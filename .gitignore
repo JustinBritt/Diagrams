@@ -8,3 +8,5 @@
 /packages
 /_ReSharper.Caches
 /Diagrams/Diagrams.csproj.user
+/Sequence/bin/Debug
+/Sequence/obj

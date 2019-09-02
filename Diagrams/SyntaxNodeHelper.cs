@@ -1,42 +1,44 @@
 // 
 
+// 
+
 using Microsoft.CodeAnalysis;
 
-namespace DotNetDiagrams {
-    internal static class SyntaxNodeHelper
-    {
-        public static bool TryGetParentSyntax<T>(SyntaxNode syntaxNode, out T result) where T : SyntaxNode
-        {
-            // set defaults
-            result = null;
+namespace DotNetDiagrams
+{
+
+   internal static class SyntaxNodeHelper
+   {
+      public static bool TryGetParentSyntax<T>(SyntaxNode syntaxNode, out T result)
+         where T : SyntaxNode
+      {
+         // set defaults
+         result = null;
+         syntaxNode = syntaxNode?.Parent;
+
+         if (syntaxNode == null)
+            return false;
+
+         try
+         {
+            syntaxNode = syntaxNode.Parent;
 
             if (syntaxNode == null)
+               return false;
+
+            if (syntaxNode.GetType() == typeof(T))
             {
-                return false;
+               result = syntaxNode as T;
+               return true;
             }
 
-            try
-            {
-                syntaxNode = syntaxNode.Parent;
+            return TryGetParentSyntax(syntaxNode, out result);
+         }
+         catch
+         {
+            return false;
+         }
+      }
+   }
 
-                if (syntaxNode == null)
-                {
-                    return false;
-                }
-
-                if (syntaxNode.GetType() == typeof(T))
-                {
-                    result = syntaxNode as T;
-
-                    return true;
-                }
-
-                return TryGetParentSyntax(syntaxNode, out result);
-            }
-            catch
-            {
-                return false;
-            }
-        }
-    }
 }

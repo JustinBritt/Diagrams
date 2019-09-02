@@ -4,33 +4,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNetDiagrams {
-    public static class StringEx
-    {
-        public static string RemoveNewLines(this string stringWithNewLines, bool cleanWhitespace = false)
-        {
-            string stringWithoutNewLines = null;
-            List<char> splitElementList = Environment.NewLine.ToCharArray().ToList();
+namespace DotNetDiagrams
+{
 
-            if (cleanWhitespace)
-            {
-                splitElementList.AddRange(" ".ToCharArray().ToList());
-            }
+   public static class StringEx
+   {
+      public static string RemoveNewLines(this string stringWithNewLines, bool cleanWhitespace = false)
+      {
+         List<char> splitElementList = new List<char> { '\r', '\n' };
 
-            char[] splitElements = splitElementList.ToArray();
+         if (cleanWhitespace)
+            splitElementList.Add(' ');
 
-            string[] stringElements = stringWithNewLines.Split(splitElements, StringSplitOptions.RemoveEmptyEntries);
+         string[] stringElements = stringWithNewLines.Split(splitElementList.ToArray(), StringSplitOptions.RemoveEmptyEntries);
+         return stringElements.Any() ? string.Join(" ", stringElements) : stringWithNewLines;
+      }
+   }
 
-            if (stringElements.Any())
-            {
-                stringWithoutNewLines = stringElements.Aggregate(stringWithoutNewLines
-                                                               , (current, element) => current +
-                                                                                       (current == null
-                                                                                            ? element
-                                                                                            : " " + element));
-            }
-
-            return stringWithoutNewLines ?? stringWithNewLines;
-        }
-    }
 }

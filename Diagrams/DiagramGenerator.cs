@@ -12,285 +12,289 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.MSBuild;
 
-namespace DotNetDiagrams {
-    internal class DiagramGenerator
-    {
-        public DiagramGenerator(string solutionPath, MSBuildWorkspace workspace)
-        {
-            _solution = workspace.OpenSolutionAsync(solutionPath).Result;
-        }
+namespace DotNetDiagrams
+{
 
-        private readonly Solution _solution;
+   internal class DiagramGenerator
+   {
+      private readonly Solution solution;
 
-        private readonly ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>> _methodDeclarationSyntaxes = new ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>>();
+      private readonly ConcurrentDictionary<MethodDeclarationSyntax, ConcurrentBag<MethodDeclarationSyntax>> methodDeclCache
+         = new ConcurrentDictionary<MethodDeclarationSyntax, ConcurrentBag<MethodDeclarationSyntax>>();
 
-        private readonly ConcurrentDictionary<MethodDeclarationSyntax, Dictionary<int, MethodDeclarationSyntax>> _methodOrder = new ConcurrentDictionary<MethodDeclarationSyntax, Dictionary<int, MethodDeclarationSyntax>>();
+      private readonly ConcurrentDictionary<MethodDeclarationSyntax, ConcurrentDictionary<int, MethodDeclarationSyntax>> methodSequences
+         = new ConcurrentDictionary<MethodDeclarationSyntax, ConcurrentDictionary<int, MethodDeclarationSyntax>>();
 
-#region [process the tree]
+      public DiagramGenerator(string solutionPath, MSBuildWorkspace workspace)
+      {
+         solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+      }
 
-        private async Task ProcessCompilation(Compilation compilation)
-        {
-            IEnumerable<SyntaxTree> trees = compilation.SyntaxTrees;
+      #region [process the tree]
 
-            foreach (SyntaxTree tree in trees)
-            {
-                SyntaxNode root = await tree.GetRootAsync();
-                IEnumerable<ClassDeclarationSyntax> classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
-                SyntaxTree treeCopy = tree;
+      private async Task ProcessCompilation(Compilation compilation)
+      {
+         IEnumerable<SyntaxTree> trees = compilation.SyntaxTrees;
 
-                foreach (ClassDeclarationSyntax @class in classes)
-                {
-                    await ProcessClass(@class, compilation, treeCopy);
-                }
-            }
-        }
+         foreach (SyntaxTree tree in trees)
+         {
+            SyntaxNode root = await tree.GetRootAsync();
+            IEnumerable<ClassDeclarationSyntax> classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+            SyntaxTree treeCopy = tree;
 
-        private async Task ProcessClass(ClassDeclarationSyntax @class, Compilation compilation, SyntaxTree syntaxTree)
-        {
-            IEnumerable<MethodDeclarationSyntax> methods = @class.DescendantNodes().OfType<MethodDeclarationSyntax>();
+            foreach (ClassDeclarationSyntax @class in classes)
+               await ProcessClass(@class, compilation, treeCopy);
+         }
+      }
 
-            foreach (MethodDeclarationSyntax method in methods)
-            {
-                await ProcessMethod(method, compilation, syntaxTree);
-            }
-        }
+      private async Task ProcessClass(ClassDeclarationSyntax classDecl
+                                    , Compilation compilation
+                                    , SyntaxTree syntaxTree)
+      {
+         IEnumerable<MethodDeclarationSyntax> methodDecls = classDecl.DescendantNodes().OfType<MethodDeclarationSyntax>();
 
-        private async Task ProcessMethod(MethodDeclarationSyntax method, Compilation compilation, SyntaxTree syntaxTree)
-        {
+         foreach (MethodDeclarationSyntax methodDecl in methodDecls)
+            await ProcessMethod(methodDecl, compilation, syntaxTree);
+      }
+
+      private async Task ProcessMethod(MethodDeclarationSyntax methodDecl
+                                     , Compilation compilation
+                                     , SyntaxTree syntaxTree)
+      {
+         if (SyntaxNodeHelper.TryGetParentSyntax(methodDecl, out ClassDeclarationSyntax _))
+         {
             SemanticModel model = compilation.GetSemanticModel(syntaxTree);
+            IMethodSymbol methodSymbol = model.GetDeclaredSymbol(methodDecl);
 
-            IMethodSymbol methodSymbol = model.GetDeclaredSymbol(method);
-
-            List<MethodDeclarationSyntax> callingMethods = await GetCallingMethodsAsync(methodSymbol, method);
-
-            Parallel.ForEach(callingMethods
-                           , callingMethod =>
+            Parallel.ForEach(await GetCallingMethodsAsync(methodSymbol, methodDecl)
+                           , caller =>
                              {
-                                 ClassDeclarationSyntax callingClass = null;
+                                if (!methodDeclCache.TryGetValue(caller, out ConcurrentBag<MethodDeclarationSyntax> value))
+                                   methodDeclCache[caller] = new ConcurrentBag<MethodDeclarationSyntax>();
 
-                                 if (SyntaxNodeHelper.TryGetParentSyntax(method, out callingClass))
-                                 {
-                                     List<MethodDeclarationSyntax> value;
-
-                                     if (!_methodDeclarationSyntaxes.TryGetValue(callingMethod, out value))
-                                     {
-                                         if (!_methodDeclarationSyntaxes.TryAdd(callingMethod, new List<MethodDeclarationSyntax> { method }))
-                                             throw new Exception("Could not add item to _methodDeclarationSyntaxes!");
-                                     }
-                                     else
-                                     {
-                                         value.Add(method);
-                                     }
-                                 }
+                                value.Add(methodDecl);
                              });
-        }
+         }
+      }
 
-        /// <summary>
-        ///     Gets a list of methods that call the method based on the method symbol
-        ///     also builds a list of called methods by the calling method as the key and then the value is a dictionary
-        ///     of UInt64,MethodDeclarationSyntax where the UInt64 is the start location of the span where the called method is
-        ///     called
-        ///     from inside the calling method - this will allow us to order our sequence diagrams, but this functionality should
-        ///     be moved out into a separate method at some point
-        ///     (in fact this whole method needs a ton of refactoring and is too complex)
-        /// </summary>
-        /// <param name="methodSymbol"></param>
-        /// <param name="method"></param>
-        /// <returns></returns>
-        private async Task<List<MethodDeclarationSyntax>> GetCallingMethodsAsync(IMethodSymbol methodSymbol, MethodDeclarationSyntax method)
-        {
-            List<MethodDeclarationSyntax> references = new List<MethodDeclarationSyntax>();
+      /// <summary>
+      ///    Gets a list of methods that call the method based on the method symbol
+      ///    also builds a list of called methods by the calling method as the key and then the value is a dictionary
+      ///    of UInt64,MethodDeclarationSyntax where the UInt64 is the start location of the span where the called method is
+      ///    called
+      ///    from inside the calling method - this will allow us to order our sequence diagrams, but this functionality should be
+      ///    moved out into a separate method at some point
+      ///    (in fact this whole method needs a ton of refactoring and is too complex)
+      /// </summary>
+      /// <param name="methodSymbol"></param>
+      /// <param name="method"></param>
+      /// <returns></returns>
+      private async Task<List<MethodDeclarationSyntax>> GetCallingMethodsAsync(IMethodSymbol methodSymbol, MethodDeclarationSyntax method)
+      {
+         List<MethodDeclarationSyntax> references = new List<MethodDeclarationSyntax>();
 
-            IEnumerable<SymbolCallerInfo> referencingSymbols = await SymbolFinder.FindCallersAsync(methodSymbol, _solution);
-            IList<SymbolCallerInfo> referencingSymbolsList = referencingSymbols as IList<SymbolCallerInfo> ?? referencingSymbols.ToList();
+         List<Location> locations = (await SymbolFinder.FindCallersAsync(methodSymbol, solution)).SelectMany(s => s.Locations).ToList();
 
-            if (!referencingSymbolsList.Any(s => s.Locations.Any()))
-            {
-                return references;
-            }
-
-            foreach (SymbolCallerInfo referenceSymbol in referencingSymbolsList)
-            {
-                foreach (Location location in referenceSymbol.Locations)
-                {
-                    int position = location.SourceSpan.Start;
-                    SyntaxNode root = await location.SourceTree.GetRootAsync();
-                    IEnumerable<MethodDeclarationSyntax> nodes = root.FindToken(position).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>();
-
-                    MethodDeclarationSyntax[] methodDeclarationSyntaxes = nodes as MethodDeclarationSyntax[] ?? nodes.ToArray();
-                    references.AddRange(methodDeclarationSyntaxes);
-
-                    // we need to know what order methods are called in
-                    foreach (MethodDeclarationSyntax methodCall in methodDeclarationSyntaxes)
-                    {
-                        Dictionary<int, MethodDeclarationSyntax> value;
-
-                        if (!_methodOrder.TryGetValue(methodCall, out value))
-                        {
-                            Dictionary<int, MethodDeclarationSyntax> dictionary = new Dictionary<int, MethodDeclarationSyntax>();
-                            dictionary.Add(location.SourceSpan.Start, method);
-
-                            if (!_methodOrder.TryAdd(methodCall, dictionary))
-                            {
-                                throw new Exception("Could not add item to _methodOrder!");
-                            }
-                        }
-                        else
-                        {
-                            value.Add(location.SourceSpan.Start, method);
-                        }
-                    }
-                }
-            }
-
+         if (!locations.Any())
             return references;
-        }
 
-#endregion
+         foreach (Location location in locations)
+         {
+            int position = location.SourceSpan.Start;
+            SyntaxNode root = await location.SourceTree.GetRootAsync();
 
-#region [build & output js-sequence-diagrams formatted text]
+            MethodDeclarationSyntax[] methodCalls = root.FindToken(position)
+                                                        .Parent
+                                                        .AncestorsAndSelf()
+                                                        .OfType<MethodDeclarationSyntax>()
+                                                        .ToArray();
+            references.AddRange(methodCalls);
 
-        /// <summary>
-        ///     generates diagram by order of methods getting called based on the first method found that does not have anything
-        ///     calling it
-        /// </summary>
-        public void GenerateDiagramFromRoot()
-        {
-            foreach (MethodDeclarationSyntax key in _methodDeclarationSyntaxes.Keys.Where(key => !_methodDeclarationSyntaxes.Values.Any(value => value.Contains(key))))
+            // we need to know what order methods are called in
+            foreach (MethodDeclarationSyntax methodCall in methodCalls)
             {
-                // then we have a method that's not being called by anything
-                PrintMethodInfo(key);
+               if (!methodSequences.ContainsKey(methodCall))
+                  methodSequences[methodCall] = new ConcurrentDictionary<int, MethodDeclarationSyntax>();
+
+               methodSequences[methodCall][location.SourceSpan.Start] = method;
             }
-        }
+         }
 
-        private void PrintMethodInfo(MethodDeclarationSyntax callingMethod)
-        {
-            if (!_methodDeclarationSyntaxes.ContainsKey(callingMethod))
+         return references;
+      }
+
+      #endregion
+
+      #region [build & output js-sequence-diagrams formatted text]
+
+      /// <summary>
+      ///    generates diagram by order of methods getting called based on the first method found that does not have anything
+      ///    calling it
+      /// </summary>
+      public void GenerateDiagrams()
+      {
+         IEnumerable<MethodDeclarationSyntax> rootMethods =
+            methodDeclCache.Keys.Where(key => !methodDeclCache.Values.Any(value => value.Contains(key)));
+
+         foreach (MethodDeclarationSyntax root in rootMethods)
+            PrintMethodInfo(root);
+      }
+
+      private void PrintMethodInfo(MethodDeclarationSyntax caller)
+      {
+         if (!methodDeclCache.ContainsKey(caller))
+            return;
+
+         foreach (MethodDeclarationSyntax calledMethod in methodSequences[caller].Keys
+                                                                                 .OrderBy(k => k)
+                                                                                 .Select(key => methodSequences[caller][key]))
+         {
+            if (!SyntaxNodeHelper.TryGetParentSyntax(caller, out ClassDeclarationSyntax callingClass)
+             || !SyntaxNodeHelper.TryGetParentSyntax(calledMethod, out ClassDeclarationSyntax calledClass))
             {
-                return;
-            }
-
-            Dictionary<int, MethodDeclarationSyntax> calledMethods = _methodOrder[callingMethod];
-            IOrderedEnumerable<KeyValuePair<int, MethodDeclarationSyntax>> orderedCalledMethods = calledMethods.OrderBy(kvp => kvp.Key);
-
-            foreach (MethodDeclarationSyntax calledMethod in orderedCalledMethods.Select(kvp => kvp.Value))
-            {
-                if (SyntaxNodeHelper.TryGetParentSyntax(callingMethod, out ClassDeclarationSyntax callingClass) && SyntaxNodeHelper.TryGetParentSyntax(calledMethod, out ClassDeclarationSyntax calledClass))
-                {
-                    PrintOutgoingCallInfo(calledClass, callingClass, callingMethod, calledMethod);
-
-                    if (callingMethod != calledMethod)
-                        PrintMethodInfo(calledMethod);
-
-                    PrintReturnCallInfo(calledClass, callingClass, callingMethod, calledMethod);
-                }
-            }
-        }
-
-        private static void PrintOutgoingCallInfo(ClassDeclarationSyntax classBeingCalled, ClassDeclarationSyntax callingClass, MethodDeclarationSyntax callingMethod, MethodDeclarationSyntax calledMethod, bool includeCalledMethodArguments = false)
-        {
-            string callingMethodName = callingMethod.Identifier.ToFullString();
-            string calledMethodReturnType = calledMethod.ReturnType.ToFullString();
-            string calledMethodName = calledMethod.Identifier.ToFullString();
-            string calledMethodArguments = calledMethod.ParameterList.ToFullString();
-            string calledMethodModifiers = calledMethod.Modifiers.ToString();
-            string calledMethodConstraints = calledMethod.ConstraintClauses.ToFullString();
-            string actedUpon = classBeingCalled.Identifier.ValueText;
-            string actor = callingClass.Identifier.ValueText;
-
-            string calledMethodTypeParameters = calledMethod.TypeParameterList != null
-                                                    ? calledMethod.TypeParameterList.ToFullString()
-                                                    : string.Empty;
-
-            string callingMethodTypeParameters = callingMethod.TypeParameterList != null
-                                                     ? callingMethod.TypeParameterList.ToFullString()
-                                                     : string.Empty;
-
-            string callInfo = callingMethodName + callingMethodTypeParameters + " => " + calledMethodModifiers + " " + calledMethodReturnType + calledMethodName + calledMethodTypeParameters;
-
-            if (includeCalledMethodArguments)
-            {
-                callInfo += calledMethodArguments;
+               continue;
             }
 
-            callInfo += calledMethodConstraints;
+            PrintOutgoingCallInfo(calledClass
+                                , callingClass
+                                , caller
+                                , calledMethod);
 
-            string info = BuildOutgoingCallInfo(actor, actedUpon, callInfo);
-
-            Console.Write(info);
-        }
-
-        private static void PrintReturnCallInfo(ClassDeclarationSyntax classBeingCalled, ClassDeclarationSyntax callingClass, MethodDeclarationSyntax callingMethod, MethodDeclarationSyntax calledMethod)
-        {
-            string actedUpon = classBeingCalled.Identifier.ValueText;
-            string actor = callingClass.Identifier.ValueText;
-            string callerName = callingMethod.Identifier.ToFullString();
-
-            string callingMethodTypeParameters = callingMethod.TypeParameterList != null
-                                                     ? callingMethod.TypeParameterList.ToFullString()
-                                                     : string.Empty;
-
-            string calledMethodTypeParameters = calledMethod.TypeParameterList != null
-                                                    ? calledMethod.TypeParameterList.ToFullString()
-                                                    : string.Empty;
-
-            string calledMethodInfo = calledMethod.Identifier.ToFullString() + calledMethodTypeParameters;
-
-            callerName += callingMethodTypeParameters;
-
-            string returnCallInfo = calledMethod.ReturnType.ToString();
-
-            SeparatedSyntaxList<ParameterSyntax> returnMethodParameters = calledMethod.ParameterList.Parameters;
-
-            foreach (ParameterSyntax parameter in returnMethodParameters)
+            if (caller != calledMethod)
             {
-                if (parameter.Modifiers.Any(m => m.Text == "out"))
-                {
-                    returnCallInfo += "," + parameter.ToFullString();
-                }
+               PrintMethodInfo(calledMethod);
             }
 
-            string info = BuildReturnCallInfo(actor, actedUpon, calledMethodInfo, callerName, returnCallInfo);
+            PrintReturnCallInfo(calledClass
+                              , callingClass
+                              , caller
+                              , calledMethod);
+         }
+      }
 
-            Console.Write(info);
-        }
+      private static void PrintOutgoingCallInfo(ClassDeclarationSyntax classBeingCalled
+                                              , ClassDeclarationSyntax callingClass
+                                              , MethodDeclarationSyntax callingMethod
+                                              , MethodDeclarationSyntax calledMethod
+                                              , bool includeCalledMethodArguments = false)
+      {
+         string callingMethodName = callingMethod.Identifier.ToFullString();
+         string calledMethodReturnType = calledMethod.ReturnType.ToFullString();
+         string calledMethodName = calledMethod.Identifier.ToFullString();
+         string calledMethodArguments = calledMethod.ParameterList.ToFullString();
+         string calledMethodModifiers = calledMethod.Modifiers.ToString();
+         string calledMethodConstraints = calledMethod.ConstraintClauses.ToFullString();
+         string actedUpon = classBeingCalled.Identifier.ValueText;
+         string actor = callingClass.Identifier.ValueText;
 
-        private static string BuildOutgoingCallInfo(string actor, string actedUpon, string callInfo)
-        {
-            const string calls = "->";
-            const string descriptionSeparator = ": ";
+         string calledMethodTypeParameters = calledMethod.TypeParameterList != null
+                                                ? calledMethod.TypeParameterList.ToFullString()
+                                                : string.Empty;
 
-            string callingInfo = actor + calls + actedUpon + descriptionSeparator + callInfo;
+         string callingMethodTypeParameters = callingMethod.TypeParameterList != null
+                                                 ? callingMethod.TypeParameterList.ToFullString()
+                                                 : string.Empty;
 
-            callingInfo = callingInfo.RemoveNewLines(true);
+         string callInfo = callingMethodName + callingMethodTypeParameters + " => " + calledMethodModifiers + " " + calledMethodReturnType + calledMethodName + calledMethodTypeParameters;
 
-            string result = callingInfo + Environment.NewLine;
+         if (includeCalledMethodArguments)
+         {
+            callInfo += calledMethodArguments;
+         }
 
-            return result;
-        }
+         callInfo += calledMethodConstraints;
 
-        private static string BuildReturnCallInfo(string actor, string actedUpon, string calledMethodInfo, string callerName, string returnInfo)
-        {
-            const string returns = "-->";
-            const string descriptionSeparator = ": ";
+         string info
+            = BuildOutgoingCallInfo(actor
+                                  , actedUpon
+                                  , callInfo);
 
-            string returningInfo = actedUpon + returns + actor + descriptionSeparator + calledMethodInfo + " returns " + returnInfo + " to " + callerName;
-            returningInfo = returningInfo.RemoveNewLines(true);
+         Console.Write(info);
+      }
 
-            string result = returningInfo + Environment.NewLine;
+      private static void PrintReturnCallInfo(ClassDeclarationSyntax classBeingCalled
+                                            , ClassDeclarationSyntax callingClass
+                                            , MethodDeclarationSyntax callingMethod
+                                            , MethodDeclarationSyntax calledMethod)
+      {
+         string actedUpon = classBeingCalled.Identifier.ValueText;
+         string actor = callingClass.Identifier.ValueText;
+         string callerName = callingMethod.Identifier.ToFullString();
 
-            return result;
-        }
+         string callingMethodTypeParameters = callingMethod.TypeParameterList != null
+                                                 ? callingMethod.TypeParameterList.ToFullString()
+                                                 : string.Empty;
 
-        public async Task ProcessSolution()
-        {
-            foreach (Project project in _solution.Projects)
+         string calledMethodTypeParameters = calledMethod.TypeParameterList != null
+                                                ? calledMethod.TypeParameterList.ToFullString()
+                                                : string.Empty;
+
+         string calledMethodInfo = calledMethod.Identifier.ToFullString() + calledMethodTypeParameters;
+
+         callerName += callingMethodTypeParameters;
+
+         string returnCallInfo = calledMethod.ReturnType.ToString();
+
+         SeparatedSyntaxList<ParameterSyntax> returnMethodParameters = calledMethod.ParameterList.Parameters;
+
+         foreach (ParameterSyntax parameter in returnMethodParameters)
+         {
+            if (parameter.Modifiers.Any(m => m.Text == "out"))
             {
-                Compilation compilation = await project.GetCompilationAsync();
-                await ProcessCompilation(compilation);
+               returnCallInfo += "," + parameter.ToFullString();
             }
-        }
+         }
 
-#endregion
-    }
+         string info = BuildReturnCallInfo(actor
+                                         , actedUpon
+                                         , calledMethodInfo
+                                         , callerName
+                                         , returnCallInfo);
+
+         Console.Write(info);
+      }
+
+      private static string BuildOutgoingCallInfo(string actor, string actedUpon, string callInfo)
+      {
+         const string calls = "->";
+         const string descriptionSeparator = ": ";
+
+         string callingInfo = actor + calls + actedUpon + descriptionSeparator + callInfo;
+
+         callingInfo = callingInfo.RemoveNewLines(true);
+
+         string result = callingInfo + Environment.NewLine;
+
+         return result;
+      }
+
+      private static string BuildReturnCallInfo(string actor
+                                              , string actedUpon
+                                              , string calledMethodInfo
+                                              , string callerName
+                                              , string returnInfo)
+      {
+         const string returns = "-->";
+         const string descriptionSeparator = ": ";
+
+         string returningInfo = actedUpon + returns + actor + descriptionSeparator + calledMethodInfo + " returns " + returnInfo + " to " + callerName;
+         returningInfo = returningInfo.RemoveNewLines(true);
+
+         string result = returningInfo + Environment.NewLine;
+
+         return result;
+      }
+
+      public async Task ProcessSolution()
+      {
+         foreach (Project project in solution.Projects)
+         {
+            Compilation compilation = await project.GetCompilationAsync();
+            await ProcessCompilation(compilation);
+         }
+      }
+
+      #endregion
+   }
+
 }
