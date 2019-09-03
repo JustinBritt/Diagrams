@@ -9,30 +9,22 @@ namespace DotNetDiagrams
 
    internal static class SyntaxNodeHelper
    {
+      public static T GetParent<T>(this SyntaxNode syntaxNode) where T: SyntaxNode
+      {
+         SyntaxNode node = syntaxNode;
+
+         while (node != null && !(node is T))
+            node = node.Parent;
+
+         return node as T;
+      }
+
       public static bool TryGetParentSyntax<T>(this SyntaxNode syntaxNode, out T result)
          where T : SyntaxNode
       {
-         result = null;
+         result = syntaxNode.GetParent<T>();
 
-         try
-         {
-            syntaxNode = syntaxNode?.Parent;
-
-            if (syntaxNode == null)
-               return false;
-
-            if (syntaxNode.GetType() == typeof(T))
-            {
-               result = syntaxNode as T;
-               return true;
-            }
-
-            return TryGetParentSyntax(syntaxNode, out result);
-         }
-         catch
-         {
-            return false;
-         }
+         return result != null;
       }
    }
 

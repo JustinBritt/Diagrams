@@ -13,29 +13,8 @@ namespace DotNetDiagrams
 {
     internal class JsSequenceDiagramGenerator : RoslynDiagramGenerator
     {
-
         public JsSequenceDiagramGenerator(string solutionPath) : base(solutionPath)
         {
-        }
-
-        protected override IEnumerable<string> InternalGetDiagramNames()
-        {
-            return diagrams.Keys
-                           .Where(method => method.TryGetParentSyntax(out ClassDeclarationSyntax _))
-                           .Select(MethodDisplay)
-                           .ToList();
-        }
-
-        private string MethodDisplay(MethodDeclarationSyntax method)
-        {
-            return method.TryGetParentSyntax(out ClassDeclarationSyntax @class)
-                       ? $"{@class.Identifier.ValueText}.{method.Identifier.ValueText}"
-                       : method.Identifier.ValueText;
-        }
-
-        protected override IEnumerable<string> InternalGetDiagram(string diagramName)
-        {
-            return diagrams.FirstOrDefault(kv => kv.Key.Parent is ClassDeclarationSyntax && diagramName == MethodDisplay(kv.Key)).Value;
         }
 
         protected override async Task<DiagramResult> GenerateDiagrams()
@@ -45,19 +24,15 @@ namespace DotNetDiagrams
 
             DiagramResult result = new DiagramResult();
 
-            foreach (MethodDeclarationSyntax root in methodDeclarationSyntaxes.Keys.Where(key => key != null && !methodDeclarationSyntaxes.Values.Any(value => value.Contains(key))))
+            foreach (MethodDeclarationSyntax root in methodDeclarations.Keys.Where(key => key != null && !methodDeclarations.Values.Any(value => value.Contains(key))))
                 result[root] = GenerateMethod(root);
 
             return result;
         }
 
-        /// <summary>
-        ///     generates diagram by order of methods getting called based on the first method found that does not have anything
-        ///     calling it
-        /// </summary>
         private IEnumerable<string> GenerateMethod(MethodDeclarationSyntax caller)
         {
-            if (!methodDeclarationSyntaxes.ContainsKey(caller))
+            if (!methodDeclarations.ContainsKey(caller))
                 return new string[0];
 
             List<string> resultList = new List<string>();
@@ -145,5 +120,6 @@ namespace DotNetDiagrams
 
             return result.RemoveNewLines(true);
         }
+
     }
 }

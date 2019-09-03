@@ -13,24 +13,24 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.FindSymbols;
 using Microsoft.CodeAnalysis.MSBuild;
 
-namespace DotNetDiagrams {
+namespace DotNetDiagrams
+{
     internal abstract class RoslynDiagramGenerator : IDiagramGenerator, IDisposable
     {
-        static RoslynDiagramGenerator()
-        {
-            MSBuildLocator.RegisterDefaults();
-
-        }
-
-        protected class DiagramResult : Dictionary<MethodDeclarationSyntax, IEnumerable<string>> { }
-
         protected readonly ConcurrentDictionary<MethodDeclarationSyntax, Dictionary<int, MethodDeclarationSyntax>> _methodOrder = new ConcurrentDictionary<MethodDeclarationSyntax, Dictionary<int, MethodDeclarationSyntax>>();
-        protected readonly ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>> methodDeclarationSyntaxes = new ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>>();
+        protected readonly ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>> methodDeclarations = new ConcurrentDictionary<MethodDeclarationSyntax, List<MethodDeclarationSyntax>>();
         protected readonly Solution solution;
 
         protected readonly MSBuildWorkspace workspace;
 
         protected DiagramResult diagrams;
+
+        protected List<(MethodDeclarationSyntax Node, string Assembly, string Class, string Method)> Methods = new List<(MethodDeclarationSyntax Node, string Assembly, string Class, string Method)>();
+
+        static RoslynDiagramGenerator()
+        {
+            MSBuildLocator.RegisterDefaults();
+        }
 
         protected RoslynDiagramGenerator(string solutionPath)
         {
@@ -54,58 +54,22 @@ namespace DotNetDiagrams {
             return InternalGetDiagram(diagramName);
         }
 
-        protected abstract IEnumerable<string> InternalGetDiagramNames();
+        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-        protected abstract IEnumerable<string> InternalGetDiagram(string diagramName);
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                workspace?.Dispose();
+            }
+        }
 
         protected abstract Task<DiagramResult> GenerateDiagrams();
-
-        protected async Task ProcessCompilation(Compilation compilation, string assemblyName)
-        {
-            IEnumerable<SyntaxTree> trees = compilation.SyntaxTrees;
-
-            foreach (SyntaxTree tree in trees)
-            {
-                SyntaxNode root = await tree.GetRootAsync();
-                IEnumerable<ClassDeclarationSyntax> classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
-                SyntaxTree treeCopy = tree;
-
-                foreach (ClassDeclarationSyntax @class in classes)
-                {
-                    string className = @class.Identifier.ToFullString();
-                    await ProcessClass(@class, compilation, treeCopy, assemblyName, className);
-                }
-            }
-        }
-
-        protected async Task ProcessClass(ClassDeclarationSyntax @class, Compilation compilation, SyntaxTree syntaxTree, string assemblyName, string className)
-        {
-            IEnumerable<MethodDeclarationSyntax> methods = @class.DescendantNodes().OfType<MethodDeclarationSyntax>();
-
-            foreach (MethodDeclarationSyntax method in methods)
-            {
-                string methodName = method.Identifier.ToFullString();
-                await ProcessMethod(method, compilation, syntaxTree, assemblyName, className, methodName);
-            }
-        }
-
-        protected async Task ProcessMethod(MethodDeclarationSyntax method, Compilation compilation, SyntaxTree syntaxTree, string assemblyName, string className, string methodName)
-        {
-            SemanticModel model = compilation.GetSemanticModel(syntaxTree);
-
-            IMethodSymbol methodSymbol = model.GetDeclaredSymbol(method);
-
-            List<MethodDeclarationSyntax> callingMethods = await GetCallingMethodsAsync(methodSymbol, method);
-
-            Parallel.ForEach(callingMethods
-                           , callingMethod =>
-                             {
-                                 if (!methodDeclarationSyntaxes.ContainsKey(callingMethod))
-                                     methodDeclarationSyntaxes[callingMethod] = new List<MethodDeclarationSyntax>();
-
-                                 methodDeclarationSyntaxes[callingMethod].Add(method);
-                             });
-        }
 
         protected async Task<List<MethodDeclarationSyntax>> GetCallingMethodsAsync(IMethodSymbol methodSymbol, MethodDeclarationSyntax method)
         {
@@ -121,11 +85,11 @@ namespace DotNetDiagrams {
                 int position = location.SourceSpan.Start;
                 SyntaxNode root = await location.SourceTree.GetRootAsync();
 
-                MethodDeclarationSyntax[] methodDeclarations = root.FindToken(position).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>().ToArray();
-                references.AddRange(methodDeclarations);
+                MethodDeclarationSyntax[] declarations = root.FindToken(position).Parent.AncestorsAndSelf().OfType<MethodDeclarationSyntax>().ToArray();
+                references.AddRange(declarations);
 
                 // we need to know what order methods are called in
-                foreach (MethodDeclarationSyntax methodCall in methodDeclarations)
+                foreach (MethodDeclarationSyntax methodCall in declarations)
                 {
                     if (!_methodOrder.ContainsKey(methodCall))
                         _methodOrder[methodCall] = new Dictionary<int, MethodDeclarationSyntax>();
@@ -138,19 +102,77 @@ namespace DotNetDiagrams {
             return references;
         }
 
-        protected virtual void Dispose(bool disposing)
+        protected virtual IEnumerable<string> InternalGetDiagram(string diagramName)
         {
-            if (disposing)
+            return diagrams.FirstOrDefault(kv => kv.Key.Parent is ClassDeclarationSyntax && diagramName == MethodDisplay(kv.Key)).Value;
+        }
+
+        protected virtual IEnumerable<string> InternalGetDiagramNames()
+        {
+            return diagrams.Keys
+                           .Where(method => method.TryGetParentSyntax(out ClassDeclarationSyntax _))
+                           .Select(MethodDisplay)
+                           .ToList();
+        }
+
+        protected virtual string MethodDisplay(MethodDeclarationSyntax method)
+        {
+            (MethodDeclarationSyntax Node, string Assembly, string Class, string Method) descriptor = Methods.FirstOrDefault(m => m.Node == method);
+
+            return descriptor.Node != null
+                       ? $"{descriptor.Assembly}:{descriptor.Class}.{descriptor.Method}"
+                       : method.Identifier.ValueText;
+        }
+
+        protected async Task ProcessClass(ClassDeclarationSyntax @class, Compilation compilation, SyntaxTree syntaxTree, string assemblyName, string className)
+        {
+            IEnumerable<MethodDeclarationSyntax> methods = @class.DescendantNodes().OfType<MethodDeclarationSyntax>();
+
+            foreach (MethodDeclarationSyntax method in methods)
+                await ProcessMethod(method
+                                  , compilation
+                                  , syntaxTree
+                                  , assemblyName
+                                  , className
+                                  , method.Identifier.ToFullString().Trim('\r', '\n'));
+        }
+
+        protected async Task ProcessCompilation(Compilation compilation, string assemblyName)
+        {
+            IEnumerable<SyntaxTree> trees = compilation.SyntaxTrees;
+
+            foreach (SyntaxTree tree in trees)
             {
-                workspace?.Dispose();
+                SyntaxNode root = await tree.GetRootAsync();
+                IEnumerable<ClassDeclarationSyntax> classes = root.DescendantNodes().OfType<ClassDeclarationSyntax>();
+                SyntaxTree treeCopy = tree;
+
+                foreach (ClassDeclarationSyntax @class in classes)
+                    await ProcessClass(@class, compilation, treeCopy, assemblyName, @class.Identifier.ToFullString().Trim('\r', '\n'));
             }
         }
 
-        /// <summary>Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.</summary>
-        public void Dispose()
+        protected async Task ProcessMethod(MethodDeclarationSyntax method, Compilation compilation, SyntaxTree syntaxTree, string assemblyName, string className, string methodName)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
+            if (!Methods.Contains((method, assemblyName, className, methodName)))
+                Methods.Add((method, assemblyName, className, methodName));
+
+            SemanticModel model = compilation.GetSemanticModel(syntaxTree);
+            IMethodSymbol methodSymbol = model.GetDeclaredSymbol(method);
+            IEnumerable<SymbolCallerInfo> callers = await SymbolFinder.FindCallersAsync(methodSymbol, solution);
+
+            List<MethodDeclarationSyntax> callingMethods = await GetCallingMethodsAsync(methodSymbol, method);
+
+            Parallel.ForEach(callingMethods
+                           , callingMethod =>
+                             {
+                                 if (!methodDeclarations.ContainsKey(callingMethod))
+                                     methodDeclarations[callingMethod] = new List<MethodDeclarationSyntax>();
+
+                                 methodDeclarations[callingMethod].Add(method);
+                             }); 
         }
+
+        protected class DiagramResult : Dictionary<MethodDeclarationSyntax, IEnumerable<string>> { }
     }
 }
