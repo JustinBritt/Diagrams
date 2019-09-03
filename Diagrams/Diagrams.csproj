@@ -129,7 +129,7 @@
     <Compile Include="Generators\IDiagramGenerator.cs" />
     <Compile Include="Generators\JsSequenceDiagramGenerator.cs" />
     <Compile Include="Generators\PlantUmlDiagramGenerator.cs" />
-    <Compile Include="Generators\Walker.cs" />
+    <Compile Include="Generators\PlantWalker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Generators\RoslynDiagramGenerator.cs" />

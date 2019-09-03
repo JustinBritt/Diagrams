@@ -19,7 +19,7 @@ namespace DotNetDiagrams
 
         protected override async Task<DiagramResult> GenerateDiagrams()
         {
-            foreach (Project project in solution.Projects)
+            foreach (Project project in solution.Projects) 
                 await ProcessCompilation(await project.GetCompilationAsync(), project.AssemblyName);
 
             DiagramResult result = new DiagramResult();

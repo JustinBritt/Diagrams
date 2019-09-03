@@ -1,99 +1,42 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
+using Microsoft.Build.Locator;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.MSBuild;
 
 namespace DotNetDiagrams
 {
-    internal class PlantUmlDiagramGenerator : RoslynDiagramGenerator
-    {
-        public PlantUmlDiagramGenerator(string solutionPath) : base(solutionPath)
-        {
-        }
+   internal class PlantUmlDiagramGenerator
+   {
+      private readonly Solution solution;
+      private static readonly MSBuildWorkspace workspace;
+      public Dictionary<string, List<string>> Diagrams { get; private set; }
 
-        protected override async Task<DiagramResult> GenerateDiagrams()
-        {
-            foreach (Project project in solution.Projects)
-                await ProcessCompilation(await project.GetCompilationAsync(), project.AssemblyName);
+      static PlantUmlDiagramGenerator()
+      {
+         MSBuildLocator.RegisterDefaults();
+         workspace = MSBuildWorkspace.Create();
+      }
 
-            DiagramResult result = new DiagramResult();
+      public PlantUmlDiagramGenerator(string solutionPath)
+      {
+         solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+      }
 
-            foreach (MethodDeclarationSyntax root in methodDeclarations.Keys.Where(key => key != null && !methodDeclarations.Values.Any(value => value.Contains(key))))
+      public void Process()
+      {
+         foreach (Project project in solution.Projects)
+         {
+            Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+            foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
             {
-                // ReSharper disable once UseObjectOrCollectionInitializer
-                List<string> commands = new List<string>();
-
-                commands.Add("@startuml");
-                commands.Add("autoactivate on");
-                commands.Add("hide footbox");
-                GenerateMethod(root, commands);
-                commands.Add("@enduml");
-
-                result[root] = commands;
+               PlantWalker walker = new PlantWalker(compilation, syntaxTree, solution, project);
+               walker.Visit(syntaxTree.GetRoot());
             }
+         }
 
-            return result;
-        }
-
-        private IEnumerable<string> GenerateMethod(MethodDeclarationSyntax caller, List<string> resultList = null)
-        {
-            if (!methodDeclarations.ContainsKey(caller))
-                return new string[0];
-
-            resultList = resultList ?? new List<string>();
-
-            foreach (MethodDeclarationSyntax target in _methodOrder[caller].OrderBy(kvp => kvp.Key).Select(kvp => kvp.Value))
-            {
-                bool callerIsLocal = caller.TryGetParentSyntax(out ClassDeclarationSyntax callingClass);
-                bool targetIsLocal = target.TryGetParentSyntax(out ClassDeclarationSyntax targetClass);
-
-                if (callerIsLocal && targetIsLocal)
-                {
-                    resultList.Add(GeneratingOutgoingCall(targetClass, callingClass, caller, target));
-
-                    if (caller != target)
-                        resultList.AddRange(GenerateMethod(target));
-
-                    resultList.Add(GenerateReturnCall(target));
-                }
-            }
-
-            return resultList;
-        }
-
-        private static string GeneratingOutgoingCall(ClassDeclarationSyntax targetClass, ClassDeclarationSyntax callingClass, MethodDeclarationSyntax caller, MethodDeclarationSyntax target, bool includeCalledMethodArguments = false)
-        {
-            string targetMethodName = target.Identifier.ToFullString();
-            string targetMethodArguments = target.ParameterList.ToFullString();
-            string targetMethodConstraints = target.ConstraintClauses.ToFullString();
-            string targetClassName = targetClass.Identifier.ValueText;
-            string callingClassName = callingClass.Identifier.ValueText;
-
-            string targetMethodTypeParameters = target.TypeParameterList != null
-                                                    ? target.TypeParameterList.ToFullString()
-                                                    : string.Empty;
-
-            string callInfo = targetMethodName + targetMethodTypeParameters;
-
-            if (includeCalledMethodArguments)
-                callInfo += targetMethodArguments;
-
-            callInfo += targetMethodConstraints;
-
-            return (callingClassName + "->" + targetClassName + ": " + callInfo).RemoveNewLines(true);
-        }
-
-        private static string GenerateReturnCall(MethodDeclarationSyntax target)
-        {
-            string targetTypeParameters = target.TypeParameterList != null
-                                              ? target.TypeParameterList.ToFullString()
-                                              : string.Empty;
-
-            string targetInfo = target.Identifier.ToFullString() + targetTypeParameters;
-
-            return ("return " + targetInfo).RemoveNewLines(true);
-        }
-    }
+         Diagrams = PlantWalker.Diagrams;
+      }
+   }
 }
