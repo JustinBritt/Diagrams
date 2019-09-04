@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 using Microsoft.CodeAnalysis;
@@ -11,7 +12,6 @@ namespace DotNetDiagrams
 
    internal class PlantWalker : CSharpSyntaxWalker
    {
-      private static readonly Dictionary<string, List<string>> diagrams;
       private readonly Compilation compilation;
       private readonly Project project;
       private readonly Solution solution;
@@ -24,7 +24,7 @@ namespace DotNetDiagrams
 
       static PlantWalker()
       {
-         diagrams = new Dictionary<string, List<string>>(); // title, code
+         Diagrams = new Dictionary<string, List<string>>(); // title, code
       }
 
       public PlantWalker(Compilation compilation
@@ -53,32 +53,17 @@ namespace DotNetDiagrams
          }
       }
 
-      private string AssemblyName
-      {
-         get
-         {
-            return project.AssemblyName;
-         }
-      }
+      private string AssemblyName { get { return project.AssemblyName; } }
 
-      public static Dictionary<string, List<string>> Diagrams
-      {
-         get
-         {
-            if (diagrams.Any() && diagrams.Last().Value.Any() && !diagrams.Last().Value.Last().EndsWith("@enduml"))
-               diagrams.Last().Value.Add("@enduml");
-
-            return diagrams;
-         }
-      }
+      public static Dictionary<string, List<string>> Diagrams { get; }
 
       private void EndDiagram()
       {
          if (!string.IsNullOrEmpty(currentTitle))
          {
-            if (PlantCode.Any())
-               PlantCode.Add("@endum");
-            else 
+            if (PlantCode.Count > 4) // minimum # of lines in header
+               AddCommand("@enduml");
+            else
                Diagrams.Remove(currentTitle);
          }
       }
@@ -94,15 +79,17 @@ namespace DotNetDiagrams
 
       private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
       {
-         currentTitle = $"{AssemblyName}_{methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText}_{methodDeclaration.Identifier.ValueText}";
+         string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+         string methodName = methodDeclaration.Identifier.ValueText;
+         currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
          if (!Diagrams.ContainsKey(currentTitle))
             Diagrams.Add(currentTitle, new List<string>());
 
-         PlantCode.Add("@startuml");
-         PlantCode.Add($"title {currentTitle}");
-         PlantCode.Add("autoactivate on");
-         PlantCode.Add("hide footbox");
+         AddCommand("@startuml");
+         AddCommand($"title {currentTitle}");
+         AddCommand("autoactivate on");
+         AddCommand("hide footbox");
       }
 
       private void StartDiagram(ConstructorDeclarationSyntax constructorDeclaration)
@@ -112,10 +99,10 @@ namespace DotNetDiagrams
          if (!Diagrams.ContainsKey(currentTitle))
             Diagrams.Add(currentTitle, new List<string>());
 
-         PlantCode.Add("@startuml");
-         PlantCode.Add($"title {currentTitle}");
-         PlantCode.Add("autoactivate on");
-         PlantCode.Add("hide footbox");
+         AddCommand("@startuml");
+         AddCommand($"title {currentTitle}");
+         AddCommand("autoactivate on");
+         AddCommand("hide footbox");
       }
 
       public override void Visit(SyntaxNode node)
@@ -126,7 +113,7 @@ namespace DotNetDiagrams
             return;
          }
 
-         switch (node) 
+         switch (node)
          {
             case MethodDeclarationSyntax methodDeclaration:
                Visit(methodDeclaration);
@@ -134,7 +121,10 @@ namespace DotNetDiagrams
             case ConstructorDeclarationSyntax constructorDeclaration:
                Visit(constructorDeclaration);
                break;
-            case MemberAccessExpressionSyntax invocation:
+            case MemberAccessExpressionSyntax memberAccess:
+               Visit(memberAccess);
+               break;
+            case InvocationExpressionSyntax invocation:
                Visit(invocation);
                break;
             case IfStatementSyntax ifStatement:
@@ -160,57 +150,132 @@ namespace DotNetDiagrams
 
       private void Visit(WhileStatementSyntax whileStatement)
       {
-         string command = $"{Indent}group while";
-         PlantCode.Add(command);
+         string command1 = $"{Indent}group while";
+         AddCommand(command1);
          ++indent;
          base.Visit(whileStatement);
          --indent;
-         command = $"{Indent}end";
-         PlantCode.Add(command);
+         string command2 = $"{Indent}end";
+         AddCommand(command2, command1);
       }
 
       private void Visit(DoStatementSyntax doStatement)
       {
-         string command = $"{Indent}group do/while";
-         PlantCode.Add(command);
+         string command1 = $"{Indent}group do/while";
+         AddCommand(command1);
          ++indent;
          base.Visit(doStatement);
          --indent;
-         command = $"{Indent}end";
-         PlantCode.Add(command);
+         string command2 = $"{Indent}end";
+         AddCommand(command2, command1);
       }
 
       private void Visit(ForEachStatementSyntax forEachStatement)
       {
-         string command = $"{Indent}group foreach";
-         PlantCode.Add(command);
+         string command1 = $"{Indent}group foreach";
+         AddCommand(command1);
          ++indent;
          base.Visit(forEachStatement);
          --indent;
-         command = $"{Indent}end";
-         PlantCode.Add(command);
+         string command2 = $"{Indent}end";
+         AddCommand(command2, command1);
       }
 
       private void Visit(ForStatementSyntax forStatement)
       {
-         string command = $"{Indent}group for";
-         PlantCode.Add(command);
+         string command1 = $"{Indent}group for";
+         AddCommand(command1);
          ++indent;
          base.Visit(forStatement);
          --indent;
-         command = $"{Indent}end";
+         string command2 = $"{Indent}end";
+         AddCommand(command2, command1);
+      }
+
+      private void AddCommand(string command, string unlessFollowing = null)
+      {
+         // add the command unless the last thing on the list is the second parameter
+         // if it is, remove that entry and don't add the command
+         if (unlessFollowing != null && PlantCode.LastOrDefault() == unlessFollowing)
+         {
+            PlantCode.RemoveAt(PlantCode.Count - 1);
+            return;
+         }
+
+         Debug.WriteLine("----------------------------------");
+         Debug.WriteLine(currentTitle);
+         Debug.WriteLine("   " + command);
          PlantCode.Add(command);
       }
 
       private void Visit(IfStatementSyntax ifStatement)
       {
-         string command = $"{Indent}group if";
-         PlantCode.Add(command);
+         string command1 = $"{Indent}group if";
+         AddCommand(command1);
          ++indent;
          base.Visit(ifStatement);
          --indent;
-         command = $"{Indent}end";
-         PlantCode.Add(command);
+         string command2 = $"{Indent}end";
+         AddCommand(command2, command1);
+      }
+
+      private void Visit(InvocationExpressionSyntax invocation)
+      {
+         if (invocation.Expression is IdentifierNameSyntax identifierName)
+         {
+            string callerTypeName;
+            SemanticModel semanticModel;
+
+            MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
+            ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
+
+            if (methodHost != null)
+            {
+               callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+               semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
+            }
+            else if (constructorHost != null)
+            {
+               callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+               semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
+            }
+            else
+            {
+               base.Visit(invocation);
+               return;
+            }
+
+            string targetTypeName;
+            string targetName;
+            string returnTypeName;
+
+            if (semanticModel.GetTypeInfo(identifierName).Type == null)
+            {
+               // same type as caller
+               targetTypeName = callerTypeName;
+               targetName = identifierName.Identifier.ValueText;
+               returnTypeName = semanticModel.GetTypeInfo(invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else if (semanticModel.GetTypeInfo(identifierName).Type is INamedTypeSymbol targetType)
+            {
+               targetTypeName = targetType.ToString();
+               targetName = invocation.TryGetInferredMemberName();
+               returnTypeName = semanticModel.GetTypeInfo(invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else
+            {
+               base.Visit(invocation);
+               return;
+            }
+
+            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+            AddCommand(command);
+
+            base.Visit(invocation);
+
+            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+            AddCommand(command);
+         }
       }
 
       private void Visit(MemberAccessExpressionSyntax invocation)
@@ -220,71 +285,93 @@ namespace DotNetDiagrams
             string callerTypeName;
             SemanticModel semanticModel;
 
-            MethodDeclarationSyntax hostMethod = invocation.GetParent<MethodDeclarationSyntax>();
+            MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
+            ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
 
-            if (hostMethod != null)
+            if (methodHost != null)
             {
-               callerTypeName = hostMethod.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-               semanticModel = compilation.GetSemanticModel(hostMethod.SyntaxTree, true);
+               callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+               semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
+            }
+            else if (constructorHost != null)
+            {
+               callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+               semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
             }
             else
             {
-               ConstructorDeclarationSyntax hostConstructor = invocation.GetParent<ConstructorDeclarationSyntax>();
-
-               if (hostConstructor == null)
-               {
-                  base.Visit(invocation);
-                  return;
-               }
-
-               callerTypeName = hostConstructor.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-               semanticModel = compilation.GetSemanticModel(hostConstructor.SyntaxTree, true);
-            }
-            
-            if (semanticModel.GetTypeInfo(identifierName).Type is INamedTypeSymbol targetType)
-            {
-               string targetTypeName = targetType.ToString();
-               string targetName = invocation.Name.Identifier.ValueText;
-               string returnTypeName = semanticModel.GetTypeInfo(invocation).Type?.ToString().Split('.').Last() ?? string.Empty;
-
-               string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
-               PlantCode.Add(command);
-
                base.Visit(invocation);
-
-               command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
-               PlantCode.Add(command);
+               return;
             }
+
+            string targetTypeName;
+            string targetName;
+            string returnTypeName;
+
+            if (semanticModel.GetTypeInfo(identifierName).Type == null)
+            {
+               // same type as caller
+               targetTypeName = callerTypeName;
+               targetName = identifierName.Identifier.ValueText;
+               returnTypeName = semanticModel.GetTypeInfo(invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else if (semanticModel.GetTypeInfo(identifierName).Type is INamedTypeSymbol targetType)
+            {
+               targetTypeName = targetType.ToString();
+               targetName = invocation.TryGetInferredMemberName();
+               returnTypeName = semanticModel.GetTypeInfo(invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else
+            {
+               base.Visit(invocation);
+               return;
+            }
+
+            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+            AddCommand(command);
+
+            base.Visit(invocation);
+
+            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+            AddCommand(command);
          }
       }
 
       private void Visit(MethodDeclarationSyntax methodDeclaration)
-      { 
+      {
          // we only care about method declarations that don't have callers
-         if (HasCallers(methodDeclaration))
-         {
-            ignore = true;
+         ignore = HasCallers(methodDeclaration);
 
-            try
-            {
-               base.Visit(methodDeclaration);
-            }
-            finally
-            {
-               ignore = false;
-            }
-         }
-         else
-         {
-            EndDiagram();
+         if (!ignore)
             StartDiagram(methodDeclaration);
+
+         try
+         {
+            base.Visit(methodDeclaration);
+         }
+         finally
+         {
+            if (!ignore)
+               EndDiagram();
+
+            ignore = false;
          }
       }
 
       private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
       {
-         EndDiagram();
-         StartDiagram(constructorDeclaration);
+         // ignore constructors (instance and static)
+         // we only care about method declarations that don't have callers
+         ignore = true;
+
+         try
+         {
+            base.Visit(constructorDeclaration);
+         }
+         finally
+         {
+            ignore = false;
+         }
       }
    }
 }
