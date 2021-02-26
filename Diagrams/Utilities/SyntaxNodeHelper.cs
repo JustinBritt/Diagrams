@@ -1,11 +1,6 @@
-// 
-
-// 
-
-using Microsoft.CodeAnalysis;
-
 namespace DotNetDiagrams
 {
+    using Microsoft.CodeAnalysis;
 
    internal static class SyntaxNodeHelper
    {
@@ -27,5 +22,4 @@ namespace DotNetDiagrams
          return result != null;
       }
    }
-
 }
