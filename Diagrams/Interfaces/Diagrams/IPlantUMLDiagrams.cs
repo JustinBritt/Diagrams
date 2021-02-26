@@ -6,8 +6,9 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public interface IPlantUMLDiagrams
+    using DotNetDiagrams.Interfaces.Diagrams;
+
+    public interface IPlantUMLDiagrams : IDiagrams
     {
-        Dictionary<string, List<string>> Value { get; set; }
     }
 }
