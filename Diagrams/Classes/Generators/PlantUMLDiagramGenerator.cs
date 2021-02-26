@@ -21,6 +21,7 @@
         static PlantUMLDiagramGenerator()
         {
             MSBuildLocator.RegisterDefaults();
+
             workspace = MSBuildWorkspace.Create();
         }
 
