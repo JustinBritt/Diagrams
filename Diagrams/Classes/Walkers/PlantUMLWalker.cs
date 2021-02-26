@@ -51,13 +51,7 @@
             get { return new string(' ', indent * 2); }
         }
 
-        private List<string> PlantUMLCode
-        {
-            get
-            {
-                return Diagrams.GetCodeAtTitleOrDefault(currentTitle);
-            }
-        }
+        private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
         private string AssemblyName { get { return project.AssemblyName; } }
 
