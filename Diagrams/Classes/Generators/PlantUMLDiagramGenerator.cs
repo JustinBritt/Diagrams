@@ -6,7 +6,9 @@
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
+    using DotNetDiagrams.Classes.Diagrams;
     using DotNetDiagrams.Classes.Walkers;
+    using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
     // ReSharper disable UnusedMemberInSuper.Global
 
