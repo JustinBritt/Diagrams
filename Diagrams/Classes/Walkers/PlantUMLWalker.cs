@@ -79,8 +79,6 @@
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
         {
-            ClassDeclarationSyntax parent = methodDeclaration.GetParent<ClassDeclarationSyntax>();
-
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
