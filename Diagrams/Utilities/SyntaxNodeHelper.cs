@@ -4,7 +4,8 @@ namespace DotNetDiagrams
 
     internal static class SyntaxNodeHelper
     {
-        public static T GetParent<T>(this SyntaxNode syntaxNode) where T : SyntaxNode
+        public static T GetParent<T>(this SyntaxNode syntaxNode) 
+            where T : SyntaxNode
         {
             SyntaxNode node = syntaxNode;
 
