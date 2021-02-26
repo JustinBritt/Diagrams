@@ -388,7 +388,13 @@
                 command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
                 AddCommand(command);
             }
+            else if (invocation.Expression is BaseExpressionSyntax basexpression)
+            {
+            }
             else if (invocation.Expression is ThisExpressionSyntax thisExpression)
+            {
+            }
+            else if (invocation.Expression is PredefinedTypeSyntax predefinedType)
             {
             }
             else if (invocation.Expression is InvocationExpressionSyntax invocationExpression)
