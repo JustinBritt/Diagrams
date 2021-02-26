@@ -10,6 +10,9 @@
     {
         List<IDiagram> Value { get; set; }
 
+        void AddTitle(
+            string title);
+
         bool ContainsTitle(
             string title);
 

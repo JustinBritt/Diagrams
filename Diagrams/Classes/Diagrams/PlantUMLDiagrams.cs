@@ -17,6 +17,12 @@
 
         public List<IDiagram> Value { get; set; }
 
+        public void AddTitle(
+            string title)
+        {
+            this.Value.Add(new PlantUMLDiagram(title, new List<string>()));
+        }
+
         public bool ContainsTitle(
             string title)
         {
