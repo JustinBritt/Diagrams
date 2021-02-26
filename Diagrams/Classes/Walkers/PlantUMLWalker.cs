@@ -9,7 +9,9 @@
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.FindSymbols;
 
+    using DotNetDiagrams.Classes.Diagrams;
     using DotNetDiagrams.Extensions;
+    using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Walkers;
     
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
