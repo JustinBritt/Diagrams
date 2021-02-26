@@ -1,21 +1,21 @@
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
-using Microsoft.Build.Locator;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.FindSymbols;
-using Microsoft.CodeAnalysis.MSBuild;
-// ReSharper disable UnusedMemberInSuper.Global
-
 namespace DotNetDiagrams
 {
-   /// <summary>
-   /// For later if we ever add other diagram generators. Doesn't hurt! :-)
-   /// </summary>
-   internal interface IDiagramGenerator
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using Microsoft.Build.Locator;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
+    using Microsoft.CodeAnalysis.CSharp.Syntax;
+    using Microsoft.CodeAnalysis.FindSymbols;
+    using Microsoft.CodeAnalysis.MSBuild;
+    // ReSharper disable UnusedMemberInSuper.Global
+
+    /// <summary>
+    /// For later if we ever add other diagram generators. Doesn't hurt! :-)
+    /// </summary>
+    internal interface IDiagramGenerator
    {
       Dictionary<string, List<string>> Diagrams { get; }
 
