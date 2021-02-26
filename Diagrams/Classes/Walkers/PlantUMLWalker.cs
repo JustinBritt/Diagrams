@@ -10,8 +10,9 @@
     using Microsoft.CodeAnalysis.FindSymbols;
 
     using Diagrams.Extensions;
+    using Diagrams.Interfaces.Walkers;
     
-    internal class PlantUMLWalker : CSharpSyntaxWalker
+    internal class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
         private readonly Compilation compilation;
         private readonly Project project;
