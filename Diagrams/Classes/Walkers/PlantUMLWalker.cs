@@ -84,7 +84,7 @@
             currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
             if (!Diagrams.ContainsTitle(currentTitle))
-                Diagrams.Value.Add(new PlantUMLDiagram(currentTitle, new List<string>()));
+                Diagrams.AddTitle(currentTitle);
 
             AddCommand("@startuml");
             AddCommand($"title {currentTitle}");
