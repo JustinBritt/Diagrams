@@ -49,7 +49,7 @@
             get { return new string(' ', indent * 2); }
         }
 
-        private List<string> PlantCode
+        private List<string> PlantUMLCode
         {
             get
             {
@@ -67,7 +67,7 @@
         {
             if (!string.IsNullOrEmpty(currentTitle))
             {
-                if (PlantCode.Count > 4) // minimum # of lines in header
+                if (PlantUMLCode.Count > 4) // minimum # of lines in header
                     AddCommand("@enduml");
                 else
                     Diagrams.Remove(currentTitle);
@@ -189,16 +189,16 @@
         {
             // add the command unless the last thing on the list is the second parameter
             // if it is, remove that entry and don't add the command
-            if (unlessFollowing != null && PlantCode.LastOrDefault() == unlessFollowing)
+            if (unlessFollowing != null && PlantUMLCode.LastOrDefault() == unlessFollowing)
             {
-                PlantCode.RemoveAt(PlantCode.Count - 1);
+                PlantUMLCode.RemoveAt(PlantUMLCode.Count - 1);
                 return;
             }
 
             Debug.WriteLine("----------------------------------");
             Debug.WriteLine(currentTitle);
             Debug.WriteLine("   " + command);
-            PlantCode.Add(command);
+            PlantUMLCode.Add(command);
         }
 
         private void Visit(IfStatementSyntax ifStatement)
