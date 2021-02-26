@@ -9,5 +9,8 @@
     public interface IDiagrams
     {
         List<IDiagram> Value { get; set; }
+
+        List<string> GetCodeAtTitleOrDefault(
+            string title);
     }
 }

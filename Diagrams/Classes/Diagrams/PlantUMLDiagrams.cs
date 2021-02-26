@@ -16,5 +16,13 @@
         }
 
         public List<IDiagram> Value { get; set; }
+
+        public List<string> GetCodeAtTitleOrDefault(
+            string title)
+        {
+            return this.Value.Select(w => w.Title).Contains(title)
+                ? this.Value.Where(w => w.Title == title).SingleOrDefault().Code
+                : new List<string>();
+        }
     }
 }
