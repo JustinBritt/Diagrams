@@ -13,7 +13,9 @@
     internal sealed class PlantUMLDiagramGenerator : IDiagramGenerator
     {
         private readonly Solution solution;
+
         private static readonly MSBuildWorkspace workspace;
+
         public Dictionary<string, List<string>> Diagrams { get; private set; }
 
         static PlantUMLDiagramGenerator()
@@ -36,6 +38,7 @@
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
                     PlantUMLWalker walker = new PlantUMLWalker(compilation, syntaxTree, solution, project);
+
                     walker.Visit(syntaxTree.GetRoot());
                 }
             }
