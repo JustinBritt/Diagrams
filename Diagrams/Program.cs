@@ -4,6 +4,8 @@ namespace DotNetDiagrams
     using System.Collections.Generic;
     using System.IO;
 
+    using Diagrams.Classes.Generators;
+
     internal class Program
    {
       private static void Main(string[] args)
