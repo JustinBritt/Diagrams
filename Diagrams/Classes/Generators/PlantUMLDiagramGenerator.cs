@@ -15,6 +15,7 @@
     using Microsoft.CodeAnalysis.MSBuild;
 
     using DotNetDiagrams;
+    using Diagrams.Extensions;
 
     using Diagrams.Interfaces.Generators;
     // ReSharper disable UnusedMemberInSuper.Global
