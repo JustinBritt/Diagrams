@@ -55,9 +55,7 @@
         {
             get
             {
-                return Diagrams.Value.Select(w => w.Title).Contains(currentTitle)
-                          ? Diagrams.Value.Where(w => w.Title == currentTitle).SingleOrDefault().Code
-                          : new List<string>();
+                return Diagrams.GetCodeAtTitleOrDefault(currentTitle);
             }
         }
 
