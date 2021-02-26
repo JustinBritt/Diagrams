@@ -6,8 +6,6 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    using DotNetDiagrams.Interfaces.Diagrams;
-
     public interface IPlantUMLDiagrams : IDiagrams
     {
     }
