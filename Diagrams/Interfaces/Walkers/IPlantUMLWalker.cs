@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Interfaces.Walkers
+﻿namespace DotNetDiagrams.Interfaces.Walkers
 {
     using System;
     using System.Collections.Generic;

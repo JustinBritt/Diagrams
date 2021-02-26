@@ -4,7 +4,7 @@ namespace DotNetDiagrams
     using System.Collections.Generic;
     using System.IO;
 
-    using Diagrams.Classes.Generators;
+    using DotNetDiagrams.Classes.Generators;
 
     internal class Program
     {

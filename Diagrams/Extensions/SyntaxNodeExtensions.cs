@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Extensions
+﻿namespace DotNetDiagrams.Extensions
 {
     using Microsoft.CodeAnalysis;
 

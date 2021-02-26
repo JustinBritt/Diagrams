@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Classes.Generators
+﻿namespace DotNetDiagrams.Classes.Generators
 {
     using System.Collections.Generic;
 
@@ -6,8 +6,8 @@
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
-    using Diagrams.Classes.Walkers;
-    using Diagrams.Interfaces.Generators;
+    using DotNetDiagrams.Classes.Walkers;
+    using DotNetDiagrams.Interfaces.Generators;
     // ReSharper disable UnusedMemberInSuper.Global
 
     internal sealed class PlantUMLDiagramGenerator : IDiagramGenerator

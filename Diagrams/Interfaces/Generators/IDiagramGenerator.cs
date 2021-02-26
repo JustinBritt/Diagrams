@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Interfaces.Generators
+﻿namespace DotNetDiagrams.Interfaces.Generators
 {
     using System;
     using System.Collections.Generic;

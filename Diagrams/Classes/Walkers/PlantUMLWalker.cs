@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Classes.Walkers
+﻿namespace DotNetDiagrams.Classes.Walkers
 {
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -9,8 +9,8 @@
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.FindSymbols;
 
-    using Diagrams.Extensions;
-    using Diagrams.Interfaces.Walkers;
+    using DotNetDiagrams.Extensions;
+    using DotNetDiagrams.Interfaces.Walkers;
     
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
