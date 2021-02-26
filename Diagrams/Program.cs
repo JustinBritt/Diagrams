@@ -7,7 +7,7 @@ namespace DotNetDiagrams
     using Diagrams.Classes.Generators;
 
     internal class Program
-   {
+    {
       private static void Main(string[] args)
       {
          if (args.Length != 1 || Path.GetExtension(args[0]).ToLowerInvariant() != ".sln")
