@@ -6,6 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using DotNetDiagrams.Interfaces.Diagrams;
+
     public interface IDiagramGenerator
     {
         Dictionary<string, List<string>> Diagrams { get; }
