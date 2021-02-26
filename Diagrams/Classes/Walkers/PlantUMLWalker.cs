@@ -271,6 +271,53 @@
 
                 MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
                 ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
+
+                if (methodHost != null)
+                {
+                    callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                    semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
+                }
+                else if (constructorHost != null)
+                {
+                    callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                    semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
+                }
+                else
+                {
+                    base.Visit(invocation);
+                    return;
+                }
+
+                string targetTypeName;
+                string targetName;
+                string returnTypeName;
+
+                if (ModelExtensions.GetTypeInfo(semanticModel, memberAccessExpression).Type == null)
+                {
+                    // same type as caller
+                    targetTypeName = callerTypeName;
+                    targetName = memberAccessExpression.Name.Identifier.ValueText;
+                    returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+                }
+                else if (ModelExtensions.GetTypeInfo(semanticModel, memberAccessExpression).Type is INamedTypeSymbol targetType)
+                {
+                    targetTypeName = targetType.ToString();
+                    targetName = invocation.TryGetInferredMemberName();
+                    returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+                }
+                else
+                {
+                    base.Visit(invocation);
+                    return;
+                }
+
+                string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+                AddCommand(command);
+
+                base.Visit(invocation);
+
+                command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+                AddCommand(command);
             }
             else
             {
