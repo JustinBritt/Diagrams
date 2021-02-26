@@ -83,7 +83,7 @@
             string methodName = methodDeclaration.Identifier.ValueText;
             currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
-            if (!Diagrams.Value.Select(w => w.Title).Contains(currentTitle))
+            if (!Diagrams.ContainsTitle(currentTitle))
                 Diagrams.Value.Add(new PlantUMLDiagram(currentTitle, new List<string>()));
 
             AddCommand("@startuml");
