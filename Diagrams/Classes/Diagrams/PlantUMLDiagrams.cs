@@ -24,5 +24,11 @@
                 ? this.Value.Where(w => w.Title == title).SingleOrDefault().Code
                 : new List<string>();
         }
+
+        public bool RemoveAtTitle(
+            string title)
+        {
+            return this.Value.Remove(this.Value.Where(w => w.Title == title).SingleOrDefault());
+        }
     }
 }

@@ -12,5 +12,8 @@
 
         List<string> GetCodeAtTitleOrDefault(
             string title);
+
+        bool RemoveAtTitle(
+            string title);
     }
 }
