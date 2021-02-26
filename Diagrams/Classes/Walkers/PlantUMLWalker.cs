@@ -79,17 +79,22 @@
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
         {
-            string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-            string methodName = methodDeclaration.Identifier.ValueText;
-            currentTitle = $"{AssemblyName}_{className}_{methodName}";
+            ClassDeclarationSyntax parent = methodDeclaration.GetParent<ClassDeclarationSyntax>();
 
-            if (!Diagrams.ContainsTitle(currentTitle))
-                Diagrams.AddTitle(currentTitle);
+            if (parent is not null)
+            {
+                string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                string methodName = methodDeclaration.Identifier.ValueText;
+                currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
-            AddCommand("@startuml");
-            AddCommand($"title {currentTitle}");
-            AddCommand("autoactivate on");
-            AddCommand("hide footbox");
+                if (!Diagrams.ContainsTitle(currentTitle))
+                    Diagrams.AddTitle(currentTitle);
+
+                AddCommand("@startuml");
+                AddCommand($"title {currentTitle}");
+                AddCommand("autoactivate on");
+                AddCommand("hide footbox");
+            } 
         }
 
         private void AddCommand(string command, string unlessFollowing = null)
