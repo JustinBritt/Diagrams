@@ -10,7 +10,7 @@
 
     public interface IDiagramGenerator
     {
-        Dictionary<string, List<string>> Diagrams { get; }
+        IDiagrams Diagrams { get; }
 
         void Process();
     }

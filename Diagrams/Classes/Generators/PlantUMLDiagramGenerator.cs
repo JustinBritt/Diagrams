@@ -18,7 +18,7 @@
 
         private static readonly MSBuildWorkspace workspace;
 
-        public Dictionary<string, List<string>> Diagrams { get; private set; }
+        public IDiagrams Diagrams { get; private set; }
 
         static PlantUMLDiagramGenerator()
         {
@@ -46,7 +46,7 @@
                 }
             }
 
-            Diagrams = PlantUMLWalker.Diagrams;
+            Diagrams = new DotNetDiagrams.Classes.Diagrams.PlantUMLDiagrams() { Value = PlantUMLWalker.Diagrams };
         }
     }
 }
