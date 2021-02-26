@@ -15,6 +15,8 @@
     using Microsoft.CodeAnalysis.MSBuild;
 
     using DotNetDiagrams;
+
+    using Diagrams.Interfaces.Generators;
     // ReSharper disable UnusedMemberInSuper.Global
 
     internal sealed class PlantUMLDiagramGenerator : IDiagramGenerator
