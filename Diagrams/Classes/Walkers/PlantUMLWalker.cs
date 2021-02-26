@@ -70,7 +70,7 @@
                 if (PlantUMLCode.Count > 4) // minimum # of lines in header
                     AddCommand("@enduml");
                 else
-                    Diagrams.Value.Remove(Diagrams.Value.Where(w => w.Title == currentTitle).SingleOrDefault());
+                    Diagrams.RemoveAtTitle(currentTitle);
             }
         }
 
