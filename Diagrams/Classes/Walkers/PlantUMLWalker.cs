@@ -263,6 +263,12 @@
                 command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
                 AddCommand(command);
             }
+            else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+            {
+            }
+            else
+            {
+            }
         }
 
         private void Visit(MemberAccessExpressionSyntax invocation)
@@ -321,6 +327,18 @@
 
                 command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
                 AddCommand(command);
+            }
+            else if (invocation.Expression is ThisExpressionSyntax thisExpression)
+            {
+            }
+            else if (invocation.Expression is InvocationExpressionSyntax invocationExpression)
+            {
+            }
+            else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+            {
+            }
+            else
+            {
             }
         }
 
