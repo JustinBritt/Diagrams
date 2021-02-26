@@ -95,17 +95,7 @@
             } 
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
-                string interfaceName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-                string methodName = methodDeclaration.Identifier.ValueText;
-                currentTitle = $"{AssemblyName}_{interfaceName}_{methodName}";
-
-                if (!Diagrams.ContainsTitle(currentTitle))
-                    Diagrams.AddTitle(currentTitle);
-
-                AddCommand("@startuml");
-                AddCommand($"title {currentTitle}");
-                AddCommand("autoactivate on");
-                AddCommand("hide footbox");
+                // Ignore Interfaces
             }
         }
 
