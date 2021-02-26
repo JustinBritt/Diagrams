@@ -98,6 +98,22 @@
             AddCommand("hide footbox");
         }
 
+        private void AddCommand(string command, string unlessFollowing = null)
+        {
+            // add the command unless the last thing on the list is the second parameter
+            // if it is, remove that entry and don't add the command
+            if (unlessFollowing != null && PlantUMLCode.LastOrDefault() == unlessFollowing)
+            {
+                PlantUMLCode.RemoveAt(PlantUMLCode.Count - 1);
+                return;
+            }
+
+            Debug.WriteLine("----------------------------------");
+            Debug.WriteLine(currentTitle);
+            Debug.WriteLine("   " + command);
+            PlantUMLCode.Add(command);
+        }
+
         public override void Visit(SyntaxNode node)
         {
             if (ignore)
@@ -183,22 +199,6 @@
             --indent;
             string command2 = $"{Indent}end";
             AddCommand(command2, command1);
-        }
-
-        private void AddCommand(string command, string unlessFollowing = null)
-        {
-            // add the command unless the last thing on the list is the second parameter
-            // if it is, remove that entry and don't add the command
-            if (unlessFollowing != null && PlantUMLCode.LastOrDefault() == unlessFollowing)
-            {
-                PlantUMLCode.RemoveAt(PlantUMLCode.Count - 1);
-                return;
-            }
-
-            Debug.WriteLine("----------------------------------");
-            Debug.WriteLine(currentTitle);
-            Debug.WriteLine("   " + command);
-            PlantUMLCode.Add(command);
         }
 
         private void Visit(IfStatementSyntax ifStatement)
