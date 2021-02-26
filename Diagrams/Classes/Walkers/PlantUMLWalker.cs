@@ -95,7 +95,7 @@
             } 
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
-                // Ignore Interfaces
+                // Ignore method declarations in interfaces
             }
         }
 
