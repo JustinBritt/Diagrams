@@ -16,7 +16,7 @@
 
     using Diagrams.Extensions;
     
-    internal class PlantWalker : CSharpSyntaxWalker
+    internal class PlantUMLWalker : CSharpSyntaxWalker
     {
         private readonly Compilation compilation;
         private readonly Project project;
@@ -28,12 +28,12 @@
         private bool ignore;
         private int indent;
 
-        static PlantWalker()
+        static PlantUMLWalker()
         {
             Diagrams = new Dictionary<string, List<string>>(); // title, code
         }
 
-        public PlantWalker(Compilation compilation
+        public PlantUMLWalker(Compilation compilation
                          , SyntaxTree syntaxTree
                          , Solution solution
                          , Project project)
