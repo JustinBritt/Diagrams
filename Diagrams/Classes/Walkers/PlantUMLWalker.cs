@@ -81,7 +81,7 @@
         {
             ClassDeclarationSyntax parent = methodDeclaration.GetParent<ClassDeclarationSyntax>();
 
-            if (parent is not null)
+            if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
                 string methodName = methodDeclaration.Identifier.ValueText;
@@ -95,6 +95,20 @@
                 AddCommand("autoactivate on");
                 AddCommand("hide footbox");
             } 
+            else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
+            {
+                string interfaceName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+                string methodName = methodDeclaration.Identifier.ValueText;
+                currentTitle = $"{AssemblyName}_{interfaceName}_{methodName}";
+
+                if (!Diagrams.ContainsTitle(currentTitle))
+                    Diagrams.AddTitle(currentTitle);
+
+                AddCommand("@startuml");
+                AddCommand($"title {currentTitle}");
+                AddCommand("autoactivate on");
+                AddCommand("hide footbox");
+            }
         }
 
         private void AddCommand(string command, string unlessFollowing = null)
