@@ -1,23 +1,12 @@
 ﻿namespace Diagrams.Classes.Generators
 {
-    using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     using Microsoft.Build.Locator;
     using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.CSharp;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
-    using Microsoft.CodeAnalysis.FindSymbols;
     using Microsoft.CodeAnalysis.MSBuild;
 
-    using DotNetDiagrams;
     using Diagrams.Classes.Walkers;
-    using Diagrams.Extensions;
-
     using Diagrams.Interfaces.Generators;
     // ReSharper disable UnusedMemberInSuper.Global
 
