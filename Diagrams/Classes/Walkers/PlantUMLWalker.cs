@@ -12,7 +12,7 @@
     using Diagrams.Extensions;
     using Diagrams.Interfaces.Walkers;
     
-    internal class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
+    internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
         private readonly Compilation compilation;
         private readonly Project project;
