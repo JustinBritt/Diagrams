@@ -10,6 +10,9 @@
     {
         List<IDiagram> Value { get; set; }
 
+        bool ContainsTitle(
+            string title);
+
         List<string> GetCodeAtTitleOrDefault(
             string title);
 

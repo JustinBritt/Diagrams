@@ -17,6 +17,12 @@
 
         public List<IDiagram> Value { get; set; }
 
+        public bool ContainsTitle(
+            string title)
+        {
+            return this.Value.Select(w => w.Title).Contains(title);
+        }
+
         public List<string> GetCodeAtTitleOrDefault(
             string title)
         {
