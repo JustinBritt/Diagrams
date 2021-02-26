@@ -12,9 +12,9 @@
     {
         public PlantUMLDiagrams()
         {
-            this.Value = new Dictionary<string, List<string>>();
+            this.Value = new List<IDiagram>();
         }
 
-        public Dictionary<string, List<string>> Value { get; set; }
+        public List<IDiagram> Value { get; set; }
     }
 }

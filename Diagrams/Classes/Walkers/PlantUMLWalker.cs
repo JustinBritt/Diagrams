@@ -28,7 +28,7 @@
 
         static PlantUMLWalker()
         {
-            Diagrams = new PlantUMLDiagrams() { Value = new Dictionary<string, List<string>>() }; // title, code
+            Diagrams = new PlantUMLDiagrams();
         }
 
         public PlantUMLWalker(
@@ -55,8 +55,8 @@
         {
             get
             {
-                return Diagrams.Value.ContainsKey(currentTitle)
-                          ? Diagrams.Value[currentTitle]
+                return Diagrams.Value.Select(w => w.Title).Contains(currentTitle)
+                          ? Diagrams.Value.Where(w => w.Title == currentTitle).SingleOrDefault().Code
                           : new List<string>();
             }
         }
@@ -72,7 +72,7 @@
                 if (PlantUMLCode.Count > 4) // minimum # of lines in header
                     AddCommand("@enduml");
                 else
-                    Diagrams.Value.Remove(currentTitle);
+                    Diagrams.Value.Remove(Diagrams.Value.Where(w => w.Title == currentTitle).SingleOrDefault());
             }
         }
 
@@ -91,8 +91,8 @@
             string methodName = methodDeclaration.Identifier.ValueText;
             currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
-            if (!Diagrams.Value.ContainsKey(currentTitle))
-                Diagrams.Value.Add(currentTitle, new List<string>());
+            if (!Diagrams.Value.Select(w => w.Title).Contains(currentTitle))
+                Diagrams.Value.Add(new PlantUMLDiagram(currentTitle, new List<string>()));
 
             AddCommand("@startuml");
             AddCommand($"title {currentTitle}");

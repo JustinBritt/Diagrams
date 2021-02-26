@@ -3,7 +3,7 @@ namespace DotNetDiagrams
     using System;
     using System.Collections.Generic;
     using System.IO;
-
+    using System.Linq;
     using DotNetDiagrams.Classes.Generators;
 
     internal class Program
@@ -27,13 +27,13 @@ namespace DotNetDiagrams
          PlantUMLDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
          generator.Process();
 
-         foreach (string title in generator.Diagrams.Value.Keys)
+         foreach (string title in generator.Diagrams.Value.Select(w => w.Title))
          {
             Console.WriteLine("-----------------------------");
             Console.WriteLine(title);
             Console.WriteLine("-----------------------------");
 
-            foreach (string code in generator.Diagrams.Value[title])
+            foreach (string code in generator.Diagrams.Value.Where(w => w.Title == title).Select(w => w.Code).SingleOrDefault())
                Console.WriteLine(code);
 
             Console.WriteLine();

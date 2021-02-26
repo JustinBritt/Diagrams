@@ -8,6 +8,6 @@
 
     public interface IDiagrams
     {
-        Dictionary<string, List<string>> Value { get; set; }
+        List<IDiagram> Value { get; set; }
     }
 }
