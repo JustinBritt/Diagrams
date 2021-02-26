@@ -46,7 +46,7 @@
                 }
             }
 
-            Diagrams = new DotNetDiagrams.Classes.Diagrams.PlantUMLDiagrams() { Value = PlantUMLWalker.Diagrams };
+            Diagrams = PlantUMLWalker.Diagrams;
         }
     }
 }

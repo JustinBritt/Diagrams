@@ -28,7 +28,7 @@
 
         static PlantUMLWalker()
         {
-            Diagrams = new Dictionary<string, List<string>>(); // title, code
+            Diagrams = new PlantUMLDiagrams() { Value = new Dictionary<string, List<string>>() }; // title, code
         }
 
         public PlantUMLWalker(
@@ -55,15 +55,15 @@
         {
             get
             {
-                return Diagrams.ContainsKey(currentTitle)
-                          ? Diagrams[currentTitle]
+                return Diagrams.Value.ContainsKey(currentTitle)
+                          ? Diagrams.Value[currentTitle]
                           : new List<string>();
             }
         }
 
         private string AssemblyName { get { return project.AssemblyName; } }
 
-        public static Dictionary<string, List<string>> Diagrams { get; }
+        public static IPlantUMLDiagrams Diagrams { get; }
 
         private void EndDiagram()
         {
@@ -72,7 +72,7 @@
                 if (PlantUMLCode.Count > 4) // minimum # of lines in header
                     AddCommand("@enduml");
                 else
-                    Diagrams.Remove(currentTitle);
+                    Diagrams.Value.Remove(currentTitle);
             }
         }
 
@@ -91,8 +91,8 @@
             string methodName = methodDeclaration.Identifier.ValueText;
             currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
-            if (!Diagrams.ContainsKey(currentTitle))
-                Diagrams.Add(currentTitle, new List<string>());
+            if (!Diagrams.Value.ContainsKey(currentTitle))
+                Diagrams.Value.Add(currentTitle, new List<string>());
 
             AddCommand("@startuml");
             AddCommand($"title {currentTitle}");
