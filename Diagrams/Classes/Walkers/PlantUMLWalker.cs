@@ -265,6 +265,12 @@
             }
             else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
+                string callerTypeName;
+
+                SemanticModel semanticModel;
+
+                MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
+                ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
             }
             else
             {
