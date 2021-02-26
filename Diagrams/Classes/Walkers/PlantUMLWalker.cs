@@ -29,14 +29,18 @@
             Diagrams = new Dictionary<string, List<string>>(); // title, code
         }
 
-        public PlantUMLWalker(Compilation compilation
-                         , SyntaxTree syntaxTree
-                         , Solution solution
-                         , Project project)
+        public PlantUMLWalker(
+            Compilation compilation, 
+            SyntaxTree syntaxTree,
+            Solution solution,
+            Project project)
         {
             this.compilation = compilation;
+
             this.syntaxTree = syntaxTree;
+
             this.solution = solution;
+
             this.project = project;
         }
 
