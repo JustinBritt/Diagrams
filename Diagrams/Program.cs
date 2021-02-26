@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-
 namespace DotNetDiagrams
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
 
-   internal class Program
+    internal class Program
    {
       private static void Main(string[] args)
       {
@@ -38,6 +37,5 @@ namespace DotNetDiagrams
             Console.WriteLine();
          }
       }
-
    }
 }
