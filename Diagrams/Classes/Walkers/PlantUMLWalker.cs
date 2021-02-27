@@ -198,23 +198,6 @@
             base.Visit(constructorDeclaration);
         }
 
-        //private void Visit(DoStatementSyntax doStatement)
-        //{
-        //    string command1 = $"{Indent}group do/while";
-
-        //    AddCommand(command1);
-
-        //    ++indent;
-
-        //    base.Visit(doStatement);
-
-        //    --indent;
-
-        //    string command2 = $"{Indent}end";
-
-        //    AddCommand(command2, command1);
-        //}
-
         private void Visit(StatementSyntax statement)
         {
             List<SyntaxKind> validStatementKinds = new List<SyntaxKind> 
