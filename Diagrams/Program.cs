@@ -41,22 +41,13 @@ namespace DotNetDiagrams
 
          IDiagramGenerator diagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
 
-         IDiagrams diagrams = ProcessSolution(
-             diagramGenerator,
-             solution);
+         IDiagrams diagrams = diagramGenerator.Process(solution);
 
          WriteDiagramsToConsole(diagrams);
 
          Console.WriteLine("Hit any key to continue");
          
          Console.ReadKey();
-      }
-
-      private static IDiagrams ProcessSolution(
-          IDiagramGenerator diagramGenerator,
-          Solution solution)
-      {
-            return diagramGenerator.Process(solution);
       }
 
         private static void WriteDiagramsToConsole(
