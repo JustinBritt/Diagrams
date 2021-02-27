@@ -144,11 +144,11 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     Visit(methodDeclaration);
                     break;
-                case StatementSyntax statement:
-                    Visit(statement);
-                    break;
                 case NamespaceDeclarationSyntax namespaceDeclaration:
                     Visit(namespaceDeclaration);
+                    break;
+                case StatementSyntax statement:
+                    Visit(statement);
                     break;
                 default:
                     base.Visit(node);
