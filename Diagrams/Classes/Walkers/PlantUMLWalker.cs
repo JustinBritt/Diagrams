@@ -170,18 +170,7 @@
 
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
         {
-            // ignore constructors (instance and static)
-            // we only care about method declarations that don't have callers
-            ignore = true;
-
-            try
-            {
-                base.Visit(constructorDeclaration);
-            }
-            finally
-            {
-                ignore = false;
-            }
+            base.Visit(constructorDeclaration);
         }
 
         private void Visit(DoStatementSyntax doStatement)
