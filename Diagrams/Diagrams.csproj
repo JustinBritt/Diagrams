@@ -24,4 +24,9 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0-1.final" />
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.MSBuild" Version="3.9.0-1.final" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Factories\Dependencies\" />
+    <Folder Include="InterfacesFactories\Dependencies\" />
+  </ItemGroup>
 </Project>
