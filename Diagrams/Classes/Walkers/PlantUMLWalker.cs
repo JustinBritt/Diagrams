@@ -135,18 +135,6 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
-                case DoStatementSyntax doStatement:
-                    Visit(doStatement);
-                    break;
-                case ForStatementSyntax forStatement:
-                    Visit(forStatement);
-                    break;
-                case ForEachStatementSyntax forEachStatement:
-                    Visit(forEachStatement);
-                    break;
-                case IfStatementSyntax ifStatement:
-                    Visit(ifStatement);
-                    break;
                 case InvocationExpressionSyntax invocation:
                     Visit(invocation);
                     break;
@@ -156,16 +144,53 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     Visit(methodDeclaration);
                     break;
+                case StatementSyntax statement:
+                    Visit(statement);
+                    break;
                 case NamespaceDeclarationSyntax namespaceDeclaration:
                     Visit(namespaceDeclaration);
-                    break;
-                case WhileStatementSyntax whileStatement:
-                    Visit(whileStatement);
                     break;
                 default:
                     base.Visit(node);
                     break;
             }
+
+            //switch (node)
+            //{
+            //    case ConstructorDeclarationSyntax constructorDeclaration:
+            //        Visit(constructorDeclaration);
+            //        break;
+            //    case DoStatementSyntax doStatement:
+            //        Visit(doStatement);
+            //        break;
+            //    case ForStatementSyntax forStatement:
+            //        Visit(forStatement);
+            //        break;
+            //    case ForEachStatementSyntax forEachStatement:
+            //        Visit(forEachStatement);
+            //        break;
+            //    case IfStatementSyntax ifStatement:
+            //        Visit(ifStatement);
+            //        break;
+            //    case InvocationExpressionSyntax invocation:
+            //        Visit(invocation);
+            //        break;
+            //    case MemberAccessExpressionSyntax memberAccess:
+            //        Visit(memberAccess);
+            //        break;
+            //    case MethodDeclarationSyntax methodDeclaration:
+            //        Visit(methodDeclaration);
+            //        break;
+            //    case NamespaceDeclarationSyntax namespaceDeclaration:
+            //        Visit(namespaceDeclaration);
+            //        break;
+            //    case WhileStatementSyntax whileStatement:
+            //        Visit(whileStatement);
+            //        break;
+            //    default:
+            //        base.Visit(node);
+            //        break;
+            //}
         }
 
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
@@ -173,15 +198,62 @@
             base.Visit(constructorDeclaration);
         }
 
-        private void Visit(DoStatementSyntax doStatement)
+        //private void Visit(DoStatementSyntax doStatement)
+        //{
+        //    string command1 = $"{Indent}group do/while";
+
+        //    AddCommand(command1);
+
+        //    ++indent;
+
+        //    base.Visit(doStatement);
+
+        //    --indent;
+
+        //    string command2 = $"{Indent}end";
+
+        //    AddCommand(command2, command1);
+        //}
+
+        private void Visit(StatementSyntax statement)
         {
-            string command1 = $"{Indent}group do/while";
+            List<SyntaxKind> validStatementKinds = new List<SyntaxKind> 
+            { 
+                SyntaxKind.DoStatement,
+                SyntaxKind.IfStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.WhileStatement};
+            
+            if (!validStatementKinds.Contains(statement.Kind()))
+            {
+                base.Visit(statement);
+
+                return;
+            }
+
+            string res = statement switch
+            {
+                DoStatementSyntax => "do/while",
+
+                IfStatementSyntax => "if",
+
+                ForStatementSyntax => "for",
+
+                ForEachStatementSyntax => "foreach",
+
+                WhileStatementSyntax => "while",
+
+                { } => throw new System.Exception(statement.Kind().ToString())
+            };
+
+            string command1 = $"{Indent}group " + res;
 
             AddCommand(command1);
 
             ++indent;
 
-            base.Visit(doStatement);
+            base.Visit(statement);
 
             --indent;
 
@@ -190,56 +262,56 @@
             AddCommand(command2, command1);
         }
 
-        private void Visit(ForStatementSyntax forStatement)
-        {
-            string command1 = $"{Indent}group for";
+        //private void Visit(ForStatementSyntax forStatement)
+        //{
+        //    string command1 = $"{Indent}group for";
 
-            AddCommand(command1);
+        //    AddCommand(command1);
 
-            ++indent;
+        //    ++indent;
 
-            base.Visit(forStatement);
+        //    base.Visit(forStatement);
 
-            --indent;
+        //    --indent;
 
-            string command2 = $"{Indent}end";
+        //    string command2 = $"{Indent}end";
 
-            AddCommand(command2, command1);
-        }
+        //    AddCommand(command2, command1);
+        //}
 
-        private void Visit(ForEachStatementSyntax forEachStatement)
-        {
-            string command1 = $"{Indent}group foreach";
+        //private void Visit(ForEachStatementSyntax forEachStatement)
+        //{
+        //    string command1 = $"{Indent}group foreach";
 
-            AddCommand(command1);
+        //    AddCommand(command1);
 
-            ++indent;
+        //    ++indent;
 
-            base.Visit(forEachStatement);
+        //    base.Visit(forEachStatement);
 
-            --indent;
+        //    --indent;
 
-            string command2 = $"{Indent}end";
+        //    string command2 = $"{Indent}end";
 
-            AddCommand(command2, command1);
-        }
+        //    AddCommand(command2, command1);
+        //}
 
-        private void Visit(IfStatementSyntax ifStatement)
-        {
-            string command1 = $"{Indent}group if";
+        //private void Visit(IfStatementSyntax ifStatement)
+        //{
+        //    string command1 = $"{Indent}group if";
 
-            AddCommand(command1);
+        //    AddCommand(command1);
 
-            ++indent;
+        //    ++indent;
 
-            base.Visit(ifStatement);
+        //    base.Visit(ifStatement);
 
-            --indent;
+        //    --indent;
 
-            string command2 = $"{Indent}end";
+        //    string command2 = $"{Indent}end";
 
-            AddCommand(command2, command1);
-        }
+        //    AddCommand(command2, command1);
+        //}
 
         private void Visit(InvocationExpressionSyntax invocation)
         {
@@ -462,21 +534,21 @@
             base.Visit(namespaceDeclaration);
         }
 
-        private void Visit(WhileStatementSyntax whileStatement)
-        {
-            string command1 = $"{Indent}group while";
+        //private void Visit(WhileStatementSyntax whileStatement)
+        //{
+        //    string command1 = $"{Indent}group while";
 
-            AddCommand(command1);
+        //    AddCommand(command1);
             
-            ++indent;
+        //    ++indent;
             
-            base.Visit(whileStatement);
+        //    base.Visit(whileStatement);
             
-            --indent;
+        //    --indent;
             
-            string command2 = $"{Indent}end";
+        //    string command2 = $"{Indent}end";
             
-            AddCommand(command2, command1);
-        }
+        //    AddCommand(command2, command1);
+        //}
     }
 }
