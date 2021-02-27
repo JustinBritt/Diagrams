@@ -166,24 +166,29 @@
             if (invocation.Expression is IdentifierNameSyntax identifierName)
             {
                 string callerTypeName;
+
                 SemanticModel semanticModel;
 
                 MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
+                
                 ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
 
                 if (methodHost != null)
                 {
                     callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                
                     semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
                 }
                 else if (constructorHost != null)
                 {
                     callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                    
                     semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
                 }
                 else
                 {
                     base.Visit(invocation);
+                    
                     return;
                 }
 
