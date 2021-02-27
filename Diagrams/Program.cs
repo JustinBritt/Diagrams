@@ -32,6 +32,8 @@ namespace DotNetDiagrams
          IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
          IPlantUMLDiagramGeneratorFactory PlantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
+
+         ISolutionFactory solutionFactory = new SolutionFactory();
          
          Solution solution = OpenSolution(
              args[0],
