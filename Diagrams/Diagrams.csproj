@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\Dependencies\" />
-    <Folder Include="InterfacesFactories\Dependencies\" />
+    <Folder Include="Factories\Dependencies\Microsoft.CodeAnalysis\MSBuild\" />
+    <Folder Include="InterfacesFactories\Dependencies\Microsoft.CodeAnalysis\MSBuild\" />
   </ItemGroup>
 </Project>
