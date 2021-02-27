@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Factories\" />
-    <Folder Include="InterfacesFactories\" />
+    <Folder Include="Factories\Generators\" />
+    <Folder Include="InterfacesFactories\Generators\" />
   </ItemGroup>
 </Project>
