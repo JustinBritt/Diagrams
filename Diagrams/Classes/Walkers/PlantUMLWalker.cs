@@ -182,7 +182,7 @@
 
         private void Visit(InvocationExpressionSyntax invocation)
         {
-            string callerTypeName;
+            string callerTypeName = String.Empty;
 
             SemanticModel semanticModel;
 
@@ -192,7 +192,14 @@
 
             if (methodHost != null)
             {
-                callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                if (methodHost.GetParent<ClassDeclarationSyntax>() != null)
+                {
+                    callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                }
+                else if (methodHost.GetParent<ClassDeclarationSyntax>() != null)
+                {
+                    callerTypeName = methodHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+                }
 
                 semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
             }
