@@ -1,5 +1,6 @@
 ﻿namespace DotNetDiagrams.Classes.Walkers
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -190,9 +191,9 @@
                 return;
             }
 
-            string targetTypeName;
-            string targetName;
-            string returnTypeName;
+            string targetTypeName = String.Empty;
+            string targetName = String.Empty;
+            string returnTypeName = String.Empty;
 
             if (invocation.Expression is IdentifierNameSyntax identifierName)
             {
@@ -214,14 +215,6 @@
                     base.Visit(invocation);
                     return;
                 }
-
-                string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
-                AddCommand(command);
-
-                base.Visit(invocation);
-
-                command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
-                AddCommand(command);
             }
             else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
             {
@@ -243,18 +236,20 @@
                     base.Visit(invocation);
                     return;
                 }
-
-                string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
-                AddCommand(command);
-
-                base.Visit(invocation);
-
-                command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
-                AddCommand(command);
             }
             else
             {
             }
+
+            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+
+            AddCommand(command);
+
+            base.Visit(invocation);
+
+            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+
+            AddCommand(command);
         }
 
         private void Visit(MemberAccessExpressionSyntax invocation)
