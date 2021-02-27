@@ -161,54 +161,6 @@
             base.Visit(constructorDeclaration);
         }
 
-        private void Visit(StatementSyntax statement)
-        {
-            List<SyntaxKind> validStatementKinds = new List<SyntaxKind> 
-            { 
-                SyntaxKind.DoStatement,
-                SyntaxKind.IfStatement,
-                SyntaxKind.ForStatement,
-                SyntaxKind.ForEachStatement,
-                SyntaxKind.WhileStatement
-            };
-            
-            if (!validStatementKinds.Contains(statement.Kind()))
-            {
-                base.Visit(statement);
-
-                return;
-            }
-
-            string groupMessage = statement switch
-            {
-                DoStatementSyntax => "do/while",
-
-                IfStatementSyntax => "if",
-
-                ForStatementSyntax => "for",
-
-                ForEachStatementSyntax => "foreach",
-
-                WhileStatementSyntax => "while",
-
-                { } => throw new System.Exception(statement.Kind().ToString())
-            };
-
-            string command1 = $"{Indent}group " + groupMessage;
-
-            AddCommand(command1);
-
-            ++indent;
-
-            base.Visit(statement);
-
-            --indent;
-
-            string command2 = $"{Indent}end";
-
-            AddCommand(command2, command1);
-        }
-
         private void Visit(InvocationExpressionSyntax invocation)
         {
             if (invocation.Expression is IdentifierNameSyntax identifierName)
@@ -428,6 +380,54 @@
         private void Visit(NamespaceDeclarationSyntax namespaceDeclaration)
         {
             base.Visit(namespaceDeclaration);
+        }
+
+        private void Visit(StatementSyntax statement)
+        {
+            List<SyntaxKind> validStatementKinds = new List<SyntaxKind>
+            {
+                SyntaxKind.DoStatement,
+                SyntaxKind.IfStatement,
+                SyntaxKind.ForStatement,
+                SyntaxKind.ForEachStatement,
+                SyntaxKind.WhileStatement
+            };
+
+            if (!validStatementKinds.Contains(statement.Kind()))
+            {
+                base.Visit(statement);
+
+                return;
+            }
+
+            string groupMessage = statement switch
+            {
+                DoStatementSyntax => "do/while",
+
+                IfStatementSyntax => "if",
+
+                ForStatementSyntax => "for",
+
+                ForEachStatementSyntax => "foreach",
+
+                WhileStatementSyntax => "while",
+
+                { } => throw new System.Exception(statement.Kind().ToString())
+            };
+
+            string command1 = $"{Indent}group " + groupMessage;
+
+            AddCommand(command1);
+
+            ++indent;
+
+            base.Visit(statement);
+
+            --indent;
+
+            string command2 = $"{Indent}end";
+
+            AddCommand(command2, command1);
         }
     }
 }
