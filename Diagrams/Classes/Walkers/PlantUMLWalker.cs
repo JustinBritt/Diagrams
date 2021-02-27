@@ -262,57 +262,6 @@
             AddCommand(command2, command1);
         }
 
-        //private void Visit(ForStatementSyntax forStatement)
-        //{
-        //    string command1 = $"{Indent}group for";
-
-        //    AddCommand(command1);
-
-        //    ++indent;
-
-        //    base.Visit(forStatement);
-
-        //    --indent;
-
-        //    string command2 = $"{Indent}end";
-
-        //    AddCommand(command2, command1);
-        //}
-
-        //private void Visit(ForEachStatementSyntax forEachStatement)
-        //{
-        //    string command1 = $"{Indent}group foreach";
-
-        //    AddCommand(command1);
-
-        //    ++indent;
-
-        //    base.Visit(forEachStatement);
-
-        //    --indent;
-
-        //    string command2 = $"{Indent}end";
-
-        //    AddCommand(command2, command1);
-        //}
-
-        //private void Visit(IfStatementSyntax ifStatement)
-        //{
-        //    string command1 = $"{Indent}group if";
-
-        //    AddCommand(command1);
-
-        //    ++indent;
-
-        //    base.Visit(ifStatement);
-
-        //    --indent;
-
-        //    string command2 = $"{Indent}end";
-
-        //    AddCommand(command2, command1);
-        //}
-
         private void Visit(InvocationExpressionSyntax invocation)
         {
             if (invocation.Expression is IdentifierNameSyntax identifierName)
@@ -533,22 +482,5 @@
         {
             base.Visit(namespaceDeclaration);
         }
-
-        //private void Visit(WhileStatementSyntax whileStatement)
-        //{
-        //    string command1 = $"{Indent}group while";
-
-        //    AddCommand(command1);
-            
-        //    ++indent;
-            
-        //    base.Visit(whileStatement);
-            
-        //    --indent;
-            
-        //    string command2 = $"{Indent}end";
-            
-        //    AddCommand(command2, command1);
-        //}
     }
 }
