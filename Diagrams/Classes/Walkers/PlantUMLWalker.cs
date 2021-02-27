@@ -98,7 +98,7 @@
 
                 string methodName = methodDeclaration.Identifier.ValueText;
 
-                currentTitle = $"{namespaceName}_{className}_{methodName}";
+                currentTitle = $"{namespaceName}.{className}.{methodName}";
 
                 if (!Diagrams.ContainsTitle(currentTitle))
                     Diagrams.AddTitle(currentTitle);
@@ -114,7 +114,7 @@
 
                 string methodName = methodDeclaration.Identifier.ValueText;
 
-                currentTitle = $"{namespaceName}_{structName}_{methodName}";
+                currentTitle = $"{namespaceName}.{structName}.{methodName}";
 
                 if (!Diagrams.ContainsTitle(currentTitle))
                     Diagrams.AddTitle(currentTitle);
