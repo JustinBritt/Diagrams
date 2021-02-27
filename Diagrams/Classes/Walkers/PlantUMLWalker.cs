@@ -168,20 +168,20 @@
             }
         }
 
-        private void Visit(NamespaceDeclarationSyntax namespaceDeclaration)
+        private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
         {
-            base.Visit(namespaceDeclaration);
-        }
+            // ignore constructors (instance and static)
+            // we only care about method declarations that don't have callers
+            ignore = true;
 
-        private void Visit(WhileStatementSyntax whileStatement)
-        {
-            string command1 = $"{Indent}group while";
-            AddCommand(command1);
-            ++indent;
-            base.Visit(whileStatement);
-            --indent;
-            string command2 = $"{Indent}end";
-            AddCommand(command2, command1);
+            try
+            {
+                base.Visit(constructorDeclaration);
+            }
+            finally
+            {
+                ignore = false;
+            }
         }
 
         private void Visit(DoStatementSyntax doStatement)
@@ -195,23 +195,23 @@
             AddCommand(command2, command1);
         }
 
-        private void Visit(ForEachStatementSyntax forEachStatement)
-        {
-            string command1 = $"{Indent}group foreach";
-            AddCommand(command1);
-            ++indent;
-            base.Visit(forEachStatement);
-            --indent;
-            string command2 = $"{Indent}end";
-            AddCommand(command2, command1);
-        }
-
         private void Visit(ForStatementSyntax forStatement)
         {
             string command1 = $"{Indent}group for";
             AddCommand(command1);
             ++indent;
             base.Visit(forStatement);
+            --indent;
+            string command2 = $"{Indent}end";
+            AddCommand(command2, command1);
+        }
+
+        private void Visit(ForEachStatementSyntax forEachStatement)
+        {
+            string command1 = $"{Indent}group foreach";
+            AddCommand(command1);
+            ++indent;
+            base.Visit(forEachStatement);
             --indent;
             string command2 = $"{Indent}end";
             AddCommand(command2, command1);
@@ -444,20 +444,20 @@
             }
         }
 
-        private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
+        private void Visit(NamespaceDeclarationSyntax namespaceDeclaration)
         {
-            // ignore constructors (instance and static)
-            // we only care about method declarations that don't have callers
-            ignore = true;
+            base.Visit(namespaceDeclaration);
+        }
 
-            try
-            {
-                base.Visit(constructorDeclaration);
-            }
-            finally
-            {
-                ignore = false;
-            }
+        private void Visit(WhileStatementSyntax whileStatement)
+        {
+            string command1 = $"{Indent}group while";
+            AddCommand(command1);
+            ++indent;
+            base.Visit(whileStatement);
+            --indent;
+            string command2 = $"{Indent}end";
+            AddCommand(command2, command1);
         }
     }
 }
