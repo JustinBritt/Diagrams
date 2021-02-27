@@ -24,7 +24,7 @@ namespace DotNetDiagrams
 
          Console.WriteLine("Hit any key to continue");
          
-            Console.ReadKey();
+         Console.ReadKey();
       }
 
       private static void ExecuteStrategy2(string[] args)
