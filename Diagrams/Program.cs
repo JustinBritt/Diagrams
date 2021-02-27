@@ -9,7 +9,7 @@ namespace DotNetDiagrams
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;;
 
-    internal class Program
+    internal sealed class Program
     {
       private static void Main(string[] args)
       {
