@@ -14,8 +14,8 @@ namespace DotNetDiagrams
     using DotNetDiagrams.Factories.Generators;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
-    using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
     using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
     using DotNetDiagrams.InterfacesFactories.Generators;
 
     internal sealed class Program
