@@ -135,6 +135,9 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     Visit(methodDeclaration);
                     break;
+                case NamespaceDeclarationSyntax namespaceDeclaration:
+                    Visit(namespaceDeclaration);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
@@ -163,6 +166,11 @@
                     base.Visit(node);
                     break;
             }
+        }
+
+        private void Visit(NamespaceDeclarationSyntax namespaceDeclaration)
+        {
+            base.Visit(namespaceDeclaration);
         }
 
         private void Visit(WhileStatementSyntax whileStatement)
