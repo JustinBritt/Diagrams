@@ -45,7 +45,7 @@ namespace DotNetDiagrams
                 Console.WriteLine(title);
                 Console.WriteLine("-----------------------------");
 
-                foreach (string code in diagrams.Value.Where(w => w.Title == title).Select(w => w.Code).SingleOrDefault())
+                foreach (string code in diagrams.GetCodeAtTitleOrDefault(title))
                     Console.WriteLine(code);
 
                 Console.WriteLine();
