@@ -85,9 +85,7 @@
             }
             else if (this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).Count() == 1)
             {
-                var w1 = (NamespaceDeclarationSyntax)this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault();
-
-                namespaceName = w1.Name.ToString();
+                namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
             }
             else
             {
