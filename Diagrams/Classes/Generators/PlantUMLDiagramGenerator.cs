@@ -17,19 +17,16 @@
     {
         private readonly Solution solution;
 
-        private static readonly MSBuildWorkspace workspace;
+        private readonly MSBuildWorkspace workspace;
 
         public IDiagrams Diagrams { get; private set; }
 
-        static PlantUMLDiagramGenerator()
+        public PlantUMLDiagramGenerator(string solutionPath)
         {
             MSBuildLocator.RegisterDefaults();
 
             workspace = MSBuildWorkspace.Create();
-        }
 
-        public PlantUMLDiagramGenerator(string solutionPath)
-        {
             solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
         }
 
