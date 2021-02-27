@@ -26,7 +26,9 @@ namespace DotNetDiagrams
 
          Solution solution = OpenSolution(args[0]);
 
-         ExecuteStrategy2(solution);
+         IDiagrams diagrams = ProcessSolution(solution);
+
+         WriteDiagramsToConsole(diagrams);
 
          Console.WriteLine("Hit any key to continue");
          
@@ -43,14 +45,12 @@ namespace DotNetDiagrams
             return workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
       }
 
-      private static void ExecuteStrategy2(
+      private static IDiagrams ProcessSolution(
           Solution solution)
       {
-         IDiagramGenerator generator = new PlantUMLDiagramGenerator();
-         
-         IDiagrams diagrams = generator.Process(solution);
-            
-         WriteDiagramsToConsole(diagrams);
+            IDiagramGenerator generator = new PlantUMLDiagramGenerator();
+
+            return generator.Process(solution);
       }
 
         private static void WriteDiagramsToConsole(
