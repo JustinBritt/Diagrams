@@ -304,7 +304,7 @@
                 }
                 else
                 {
-                    throw new Exception(typeof(invocation.Expression));
+                    throw new Exception(invocation.Expression.GetType().FullName);
                 }
 
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
