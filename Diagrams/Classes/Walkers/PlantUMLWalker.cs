@@ -154,43 +154,6 @@
                     base.Visit(node);
                     break;
             }
-
-            //switch (node)
-            //{
-            //    case ConstructorDeclarationSyntax constructorDeclaration:
-            //        Visit(constructorDeclaration);
-            //        break;
-            //    case DoStatementSyntax doStatement:
-            //        Visit(doStatement);
-            //        break;
-            //    case ForStatementSyntax forStatement:
-            //        Visit(forStatement);
-            //        break;
-            //    case ForEachStatementSyntax forEachStatement:
-            //        Visit(forEachStatement);
-            //        break;
-            //    case IfStatementSyntax ifStatement:
-            //        Visit(ifStatement);
-            //        break;
-            //    case InvocationExpressionSyntax invocation:
-            //        Visit(invocation);
-            //        break;
-            //    case MemberAccessExpressionSyntax memberAccess:
-            //        Visit(memberAccess);
-            //        break;
-            //    case MethodDeclarationSyntax methodDeclaration:
-            //        Visit(methodDeclaration);
-            //        break;
-            //    case NamespaceDeclarationSyntax namespaceDeclaration:
-            //        Visit(namespaceDeclaration);
-            //        break;
-            //    case WhileStatementSyntax whileStatement:
-            //        Visit(whileStatement);
-            //        break;
-            //    default:
-            //        base.Visit(node);
-            //        break;
-            //}
         }
 
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
