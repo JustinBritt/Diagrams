@@ -132,23 +132,11 @@
 
             switch (node)
             {
-                case MethodDeclarationSyntax methodDeclaration:
-                    Visit(methodDeclaration);
-                    break;
-                case NamespaceDeclarationSyntax namespaceDeclaration:
-                    Visit(namespaceDeclaration);
-                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
-                case MemberAccessExpressionSyntax memberAccess:
-                    Visit(memberAccess);
-                    break;
-                case InvocationExpressionSyntax invocation:
-                    Visit(invocation);
-                    break;
-                case IfStatementSyntax ifStatement:
-                    Visit(ifStatement);
+                case DoStatementSyntax doStatement:
+                    Visit(doStatement);
                     break;
                 case ForStatementSyntax forStatement:
                     Visit(forStatement);
@@ -156,8 +144,20 @@
                 case ForEachStatementSyntax forEachStatement:
                     Visit(forEachStatement);
                     break;
-                case DoStatementSyntax doStatement:
-                    Visit(doStatement);
+                case IfStatementSyntax ifStatement:
+                    Visit(ifStatement);
+                    break;
+                case InvocationExpressionSyntax invocation:
+                    Visit(invocation);
+                    break;
+                case MemberAccessExpressionSyntax memberAccess:
+                    Visit(memberAccess);
+                    break;
+                case MethodDeclarationSyntax methodDeclaration:
+                    Visit(methodDeclaration);
+                    break;
+                case NamespaceDeclarationSyntax namespaceDeclaration:
+                    Visit(namespaceDeclaration);
                     break;
                 case WhileStatementSyntax whileStatement:
                     Visit(whileStatement);
