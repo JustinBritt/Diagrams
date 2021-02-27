@@ -52,13 +52,6 @@ namespace DotNetDiagrams
          Console.ReadKey();
       }
 
-      private static Solution OpenSolution(
-          string solutionPath,
-          MSBuildWorkspace workspace)
-      {
-            return workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
-      }
-
       private static IDiagrams ProcessSolution(
           IDiagramGenerator diagramGenerator,
           Solution solution)
