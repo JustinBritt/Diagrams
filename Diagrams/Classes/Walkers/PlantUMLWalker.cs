@@ -179,7 +179,7 @@
                 return;
             }
 
-            string group = statement switch
+            string groupMessage = statement switch
             {
                 DoStatementSyntax => "do/while",
 
@@ -194,7 +194,7 @@
                 { } => throw new System.Exception(statement.Kind().ToString())
             };
 
-            string command1 = $"{Indent}group " + group;
+            string command1 = $"{Indent}group " + groupMessage;
 
             AddCommand(command1);
 
