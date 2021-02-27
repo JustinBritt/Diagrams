@@ -93,6 +93,19 @@
             } 
             else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
             {
+                string structName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+
+                string methodName = methodDeclaration.Identifier.ValueText;
+
+                currentTitle = $"{AssemblyName}_{structName}_{methodName}";
+
+                if (!Diagrams.ContainsTitle(currentTitle))
+                    Diagrams.AddTitle(currentTitle);
+
+                AddCommand("@startuml");
+                AddCommand($"title {currentTitle}");
+                AddCommand("autoactivate on");
+                AddCommand("hide footbox");
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
