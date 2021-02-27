@@ -102,7 +102,7 @@
             // if it is, remove that entry and don't add the command
             if (unlessFollowing != null && PlantUMLCode.LastOrDefault() == unlessFollowing)
             {
-                PlantUMLCode.RemoveAt(PlantUMLCode.Count - 1);
+                this.PlantUMLCode.RemoveAt(PlantUMLCode.Count - 1);
                 return;
             }
 
