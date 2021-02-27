@@ -298,8 +298,13 @@
                 {
                     targetName = identifierName.Identifier.ValueText;
                 }
+                else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+                {
+                    targetName = memberAccessExpression.Name.Identifier.ValueText;
+                }
                 else
                 {
+                    throw new Exception(typeof(invocation.Expression));
                 }
 
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
