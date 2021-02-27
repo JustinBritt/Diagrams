@@ -200,18 +200,14 @@
                 // same type as caller
                 targetTypeName = callerTypeName;
 
-                if (invocation.Expression is IdentifierNameSyntax identifierName)
+                targetName = invocation.Expression switch
                 {
-                    targetName = identifierName.Identifier.ValueText;
-                }
-                else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-                {
-                    targetName = memberAccessExpression.Name.Identifier.ValueText;
-                }
-                else
-                {
-                    throw new Exception("Error");
-                }
+                    IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
+
+                    MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Name.Identifier.ValueText,
+                    
+                    { } => throw new Exception(invocation.Expression.ToFullString())
+                };
 
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
             }
