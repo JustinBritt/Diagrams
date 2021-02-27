@@ -10,6 +10,7 @@
     using DotNetDiagrams.Classes.Walkers;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
+    using DotNetDiagrams.Interfaces.Walkers;
     // ReSharper disable UnusedMemberInSuper.Global
 
     internal sealed class PlantUMLDiagramGenerator : IDiagramGenerator
