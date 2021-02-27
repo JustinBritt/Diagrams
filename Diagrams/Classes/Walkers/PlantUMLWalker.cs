@@ -99,14 +99,6 @@
                 string methodName = methodDeclaration.Identifier.ValueText;
 
                 currentTitle = $"{namespaceName}.{className}.{methodName}";
-
-                if (!Diagrams.ContainsTitle(currentTitle))
-                    Diagrams.AddTitle(currentTitle);
-
-                AddCommand("@startuml");
-                AddCommand($"title {currentTitle}");
-                AddCommand("autoactivate on");
-                AddCommand("hide footbox");
             } 
             else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
             {
@@ -115,19 +107,19 @@
                 string methodName = methodDeclaration.Identifier.ValueText;
 
                 currentTitle = $"{namespaceName}.{structName}.{methodName}";
-
-                if (!Diagrams.ContainsTitle(currentTitle))
-                    Diagrams.AddTitle(currentTitle);
-
-                AddCommand("@startuml");
-                AddCommand($"title {currentTitle}");
-                AddCommand("autoactivate on");
-                AddCommand("hide footbox");
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
                 // Ignore method declarations in interfaces
             }
+
+            if (!Diagrams.ContainsTitle(currentTitle))
+                Diagrams.AddTitle(currentTitle);
+
+            AddCommand("@startuml");
+            AddCommand($"title {currentTitle}");
+            AddCommand("autoactivate on");
+            AddCommand("hide footbox");
         }
 
         private void AddCommand(string command, string unlessFollowing = null)
