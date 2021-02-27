@@ -9,7 +9,6 @@ namespace DotNetDiagrams
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
-    using DotNetDiagrams.Classes.Generators;
     using DotNetDiagrams.Factories.Generators;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
