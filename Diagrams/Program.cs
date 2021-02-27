@@ -7,7 +7,7 @@ namespace DotNetDiagrams
 
     using DotNetDiagrams.Classes.Generators;
     using DotNetDiagrams.Interfaces.Diagrams;
-    using DotNetDiagrams.Interfaces.Generators;;
+    using DotNetDiagrams.Interfaces.Generators;
 
     internal sealed class Program
     {
