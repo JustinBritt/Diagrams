@@ -10,8 +10,10 @@ namespace DotNetDiagrams
     using Microsoft.CodeAnalysis.MSBuild;
 
     using DotNetDiagrams.Classes.Generators;
+    using DotNetDiagrams.Factories.Generators;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
+    using DotNetDiagrams.InterfacesFactories.Generators;
 
     internal sealed class Program
     {
