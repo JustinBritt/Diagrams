@@ -13,13 +13,15 @@ namespace DotNetDiagrams
          if (args.Length != 1 || Path.GetExtension(args[0]).ToLowerInvariant() != ".sln")
          {
             Console.WriteLine("Usage: Diagrams <solutionPath>");
+
             return;
          }
 
          ExecuteStrategy2(args);
 
          Console.WriteLine("Hit any key to continue");
-         Console.ReadKey();
+         
+            Console.ReadKey();
       }
 
       private static void ExecuteStrategy2(string[] args)
