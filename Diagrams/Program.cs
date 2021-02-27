@@ -31,7 +31,7 @@ namespace DotNetDiagrams
 
          Solution solution = OpenSolution(
              args[0],
-             CreateMSBuildWorkspace());
+             MSBuildWorkspaceFactory.CreateAndRegisterDefaults());
 
          IPlantUMLDiagramGeneratorFactory plantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
 
