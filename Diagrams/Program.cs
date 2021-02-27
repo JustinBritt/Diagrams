@@ -29,7 +29,7 @@ namespace DotNetDiagrams
 
       private static void ExecuteStrategy2(string[] args)
       {
-         PlantUMLDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
+         IDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
          
          generator.Process();
             
