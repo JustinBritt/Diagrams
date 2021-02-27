@@ -27,6 +27,8 @@ namespace DotNetDiagrams
             return;
          }
 
+         IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
+
          Solution solution = OpenSolution(
              args[0],
              CreateMSBuildWorkspace());
