@@ -267,34 +267,38 @@
             string targetName;
             string returnTypeName;
 
+            if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type == null)
+            {
+                // same type as caller
+                targetTypeName = callerTypeName;
+
+                targetName = identifierName.Identifier.ValueText;
+
+                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type is INamedTypeSymbol targetType)
+            {
+                targetTypeName = targetType.ToString();
+                targetName = invocation.TryGetInferredMemberName();
+                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+            }
+            else
+            {
+                base.Visit(invocation);
+                return;
+            }
+
+            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+            AddCommand(command);
+
+            base.Visit(invocation);
+
+            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+            AddCommand(command);
+
             if (invocation.Expression is IdentifierNameSyntax identifierName)
             {
-                if (ModelExtensions.GetTypeInfo(semanticModel, identifierName).Type == null)
-                {
-                    // same type as caller
-                    targetTypeName = callerTypeName;
-                    targetName = identifierName.Identifier.ValueText;
-                    returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-                }
-                else if (ModelExtensions.GetTypeInfo(semanticModel, identifierName).Type is INamedTypeSymbol targetType)
-                {
-                    targetTypeName = targetType.ToString();
-                    targetName = invocation.TryGetInferredMemberName();
-                    returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-                }
-                else
-                {
-                    base.Visit(invocation);
-                    return;
-                }
-
-                string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
-                AddCommand(command);
-
-                base.Visit(invocation);
-
-                command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
-                AddCommand(command);
+                
             }
             else if (invocation.Expression is BaseExpressionSyntax basexpression)
             {
