@@ -6,10 +6,13 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using Microsoft.CodeAnalysis;
+
     using DotNetDiagrams.Interfaces.Diagrams;
 
     public interface IDiagramGenerator
     {
-        IDiagrams Process();
+        IDiagrams Process(
+            Solution solution);
     }
 }

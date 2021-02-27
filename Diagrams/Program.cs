@@ -5,6 +5,10 @@ namespace DotNetDiagrams
     using System.IO;
     using System.Linq;
 
+    using Microsoft.Build.Locator;
+    using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.MSBuild;
+
     using DotNetDiagrams.Classes.Generators;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Generators;
@@ -29,9 +33,15 @@ namespace DotNetDiagrams
 
       private static void ExecuteStrategy2(string[] args)
       {
-         IDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
+         MSBuildLocator.RegisterDefaults();
+
+         MSBuildWorkspace workspace = MSBuildWorkspace.Create();
+
+         Solution solution = workspace.OpenSolutionAsync(args[0]).GetAwaiter().GetResult();
+
+         IDiagramGenerator generator = new PlantUMLDiagramGenerator();
          
-         IDiagrams diagrams = generator.Process();
+         IDiagrams diagrams = generator.Process(solution);
             
          WriteDiagramsToConsole(diagrams);
       }

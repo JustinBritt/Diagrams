@@ -15,18 +15,12 @@
 
     internal sealed class PlantUMLDiagramGenerator : IDiagramGenerator
     {
-        private readonly Solution solution;
-
-        public PlantUMLDiagramGenerator(string solutionPath)
+        public PlantUMLDiagramGenerator()
         {
-            MSBuildLocator.RegisterDefaults();
-
-            MSBuildWorkspace workspace = MSBuildWorkspace.Create();
-
-            solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
         }
 
-        public IDiagrams Process()
+        public IDiagrams Process(
+            Solution solution)
         {
             IDiagrams diagrams = new PlantUMLDiagrams();
 
