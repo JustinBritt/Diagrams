@@ -4,7 +4,9 @@ namespace DotNetDiagrams
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+
     using DotNetDiagrams.Classes.Generators;
+    using DotNetDiagrams.Interfaces.Diagrams;
 
     internal class Program
     {
@@ -27,19 +29,26 @@ namespace DotNetDiagrams
       private static void ExecuteStrategy2(string[] args)
       {
          PlantUMLDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
+         
          generator.Process();
-
-         foreach (string title in generator.Diagrams.Value.Select(w => w.Title))
-         {
-            Console.WriteLine("-----------------------------");
-            Console.WriteLine(title);
-            Console.WriteLine("-----------------------------");
-
-            foreach (string code in generator.Diagrams.Value.Where(w => w.Title == title).Select(w => w.Code).SingleOrDefault())
-               Console.WriteLine(code);
-
-            Console.WriteLine();
-         }
+            
+         WriteDiagramsToConsole(generator.Diagrams);
       }
+
+        private static void WriteDiagramsToConsole(
+            IDiagrams diagrams)
+        {
+            foreach (string title in diagrams.Value.Select(w => w.Title))
+            {
+                Console.WriteLine("-----------------------------");
+                Console.WriteLine(title);
+                Console.WriteLine("-----------------------------");
+
+                foreach (string code in diagrams.Value.Where(w => w.Title == title).Select(w => w.Code).SingleOrDefault())
+                    Console.WriteLine(code);
+
+                Console.WriteLine();
+            }
+        }
    }
 }
