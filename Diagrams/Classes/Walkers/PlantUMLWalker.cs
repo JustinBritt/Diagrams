@@ -206,6 +206,8 @@
 
                     MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Name.Identifier.ValueText,
                     
+                    MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.Name.Identifier.ValueText,
+
                     { } => throw new Exception(invocation.Expression.ToFullString())
                 };
 
