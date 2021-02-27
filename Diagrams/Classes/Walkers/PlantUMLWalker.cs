@@ -110,7 +110,7 @@
                 command,
                 currentTitle);
 
-            PlantUMLCode.Add(command);
+            this.PlantUMLCode..Add(command);
         }
 
         private void WriteCommandToDebug(
