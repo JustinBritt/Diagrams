@@ -24,7 +24,9 @@ namespace DotNetDiagrams
             return;
          }
 
-         Solution solution = OpenSolution(args[0]);
+         Solution solution = OpenSolution(
+             args[0],
+             CreateMSBuildWorkspace());
 
          IDiagrams diagrams = ProcessSolution(solution);
 
@@ -35,13 +37,17 @@ namespace DotNetDiagrams
          Console.ReadKey();
       }
 
+     private static MSBuildWorkspace CreateMSBuildWorkspace()
+     {
+        MSBuildLocator.RegisterDefaults();
+
+        return MSBuildWorkspace.Create();
+     }
+
       private static Solution OpenSolution(
-          string solutionPath)
+          string solutionPath,
+          MSBuildWorkspace workspace)
       {
-            MSBuildLocator.RegisterDefaults();
-
-            MSBuildWorkspace workspace = MSBuildWorkspace.Create();
-
             return workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
       }
 
