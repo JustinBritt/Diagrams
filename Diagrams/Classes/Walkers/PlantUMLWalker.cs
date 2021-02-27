@@ -285,21 +285,26 @@
             else if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type is INamedTypeSymbol targetType)
             {
                 targetTypeName = targetType.ToString();
+
                 targetName = invocation.TryGetInferredMemberName();
+
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
             }
             else
             {
                 base.Visit(invocation);
+
                 return;
             }
 
             string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+
             AddCommand(command);
 
             base.Visit(invocation);
 
             command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+
             AddCommand(command);
 
             //if (invocation.Expression is IdentifierNameSyntax identifierName)
