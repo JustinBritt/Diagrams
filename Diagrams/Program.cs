@@ -41,7 +41,7 @@ namespace DotNetDiagrams
             MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
             return workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
-        }
+      }
 
       private static void ExecuteStrategy2(
           Solution solution)
