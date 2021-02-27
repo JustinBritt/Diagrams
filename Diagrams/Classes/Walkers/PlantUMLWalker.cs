@@ -91,6 +91,9 @@
                 AddCommand("autoactivate on");
                 AddCommand("hide footbox");
             } 
+            else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
+            {
+            }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
                 // Ignore method declarations in interfaces
