@@ -35,9 +35,9 @@ namespace DotNetDiagrams
 
          ISolutionFactory solutionFactory = new SolutionFactory();
          
-         Solution solution = OpenSolution(
-             args[0],
-             MSBuildWorkspaceFactory.CreateAndRegisterDefaults());
+         Solution solution = solutionFactory.Create(
+             MSBuildWorkspaceFactory.CreateAndRegisterDefaults(),
+             args[0]);
 
          IDiagramGenerator diagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
 
