@@ -106,10 +106,20 @@
                 return;
             }
 
-            Debug.WriteLine("----------------------------------");
-            Debug.WriteLine(currentTitle);
-            Debug.WriteLine("   " + command);
+            this.WriteCommandToDebug(
+                command,
+                currentTitle);
+
             PlantUMLCode.Add(command);
+        }
+
+        private void WriteCommandToDebug(
+            string command,
+            string title)
+        {
+            Debug.WriteLine("----------------------------------");
+            Debug.WriteLine(title);
+            Debug.WriteLine("   " + command);
         }
 
         public override void Visit(SyntaxNode node)
