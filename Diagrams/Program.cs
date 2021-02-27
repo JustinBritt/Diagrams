@@ -24,21 +24,28 @@ namespace DotNetDiagrams
             return;
          }
 
-         ExecuteStrategy2(args);
+         Solution solution = OpenSolution(args[0]);
+
+         ExecuteStrategy2(solution);
 
          Console.WriteLine("Hit any key to continue");
          
          Console.ReadKey();
       }
 
-      private static void ExecuteStrategy2(string[] args)
+      private static Solution OpenSolution(
+          string solutionPath)
       {
-         MSBuildLocator.RegisterDefaults();
+            MSBuildLocator.RegisterDefaults();
 
-         MSBuildWorkspace workspace = MSBuildWorkspace.Create();
+            MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
-         Solution solution = workspace.OpenSolutionAsync(args[0]).GetAwaiter().GetResult();
+            return workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+        }
 
+      private static void ExecuteStrategy2(
+          Solution solution)
+      {
          IDiagramGenerator generator = new PlantUMLDiagramGenerator();
          
          IDiagrams diagrams = generator.Process(solution);
