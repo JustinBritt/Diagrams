@@ -30,7 +30,9 @@ namespace DotNetDiagrams
              args[0],
              CreateMSBuildWorkspace());
 
-         IDiagramGenerator diagramGenerator = new PlantUMLDiagramGenerator();
+         IPlantUMLDiagramGeneratorFactory plantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
+
+         IDiagramGenerator diagramGenerator = plantUMLDiagramGeneratorFactory.Create();
 
          IDiagrams diagrams = ProcessSolution(
              diagramGenerator,
