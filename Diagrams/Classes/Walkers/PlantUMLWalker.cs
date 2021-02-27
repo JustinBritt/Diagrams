@@ -187,7 +187,7 @@
             base.Visit(constructorDeclaration);
         }
 
-        private void Visit(InvocationExpressionSyntax invocation)
+        private void Visit(ExpressionSyntax invocation)
         {
             string callerTypeName = String.Empty;
 
@@ -227,27 +227,42 @@
             string targetName;
             string returnTypeName;
 
-            if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type == null)
+            ExpressionSyntax expression;
+
+            if (invocation is InvocationExpressionSyntax invocationExpression)
+            {
+                expression = invocationExpression.Expression;
+            }
+            else if(invocation is MemberAccessExpressionSyntax memberAccessExpression)
+            {
+                expression = memberAccessExpression.Expression;
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type == null)
             {
                 // same type as caller
                 targetTypeName = callerTypeName;
 
-                targetName = invocation.Expression switch
+                targetName = expression switch
                 {
                     GenericNameSyntax genericName => genericName.Identifier.ValueText,
 
                     IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
 
                     MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Name.Identifier.ValueText,
-                    
+
                     MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.Name.Identifier.ValueText,
 
-                    { } => throw new Exception(invocation.Expression.ToFullString())
+                    { } => throw new Exception(expression.ToFullString())
                 };
 
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
             }
-            else if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type is INamedTypeSymbol targetType)
+            else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
             {
                 targetTypeName = targetType.ToString();
                 targetName = invocation.TryGetInferredMemberName();
@@ -268,115 +283,6 @@
             command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
 
             AddCommand(command);
-        }
-
-        private void Visit(MemberAccessExpressionSyntax invocation)
-        {
-            string callerTypeName = String.Empty;
-            
-            SemanticModel semanticModel;
-
-            MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
-            
-            ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
-
-            if (methodHost != null)
-            {
-                if (methodHost.GetParent<ClassDeclarationSyntax>() != null)
-                {
-                    callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (methodHost.GetParent<StructDeclarationSyntax>() != null)
-                {
-                    callerTypeName = methodHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-                }
-
-                semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
-            }
-            else if (constructorHost != null)
-            {
-                callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-                
-                semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
-            }
-            else
-            {
-                base.Visit(invocation);
-
-                return;
-            }
-
-            string targetTypeName = String.Empty;
-            string targetName = String.Empty;
-            string returnTypeName = String.Empty;
-
-            if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type == null)
-            {
-                // same type as caller
-                targetTypeName = callerTypeName;
-
-                if (invocation.Expression is IdentifierNameSyntax identifierName)
-                {
-                    targetName = identifierName.Identifier.ValueText;
-                }
-                else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-                {
-                    targetName = memberAccessExpression.Name.Identifier.ValueText;
-                }
-                else
-                {
-                    throw new Exception(invocation.Expression.GetType().FullName);
-                }
-
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            }
-            else if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type is INamedTypeSymbol targetType)
-            {
-                targetTypeName = targetType.ToString();
-
-                targetName = invocation.TryGetInferredMemberName();
-
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            }
-            else
-            {
-                base.Visit(invocation);
-
-                return;
-            }
-
-            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
-
-            AddCommand(command);
-
-            base.Visit(invocation);
-
-            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
-
-            AddCommand(command);
-
-            //if (invocation.Expression is IdentifierNameSyntax identifierName)
-            //{
-                
-            //}
-            //else if (invocation.Expression is BaseExpressionSyntax basexpression)
-            //{
-            //}
-            //else if (invocation.Expression is ThisExpressionSyntax thisExpression)
-            //{
-            //}
-            //else if (invocation.Expression is PredefinedTypeSyntax predefinedType)
-            //{
-            //}
-            //else if (invocation.Expression is InvocationExpressionSyntax invocationExpression)
-            //{
-            //}
-            //else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-            //{
-            //}
-            //else
-            //{
-            //}
         }
 
         private void Visit(MethodDeclarationSyntax methodDeclaration)
