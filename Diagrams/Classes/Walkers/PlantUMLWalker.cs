@@ -263,16 +263,22 @@
                 return;
             }
 
-            string targetTypeName;
-            string targetName;
-            string returnTypeName;
+            string targetTypeName = String.Empty;
+            string targetName = String.Empty;
+            string returnTypeName = String.Empty;
 
             if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type == null)
             {
                 // same type as caller
                 targetTypeName = callerTypeName;
 
-                targetName = identifierName.Identifier.ValueText;
+                if (invocation.Expression is IdentifierNameSyntax identifierName)
+                {
+                    targetName = identifierName.Identifier.ValueText;
+                }
+                else
+                {
+                }
 
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
             }
@@ -296,28 +302,28 @@
             command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
             AddCommand(command);
 
-            if (invocation.Expression is IdentifierNameSyntax identifierName)
-            {
+            //if (invocation.Expression is IdentifierNameSyntax identifierName)
+            //{
                 
-            }
-            else if (invocation.Expression is BaseExpressionSyntax basexpression)
-            {
-            }
-            else if (invocation.Expression is ThisExpressionSyntax thisExpression)
-            {
-            }
-            else if (invocation.Expression is PredefinedTypeSyntax predefinedType)
-            {
-            }
-            else if (invocation.Expression is InvocationExpressionSyntax invocationExpression)
-            {
-            }
-            else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-            {
-            }
-            else
-            {
-            }
+            //}
+            //else if (invocation.Expression is BaseExpressionSyntax basexpression)
+            //{
+            //}
+            //else if (invocation.Expression is ThisExpressionSyntax thisExpression)
+            //{
+            //}
+            //else if (invocation.Expression is PredefinedTypeSyntax predefinedType)
+            //{
+            //}
+            //else if (invocation.Expression is InvocationExpressionSyntax invocationExpression)
+            //{
+            //}
+            //else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
+            //{
+            //}
+            //else
+            //{
+            //}
         }
 
         private void Visit(MethodDeclarationSyntax methodDeclaration)
