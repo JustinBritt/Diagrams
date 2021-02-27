@@ -227,52 +227,6 @@
                 return;
             }
 
-            //if (invocation.Expression is IdentifierNameSyntax identifierName)
-            //{
-            //    if (ModelExtensions.GetTypeInfo(semanticModel, identifierName).Type == null)
-            //    {
-            //        // same type as caller
-            //        targetTypeName = callerTypeName;
-            //        targetName = identifierName.Identifier.ValueText;
-            //        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            //    }
-            //    else if (ModelExtensions.GetTypeInfo(semanticModel, identifierName).Type is INamedTypeSymbol targetType)
-            //    {
-            //        targetTypeName = targetType.ToString();
-            //        targetName = invocation.TryGetInferredMemberName();
-            //        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            //    }
-            //    else
-            //    {
-            //        base.Visit(invocation);
-            //        return;
-            //    }
-            //}
-            //else if (invocation.Expression is MemberAccessExpressionSyntax memberAccessExpression)
-            //{
-            //    if (ModelExtensions.GetTypeInfo(semanticModel, memberAccessExpression).Type == null)
-            //    {
-            //        // same type as caller
-            //        targetTypeName = callerTypeName;
-            //        targetName = memberAccessExpression.Name.Identifier.ValueText;
-            //        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            //    }
-            //    else if (ModelExtensions.GetTypeInfo(semanticModel, memberAccessExpression).Type is INamedTypeSymbol targetType)
-            //    {
-            //        targetTypeName = targetType.ToString();
-            //        targetName = invocation.TryGetInferredMemberName();
-            //        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
-            //    }
-            //    else
-            //    {
-            //        base.Visit(invocation);
-            //        return;
-            //    }
-            //}
-            //else
-            //{
-            //}
-
             string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
 
             AddCommand(command);
