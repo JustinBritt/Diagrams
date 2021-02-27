@@ -48,13 +48,6 @@ namespace DotNetDiagrams
          Console.ReadKey();
       }
 
-     private static MSBuildWorkspace CreateMSBuildWorkspace()
-     {
-        MSBuildLocator.RegisterDefaults();
-
-        return MSBuildWorkspace.Create();
-     }
-
       private static Solution OpenSolution(
           string solutionPath,
           MSBuildWorkspace workspace)
