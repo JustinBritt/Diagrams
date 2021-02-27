@@ -31,9 +31,9 @@ namespace DotNetDiagrams
       {
          IDiagramGenerator generator = new PlantUMLDiagramGenerator(args[0]);
          
-         generator.Process();
+         IDiagrams diagrams = generator.Process();
             
-         WriteDiagramsToConsole(generator.Diagrams);
+         WriteDiagramsToConsole(diagrams);
       }
 
         private static void WriteDiagramsToConsole(

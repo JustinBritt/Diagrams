@@ -10,8 +10,6 @@
 
     public interface IDiagramGenerator
     {
-        IDiagrams Diagrams { get; }
-
-        void Process();
+        IDiagrams Process();
     }
 }

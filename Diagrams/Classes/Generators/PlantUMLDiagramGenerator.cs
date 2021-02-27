@@ -17,8 +17,6 @@
     {
         private readonly Solution solution;
 
-        public IDiagrams Diagrams { get; private set; }
-
         public PlantUMLDiagramGenerator(string solutionPath)
         {
             MSBuildLocator.RegisterDefaults();
@@ -26,12 +24,12 @@
             MSBuildWorkspace workspace = MSBuildWorkspace.Create();
 
             solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
-
-            this.Diagrams = new PlantUMLDiagrams();
         }
 
-        public void Process()
+        public IDiagrams Process()
         {
+            IDiagrams diagrams = new PlantUMLDiagrams();
+
             foreach (Project project in solution.Projects)
             {
                 Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
@@ -46,9 +44,11 @@
 
                     walker.Visit(syntaxTree.GetRoot());
 
-                    this.Diagrams.Value.AddRange(walker.Diagrams.Value);
+                    diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
             }
+
+            return diagrams;
         }
     }
 }
