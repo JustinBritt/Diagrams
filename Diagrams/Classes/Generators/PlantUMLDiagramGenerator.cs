@@ -40,7 +40,11 @@
 
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
-                    PlantUMLWalker walker = new PlantUMLWalker(compilation, syntaxTree, solution, project);
+                    PlantUMLWalker walker = new PlantUMLWalker(
+                        compilation,
+                        syntaxTree,
+                        solution,
+                        project);
 
                     walker.Visit(syntaxTree.GetRoot());
 
