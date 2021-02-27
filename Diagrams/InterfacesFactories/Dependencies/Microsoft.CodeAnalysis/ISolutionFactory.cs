@@ -1,4 +1,4 @@
-﻿namespace Diagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis
+﻿namespace DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis
 {
     using System;
     using System.Collections.Generic;

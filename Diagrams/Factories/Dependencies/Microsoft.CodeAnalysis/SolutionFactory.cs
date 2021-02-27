@@ -1,4 +1,4 @@
-﻿namespace Diagrams.Factories.Dependencies.Microsoft.CodeAnalysis
+﻿namespace DotNetDiagrams.Factories.Dependencies.Microsoft.CodeAnalysis
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,7 @@
     using global::Microsoft.CodeAnalysis;
     using global::Microsoft.CodeAnalysis.MSBuild;
 
-    using Diagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
 
     internal sealed class SolutionFactory : ISolutionFactory
     {
