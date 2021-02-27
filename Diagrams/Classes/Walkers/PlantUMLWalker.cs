@@ -191,9 +191,9 @@
                 return;
             }
 
-            string targetTypeName = String.Empty;
-            string targetName = String.Empty;
-            string returnTypeName = String.Empty;
+            string targetTypeName;
+            string targetName;
+            string returnTypeName;
 
             if (ModelExtensions.GetTypeInfo(semanticModel, invocation.Expression).Type == null)
             {
