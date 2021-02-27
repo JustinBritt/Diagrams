@@ -28,6 +28,8 @@
             workspace = MSBuildWorkspace.Create();
 
             solution = workspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+
+            this.Diagrams = new PlantUMLDiagrams();
         }
 
         public void Process()
@@ -41,10 +43,10 @@
                     PlantUMLWalker walker = new PlantUMLWalker(compilation, syntaxTree, solution, project);
 
                     walker.Visit(syntaxTree.GetRoot());
+
+                    this.Diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
             }
-
-            Diagrams = PlantUMLWalker.Diagrams;
         }
     }
 }

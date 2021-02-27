@@ -26,17 +26,14 @@
         private bool ignore;
         private int indent;
 
-        static PlantUMLWalker()
-        {
-            Diagrams = new PlantUMLDiagrams();
-        }
-
         public PlantUMLWalker(
             Compilation compilation, 
             SyntaxTree syntaxTree,
             Solution solution,
             Project project)
         {
+            this.Diagrams = new PlantUMLDiagrams();
+
             this.compilation = compilation;
 
             this.syntaxTree = syntaxTree;
@@ -55,7 +52,7 @@
 
         private string AssemblyName { get { return project.AssemblyName; } }
 
-        public static IPlantUMLDiagrams Diagrams { get; }
+        public IPlantUMLDiagrams Diagrams { get; }
 
         private void EndDiagram()
         {
