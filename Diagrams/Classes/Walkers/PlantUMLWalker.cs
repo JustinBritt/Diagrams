@@ -196,7 +196,7 @@
                 {
                     callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
                 }
-                else if (methodHost.GetParent<ClassDeclarationSyntax>() != null)
+                else if (methodHost.GetParent<StructDeclarationSyntax>() != null)
                 {
                     callerTypeName = methodHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
                 }
