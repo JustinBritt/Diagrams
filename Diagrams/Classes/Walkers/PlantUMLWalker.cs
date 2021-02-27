@@ -77,6 +77,8 @@
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
         {
+            string namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
+
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
