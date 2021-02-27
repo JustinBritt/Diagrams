@@ -169,7 +169,8 @@
                 SyntaxKind.IfStatement,
                 SyntaxKind.ForStatement,
                 SyntaxKind.ForEachStatement,
-                SyntaxKind.WhileStatement};
+                SyntaxKind.WhileStatement
+            };
             
             if (!validStatementKinds.Contains(statement.Kind()))
             {
