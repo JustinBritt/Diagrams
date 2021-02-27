@@ -202,6 +202,8 @@
 
                 targetName = invocation.Expression switch
                 {
+                    GenericNameSyntax genericName => genericName.Identifier.ValueText,
+
                     IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
 
                     MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Name.Identifier.ValueText,
