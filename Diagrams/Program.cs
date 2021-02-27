@@ -28,7 +28,11 @@ namespace DotNetDiagrams
              args[0],
              CreateMSBuildWorkspace());
 
-         IDiagrams diagrams = ProcessSolution(solution);
+         IDiagramGenerator diagramGenerator = new PlantUMLDiagramGenerator();
+
+         IDiagrams diagrams = ProcessSolution(
+             diagramGenerator,
+             solution);
 
          WriteDiagramsToConsole(diagrams);
 
@@ -52,11 +56,10 @@ namespace DotNetDiagrams
       }
 
       private static IDiagrams ProcessSolution(
+          IDiagramGenerator diagramGenerator,
           Solution solution)
       {
-            IDiagramGenerator generator = new PlantUMLDiagramGenerator();
-
-            return generator.Process(solution);
+            return diagramGenerator.Process(solution);
       }
 
         private static void WriteDiagramsToConsole(
