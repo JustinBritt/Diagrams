@@ -29,11 +29,11 @@ namespace DotNetDiagrams
 
          IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
+         IPlantUMLDiagramGeneratorFactory plantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
+         
          Solution solution = OpenSolution(
              args[0],
              MSBuildWorkspaceFactory.CreateAndRegisterDefaults());
-
-         IPlantUMLDiagramGeneratorFactory plantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
 
          IDiagramGenerator diagramGenerator = plantUMLDiagramGeneratorFactory.Create();
 
