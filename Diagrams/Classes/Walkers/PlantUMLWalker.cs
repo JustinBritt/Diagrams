@@ -452,11 +452,17 @@
         private void Visit(WhileStatementSyntax whileStatement)
         {
             string command1 = $"{Indent}group while";
+
             AddCommand(command1);
+            
             ++indent;
+            
             base.Visit(whileStatement);
+            
             --indent;
+            
             string command2 = $"{Indent}end";
+            
             AddCommand(command2, command1);
         }
     }
