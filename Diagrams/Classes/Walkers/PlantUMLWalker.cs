@@ -80,7 +80,9 @@
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+
                 string methodName = methodDeclaration.Identifier.ValueText;
+
                 currentTitle = $"{AssemblyName}_{className}_{methodName}";
 
                 if (!Diagrams.ContainsTitle(currentTitle))
