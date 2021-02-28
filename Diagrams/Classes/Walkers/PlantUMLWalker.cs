@@ -471,6 +471,10 @@
             AddCommand(command);
         }
 
+        /// <summary>
+        /// This visits an if statement.
+        /// </summary>
+        /// <param name="ifStatement">If statement</param>
         private void Visit(IfStatementSyntax ifStatement)
         {
             string command1 = "alt";
@@ -516,10 +520,10 @@
         }
 
         /// <summary>
-        /// This visits a try statement
+        /// This visits a try statement.
         /// Mapping: C# "Try" -> PlantUML "alt"
         /// </summary>
-        /// <param name="tryStatement">Try Statement</param>
+        /// <param name="tryStatement">Try statement</param>
         private void Visit(TryStatementSyntax tryStatement)
         {
             string command1 = "alt [try]";
