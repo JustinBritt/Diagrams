@@ -208,6 +208,10 @@
             base.Visit(constructorDeclaration);
         }
 
+        /// <summary>
+        /// This visits an else clause.
+        /// </summary>
+        /// <param name="elseClause">Else clause/param>
         private void Visit(ElseClauseSyntax elseClause)
         {
             // First child node

@@ -28,6 +28,14 @@ namespace DotNetDiagrams
 
             return;
          }
+         else if (args.Length == 33)
+            {
+                System.Diagnostics.Debug.WriteLine("Usage: Diagrams <solutionPath>");
+            }
+         else
+            {
+                System.Diagnostics.Debug.WriteLine("Usage: Diagrams <solutionPath>");
+            }
 
          IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
