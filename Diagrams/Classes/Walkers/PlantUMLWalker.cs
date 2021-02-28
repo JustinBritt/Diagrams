@@ -221,6 +221,10 @@
                 {
                     callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
                 }
+                else if (methodHost.GetParent<InterfaceDeclarationSyntax>() != null)
+                {
+                    callerTypeName = methodHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+                }
                 else if (methodHost.GetParent<StructDeclarationSyntax>() != null)
                 {
                     callerTypeName = methodHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
