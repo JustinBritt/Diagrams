@@ -231,13 +231,12 @@
                 if (elseClause.Statement.ChildNodes().Count() > 0)
                 {
                     // Case (iia): else with statements other than if or else
-                    if (((BlockSyntax)elseClause.Statement).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0)
-                    {
-                        AddCommand(command1);
-                    }
+                    bool caseiia = ((BlockSyntax)elseClause.Statement).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0;
 
                     // Case (iib): else with descendant nodes that have statements
-                    if(elseClause.Statement.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0)
+                    bool caseiib = elseClause.Statement.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0;
+
+                    if (caseiia || caseiib)
                     {
                         AddCommand(command1);
                     }
