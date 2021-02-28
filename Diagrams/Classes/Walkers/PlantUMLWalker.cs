@@ -227,12 +227,12 @@
             {
                 if (firstChild.ChildNodes().Count() > 0)
                 {
-                    // Ignore if, else if, and else statements and clauses
-                    var condA = ((BlockSyntax)firstChild).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count();
+                    if (((BlockSyntax)firstChild).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0)
+                    {
+                        AddCommand(command1);
+                    }
 
-                    var condB = firstChild.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count();
-
-                    if (condA + condB > 0)
+                    if(firstChild.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0)
                     {
                         AddCommand(command1);
                     }
