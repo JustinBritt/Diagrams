@@ -203,6 +203,18 @@
             }
         }
 
+        // TODO: Finish
+        private void Visit(BreakStatementSyntax breakStatement)
+        {
+            base.Visit(breakStatement);
+        }
+
+        // TODO: Finish
+        private void Visit(CatchClauseSyntax catchClause)
+        {
+            base.Visit(catchClause);
+        }
+
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
         {
             base.Visit(constructorDeclaration);
@@ -476,6 +488,12 @@
             string command2 = $"{Indent}end";
 
             AddCommand(command2, command1);
+        }
+
+        // TODO: Finish
+        private void Visit(TryStatementSyntax tryStatement)
+        {
+            base.Visit(tryStatement);
         }
     }
 }
