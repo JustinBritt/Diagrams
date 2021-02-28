@@ -207,20 +207,14 @@
 
         private void Visit(ElseClauseSyntax elseClause)
         {
-            string groupMessage;
+            string groupMessage = elseClause.Statement switch
+            {
+                BlockSyntax => "else",
 
-            if (elseClause.Statement is IfStatementSyntax)
-            {
-                groupMessage = "else if";
-            }
-            else if (elseClause.Statement is BlockSyntax)
-            {
-                groupMessage = "else";
-            }
-            else
-            {
-                return;
-            }
+                IfStatementSyntax => "else if",
+
+                { } => throw new ArgumentException(nameof(elseClause))
+            };
 
             string command1 = $"{Indent}group " + groupMessage;
 
