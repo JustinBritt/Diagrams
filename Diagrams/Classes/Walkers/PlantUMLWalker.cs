@@ -225,11 +225,7 @@
             // Else
             else if (firstChild is BlockSyntax)
             {
-                if (firstChild.ChildNodes().Count() == 0)
-                {
-                    // Do nothing
-                }
-                else
+                if (firstChild.ChildNodes().Count() > 0)
                 {
                     // Ignore if, else if, and else statements and clauses
                     var condA = ((BlockSyntax)firstChild).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count();
