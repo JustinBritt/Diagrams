@@ -225,7 +225,7 @@
 
             ++indent;
 
-            base.Visit(elseClause.Statement);
+            base.Visit(elseClause);
 
             --indent;
 
