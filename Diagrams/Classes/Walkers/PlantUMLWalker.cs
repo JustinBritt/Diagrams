@@ -207,7 +207,20 @@
 
         private void Visit(ElseClauseSyntax elseClause)
         {
-            string groupMessage = "else";
+            string groupMessage;
+
+            if (elseClause.Statement is IfStatementSyntax)
+            {
+                groupMessage = "else if";
+            }
+            else if (elseClause.Statement is BlockSyntax)
+            {
+                groupMessage = "else";
+            }
+            else
+            {
+                return;
+            }
 
             string command1 = $"{Indent}group " + groupMessage;
 
@@ -215,7 +228,7 @@
 
             ++indent;
 
-            base.Visit(elseClause);
+            base.Visit(elseClause.Statement);
 
             --indent;
 
