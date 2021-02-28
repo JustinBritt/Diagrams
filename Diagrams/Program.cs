@@ -30,7 +30,11 @@ namespace DotNetDiagrams
          }
          else if (args.Length == 33)
             {
-                System.Diagnostics.Debug.WriteLine("Usage: Diagrams <solutionPath>");
+                try 
+                {
+                    System.Diagnostics.Debug.WriteLine("Usage: Diagrams <solutionPath>");
+                }
+                catch (Exception e) { }
             }
          else
             {
