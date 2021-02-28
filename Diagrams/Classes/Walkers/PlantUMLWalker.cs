@@ -179,6 +179,9 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
+                case ElseClauseSyntax elseClause:
+                    Visit(elseClause);
+                    break;
                 case InvocationExpressionSyntax invocation:
                     Visit(invocation);
                     break;
@@ -200,6 +203,25 @@
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
         {
             base.Visit(constructorDeclaration);
+        }
+
+        private void Visit(ElseClauseSyntax elseClause)
+        {
+            string groupMessage = "else";
+
+            string command1 = $"{Indent}group " + groupMessage;
+
+            AddCommand(command1);
+
+            ++indent;
+
+            base.Visit(elseClause);
+
+            --indent;
+
+            string command2 = $"{Indent}end";
+
+            AddCommand(command2, command1);
         }
 
         private void Visit(ExpressionSyntax invocation)
