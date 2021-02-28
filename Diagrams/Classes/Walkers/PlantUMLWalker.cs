@@ -208,7 +208,6 @@
             base.Visit(constructorDeclaration);
         }
 
-        // TODO: Finish logic
         private void Visit(ElseClauseSyntax elseClause)
         {
             SyntaxNode firstChild = elseClause.ChildNodes().FirstOrDefault();
