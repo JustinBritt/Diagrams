@@ -210,28 +210,32 @@
 
         private void Visit(ElseClauseSyntax elseClause)
         {
+            // First child node
             SyntaxNode firstChild = elseClause.ChildNodes().FirstOrDefault();
 
             string command1 = "else";
-
-            // Else if
+            
+            // First child node: if else that might have statements
             if (firstChild is IfStatementSyntax)
             {
+                // Case (i): if else with statements
                 if (firstChild.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any())
                 {
                     AddCommand(command1);
                 }
             }
-            // Else
+            // First child node: else that might have statements
             else if (firstChild is BlockSyntax)
             {
                 if (firstChild.ChildNodes().Count() > 0)
                 {
+                    // Case (iia): else with statements other than if or else
                     if (((BlockSyntax)firstChild).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0)
                     {
                         AddCommand(command1);
                     }
 
+                    // Case (iib): else with descendant nodes that have statements
                     if(firstChild.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0)
                     {
                         AddCommand(command1);
