@@ -392,7 +392,6 @@
         {
             string command1 = "alt";
 
-            // If 
             if (ifStatement.Parent is BlockSyntax)
             {
                 AddCommand(command1);
