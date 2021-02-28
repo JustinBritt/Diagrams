@@ -517,7 +517,29 @@
         // TODO: Finish
         private void Visit(TryStatementSyntax tryStatement)
         {
+            string command1 = "alt [try]";
+
+            if (tryStatement.Parent is BlockSyntax)
+            {
+                AddCommand(command1);
+
+                ++indent;
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
             base.Visit(tryStatement);
+
+            if (tryStatement.Catches.Count == 0 && tryStatement.Finally == null)
+            {
+                string command2 = $"end";
+
+                AddCommand(command2, command1);
+
+                --indent;
+            }
         }
 
         private void Visit(WhileStatementSyntax whileStatement)
