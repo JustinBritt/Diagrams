@@ -421,8 +421,6 @@
             {
                 DoStatementSyntax => "do/while",
 
-                IfStatementSyntax => "if",
-
                 ForStatementSyntax => "for",
 
                 ForEachStatementSyntax => "foreach",
