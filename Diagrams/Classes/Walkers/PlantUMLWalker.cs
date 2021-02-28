@@ -362,11 +362,19 @@
         {
             string command1 = "alt";
 
+            // If 
             if (ifStatement.Parent is BlockSyntax)
             {
                 AddCommand(command1);
 
                 ++indent;
+            }
+            // Else if
+            else if (ifStatement.Parent is ElseClauseSyntax)
+            {
+            }
+            else
+            {
             }
 
             base.Visit(ifStatement);
