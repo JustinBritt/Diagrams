@@ -182,6 +182,9 @@
                 case ElseClauseSyntax elseClause:
                     Visit(elseClause);
                     break;
+                case IfStatementSyntax ifStatement:
+                    Visit(ifStatement);
+                    break;
                 case InvocationExpressionSyntax invocation:
                     Visit(invocation);
                     break;
@@ -363,6 +366,25 @@
             AddCommand(command);
         }
 
+        private void Visit(IfStatementSyntax ifStatement)
+        {
+            string groupMessage = "if";
+
+            string command1 = $"{Indent}group " + groupMessage;
+
+            AddCommand(command1);
+
+            ++indent;
+
+            base.Visit(ifStatement);
+
+            --indent;
+
+            string command2 = $"{Indent}end";
+
+            AddCommand(command2, command1);
+        }
+
         private void Visit(MethodDeclarationSyntax methodDeclaration)
         {
             // we only care about method declarations that don't have callers
@@ -389,7 +411,6 @@
             List<SyntaxKind> validStatementKinds = new List<SyntaxKind>
             {
                 SyntaxKind.DoStatement,
-                SyntaxKind.IfStatement,
                 SyntaxKind.ForStatement,
                 SyntaxKind.ForEachStatement,
                 SyntaxKind.WhileStatement
