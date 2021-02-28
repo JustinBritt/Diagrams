@@ -363,11 +363,9 @@
 
         private void Visit(IfStatementSyntax ifStatement)
         {
-            string command1 = "";
-
             if (ifStatement.Parent is BlockSyntax)
             {
-                command1 = "alt";
+                string command1 = "alt";
 
                 AddCommand(command1);
             }
