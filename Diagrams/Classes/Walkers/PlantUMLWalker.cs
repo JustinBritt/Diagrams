@@ -188,9 +188,6 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     Visit(methodDeclaration);
                     break;
-                case NamespaceDeclarationSyntax namespaceDeclaration:
-                    Visit(namespaceDeclaration);
-                    break;
                 case StatementSyntax statement:
                     Visit(statement);
                     break;
@@ -356,11 +353,6 @@
 
                 ignore = false;
             }
-        }
-
-        private void Visit(NamespaceDeclarationSyntax namespaceDeclaration)
-        {
-            base.Visit(namespaceDeclaration);
         }
 
         private void Visit(StatementSyntax statement)
