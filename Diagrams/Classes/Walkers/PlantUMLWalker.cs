@@ -108,14 +108,6 @@
                 string methodName = methodDeclaration.Identifier.ValueText;
 
                 currentTitle = $"{namespaceName}.{className}.{methodName}";
-            } 
-            else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
-            {
-                string structName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-
-                string methodName = methodDeclaration.Identifier.ValueText;
-
-                currentTitle = $"{namespaceName}.{structName}.{methodName}";
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
@@ -124,6 +116,14 @@
                 string methodName = methodDeclaration.Identifier.ValueText;
 
                 currentTitle = $"{namespaceName}.{interfaceName}.{methodName}";
+            }
+            else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
+            {
+                string structName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+
+                string methodName = methodDeclaration.Identifier.ValueText;
+
+                currentTitle = $"{namespaceName}.{structName}.{methodName}";
             }
 
             if (currentTitle is not null && currentTitle != String.Empty)
