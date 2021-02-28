@@ -97,20 +97,7 @@
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
         {
-            string namespaceName;
-
-            if (this.syntaxTree.GetRoot().IsKind(SyntaxKind.NamespaceDeclaration))
-            {
-                namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot()).Name.ToString();
-            }
-            else if (this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).Count() == 1)
-            {
-                namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
-            }
-            else
-            {
-                namespaceName = AssemblyName;
-            }
+            string namespaceName = this.GetNamespaceName();
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
