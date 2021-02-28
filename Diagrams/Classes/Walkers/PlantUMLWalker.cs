@@ -399,13 +399,6 @@
 
                 ++indent;
             }
-            // Else if
-            else if (ifStatement.Parent is ElseClauseSyntax)
-            {
-            }
-            else
-            {
-            }
 
             base.Visit(ifStatement);
 
