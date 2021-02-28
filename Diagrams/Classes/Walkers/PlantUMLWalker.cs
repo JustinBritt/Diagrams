@@ -119,7 +119,11 @@
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
-                // Ignore method declarations in interfaces
+                string interfaceName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+
+                string methodName = methodDeclaration.Identifier.ValueText;
+
+                currentTitle = $"{namespaceName}.{interfaceName}.{methodName}";
             }
 
             if (currentTitle is not null && currentTitle != String.Empty)
