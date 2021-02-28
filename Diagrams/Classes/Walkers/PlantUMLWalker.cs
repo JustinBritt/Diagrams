@@ -75,17 +75,18 @@
             return callers.Any();
         }
 
-        private string GetNamespaceName()
+        private string GetNamespaceName(
+            SyntaxTree syntaxTree)
         {
             string namespaceName;
 
-            if (this.syntaxTree.GetRoot().IsKind(SyntaxKind.NamespaceDeclaration))
+            if (syntaxTree.GetRoot().IsKind(SyntaxKind.NamespaceDeclaration))
             {
-                namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot()).Name.ToString();
+                namespaceName = ((NamespaceDeclarationSyntax)syntaxTree.GetRoot()).Name.ToString();
             }
-            else if (this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).Count() == 1)
+            else if (syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).Count() == 1)
             {
-                namespaceName = ((NamespaceDeclarationSyntax)this.syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
+                namespaceName = ((NamespaceDeclarationSyntax)syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
             }
             else
             {
@@ -97,7 +98,8 @@
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
         {
-            string namespaceName = this.GetNamespaceName();
+            string namespaceName = this.GetNamespaceName(
+                this.syntaxTree);
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
