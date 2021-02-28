@@ -211,6 +211,8 @@
 
             SemanticModel semanticModel;
 
+            ArrowExpressionClauseSyntax arrowClauseHost = invocation.GetParent<ArrowExpressionClauseSyntax>();
+
             MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
 
             ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
@@ -248,6 +250,23 @@
                 }
 
                 semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
+            }
+            else if (arrowClauseHost != null)
+            {
+                if (arrowClauseHost.GetParent<ClassDeclarationSyntax>() != null)
+                {
+                    callerTypeName = arrowClauseHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                }
+                else if (arrowClauseHost.GetParent<InterfaceDeclarationSyntax>() != null)
+                {
+                    callerTypeName = arrowClauseHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+                }
+                else if (arrowClauseHost.GetParent<StructDeclarationSyntax>() != null)
+                {
+                    callerTypeName = arrowClauseHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+                }
+
+                semanticModel = compilation.GetSemanticModel(arrowClauseHost.SyntaxTree, true);
             }
             else
             {
