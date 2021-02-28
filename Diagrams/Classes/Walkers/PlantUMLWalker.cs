@@ -253,6 +253,7 @@
 
         /// <summary>
         /// This visits an else clause.
+        /// Mapping: C# "else" and "else if" clauses with statements -> PlantUML "else"
         /// </summary>
         /// <param name="elseClause">Else clause/param>
         private void Visit(ElseClauseSyntax elseClause)
