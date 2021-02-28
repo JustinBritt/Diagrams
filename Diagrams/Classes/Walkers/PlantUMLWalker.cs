@@ -122,13 +122,18 @@
                 // Ignore method declarations in interfaces
             }
 
-            if (!Diagrams.ContainsTitle(currentTitle))
-                Diagrams.AddTitle(currentTitle);
+            if (currentTitle is not null && currentTitle != String.Empty)
+            {
+                if (!Diagrams.ContainsTitle(currentTitle))
+                {
+                    Diagrams.AddTitle(currentTitle);
+                }
 
-            AddCommand("@startuml");
-            AddCommand($"title {currentTitle}");
-            AddCommand("autoactivate on");
-            AddCommand("hide footbox");
+                AddCommand("@startuml");
+                AddCommand($"title {currentTitle}");
+                AddCommand("autoactivate on");
+                AddCommand("hide footbox");
+            }
         }
 
         private void AddCommand(string command, string unlessFollowing = null)
