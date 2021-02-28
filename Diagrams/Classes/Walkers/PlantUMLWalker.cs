@@ -214,18 +214,15 @@
 
             AddCommand(command1);
 
-            ++indent;
-
             base.Visit(elseClause);
 
-            --indent;
-
-            if (elseClause.Statement is not IfStatementSyntax)
+            if (elseClause.Statement is BlockSyntax)
             {
-                //string command2 = $"{Indent}end";
                 string command2 = $"end";
 
                 AddCommand(command2, command1);
+
+                --indent;
             }
         }
 
@@ -368,13 +365,11 @@
                 string command1 = "alt";
 
                 AddCommand(command1);
+
+                ++indent;
             }
-            
-            ++indent;
 
             base.Visit(ifStatement);
-
-            --indent;
         }
 
         private void Visit(MethodDeclarationSyntax methodDeclaration)
