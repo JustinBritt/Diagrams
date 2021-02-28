@@ -473,6 +473,7 @@
 
         /// <summary>
         /// This visits an if statement.
+        /// Mapping: C# "if" -> PlantUML "alt"
         /// </summary>
         /// <param name="ifStatement">If statement</param>
         private void Visit(IfStatementSyntax ifStatement)
