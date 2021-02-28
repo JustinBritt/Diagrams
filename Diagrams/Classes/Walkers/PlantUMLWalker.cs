@@ -515,7 +515,11 @@
             }
         }
 
-        // TODO: Finish
+        /// <summary>
+        /// This visits a try statement
+        /// Mapping: C# "Try" -> PlantUML "alt"
+        /// </summary>
+        /// <param name="tryStatement">Try Statement</param>
         private void Visit(TryStatementSyntax tryStatement)
         {
             string command1 = "alt [try]";
