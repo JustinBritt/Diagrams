@@ -234,7 +234,18 @@
             }
             else if (constructorHost != null)
             {
-                callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                if (constructorHost.GetParent<ClassDeclarationSyntax>() != null)
+                {
+                    callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+                }
+                else if (constructorHost.GetParent<InterfaceDeclarationSyntax>() != null)
+                {
+                    callerTypeName = constructorHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+                }
+                else if (constructorHost.GetParent<StructDeclarationSyntax>() != null)
+                {
+                    callerTypeName = constructorHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+                }
 
                 semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
             }
