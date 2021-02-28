@@ -179,8 +179,17 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
+                case DoStatementSyntax doStatement:
+                    Visit(doStatement);
+                    break;
                 case ElseClauseSyntax elseClause:
                     Visit(elseClause);
+                    break;
+                case ForStatementSyntax forStatement:
+                    Visit(forStatement);
+                    break;
+                case ForEachStatementSyntax forEachStatement:
+                    Visit(forEachStatement);
                     break;
                 case IfStatementSyntax ifStatement:
                     Visit(ifStatement);
@@ -194,8 +203,11 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     Visit(methodDeclaration);
                     break;
-                case StatementSyntax statement:
-                    Visit(statement);
+                case TryStatementSyntax tryStatement:
+                    Visit(tryStatement);
+                    break;
+                case WhileStatementSyntax whileStatement:
+                    Visit(whileStatement);
                     break;
                 default:
                     base.Visit(node);
