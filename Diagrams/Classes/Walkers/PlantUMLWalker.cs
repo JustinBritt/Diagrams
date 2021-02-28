@@ -208,11 +208,41 @@
             base.Visit(constructorDeclaration);
         }
 
+        // TODO: Finish logic
         private void Visit(ElseClauseSyntax elseClause)
         {
+            SyntaxNode firstChild = elseClause.ChildNodes().FirstOrDefault();
+
             string command1 = "else";
 
-            AddCommand(command1);
+            // Else if
+            if (firstChild is IfStatementSyntax)
+            {
+                if (firstChild.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any())
+                {
+                    AddCommand(command1);
+                }
+            }
+            // Else
+            else if (firstChild is BlockSyntax)
+            {
+                if (firstChild.ChildNodes().Count() == 0)
+                {
+                    // Do nothing
+                }
+                else
+                {
+                    // Ignore if, else if, and else statements and clauses
+                    var condA = ((BlockSyntax)firstChild).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count();
+
+                    var condB = firstChild.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count();
+
+                    if (condA + condB > 0)
+                    {
+                        AddCommand(command1);
+                    }
+                }            
+            }
 
             base.Visit(elseClause);
 
@@ -220,7 +250,7 @@
             {
                 string command2 = $"end";
 
-                AddCommand(command2);
+                AddCommand(command2, command1);
 
                 --indent;
             }
