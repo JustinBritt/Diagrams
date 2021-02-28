@@ -220,7 +220,7 @@
             {
                 string command2 = $"end";
 
-                AddCommand(command2, command1);
+                AddCommand(command2);
 
                 --indent;
             }
