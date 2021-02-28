@@ -14,7 +14,7 @@
     using DotNetDiagrams.Extensions;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Walkers;
-    
+
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
         private readonly Compilation compilation;
@@ -28,7 +28,7 @@
         private int indent;
 
         public PlantUMLWalker(
-            Compilation compilation, 
+            Compilation compilation,
             SyntaxTree syntaxTree,
             Solution solution,
             Project project)
@@ -360,16 +360,25 @@
 
         private void Visit(IfStatementSyntax ifStatement)
         {
+            string command1 = "alt";
+
             if (ifStatement.Parent is BlockSyntax)
             {
-                string command1 = "alt";
-
                 AddCommand(command1);
 
                 ++indent;
             }
 
             base.Visit(ifStatement);
+
+            if (ifStatement.Else is null)
+            {
+                string command2 = $"end";
+
+                AddCommand(command2, command1);
+
+                --indent;
+            }
         }
 
         private void Visit(MethodDeclarationSyntax methodDeclaration)
