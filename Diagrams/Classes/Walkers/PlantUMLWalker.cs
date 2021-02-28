@@ -210,16 +210,7 @@
 
         private void Visit(ElseClauseSyntax elseClause)
         {
-            string groupMessage = elseClause.Statement switch
-            {
-                BlockSyntax => "else",
-
-                IfStatementSyntax => "else if",
-
-                { } => throw new ArgumentException(nameof(elseClause))
-            };
-
-            string command1 = $"{Indent}group " + groupMessage;
+            string command1 = "else";
 
             AddCommand(command1);
 
@@ -229,9 +220,13 @@
 
             --indent;
 
-            string command2 = $"{Indent}end";
+            if (elseClause.Statement is not IfStatementSyntax)
+            {
+                //string command2 = $"{Indent}end";
+                string command2 = $"end";
 
-            AddCommand(command2, command1);
+                AddCommand(command2, command1);
+            }
         }
 
         private void Visit(ExpressionSyntax invocation)
@@ -368,21 +363,20 @@
 
         private void Visit(IfStatementSyntax ifStatement)
         {
-            string groupMessage = "if";
+            string command1 = "";
 
-            string command1 = $"{Indent}group " + groupMessage;
+            if (ifStatement.Parent is BlockSyntax)
+            {
+                command1 = "alt";
 
-            AddCommand(command1);
-
+                AddCommand(command1);
+            }
+            
             ++indent;
 
             base.Visit(ifStatement);
 
             --indent;
-
-            string command2 = $"{Indent}end";
-
-            AddCommand(command2, command1);
         }
 
         private void Visit(MethodDeclarationSyntax methodDeclaration)
