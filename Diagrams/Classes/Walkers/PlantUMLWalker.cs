@@ -220,7 +220,9 @@
             if (elseClause.Statement is IfStatementSyntax)
             {
                 // Case (i): if else with statements
-                if (elseClause.Statement.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any())
+                bool casei = elseClause.Statement.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any();
+
+                if (casei)
                 {
                     AddCommand(command1);
                 }
