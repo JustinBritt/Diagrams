@@ -12,6 +12,7 @@
 
     using DotNetDiagrams.Classes.Diagrams;
     using DotNetDiagrams.Extensions;
+    using DotNetDiagrams.Interfaces.Configurations;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Walkers;
 
