@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DotNetDiagrams\DotNetDiagrams.csproj" />
+    <ProjectReference Include="..\DotNetDiagrams.Common\DotNetDiagrams.Common.csproj" />
+    <ProjectReference Include="..\DotNetDiagrams.SequenceDiagrams\DotNetDiagrams.SequenceDiagrams.csproj" />
   </ItemGroup>
 
 </Project>

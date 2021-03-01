@@ -9,14 +9,14 @@
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.MSBuild;
 
-    using DotNetDiagrams.Factories.Dependencies.Microsoft.CodeAnalysis;
-    using DotNetDiagrams.Factories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
-    using DotNetDiagrams.Factories.Generators;
-    using DotNetDiagrams.Interfaces.Diagrams;
-    using DotNetDiagrams.Interfaces.Generators;
-    using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
-    using DotNetDiagrams.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
-    using DotNetDiagrams.InterfacesFactories.Generators;
+    using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.SequenceDiagrams.Factories.Generators;
+    using DotNetDiagrams.Common.Interfaces.Diagrams;
+    using DotNetDiagrams.SequenceDiagrams.Interfaces.Generators;
+    using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.SequenceDiagrams.InterfacesFactories.Generators;
 
     internal sealed class Program
     {
@@ -31,7 +31,7 @@
 
             IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
-            IPlantUMLDiagramGeneratorFactory PlantUMLDiagramGeneratorFactory = new PlantUMLDiagramGeneratorFactory();
+            IPlantUMLSequenceDiagramGeneratorFactory PlantUMLDiagramGeneratorFactory = new PlantUMLSequenceDiagramGeneratorFactory();
 
             ISolutionFactory solutionFactory = new SolutionFactory();
 
@@ -39,7 +39,7 @@
                 MSBuildWorkspaceFactory.CreateAndRegisterDefaults(),
                 args[0]);
 
-            IDiagramGenerator diagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
+            ISequenceDiagramGenerator diagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
 
             IDiagrams diagrams = diagramGenerator.Process(solution);
 
