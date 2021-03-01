@@ -112,7 +112,7 @@
             string namespaceName = this.GetNamespaceName(
                 this.syntaxTree);
 
-            string title = String.Empty; ;
+            string title = String.Empty;
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
