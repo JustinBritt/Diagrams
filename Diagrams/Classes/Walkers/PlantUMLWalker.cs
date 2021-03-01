@@ -243,12 +243,9 @@
 
             base.Visit(catchClause);
 
-            // TODO: Use the parent of the catchClause to determine whether there are any other catch and/or finally clauses after this one
             if (catchClause.Parent is TryStatementSyntax)
             {
-                bool isLastCatchClause = ((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause;
-
-                if (isLastCatchClause)
+                if (((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause)
                 {
                     string command2 = $"end";
 
