@@ -511,7 +511,7 @@
         /// <param name="ifStatement">If statement</param>
         private void Visit(IfStatementSyntax ifStatement)
         {
-            string command1;// = "alt";
+            string command1;
 
             if (ifStatement.Else is null)
             {
