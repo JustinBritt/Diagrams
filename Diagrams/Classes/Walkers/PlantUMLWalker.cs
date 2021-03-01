@@ -315,6 +315,26 @@
                 case BreakStatementSyntax breakStatement:
                     base.Visit(breakStatement);
                     break;
+                case CasePatternSwitchLabelSyntax casePatternSwitchLabel:
+                    base.Visit(casePatternSwitchLabel);
+                    break;
+                case CaseSwitchLabelSyntax caseSwitchLabel:
+                    base.Visit(caseSwitchLabel);
+                    break;
+                case CastExpressionSyntax castExpression:
+                    base.Visit(castExpression);
+                    break;
+                // e.g., catch (Exception e)
+                case CatchClauseSyntax catchClause:
+                    base.Visit(catchClause);
+                    break;
+                // e.g., (Exception e)
+                case CatchDeclarationSyntax catchDeclaration:
+                    base.Visit(catchDeclaration);
+                    break;
+                case CatchFilterClauseSyntax catchFilterClause:
+                    base.Visit(catchFilterClause);
+                    break;
                 case ConstructorConstraintSyntax constructorConstraint:
                     base.Visit(constructorConstraint);
                     break;
