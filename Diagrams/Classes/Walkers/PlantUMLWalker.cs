@@ -112,13 +112,13 @@
             string namespaceName = this.GetNamespaceName(
                 this.syntaxTree);
 
+            string methodName = methodDeclaration.Identifier.ValueText;
+
             string title = String.Empty;
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-
-                string methodName = methodDeclaration.Identifier.ValueText;
 
                 title = $"{namespaceName}.{className}.{methodName}";
             }
@@ -126,15 +126,11 @@
             {
                 string interfaceName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
 
-                string methodName = methodDeclaration.Identifier.ValueText;
-
                 title = $"{namespaceName}.{interfaceName}.{methodName}";
             }
             else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
             {
                 string structName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-
-                string methodName = methodDeclaration.Identifier.ValueText;
 
                 title = $"{namespaceName}.{structName}.{methodName}";
             }
