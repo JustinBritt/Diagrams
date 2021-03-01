@@ -112,30 +112,24 @@
             string namespaceName = this.GetNamespaceName(
                 this.syntaxTree);
 
-            string methodName = methodDeclaration.Identifier.ValueText;
+            string typeName = String.Empty;
 
-            string title = String.Empty;
+            string methodName = methodDeclaration.Identifier.ValueText;
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
-                string className = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-
-                title = $"{namespaceName}.{className}.{methodName}";
+                typeName = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
-                string interfaceName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-
-                title = $"{namespaceName}.{interfaceName}.{methodName}";
+                typeName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
             }
             else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
             {
-                string structName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-
-                title = $"{namespaceName}.{structName}.{methodName}";
+                typeName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
             }
 
-            return title;
+            return $"{namespaceName}.{typeName}.{methodName}";
         }
 
         private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
