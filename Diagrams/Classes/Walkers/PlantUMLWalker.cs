@@ -248,8 +248,18 @@
                 case BadDirectiveTriviaSyntax badDirectiveTrivia:
                     base.Visit(badDirectiveTrivia);
                     break;
+                // abstract base class
+                //case BaseArgumentListSyntax baseArgumentList:
+                //    base.Visit(baseArgumentList);
+                //    break;
+                case ConstructorConstraintSyntax constructorConstraint:
+                    base.Visit(constructorConstraint);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
+                    break;
+                case ConstructorInitializerSyntax constructorInitializer:
+                    base.Visit(constructorInitializer);
                     break;
                 case DoStatementSyntax doStatement:
                     this.Visit(doStatement);
