@@ -158,14 +158,21 @@
             }
         }
 
-        private void AddCommand(string command, string unlessFollowing = null)
+        private void AddCommand(string command, params string[] unlessFollowing)
         {
             // add the command unless the last thing on the list is the second parameter
             // if it is, remove that entry and don't add the command
-            if (unlessFollowing != null && PlantUMLCode.LastOrDefault() == unlessFollowing)
+            if (unlessFollowing != null)
             {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-                return;
+                foreach (var item in unlessFollowing)
+                {
+                    if (PlantUMLCode.LastOrDefault() == item)
+                    {
+                        this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                        return;
+                    }
+                }
             }
 
             this.WriteCommandToDebug(
@@ -270,7 +277,10 @@
                 {
                     string command2 = PlantUML_end;
 
-                    AddCommand(command2, command1);
+                    AddCommand(
+                        command2,
+                        PlantUML_alt,
+                        PlantUML_else);
 
                     --indent;
                 }
