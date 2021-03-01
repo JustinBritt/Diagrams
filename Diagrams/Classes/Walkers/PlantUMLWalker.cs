@@ -22,6 +22,7 @@
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_opt = "opt";
         private const string PlantUML_startuml = "@startuml";
+        private const string PlantUML_title = "title";
 
         private readonly Compilation compilation;
         private readonly Project project;
@@ -142,7 +143,7 @@
                 }
 
                 AddCommand(PlantUML_startuml);
-                AddCommand($"title {currentTitle}");
+                AddCommand($"{PlantUML_title} {currentTitle}");
                 AddCommand("autoactivate on");
                 AddCommand("hide footbox");
             }
