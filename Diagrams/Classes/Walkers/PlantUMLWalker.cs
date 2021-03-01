@@ -227,7 +227,6 @@
             base.Visit(breakStatement);
         }
 
-        // TODO: Finish
         /// <summary>
         /// This visits a catch clause.
         /// Mapping: C# "catch" -> PlantUML "else"
