@@ -256,6 +256,46 @@
                 //case BaseCrefParameterListSyntax baseCrefParameterList:
                 //    base.Visit(baseCrefParameterList);
                 //    break;
+                // base
+                case BaseExpressionSyntax baseExpression:
+                    base.Visit(baseExpression);
+                    break;
+                // abstract base class
+                case BaseFieldDeclarationSyntax baseFieldDeclaration:
+                    base.Visit(baseFieldDeclaration);
+                    break;
+                // list of base classes and/or interfaces
+                case BaseListSyntax baseList:
+                    base.Visit(baseList);
+                    break;
+                // abstract base class
+                //case BaseMethodDeclarationSyntax baseMethodDeclaration:
+                //    base.Visit(baseMethodDeclaration);
+                //    break;
+                // abstract base class
+                //case BaseObjectCreationExpressionSyntax baseObjectCreationExpression:
+                //    base.Visit(baseObjectCreationExpression);
+                //    break;
+                // abstract base class
+                //case BaseParameterListSyntax baseParameterList:
+                //    base.Visit(baseParameterList);
+                //    break;
+                // abstract base class
+                //case BasePropertyDeclarationSyntax basePropertyDeclaration:
+                //    base.Visit(basePropertyDeclaration);
+                //    break;
+                // abstract base class
+                //case BaseTypeDeclarationSyntax baseTypeDeclaration:
+                //    base.Visit(baseTypeDeclaration);
+                //    break;
+                // abstract base class
+                //case BaseTypeSyntax baseType:
+                //    base.Visit(baseType);
+                //    break;
+                // e.g., indent * 2
+                case BinaryExpressionSyntax binaryExpression:
+                    base.Visit(binaryExpression);
+                    break;
                 case ConstructorConstraintSyntax constructorConstraint:
                     base.Visit(constructorConstraint);
                     break;
