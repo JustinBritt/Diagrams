@@ -176,6 +176,18 @@
 
             switch (node)
             {
+                // get or set
+                case AccessorDeclarationSyntax accessorDeclaration:
+                    base.Visit(accessorDeclaration);
+                    break;
+                // get and/or set list
+                case AccessorListSyntax accessorList:
+                    base.Visit(accessorList);
+                    break;
+                // e.g., global::Microsoft
+                case AliasQualifiedNameSyntax aliasQualifiedName:
+                    base.Visit(aliasQualifiedName);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
