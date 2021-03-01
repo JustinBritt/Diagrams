@@ -152,8 +152,8 @@
 
                 AddCommand(PlantUML_startuml);
                 AddCommand($"{PlantUML_title} {currentTitle}");
-                AddCommand("autoactivate on");
-                AddCommand("hide footbox");
+                AddCommand($"{PlantUML_autoactivate} on");
+                AddCommand($"hide {PlantUML_footbox}");
             }
         }
 
