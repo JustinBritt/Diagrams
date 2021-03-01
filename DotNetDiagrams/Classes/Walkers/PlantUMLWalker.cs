@@ -70,6 +70,8 @@
 
         public IPlantUMLDiagrams Diagrams { get; }
 
+        public IPlantUMLSequenceDiagramConfiguration PlantUMLSequenceDiagramConfiguration { get; }
+
         private void EndDiagram()
         {
             if (!string.IsNullOrEmpty(currentTitle))
