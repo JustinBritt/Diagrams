@@ -354,7 +354,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}end";
+            string command2 = $"{Indent}{PlantUML_end}";
 
             AddCommand(command2, command1);
         }
@@ -373,7 +373,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}end";
+            string command2 = $"{Indent}{PlantUML_end}";
 
             AddCommand(command2, command1);
         }
@@ -614,7 +614,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}end";
+            string command2 = $"{Indent}{PlantUML_end}";
 
             AddCommand(command2, command1);
         }
