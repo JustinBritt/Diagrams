@@ -3,10 +3,8 @@
 ################################################################################
 
 /.vs
-/Diagrams/bin
-/Diagrams/obj
+/DotNetDiagrams/bin
+/DotNetDiagrams/obj
 /packages
 /_ReSharper.Caches
-/Diagrams/Diagrams.csproj.user
-/Sequence/bin/Debug
-/Sequence/obj
+/DotNetDiagrams/DotNetDiagrams.csproj.user
