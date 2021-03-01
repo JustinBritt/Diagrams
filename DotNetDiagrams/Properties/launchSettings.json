@@ -1,8 +1,7 @@
 {
   "profiles": {
     "Diagrams": {
-      "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\DotNetDiagrams.sln"
+      "commandName": "Project"
     }
   }
 }

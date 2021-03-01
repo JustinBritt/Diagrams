@@ -113,7 +113,6 @@ C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\bin\Debu
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\bin\Debug\net6.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\bin\Debug\net6.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\bin\Debug\net6.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.resources.dll
-C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.csprojAssemblyReference.cache
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.dll.config
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.AssemblyInfoInputs.cache
@@ -124,3 +123,4 @@ C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debu
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\ref\DotNetDiagrams.dll
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.pdb
 C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.genruntimeconfig.cache
+C:\Users\Administrator\source\repos\JustinBritt\Diagrams\DotNetDiagrams\obj\Debug\net6.0\DotNetDiagrams.csprojAssemblyReference.cache
