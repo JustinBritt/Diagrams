@@ -18,6 +18,7 @@
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
         private const string PlantUML_alt = "alt";
+        private const string PlantUML_autoactivate = "autoactivate";
         private const string PlantUML_else = "else";
         private const string PlantUML_end = "end";
         private const string PlantUML_enduml = "@enduml";
