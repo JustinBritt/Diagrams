@@ -176,6 +176,9 @@
 
             switch (node)
             {
+                case CatchClauseSyntax catchClause:
+                    this.Visit(catchClause);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
