@@ -222,6 +222,11 @@
         }
 
         // TODO: Finish
+        /// <summary>
+        /// This visits a catch clause.
+        /// Mapping: C# "catch" -> PlantUML "else"
+        /// </summary>
+        /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
             base.Visit(catchClause);
