@@ -19,6 +19,7 @@
     {
         private const string PlantUML_alt = "alt";
         private const string PlantUML_end = "end";
+        private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_opt = "opt";
 
         private readonly Compilation compilation;
@@ -64,7 +65,7 @@
             if (!string.IsNullOrEmpty(currentTitle))
             {
                 if (PlantUMLCode.Count > 4) // minimum # of lines in header
-                    AddCommand("@enduml");
+                    AddCommand(PlantUML_enduml);
                 else
                     Diagrams.RemoveAtTitle(currentTitle);
             }
