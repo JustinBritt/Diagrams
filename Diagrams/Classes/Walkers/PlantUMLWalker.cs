@@ -379,6 +379,33 @@
                 case ConstructorInitializerSyntax constructorInitializer:
                     base.Visit(constructorInitializer);
                     break;
+                case ContinueStatementSyntax continueStatement:
+                    base.Visit(continueStatement);
+                    break;
+                case ConversionOperatorDeclarationSyntax conversionOperatorDeclaration:
+                    base.Visit(conversionOperatorDeclaration);
+                    break;
+                case ConversionOperatorMemberCrefSyntax conversionOperatorMemberCref:
+                    base.Visit(conversionOperatorMemberCref);
+                    break;
+                case CrefBracketedParameterListSyntax crefBracketedParameterList:
+                    base.Visit(crefBracketedParameterList);
+                    break;
+                case CrefParameterListSyntax crefParameterList:
+                    base.Visit(crefParameterList);
+                    break;
+                case CrefParameterSyntax crefParameter:
+                    base.Visit(crefParameter);
+                    break;
+                case CrefSyntax cref:
+                    base.Visit(cref);
+                    break;
+                case DeclarationExpressionSyntax declarationExpression:
+                    base.Visit(declarationExpression);
+                    break;
+                case DeclarationPatternSyntax declarationPattern:
+                    base.Visit(declarationPattern);
+                    break;
                 case DoStatementSyntax doStatement:
                     this.Visit(doStatement);
                     break;
