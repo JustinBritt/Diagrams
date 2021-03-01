@@ -4,7 +4,9 @@
 
     using DotNetDiagrams.Common.Classes.Diagrams;
     using DotNetDiagrams.Common.Interfaces.Diagrams;
+    using DotNetDiagrams.SequenceDiagrams.Classes.Configurations;
     using DotNetDiagrams.SequenceDiagrams.Classes.Walkers;
+    using DotNetDiagrams.SequenceDiagrams.Interfaces.Configurations;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Generators;
 
     internal sealed class PlantUMLSequenceDiagramGenerator : IPlantUMLSequenceDiagramGenerator
