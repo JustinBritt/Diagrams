@@ -309,9 +309,10 @@
                 case BracketedParameterListSyntax bracketedParameterList:
                     base.Visit(bracketedParameterList);
                     break;
-                case BranchingDirectiveTriviaSyntax branchingDirectiveTrivia:
-                    base.Visit(branchingDirectiveTrivia);
-                    break;
+                // abstract base class
+                //case BranchingDirectiveTriviaSyntax branchingDirectiveTrivia:
+                //    base.Visit(branchingDirectiveTrivia);
+                //    break;
                 case BreakStatementSyntax breakStatement:
                     base.Visit(breakStatement);
                     break;
@@ -334,6 +335,40 @@
                     break;
                 case CatchFilterClauseSyntax catchFilterClause:
                     base.Visit(catchFilterClause);
+                    break;
+                case CheckedExpressionSyntax checkedExpression:
+                    base.Visit(checkedExpression);
+                    break;
+                case CheckedStatementSyntax checkedStatement:
+                    base.Visit(checkedStatement);
+                    break;
+                // Class declaration
+                case ClassDeclarationSyntax classDeclaration:
+                    base.Visit(classDeclaration);
+                    break;
+                case ClassOrStructConstraintSyntax classOrStructConstraint:
+                    base.Visit(classOrStructConstraint);
+                    break;
+                // abstract base class
+                //case CommonForEachStatementSyntax commonForEachStatement:
+                //    base.Visit(commonForEachStatement);
+                //    break;
+                case CompilationUnitSyntax compilationUnit:
+                    base.Visit(compilationUnit);
+                    break;
+                case ConditionalAccessExpressionSyntax conditionalAccessExpression:
+                    base.Visit(conditionalAccessExpression);
+                    break;
+                // abstract base class
+                //case ConditionalDirectiveTriviaSyntax conditionalDirectiveTrivia:
+                //    base.Visit(conditionalDirectiveTrivia);
+                //    break;
+                // e.g., expression with ternary operator (?)
+                case ConditionalExpressionSyntax conditionalExpression:
+                    base.Visit(conditionalExpression);
+                    break;
+                case ConstantPatternSyntax constantPattern:
+                    base.Visit(constantPattern);
                     break;
                 case ConstructorConstraintSyntax constructorConstraint:
                     base.Visit(constructorConstraint);
