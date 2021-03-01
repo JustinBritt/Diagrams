@@ -252,6 +252,10 @@
                 //case BaseArgumentListSyntax baseArgumentList:
                 //    base.Visit(baseArgumentList);
                 //    break;
+                // abstract base class
+                //case BaseCrefParameterListSyntax baseCrefParameterList:
+                //    base.Visit(baseCrefParameterList);
+                //    break;
                 case ConstructorConstraintSyntax constructorConstraint:
                     base.Visit(constructorConstraint);
                     break;
