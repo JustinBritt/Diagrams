@@ -17,6 +17,10 @@
 
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
+        private const string PlantUML_alt = "alt";
+        private const string PlantUML_end = "end";
+        private const string PlantUML_opt = "opt";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
@@ -246,7 +250,7 @@
             {
                 if (((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause)
                 {
-                    string command2 = $"end";
+                    string command2 = PlantUML_end;
 
                     AddCommand(command2, command1);
 
@@ -274,7 +278,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}end";
+            string command2 = $"{Indent}{PlantUML_end}";
 
             AddCommand(command2, command1);
         }
@@ -321,7 +325,7 @@
 
             if (elseClause.Statement is BlockSyntax)
             {
-                string command2 = $"end";
+                string command2 = PlantUML_end;
 
                 AddCommand(command2, command1);
 
@@ -515,11 +519,11 @@
 
             if (ifStatement.Else is null)
             {
-                command1 = "opt";
+                command1 = PlantUML_opt;
             }
             else
             {
-                command1 = "alt";
+                command1 = PlantUML_alt;
             }
 
             if (ifStatement.Parent is BlockSyntax)
@@ -533,7 +537,7 @@
 
             if (ifStatement.Else is null)
             {
-                string command2 = $"end";
+                string command2 = PlantUML_end;
 
                 AddCommand(command2, command1);
 
@@ -586,7 +590,7 @@
 
             if (tryStatement.Catches.Count == 0)
             {
-                string command2 = $"end";
+                string command2 = PlantUML_end;
 
                 AddCommand(command2, command1);
 
