@@ -75,7 +75,9 @@
         private bool HasCallers(MethodDeclarationSyntax methodDeclaration)
         {
             SemanticModel model = compilation.GetSemanticModel(syntaxTree);
+
             IMethodSymbol methodSymbol = ModelExtensions.GetDeclaredSymbol(model, methodDeclaration) as IMethodSymbol;
+
             IEnumerable<SymbolCallerInfo> callers = SymbolFinder.FindCallersAsync(methodSymbol, solution).GetAwaiter().GetResult();
 
             return callers.Any();
