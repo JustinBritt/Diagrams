@@ -106,10 +106,13 @@
             return namespaceName;
         }
 
-        private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
+        private string DetermineTitle(
+            MethodDeclarationSyntax methodDeclaration)
         {
             string namespaceName = this.GetNamespaceName(
                 this.syntaxTree);
+
+            string title = String.Empty; ;
 
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
@@ -117,7 +120,7 @@
 
                 string methodName = methodDeclaration.Identifier.ValueText;
 
-                currentTitle = $"{namespaceName}.{className}.{methodName}";
+                title = $"{namespaceName}.{className}.{methodName}";
             }
             else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
             {
@@ -125,7 +128,7 @@
 
                 string methodName = methodDeclaration.Identifier.ValueText;
 
-                currentTitle = $"{namespaceName}.{interfaceName}.{methodName}";
+                title = $"{namespaceName}.{interfaceName}.{methodName}";
             }
             else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
             {
@@ -133,8 +136,16 @@
 
                 string methodName = methodDeclaration.Identifier.ValueText;
 
-                currentTitle = $"{namespaceName}.{structName}.{methodName}";
+                title = $"{namespaceName}.{structName}.{methodName}";
             }
+
+            return title;
+        }
+
+        private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
+        {
+            currentTitle = DetermineTitle(
+                methodDeclaration);
 
             if (currentTitle is not null && currentTitle != String.Empty)
             {
