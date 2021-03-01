@@ -1,8 +1,0 @@
-{
-  "profiles": {
-    "Diagrams": {
-      "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\Diagrams.sln"
-    }
-  }
-}

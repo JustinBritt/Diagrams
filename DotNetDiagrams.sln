@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams", "DotNetDiagrams\DotNetDiagrams.csproj", "{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|x86.ActiveCfg = Debug|x86
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|x86.Build.0 = Debug|x86
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|Any CPU.ActiveCfg = Release|x86
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|Any CPU.Build.0 = Release|x86
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|x86.ActiveCfg = Release|x86
+		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AABFA1E8-8154-4232-86C7-5562C18CDE6E}
+	EndGlobalSection
+EndGlobal
