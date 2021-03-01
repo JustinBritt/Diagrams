@@ -244,6 +244,17 @@
             base.Visit(catchClause);
 
             // TODO: Use the parent of the catchClause to determine whether there are any other catch and/or finally clauses after this one
+            if (catchClause.Parent is TryStatementSyntax)
+            {
+                if(((TryStatementSyntax)catchClause.Parent).Catches.LastOrDefault() == catchClause)
+                {
+                    string command2 = $"end";
+
+                    AddCommand(command2, command1);
+
+                    --indent;
+                }
+            }
         }
 
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
