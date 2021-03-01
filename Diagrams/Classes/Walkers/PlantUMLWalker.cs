@@ -227,7 +227,27 @@
                 case AssignmentExpressionSyntax assignmentExpression:
                     base.Visit(assignmentExpression);
                     break;
-
+                case AttributeArgumentListSyntax attributeArgumentList:
+                    base.Visit(attributeArgumentList);
+                    break;
+                case AttributeArgumentSyntax attributeArgument:
+                    base.Visit(attributeArgument);
+                    break;
+                case AttributeListSyntax attributeList:
+                    base.Visit(attributeList);
+                    break;
+                case AttributeSyntax attribute:
+                    base.Visit(attribute);
+                    break;
+                case AttributeTargetSpecifierSyntax attributeTargetSpecifier:
+                    base.Visit(attributeTargetSpecifier);
+                    break;
+                case AwaitExpressionSyntax awaitExpression:
+                    base.Visit(awaitExpression);
+                    break;
+                case BadDirectiveTriviaSyntax badDirectiveTrivia:
+                    base.Visit(badDirectiveTrivia);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
@@ -260,6 +280,9 @@
                     break;
                 case WhileStatementSyntax whileStatement:
                     Visit(whileStatement);
+                    break;
+                case YieldStatementSyntax yieldStatement:
+                    base.Visit(yieldStatement);
                     break;
                 default:
                     base.Visit(node);
