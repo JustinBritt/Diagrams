@@ -10,8 +10,13 @@
 
     internal sealed class PlantUMLSequenceDiagramConfiguration : IPlantUMLSequenceDiagramConfiguration
     {
-        public PlantUMLSequenceDiagramConfiguration()
+        public PlantUMLSequenceDiagramConfiguration(
+            bool autoactivate = true,
+            bool footbox = true)
         {
+            this.Autoactivate = autoactivate;
+
+            this.Footbox = footbox;
         }
 
         public bool Autoactivate { get; }
