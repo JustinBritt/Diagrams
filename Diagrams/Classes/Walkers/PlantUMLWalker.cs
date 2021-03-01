@@ -213,9 +213,21 @@
                 case ArrayRankSpecifierSyntax arrayRankSpecifier:
                     base.Visit(arrayRankSpecifier);
                     break;
+                // e.g., string[]
                 case ArrayTypeSyntax arrayType:
                     base.Visit(arrayType);
                     break;
+                // TODO: Develop method
+                // Currently covered by ExpressionSyntax
+                //case ArrowExpressionClauseSyntax arrowExpressionClause:
+                //    base.Visit(arrowExpressionClause);
+                //    break;
+                
+                // e.g., this.Title = title;
+                case AssignmentExpressionSyntax assignmentExpression:
+                    base.Visit(assignmentExpression);
+                    break;
+
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
