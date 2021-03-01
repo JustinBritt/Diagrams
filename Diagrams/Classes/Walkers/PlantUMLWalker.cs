@@ -296,6 +296,25 @@
                 case BinaryExpressionSyntax binaryExpression:
                     base.Visit(binaryExpression);
                     break;
+                case BinaryPatternSyntax binaryPattern:
+                    base.Visit(binaryPattern);
+                    break;
+                case BlockSyntax block:
+                    base.Visit(block);
+                    break;
+                // e.g., [0]
+                case BracketedArgumentListSyntax bracketedArgumentList:
+                    base.Visit(bracketedArgumentList);
+                    break;
+                case BracketedParameterListSyntax bracketedParameterList:
+                    base.Visit(bracketedParameterList);
+                    break;
+                case BranchingDirectiveTriviaSyntax branchingDirectiveTrivia:
+                    base.Visit(branchingDirectiveTrivia);
+                    break;
+                case BreakStatementSyntax breakStatement:
+                    base.Visit(breakStatement);
+                    break;
                 case ConstructorConstraintSyntax constructorConstraint:
                     base.Visit(constructorConstraint);
                     break;
