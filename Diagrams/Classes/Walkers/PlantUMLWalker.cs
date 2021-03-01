@@ -185,6 +185,9 @@
                 case ElseClauseSyntax elseClause:
                     this.Visit(elseClause);
                     break;
+                case FinallyClauseSyntax finallyClause:
+                    this.Visit(finallyClause);
+                    break;
                 case ForStatementSyntax forStatement:
                     this.Visit(forStatement);
                     break;
@@ -306,6 +309,11 @@
 
                 --indent;
             }
+        }
+
+        private void Visit(FinallyClauseSyntax finallyClause)
+        {
+            base.Visit(finallyClause);
         }
 
         private void Visit(ForStatementSyntax forStatement)
