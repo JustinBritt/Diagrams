@@ -21,6 +21,7 @@
         private const string PlantUML_end = "end";
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_opt = "opt";
+        private const string PlantUML_startuml = "@startuml";
 
         private readonly Compilation compilation;
         private readonly Project project;
@@ -138,7 +139,7 @@
                     Diagrams.AddTitle(currentTitle);
                 }
 
-                AddCommand("@startuml");
+                AddCommand(PlantUML_startuml);
                 AddCommand($"title {currentTitle}");
                 AddCommand("autoactivate on");
                 AddCommand("hide footbox");
