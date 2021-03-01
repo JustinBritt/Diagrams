@@ -246,7 +246,11 @@
             // TODO: Use the parent of the catchClause to determine whether there are any other catch and/or finally clauses after this one
             if (catchClause.Parent is TryStatementSyntax)
             {
-                if(((TryStatementSyntax)catchClause.Parent).Catches.LastOrDefault() == catchClause)
+                bool isLastCatchClause = ((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause;
+
+                bool noFinallyClause = ((TryStatementSyntax)catchClause.Parent).Finally is null;
+
+                if (isLastCatchClause)
                 {
                     string command2 = $"end";
 
