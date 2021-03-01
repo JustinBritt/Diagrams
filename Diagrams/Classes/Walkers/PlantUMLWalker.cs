@@ -406,11 +406,64 @@
                 case DeclarationPatternSyntax declarationPattern:
                     base.Visit(declarationPattern);
                     break;
+                case DefaultExpressionSyntax defaultExpression:
+                    base.Visit(defaultExpression);
+                    break;
+                case DefaultSwitchLabelSyntax defaultSwitchLabel:
+                    base.Visit(defaultSwitchLabel);
+                    break;
+                case DefineDirectiveTriviaSyntax defineDirectiveTrivia:
+                    base.Visit(defineDirectiveTrivia);
+                    break;
+                case DelegateDeclarationSyntax delegateDeclaration:
+                    base.Visit(delegateDeclaration);
+                    break;
+                case DestructorDeclarationSyntax destructorDeclaration:
+                    base.Visit(destructorDeclaration);
+                    break;
+                // abstract base class
+                //case DirectiveTriviaSyntax directiveTrivia:
+                //    base.Visit(directiveTrivia);
+                //    break;
+                case DiscardDesignationSyntax discardDesignation:
+                    base.Visit(discardDesignation);
+                    break;
+                case DiscardPatternSyntax discardPattern:
+                    base.Visit(discardPattern);
+                    break;
+                case DocumentationCommentTriviaSyntax documentationCommentTrivia:
+                    base.Visit(documentationCommentTrivia);
+                    break;
                 case DoStatementSyntax doStatement:
                     this.Visit(doStatement);
                     break;
+                // e.g., args[0]
+                case ElementAccessExpressionSyntax elementAccessExpression:
+                    base.Visit(elementAccessExpression);
+                    break;
+                case ElementBindingExpressionSyntax elementBindingExpression:
+                    base.Visit(elementBindingExpression);
+                    break;
+                case ElifDirectiveTriviaSyntax elifDirectiveTrivia:
+                    base.Visit(elifDirectiveTrivia);
+                    break;
                 case ElseClauseSyntax elseClause:
                     this.Visit(elseClause);
+                    break;
+                case ElseDirectiveTriviaSyntax elseDirectiveTrivia:
+                    base.Visit(elseDirectiveTrivia);
+                    break;
+                case EmptyStatementSyntax emptyStatement:
+                    base.Visit(emptyStatement);
+                    break;
+                case EndIfDirectiveTriviaSyntax endIfDirectiveTrivia:
+                    base.Visit(endIfDirectiveTrivia);
+                    break;
+                case EndRegionDirectiveTriviaSyntax endRegionDirectiveTrivia:
+                    base.Visit(endRegionDirectiveTrivia);
+                    break;
+                case EnumDeclarationSyntax enumDeclaration:
+                    base.Visit(enumDeclaration);
                     break;
                 case ForStatementSyntax forStatement:
                     this.Visit(forStatement);
