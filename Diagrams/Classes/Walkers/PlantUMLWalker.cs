@@ -229,6 +229,8 @@
         /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
+            string command1 = "else";
+
             base.Visit(catchClause);
         }
 
