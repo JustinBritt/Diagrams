@@ -248,8 +248,6 @@
             {
                 bool isLastCatchClause = ((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause;
 
-                bool noFinallyClause = ((TryStatementSyntax)catchClause.Parent).Finally is null;
-
                 if (isLastCatchClause)
                 {
                     string command2 = $"end";
@@ -581,7 +579,7 @@
 
             base.Visit(tryStatement);
 
-            if (tryStatement.Catches.Count == 0 && tryStatement.Finally == null)
+            if (tryStatement.Catches.Count == 0)
             {
                 string command2 = $"end";
 
