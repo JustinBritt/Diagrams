@@ -18,6 +18,7 @@
     internal sealed class PlantUMLWalker : CSharpSyntaxWalker, IPlantUMLWalker
     {
         private const string PlantUML_alt = "alt";
+        private const string PlantUML_else = "else";
         private const string PlantUML_end = "end";
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_opt = "opt";
@@ -243,7 +244,7 @@
         /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
-            string command1 = "else [catch]";
+            string command1 = $"{PlantUML_else} [catch]";
 
             AddCommand(command1);
 
@@ -295,7 +296,7 @@
         /// <param name="elseClause">Else clause/param>
         private void Visit(ElseClauseSyntax elseClause)
         {
-            string command1 = "else";
+            string command1 = PlantUML_else;
             
             // if else that might have statements
             if (elseClause.Statement is IfStatementSyntax)
