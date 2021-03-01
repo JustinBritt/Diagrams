@@ -16,6 +16,8 @@
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Walkers;
 
+    using NGenerics.DataStructures.Trees;
+
     internal sealed class PlantUMLSequenceDiagramWalker : CSharpSyntaxWalker, IPlantUMLSequenceDiagramWalker
     {
         private const string PlantUML_alt = "alt";
