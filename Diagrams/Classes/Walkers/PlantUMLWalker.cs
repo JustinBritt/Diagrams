@@ -235,9 +235,15 @@
         /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
-            string command1 = "else";
+            string command1 = "else [catch]";
+
+            AddCommand(command1);
+
+            ++indent;
 
             base.Visit(catchClause);
+
+            // TODO: Use the parent of the catchClause to determine whether there are any other catch and/or finally clauses after this one
         }
 
         private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
