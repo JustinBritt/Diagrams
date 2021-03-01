@@ -506,12 +506,21 @@
 
         /// <summary>
         /// This visits an if statement.
-        /// Mapping: C# "if" -> PlantUML "alt"
+        /// Mapping: C# "if" -> PlantUML "opt" or "alt"
         /// </summary>
         /// <param name="ifStatement">If statement</param>
         private void Visit(IfStatementSyntax ifStatement)
         {
-            string command1 = "alt";
+            string command1;// = "alt";
+
+            if (ifStatement.Else is null)
+            {
+                command1 = "opt";
+            }
+            else
+            {
+                command1 = "alt";
+            }
 
             if (ifStatement.Parent is BlockSyntax)
             {
