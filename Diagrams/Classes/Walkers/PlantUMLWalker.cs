@@ -21,7 +21,12 @@
         private const string PlantUML_else = "else";
         private const string PlantUML_end = "end";
         private const string PlantUML_enduml = "@enduml";
+        private const string PlantUML_footbox = "footbox";
+        private const string PlantUML_hide = "hide";
+        private const string PlantUML_off = "off";
+        private const string PlantUML_on = "on";
         private const string PlantUML_opt = "opt";
+        private const string PlantUML_show = "show";
         private const string PlantUML_startuml = "@startuml";
         private const string PlantUML_title = "title";
 
