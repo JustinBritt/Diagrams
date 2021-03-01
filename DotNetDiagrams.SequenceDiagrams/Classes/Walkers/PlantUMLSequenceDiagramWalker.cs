@@ -254,9 +254,13 @@
         {
             string command1 = $"{PlantUML_else}";
 
-            AddCommand(command1);
+            // TODO: Check
+            if (catchClause.Block.Statements.Count > 0)
+            {
+                AddCommand(command1);
 
-            ++indent;
+                ++indent;
+            }
 
             base.Visit(catchClause);
 
