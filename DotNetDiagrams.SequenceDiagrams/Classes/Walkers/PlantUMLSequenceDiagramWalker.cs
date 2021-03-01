@@ -252,7 +252,7 @@
         /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
-            string command1 = $"{PlantUML_else} [catch]";
+            string command1 = $"{PlantUML_else}";
 
             AddCommand(command1);
 
@@ -587,7 +587,7 @@
         /// <param name="tryStatement">Try statement</param>
         private void Visit(TryStatementSyntax tryStatement)
         {
-            string command1 = "alt [try]";
+            string command1 = PlantUML_alt;
 
             if (tryStatement.Parent is BlockSyntax)
             {
