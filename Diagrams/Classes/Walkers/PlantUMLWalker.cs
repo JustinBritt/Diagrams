@@ -188,6 +188,34 @@
                 case AliasQualifiedNameSyntax aliasQualifiedName:
                     base.Visit(aliasQualifiedName);
                     break;
+                // abstract base class
+                //case AnonymousFunctionExpressionSyntax anonymousFunctionExpression:
+                //    base.Visit(anonymousFunctionExpression);
+                //    break;
+                case AnonymousMethodExpressionSyntax anonymousMethodExpression:
+                    base.Visit(anonymousMethodExpression);
+                    break;
+                case AnonymousObjectCreationExpressionSyntax anonymousObjectCreationExpression:
+                    base.Visit(anonymousObjectCreationExpression);
+                    break;
+                case AnonymousObjectMemberDeclaratorSyntax anonymousObjectMemberDeclarator:
+                    base.Visit(anonymousObjectMemberDeclarator);
+                    break;
+                case ArgumentListSyntax argumentList:
+                    base.Visit(argumentList);
+                    break;
+                case ArgumentSyntax argument:
+                    base.Visit(argument);
+                    break;
+                case ArrayCreationExpressionSyntax arrayCreationExpression:
+                    base.Visit(arrayCreationExpression);
+                    break;
+                case ArrayRankSpecifierSyntax arrayRankSpecifier:
+                    base.Visit(arrayRankSpecifier);
+                    break;
+                case ArrayTypeSyntax arrayType:
+                    base.Visit(arrayType);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     Visit(constructorDeclaration);
                     break;
