@@ -162,17 +162,11 @@
         {
             // add the command unless the last thing on the list is the second parameter
             // if it is, remove that entry and don't add the command
-            if (unlessFollowing != null)
+            if (unlessFollowing.Contains(PlantUMLCode.LastOrDefault()))
             {
-                foreach (var item in unlessFollowing)
-                {
-                    if (PlantUMLCode.LastOrDefault() == item)
-                    {
-                        this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
-                        return;
-                    }
-                }
+                return;
             }
 
             this.WriteCommandToDebug(
