@@ -12,7 +12,6 @@
 
     using DotNetDiagrams.Classes.Diagrams;
     using DotNetDiagrams.Extensions;
-    using DotNetDiagrams.Interfaces.Configurations;
     using DotNetDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.Interfaces.Walkers;
 
@@ -69,8 +68,6 @@
         private string AssemblyName { get { return project.AssemblyName; } }
 
         public IPlantUMLDiagrams Diagrams { get; }
-
-        public IPlantUMLSequenceDiagramConfiguration PlantUMLSequenceDiagramConfiguration { get; }
 
         private void EndDiagram()
         {
