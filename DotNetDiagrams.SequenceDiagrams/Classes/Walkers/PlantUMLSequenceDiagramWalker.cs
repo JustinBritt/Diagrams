@@ -158,7 +158,9 @@
             }
         }
 
-        private void AddCommand(string command, params string[] unlessFollowing)
+        private void AddCommand(
+            string command,
+            params string[] unlessFollowing)
         {
             // add the command unless the last thing on the list is the second parameter
             // if it is, remove that entry and don't add the command
