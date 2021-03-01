@@ -249,37 +249,37 @@
                     base.Visit(badDirectiveTrivia);
                     break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
-                    Visit(constructorDeclaration);
+                    this.Visit(constructorDeclaration);
                     break;
                 case DoStatementSyntax doStatement:
-                    Visit(doStatement);
+                    this.Visit(doStatement);
                     break;
                 case ElseClauseSyntax elseClause:
-                    Visit(elseClause);
+                    this.Visit(elseClause);
                     break;
                 case ForStatementSyntax forStatement:
-                    Visit(forStatement);
+                    this.Visit(forStatement);
                     break;
                 case ForEachStatementSyntax forEachStatement:
-                    Visit(forEachStatement);
+                    this.Visit(forEachStatement);
                     break;
                 case IfStatementSyntax ifStatement:
-                    Visit(ifStatement);
+                    this.Visit(ifStatement);
                     break;
                 case InvocationExpressionSyntax invocation:
-                    Visit(invocation);
+                    this.Visit(invocation);
                     break;
                 case MemberAccessExpressionSyntax memberAccess:
-                    Visit(memberAccess);
+                    this.Visit(memberAccess);
                     break;
                 case MethodDeclarationSyntax methodDeclaration:
-                    Visit(methodDeclaration);
+                    this.Visit(methodDeclaration);
                     break;
                 case TryStatementSyntax tryStatement:
-                    Visit(tryStatement);
+                    this.Visit(tryStatement);
                     break;
                 case WhileStatementSyntax whileStatement:
-                    Visit(whileStatement);
+                    this.Visit(whileStatement);
                     break;
                 case YieldStatementSyntax yieldStatement:
                     base.Visit(yieldStatement);
