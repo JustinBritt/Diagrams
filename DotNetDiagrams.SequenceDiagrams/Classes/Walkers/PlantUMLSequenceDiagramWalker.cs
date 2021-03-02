@@ -46,7 +46,6 @@
         private string currentTitle;
 
         private bool ignore;
-        private int indent;
 
         public PlantUMLSequenceDiagramWalker(
             Compilation compilation,
@@ -63,11 +62,6 @@
             this.solution = solution;
 
             this.project = project;
-        }
-
-        private string Indent
-        {
-            get { return new string(' ', indent * 2); }
         }
 
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
@@ -291,8 +285,6 @@
             if (catchClause.Block.Statements.Count > 0)
             {
                 AddCommand(command1);
-
-                ++indent;
             }
 
             base.Visit(catchClause);
@@ -303,8 +295,6 @@
                 {
                     AddCommand(
                         PlantUML_end);
-
-                    --indent;
                 }
             }
         }
@@ -318,15 +308,11 @@
         {
             string groupMessage = "do/while";
 
-            string command1 = $"{Indent}group " + groupMessage;
+            string command1 = $"group " + groupMessage;
 
             AddCommand(command1);
 
-            ++indent;
-
             base.Visit(doStatement);
-
-            --indent;
 
             AddCommand(PlantUML_end);
         }
@@ -374,8 +360,6 @@
             if (elseClause.Statement is BlockSyntax)
             {
                 AddCommand(PlantUML_end);
-
-                --indent;
             }
         }
 
@@ -388,15 +372,11 @@
         {
             string groupMessage = "for";
 
-            string command1 = $"{Indent}group " + groupMessage;
+            string command1 = $"group " + groupMessage;
 
             AddCommand(command1);
 
-            ++indent;
-
             base.Visit(forStatement);
-
-            --indent;
 
             AddCommand(PlantUML_end);
         }
@@ -405,17 +385,13 @@
         {
             string groupMessage = "for";
 
-            string command1 = $"{Indent}group " + groupMessage;
+            string command1 = $"group " + groupMessage;
 
             AddCommand(command1);
 
-            ++indent;
-
             base.Visit(forEachStatement);
 
-            --indent;
-
-            string command2 = $"{Indent}{PlantUML_end}";
+            string command2 = $"{PlantUML_end}";
 
             AddCommand(PlantUML_end);
         }
@@ -541,13 +517,13 @@
                 return;
             }
 
-            string command = $"{Indent}{callerTypeName} -> {targetTypeName}: {targetName}";
+            string command = $"{callerTypeName} -> {targetTypeName}: {targetName}";
 
             AddCommand(command);
 
             base.Visit(invocation);
 
-            command = $"{Indent}{targetTypeName} --> {callerTypeName}: {returnTypeName}";
+            command = $"{targetTypeName} --> {callerTypeName}: {returnTypeName}";
 
             AddCommand(command);
         }
@@ -573,8 +549,6 @@
             if (ifStatement.Parent is BlockSyntax)
             {
                 AddCommand(command1);
-
-                ++indent;
             }
 
             base.Visit(ifStatement);
@@ -582,8 +556,6 @@
             if (ifStatement.Else is null)
             {
                 AddCommand(PlantUML_end);
-
-                --indent;
             }
         }
 
@@ -620,8 +592,6 @@
             if (tryStatement.Parent is BlockSyntax)
             {
                 AddCommand(command1);
-
-                ++indent;
             }
             else
             {
@@ -635,8 +605,6 @@
                 string command2 = PlantUML_end;
 
                 AddCommand(PlantUML_end);
-
-                --indent;
             }
         }
 
@@ -644,15 +612,11 @@
         {
             string groupMessage = "while";
 
-            string command1 = $"{Indent}group " + groupMessage;
+            string command1 = $"group " + groupMessage;
 
             AddCommand(command1);
 
-            ++indent;
-
             base.Visit(whileStatement);
-
-            --indent;
 
             AddCommand(PlantUML_end);
         }
