@@ -18,6 +18,9 @@
 
     internal sealed class PlantUMLClassDiagramWalker : IPlantUMLClassDiagramWalker
     {
+        private const string PlantUML_enduml = "@enduml";
+        private const string PlantUML_startuml = "@startuml";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
