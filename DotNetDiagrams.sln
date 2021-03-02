@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams", "DotNetDiagrams\DotNetDiagrams.csproj", "{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.ConsoleUI", "DotNetDiagrams.ConsoleUI\DotNetDiagrams.ConsoleUI.csproj", "{AE911B4B-2A32-4DCC-9833-29DCF1430347}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.ConsoleUI", "DotNetDiagrams.ConsoleUI\DotNetDiagrams.ConsoleUI.csproj", "{AE911B4B-2A32-4DCC-9833-29DCF1430347}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.Common", "DotNetDiagrams.Common\DotNetDiagrams.Common.csproj", "{4415758C-6FAE-4A07-ACC5-0EAE3FB47AE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.Common", "DotNetDiagrams.Common\DotNetDiagrams.Common.csproj", "{4415758C-6FAE-4A07-ACC5-0EAE3FB47AE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.SequenceDiagrams", "DotNetDiagrams.SequenceDiagrams\DotNetDiagrams.SequenceDiagrams.csproj", "{E5FAFE62-6D30-4106-A2E8-7CE932B762FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.SequenceDiagrams", "DotNetDiagrams.SequenceDiagrams\DotNetDiagrams.SequenceDiagrams.csproj", "{E5FAFE62-6D30-4106-A2E8-7CE932B762FC}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.ClassDiagrams", "DotNetDiagrams.ClassDiagrams\DotNetDiagrams.ClassDiagrams.csproj", "{461BDF93-523F-4CCB-A01C-10FB3E5AD4F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.ClassDiagrams", "DotNetDiagrams.ClassDiagrams\DotNetDiagrams.ClassDiagrams.csproj", "{461BDF93-523F-4CCB-A01C-10FB3E5AD4F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,14 +19,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|x86.ActiveCfg = Debug|x86
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Debug|x86.Build.0 = Debug|x86
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|Any CPU.ActiveCfg = Release|x86
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|Any CPU.Build.0 = Release|x86
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|x86.ActiveCfg = Release|x86
-		{54B61A2F-81CC-4251-969C-7ECC9E5E47CC}.Release|x86.Build.0 = Release|x86
 		{AE911B4B-2A32-4DCC-9833-29DCF1430347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AE911B4B-2A32-4DCC-9833-29DCF1430347}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AE911B4B-2A32-4DCC-9833-29DCF1430347}.Debug|x86.ActiveCfg = Debug|Any CPU
