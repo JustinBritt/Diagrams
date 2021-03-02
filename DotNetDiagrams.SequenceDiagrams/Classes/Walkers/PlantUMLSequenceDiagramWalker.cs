@@ -162,6 +162,8 @@
             string command,
             params string[] unlessFollowing)
         {
+            string currentLast = PlantUMLCode.LastOrDefault();
+
             // add the command unless the last thing on the list is the second parameter
             // if it is, remove that entry and don't add the command
             if (unlessFollowing.Contains(PlantUMLCode.LastOrDefault()))
