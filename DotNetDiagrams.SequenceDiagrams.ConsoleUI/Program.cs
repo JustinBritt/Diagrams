@@ -1,4 +1,4 @@
-﻿namespace DotNetDiagrams.ConsoleUI
+﻿namespace DotNetDiagrams.SequenceDiagrams.ConsoleUI
 {
     using System;
     using System.Collections.Generic;
