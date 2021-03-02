@@ -211,9 +211,23 @@
 
             AddCommand($"{PlantUML_title} {title}");
 
-            AddCommand($"{PlantUML_autoactivate} on");
+            if (autoactivate)
+            {
+                AddCommand($"{PlantUML_autoactivate} {PlantUML_on}");
+            }
+            else
+            {
+                AddCommand($"{PlantUML_autoactivate} {PlantUML_off}");
+            }
 
-            AddCommand($"hide {PlantUML_footbox}");
+            if (footbox)
+            {
+                AddCommand($"{PlantUML_show} {PlantUML_footbox}");
+            }
+            else
+            {
+                AddCommand($"{PlantUML_hide} {PlantUML_footbox}");
+            }
         }
 
         private void WriteCommandToDebug(
