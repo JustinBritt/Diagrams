@@ -325,8 +325,6 @@
             {
                 if (((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause)
                 {
-                    string command2 = PlantUML_end;
-
                     AddCommand(
                         PlantUML_end);
 
