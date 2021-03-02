@@ -163,7 +163,6 @@
         {
             string currentLast = PlantUMLCode.LastOrDefault();
 
-            // TODO: Account for group messages
             if (command == PlantUML_end && currentLast == PlantUML_else)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
@@ -178,6 +177,31 @@
                 }  
             }
             else if (command == PlantUML_end && currentLast == PlantUML_alt)
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            // TODO: Add consts
+            else if (command == PlantUML_end && currentLast == "group do/while")
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == "group for")
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == "group foreach")
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == "group while")
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
