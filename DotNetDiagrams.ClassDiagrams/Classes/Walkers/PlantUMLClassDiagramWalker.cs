@@ -46,6 +46,8 @@
             this.project = project;
         }
 
+        private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
+
         public IPlantUMLDiagrams Diagrams { get; }
 
         private void AddCommand(
