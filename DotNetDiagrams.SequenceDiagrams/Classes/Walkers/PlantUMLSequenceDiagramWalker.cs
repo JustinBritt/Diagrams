@@ -195,10 +195,6 @@
                 return;
             }
 
-            this.WriteCommandToDebug(
-                command,
-                currentTitle);
-
             this.PlantUMLCode.Add(command);
         }
 
@@ -228,15 +224,6 @@
             {
                 AddCommand($"{PlantUML_hide} {PlantUML_footbox}");
             }
-        }
-
-        private void WriteCommandToDebug(
-            string command,
-            string title)
-        {
-            //Debug.WriteLine("----------------------------------");
-            //Debug.WriteLine(title);
-            //Debug.WriteLine("   " + command);
         }
 
         public override void Visit(SyntaxNode node)
