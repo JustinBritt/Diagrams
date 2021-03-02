@@ -71,5 +71,12 @@
                     break;
             }
         }
+
+        private void Visit(
+            ConstructorDeclarationSyntax constructorDeclaration)
+        {
+            base.Visit(
+                constructorDeclaration);
+        }
     }
 }
