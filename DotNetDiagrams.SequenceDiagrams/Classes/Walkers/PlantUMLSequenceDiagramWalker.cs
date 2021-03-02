@@ -596,15 +596,9 @@
         /// <param name="tryStatement">Try statement</param>
         private void Visit(TryStatementSyntax tryStatement)
         {
-            string command1 = PlantUML_alt;
-
             if (tryStatement.Parent is BlockSyntax)
             {
-                AddCommand(command1);
-            }
-            else
-            {
-                throw new Exception("");
+                AddCommand(PlantUML_alt);
             }
 
             base.Visit(tryStatement);
