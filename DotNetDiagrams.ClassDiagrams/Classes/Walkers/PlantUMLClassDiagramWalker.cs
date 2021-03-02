@@ -48,6 +48,11 @@
 
         public IPlantUMLDiagrams Diagrams { get; }
 
+        private void AddCommand(
+            string command)
+        {
+        }
+
         private void EndDiagram()
         {
         }
