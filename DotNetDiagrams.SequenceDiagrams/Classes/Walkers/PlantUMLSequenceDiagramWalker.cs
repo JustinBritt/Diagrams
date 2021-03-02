@@ -43,6 +43,7 @@
         private readonly Solution solution;
         private readonly SyntaxTree syntaxTree;
 
+        private List<string> currentHeader;
         private string currentTitle;
 
         private bool ignore;
