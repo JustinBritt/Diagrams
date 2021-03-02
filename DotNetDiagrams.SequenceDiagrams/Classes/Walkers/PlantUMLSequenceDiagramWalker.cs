@@ -164,12 +164,18 @@
             string currentLast = PlantUMLCode.LastOrDefault();
 
             // TODO: Account for group messages
-            // TODO: After removing else, check again to see if the previous needs to be removed
             if (command == PlantUML_end && currentLast == PlantUML_else)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
-                return;
+                currentLast = PlantUMLCode.LastOrDefault();
+
+                if (currentLast == PlantUML_alt)
+                {
+                    this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                    return;
+                }  
             }
             else if (command == PlantUML_end && currentLast == PlantUML_alt)
             {
