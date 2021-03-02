@@ -81,6 +81,9 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
+                case InterfaceDeclarationSyntax interfaceDeclaration:
+                    this.Visit(interfaceDeclaration);
+                    break;
                 default:
                     base.Visit(node);
                     break;
@@ -101,6 +104,15 @@
         {
             base.Visit(
                 constructorDeclaration);
+        }
+
+        private void Visit(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            string interfaceName = interfaceDeclaration.Identifier.ValueText;
+
+            base.Visit(
+                interfaceDeclaration);
         }
     }
 }
