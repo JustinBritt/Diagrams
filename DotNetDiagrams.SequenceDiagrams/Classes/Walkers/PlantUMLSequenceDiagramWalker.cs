@@ -571,6 +571,11 @@
             }
         }
 
+        /// <summary>
+        /// This visits a while statement.
+        /// Mapping: C# "while" -> PlantUML "group while"
+        /// </summary>
+        /// <param name="whileStatement"></param>
         private void Visit(WhileStatementSyntax whileStatement)
         {
             AddCommand(group_while);
