@@ -16,7 +16,7 @@
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLClassDiagramWalker : IPlantUMLClassDiagramWalker
+    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_startuml = "@startuml";
