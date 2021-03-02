@@ -39,9 +39,9 @@
                 MSBuildWorkspaceFactory.CreateAndRegisterDefaults(),
                 args[0]);
 
-            ISequenceDiagramGenerator diagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
+            ISequenceDiagramGenerator sequencediagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
 
-            IDiagrams diagrams = diagramGenerator.Process(solution);
+            IDiagrams diagrams = sequencediagramGenerator.Process(solution);
 
             WriteDiagramsToConsole(diagrams);
 
