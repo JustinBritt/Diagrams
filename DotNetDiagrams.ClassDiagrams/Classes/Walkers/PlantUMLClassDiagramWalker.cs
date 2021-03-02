@@ -57,6 +57,10 @@
         {
         }
 
+        /// <summary>
+        /// This visits a node in the syntax tree.
+        /// </summary>
+        /// <param name="node">Node</param>
         public override void Visit(
             SyntaxNode node)
         {
