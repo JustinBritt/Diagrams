@@ -19,10 +19,11 @@
     internal sealed class PlantUMLSequenceDiagramWalker : CSharpSyntaxWalker, IPlantUMLSequenceDiagramWalker
     {
         private const string group_do = "group do";
+        private const string group_doWhile = "group do/while";
         private const string group_for = "group for";
         private const string group_foreach = "group foreach";
-        private const string group_doWhile = "group do/while";
         private const string group_while = "group while";
+
         private const string PlantUML_alt = "alt";
         private const string PlantUML_autoactivate = "autoactivate";
         private const string PlantUML_else = "else";
