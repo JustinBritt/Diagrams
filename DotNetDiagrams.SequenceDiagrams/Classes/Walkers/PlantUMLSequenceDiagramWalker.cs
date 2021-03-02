@@ -152,6 +152,8 @@
                 }
 
                 this.AddHeader(
+                    autoactivate: true,
+                    footbox: true,
                     title: currentTitle);
             }
         }
@@ -201,6 +203,8 @@
         }
 
         private void AddHeader(
+            bool autoactivate,
+            bool footbox,
             string title)
         {
             AddCommand(PlantUML_startuml);
