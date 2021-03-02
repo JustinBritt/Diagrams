@@ -147,7 +147,7 @@
             currentTitle = DetermineTitle(
                 methodDeclaration);
 
-            if (currentTitle is not null && currentTitle != String.Empty)
+            if (!String.IsNullOrEmpty(currentTitle))
             {
                 if (!Diagrams.ContainsTitle(currentTitle))
                 {
