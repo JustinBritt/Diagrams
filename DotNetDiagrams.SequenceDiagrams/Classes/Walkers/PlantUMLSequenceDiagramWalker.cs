@@ -610,11 +610,7 @@
 
         private void Visit(WhileStatementSyntax whileStatement)
         {
-            string groupMessage = "while";
-
-            string command1 = $"group " + groupMessage;
-
-            AddCommand(command1);
+            AddCommand(group_while);
 
             base.Visit(whileStatement);
 
