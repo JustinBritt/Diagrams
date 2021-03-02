@@ -32,7 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Classes\" />
-	  <Folder Include="Interfaces\" />
+	  <Folder Include="Classes\Generators\" />
+	  <Folder Include="Interfaces\Generators\" />
 	</ItemGroup>
 </Project>
