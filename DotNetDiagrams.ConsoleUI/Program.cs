@@ -28,6 +28,14 @@
 
                 return;
             }
+            else if (args.Length == 2)
+            {
+                Console.WriteLine("Usage: Diagrams <solutionPath>");
+            }
+            else
+            {
+                //Console.WriteLine("Usage: Diagrams <solutionPath>");
+            }
 
             IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
