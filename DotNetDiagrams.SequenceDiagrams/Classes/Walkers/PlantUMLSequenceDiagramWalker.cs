@@ -324,36 +324,7 @@
         /// <param name="elseClause">Else clause/param>
         private void Visit(ElseClauseSyntax elseClause)
         {
-            string command1 = PlantUML_else;
-
-            // if else that might have statements
-            if (elseClause.Statement is IfStatementSyntax)
-            {
-                // Case (i): if else with statements
-                bool casei = elseClause.Statement.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any();
-
-                if (casei)
-                {
-                    AddCommand(command1);
-                }
-            }
-            // else that might have statements
-            else if (elseClause.Statement is BlockSyntax)
-            {
-                if (elseClause.Statement.ChildNodes().Count() > 0)
-                {
-                    // Case (iia): else with statements other than if or else
-                    bool caseiia = ((BlockSyntax)elseClause.Statement).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0;
-
-                    // Case (iib): else with descendant nodes that have statements
-                    bool caseiib = elseClause.Statement.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0;
-
-                    if (caseiia || caseiib)
-                    {
-                        AddCommand(command1);
-                    }
-                }
-            }
+            AddCommand(PlantUML_else);
 
             base.Visit(elseClause);
 
@@ -361,6 +332,44 @@
             {
                 AddCommand(PlantUML_end);
             }
+
+            //string command1 = PlantUML_else;
+
+            //// if else that might have statements
+            //if (elseClause.Statement is IfStatementSyntax)
+            //{
+            //    // Case (i): if else with statements
+            //    bool casei = elseClause.Statement.ChildNodes().OfType<BlockSyntax>().FirstOrDefault().Statements.Any();
+
+            //    if (casei)
+            //    {
+            //        AddCommand(command1);
+            //    }
+            //}
+            //// else that might have statements
+            //else if (elseClause.Statement is BlockSyntax)
+            //{
+            //    if (elseClause.Statement.ChildNodes().Count() > 0)
+            //    {
+            //        // Case (iia): else with statements other than if or else
+            //        bool caseiia = ((BlockSyntax)elseClause.Statement).Statements.Where(w => w.Kind() is not SyntaxKind.IfStatement && w.Kind() is not SyntaxKind.ElseClause).Count() > 0;
+
+            //        // Case (iib): else with descendant nodes that have statements
+            //        bool caseiib = elseClause.Statement.DescendantNodes().OfType<BlockSyntax>().Select(w => w.Statements).Where(w => w.Count() > 0).Count() > 0;
+
+            //        if (caseiia || caseiib)
+            //        {
+            //            AddCommand(command1);
+            //        }
+            //    }
+            //}
+
+            //base.Visit(elseClause);
+
+            //if (elseClause.Statement is BlockSyntax)
+            //{
+            //    AddCommand(PlantUML_end);
+            //}
         }
 
         private void Visit(FinallyClauseSyntax finallyClause)
@@ -602,8 +611,6 @@
 
             if (tryStatement.Catches.Count == 0)
             {
-                string command2 = PlantUML_end;
-
                 AddCommand(PlantUML_end);
             }
         }
