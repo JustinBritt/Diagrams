@@ -1,10 +1,8 @@
 ﻿namespace DotNetDiagrams.ClassDiagrams.Classes.Generators
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+
+    using Microsoft.CodeAnalysis;
 
     using DotNetDiagrams.Common.Classes.Diagrams;
     using DotNetDiagrams.Common.Interfaces.Diagrams;
@@ -14,6 +12,33 @@
     {
         public PlantUMLClassDiagramGenerator()
         {
+        }
+
+        // TODO: Finish
+        public IDiagrams Process(
+            Solution solution)
+        {
+            IDiagrams diagrams = new PlantUMLDiagrams();
+
+            foreach (Project project in solution.Projects.Where(w => w.Language == "C#"))
+            {
+                Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+                foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
+                {
+                    //PlantUMLSequenceDiagramWalker walker = new PlantUMLSequenceDiagramWalker(
+                    //    compilation,
+                    //    syntaxTree,
+                    //    solution,
+                    //    project);
+
+                    //walker.Visit(syntaxTree.GetRoot());
+
+                    //diagrams.Value.AddRange(walker.Diagrams.Value);
+                }
+            }
+
+            return diagrams;
         }
     }
 }
