@@ -10,9 +10,16 @@
 
     internal sealed class Program
     {
-        static void Main(string[] args)
+        private const string expectedSolutionExtension = ".sln";
+
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args.Length != 1 || Path.GetExtension(args[0]).ToLowerInvariant() != expectedSolutionExtension)
+            {
+                Console.WriteLine($"Usage: {typeof(Program).Assembly.GetName().Name} <solutionPath>");
+
+                return;
+            }
         }
     }
 }
