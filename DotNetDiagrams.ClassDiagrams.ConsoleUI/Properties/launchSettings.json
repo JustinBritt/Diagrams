@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DotNetDiagrams.ClassDiagrams.ConsoleUI": {
+      "commandName": "Project",
+      "commandLineArgs": "..\\..\\..\\..\\DotNetDiagrams.sln"
+    }
+  }
+}
