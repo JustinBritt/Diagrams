@@ -90,6 +90,8 @@
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
+            string className = classDeclaration.Identifier.ValueText;
+
             base.Visit(
                 classDeclaration);
         }
