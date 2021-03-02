@@ -5,9 +5,7 @@
     using System.IO;
     using System.Linq;
 
-    using Microsoft.Build.Locator;
     using Microsoft.CodeAnalysis;
-    using Microsoft.CodeAnalysis.MSBuild;
 
     using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis;
     using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
