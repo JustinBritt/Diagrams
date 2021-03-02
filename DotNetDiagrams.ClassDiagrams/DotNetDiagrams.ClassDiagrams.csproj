@@ -34,4 +34,9 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\DotNetDiagrams.Common\DotNetDiagrams.Common.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Factories\" />
+	  <Folder Include="InterfacesFactories\" />
+	</ItemGroup>
 </Project>
