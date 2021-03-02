@@ -32,7 +32,7 @@
 
             IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
 
-            IPlantUMLSequenceDiagramGeneratorFactory PlantUMLDiagramGeneratorFactory = new PlantUMLSequenceDiagramGeneratorFactory();
+            IPlantUMLSequenceDiagramGeneratorFactory PlantUMLSequenceDiagramGeneratorFactory = new PlantUMLSequenceDiagramGeneratorFactory();
 
             ISolutionFactory solutionFactory = new SolutionFactory();
 
@@ -40,7 +40,7 @@
                 MSBuildWorkspaceFactory.CreateAndRegisterDefaults(),
                 args[0]);
 
-            ISequenceDiagramGenerator sequencediagramGenerator = PlantUMLDiagramGeneratorFactory.Create();
+            ISequenceDiagramGenerator sequencediagramGenerator = PlantUMLSequenceDiagramGeneratorFactory.Create();
 
             IDiagrams diagrams = sequencediagramGenerator.Process(solution);
 
