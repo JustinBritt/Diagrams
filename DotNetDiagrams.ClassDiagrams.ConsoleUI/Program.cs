@@ -14,6 +14,7 @@
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
     using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
     using DotNetDiagrams.ClassDiagrams.InterfacesFactories.Generators;
 
     internal sealed class Program
@@ -28,6 +29,26 @@
 
                 return;
             }
+
+            IMSBuildWorkspaceFactory MSBuildWorkspaceFactory = new MSBuildWorkspaceFactory();
+
+            IPlantUMLClassDiagramGeneratorFactory PlantUMLClassDiagramGeneratorFactory = new PlantUMLClassDiagramGeneratorFactory();
+
+            ISolutionFactory solutionFactory = new SolutionFactory();
+
+            Solution solution = solutionFactory.Create(
+                MSBuildWorkspaceFactory.CreateAndRegisterDefaults(),
+                args[0]);
+
+            IClassDiagramGenerator classdiagramGenerator = PlantUMLClassDiagramGeneratorFactory.Create();
+
+            IDiagrams diagrams = classdiagramGenerator.Process(solution);
+
+            WriteDiagramsToConsole(diagrams);
+
+            Console.WriteLine("Hit any key to continue");
+
+            Console.ReadKey();
         }
 
         private static void WriteDiagramsToConsole(
