@@ -294,11 +294,9 @@
         /// <param name="catchClause">Catch clause</param>
         private void Visit(CatchClauseSyntax catchClause)
         {
-            string command1 = $"{PlantUML_else}";
-
             if (catchClause.Block.Statements.Count > 0)
             {
-                AddCommand(command1);
+                AddCommand(PlantUML_else);
             }
 
             base.Visit(catchClause);
