@@ -74,6 +74,9 @@
         {
             switch (node)
             {
+                case ClassDeclarationSyntax classDeclaration:
+                    this.Visit(classDeclaration);
+                    break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
@@ -81,6 +84,13 @@
                     base.Visit(node);
                     break;
             }
+        }
+
+        private void Visit(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            base.Visit(
+                classDeclaration);
         }
 
         private void Visit(
