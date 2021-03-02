@@ -116,6 +116,7 @@
         }
 
         // TODO: How does this handle nested declarations?
+        // TODO: A nested class or struct has a methodDeclaration.GetParent<T>() not of type NamespaceDeclarationSyntax, so this needs to be accounted for.
         private string DetermineTitle(
             MethodDeclarationSyntax methodDeclaration)
         {
