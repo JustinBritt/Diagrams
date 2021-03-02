@@ -159,14 +159,19 @@
         }
 
         private void AddCommand(
-            string command,
-            params string[] unlessFollowing)
+            string command)
         {
             string currentLast = PlantUMLCode.LastOrDefault();
 
-            // add the command unless the last thing on the list is the second parameter
-            // if it is, remove that entry and don't add the command
-            if (unlessFollowing.Contains(PlantUMLCode.LastOrDefault()))
+            // TODO: Account for group messages
+            // TODO: After removing else, check again to see if the previous needs to be removed
+            if (command == PlantUML_end && currentLast == PlantUML_else)
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == PlantUML_alt)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
@@ -276,9 +281,7 @@
                     string command2 = PlantUML_end;
 
                     AddCommand(
-                        command2,
-                        PlantUML_alt,
-                        PlantUML_else);
+                        PlantUML_end);
 
                     --indent;
                 }
@@ -304,9 +307,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}{PlantUML_end}";
-
-            AddCommand(command2, command1);
+            AddCommand(PlantUML_end);
         }
 
         /// <summary>
@@ -351,9 +352,7 @@
 
             if (elseClause.Statement is BlockSyntax)
             {
-                string command2 = PlantUML_end;
-
-                AddCommand(command2, command1);
+                AddCommand(PlantUML_end);
 
                 --indent;
             }
@@ -378,9 +377,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}{PlantUML_end}";
-
-            AddCommand(command2, command1);
+            AddCommand(PlantUML_end);
         }
 
         private void Visit(ForEachStatementSyntax forEachStatement)
@@ -399,7 +396,7 @@
 
             string command2 = $"{Indent}{PlantUML_end}";
 
-            AddCommand(command2, command1);
+            AddCommand(PlantUML_end);
         }
 
         private void Visit(ExpressionSyntax invocation)
@@ -563,9 +560,7 @@
 
             if (ifStatement.Else is null)
             {
-                string command2 = PlantUML_end;
-
-                AddCommand(command2, command1);
+                AddCommand(PlantUML_end);
 
                 --indent;
             }
@@ -618,7 +613,7 @@
             {
                 string command2 = PlantUML_end;
 
-                AddCommand(command2, command1);
+                AddCommand(PlantUML_end);
 
                 --indent;
             }
@@ -638,9 +633,7 @@
 
             --indent;
 
-            string command2 = $"{Indent}{PlantUML_end}";
-
-            AddCommand(command2, command1);
+            AddCommand(PlantUML_end);
         }
     }
 }
