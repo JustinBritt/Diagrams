@@ -44,5 +44,14 @@
         }
 
         public IPlantUMLDiagrams Diagrams { get; }
+
+        private void EndDiagram()
+        {
+        }
+
+        private void StartDiagram(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+        }
     }
 }
