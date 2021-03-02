@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     using Microsoft.CodeAnalysis;
 
@@ -24,7 +25,7 @@
         {
             if (args.Length != 1 || Path.GetExtension(args[0]).ToLowerInvariant() != expectedSolutionExtension)
             {
-                Console.WriteLine("Usage: Diagrams <solutionPath>");
+                Console.WriteLine($"Usage: {typeof(Program).Assembly.GetName().Name} <solutionPath>");
 
                 return;
             }
