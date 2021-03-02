@@ -188,26 +188,31 @@
 
                 return;
             }
-            // TODO: Add consts
-            else if (command == PlantUML_end && currentLast == "group do/while")
+            else if (command == PlantUML_end && currentLast == group_do)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
                 return;
             }
-            else if (command == PlantUML_end && currentLast == "group for")
+            else if (command == PlantUML_end && currentLast == group_doWhile)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
                 return;
             }
-            else if (command == PlantUML_end && currentLast == "group foreach")
+            else if (command == PlantUML_end && currentLast == group_for)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
                 return;
             }
-            else if (command == PlantUML_end && currentLast == "group while")
+            else if (command == PlantUML_end && currentLast == group_foreach)
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == group_while)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
