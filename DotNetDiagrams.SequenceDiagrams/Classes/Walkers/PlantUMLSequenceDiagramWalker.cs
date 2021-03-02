@@ -350,15 +350,9 @@
 
         private void Visit(ForEachStatementSyntax forEachStatement)
         {
-            string groupMessage = "for";
-
-            string command1 = $"group " + groupMessage;
-
-            AddCommand(command1);
+            AddCommand(group_foreach);
 
             base.Visit(forEachStatement);
-
-            string command2 = $"{PlantUML_end}";
 
             AddCommand(PlantUML_end);
         }
