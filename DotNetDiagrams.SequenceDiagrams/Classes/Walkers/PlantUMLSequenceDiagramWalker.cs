@@ -169,6 +169,18 @@
         {
             string currentLast = PlantUMLCode.LastOrDefault();
 
+            List<string> cannotImmediatelyPrecedePlantUML_end = new List<string>() 
+            {
+                group_do,
+                group_doWhile,
+                group_for,
+                group_foreach,
+                group_while,
+                PlantUML_alt,
+                PlantUML_else,
+                PlantUML_opt,
+            };
+
             if (command == PlantUML_end && currentLast == PlantUML_else)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
@@ -182,46 +194,10 @@
                     return;
                 }  
             }
-            else if (command == PlantUML_end && currentLast == PlantUML_alt)
+            else if (command == PlantUML_end && cannotImmediatelyPrecedePlantUML_end.Contains(currentLast))
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == PlantUML_opt)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == group_do)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == group_doWhile)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == group_for)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == group_foreach)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                return;
-            }
-            else if (command == PlantUML_end && currentLast == group_while)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
+                
                 return;
             }
 
