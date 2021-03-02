@@ -66,6 +66,9 @@
         {
             switch (node)
             {
+                case ConstructorDeclarationSyntax constructorDeclaration:
+                    this.Visit(constructorDeclaration);
+                    break;
                 default:
                     base.Visit(node);
                     break;
