@@ -175,7 +175,7 @@
 
                 currentLast = PlantUMLCode.LastOrDefault();
 
-                if (currentLast == PlantUML_alt)
+                if (currentLast == PlantUML_alt || currentLast == PlantUML_opt)
                 {
                     this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
@@ -183,6 +183,12 @@
                 }  
             }
             else if (command == PlantUML_end && currentLast == PlantUML_alt)
+            {
+                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+
+                return;
+            }
+            else if (command == PlantUML_end && currentLast == PlantUML_opt)
             {
                 this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
 
