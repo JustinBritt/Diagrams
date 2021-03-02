@@ -26,6 +26,9 @@
         private readonly Solution solution;
         private readonly SyntaxTree syntaxTree;
 
+        private List<string> currentHeader;
+        private string currentTitle;
+
         public PlantUMLClassDiagramWalker(
             Compilation compilation,
             SyntaxTree syntaxTree,
