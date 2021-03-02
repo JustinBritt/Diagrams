@@ -151,7 +151,8 @@
                     Diagrams.AddTitle(currentTitle);
                 }
 
-                this.AddHeader();
+                this.AddHeader(
+                    title: currentTitle);
             }
         }
 
@@ -199,10 +200,11 @@
             this.PlantUMLCode.Add(command);
         }
 
-        private void AddHeader()
+        private void AddHeader(
+            string title)
         {
             AddCommand(PlantUML_startuml);
-            AddCommand($"{PlantUML_title} {currentTitle}");
+            AddCommand($"{PlantUML_title} {title}");
             AddCommand($"{PlantUML_autoactivate} on");
             AddCommand($"hide {PlantUML_footbox}");
         }
