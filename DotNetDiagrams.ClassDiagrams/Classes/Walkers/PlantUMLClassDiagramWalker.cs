@@ -56,5 +56,16 @@
             TypeDeclarationSyntax typeDeclaration)
         {
         }
+
+        public override void Visit(
+            SyntaxNode node)
+        {
+            switch (node)
+            {
+                default:
+                    base.Visit(node);
+                    break;
+            }
+        }
     }
 }
