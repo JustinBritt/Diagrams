@@ -34,9 +34,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\DotNetDiagrams.Common\DotNetDiagrams.Common.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Classes\Walkers\" />
-	  <Folder Include="Interfaces\Walkers\" />
-	</ItemGroup>
 </Project>
