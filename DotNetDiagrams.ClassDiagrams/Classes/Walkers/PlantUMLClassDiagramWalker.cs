@@ -18,6 +18,7 @@
 
     internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
+        private const string PlantUML_class = "class";
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_startuml = "@startuml";
 
