@@ -115,6 +115,7 @@
             return namespaceName;
         }
 
+        // TODO: How does this handle nested declarations?
         private string DetermineTitle(
             MethodDeclarationSyntax methodDeclaration)
         {
