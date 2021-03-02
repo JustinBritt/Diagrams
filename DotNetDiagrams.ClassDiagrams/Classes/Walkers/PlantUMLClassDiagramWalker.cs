@@ -53,6 +53,7 @@
         private void AddCommand(
             string command)
         {
+            this.PlantUMLCode.Add(command);
         }
 
         private void EndDiagram()
