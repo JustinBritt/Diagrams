@@ -18,8 +18,28 @@
 
     internal sealed class PlantUMLClassDiagramWalker : IPlantUMLClassDiagramWalker
     {
-        public PlantUMLClassDiagramWalker()
+        private readonly Compilation compilation;
+        private readonly Project project;
+        private readonly Solution solution;
+        private readonly SyntaxTree syntaxTree;
+
+        public PlantUMLClassDiagramWalker(
+            Compilation compilation,
+            SyntaxTree syntaxTree,
+            Solution solution,
+            Project project)
         {
+            this.Diagrams = new PlantUMLDiagrams();
+
+            this.compilation = compilation;
+
+            this.syntaxTree = syntaxTree;
+
+            this.solution = solution;
+
+            this.project = project;
         }
+
+        public IPlantUMLDiagrams Diagrams { get; }
     }
 }
