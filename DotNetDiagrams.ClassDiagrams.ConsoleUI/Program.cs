@@ -8,6 +8,12 @@
 
     using Microsoft.CodeAnalysis;
 
+    using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.Common.Interfaces.Diagrams;
+    using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
+    using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+
     internal sealed class Program
     {
         private const string expectedSolutionExtension = ".sln";
