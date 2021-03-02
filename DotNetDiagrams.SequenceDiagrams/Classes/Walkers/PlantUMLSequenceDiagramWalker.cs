@@ -318,11 +318,7 @@
 
         private void Visit(DoStatementSyntax doStatement)
         {
-            string groupMessage = "do/while";
-
-            string command1 = $"group " + groupMessage;
-
-            AddCommand(command1);
+            AddCommand(group_doWhile);
 
             base.Visit(doStatement);
 
