@@ -10,9 +10,11 @@
 
     using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis;
     using DotNetDiagrams.Common.Factories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.ClassDiagrams.Factories.Generators;
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis;
     using DotNetDiagrams.Common.InterfacesFactories.Dependencies.Microsoft.CodeAnalysis.MSBuild;
+    using DotNetDiagrams.ClassDiagrams.InterfacesFactories.Generators;
 
     internal sealed class Program
     {
