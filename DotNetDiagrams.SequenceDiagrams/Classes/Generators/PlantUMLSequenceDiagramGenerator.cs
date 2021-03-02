@@ -1,5 +1,7 @@
 ﻿namespace DotNetDiagrams.SequenceDiagrams.Classes.Generators
 {
+    using System.Linq;
+
     using Microsoft.CodeAnalysis;
 
     using DotNetDiagrams.Common.Classes.Diagrams;
@@ -20,7 +22,7 @@
         {
             IDiagrams diagrams = new PlantUMLDiagrams();
 
-            foreach (Project project in solution.Projects)
+            foreach (Project project in solution.Projects.Where(w => w.Language == "C#"))
             {
                 Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
 
