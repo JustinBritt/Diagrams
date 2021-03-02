@@ -208,8 +208,11 @@
             string title)
         {
             AddCommand(PlantUML_startuml);
+
             AddCommand($"{PlantUML_title} {title}");
+
             AddCommand($"{PlantUML_autoactivate} on");
+
             AddCommand($"hide {PlantUML_footbox}");
         }
 
