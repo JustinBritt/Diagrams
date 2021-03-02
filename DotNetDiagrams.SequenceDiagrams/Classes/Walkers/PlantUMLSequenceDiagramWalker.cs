@@ -341,11 +341,7 @@
 
         private void Visit(ForStatementSyntax forStatement)
         {
-            string groupMessage = "for";
-
-            string command1 = $"group " + groupMessage;
-
-            AddCommand(command1);
+            AddCommand(group_for);
 
             base.Visit(forStatement);
 
