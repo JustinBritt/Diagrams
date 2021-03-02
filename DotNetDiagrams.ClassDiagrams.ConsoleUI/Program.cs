@@ -21,5 +21,23 @@
                 return;
             }
         }
+
+        private static void WriteDiagramsToConsole(
+            IDiagrams diagrams)
+        {
+            string seperator = "-----------------------------";
+
+            foreach (string title in diagrams.Value.Select(w => w.Title))
+            {
+                Console.WriteLine(seperator);
+                Console.WriteLine(title);
+                Console.WriteLine(seperator);
+
+                foreach (string code in diagrams.GetCodeAtTitleOrDefault(title))
+                    Console.WriteLine(code);
+
+                Console.WriteLine();
+            }
+        }
     }
 }
