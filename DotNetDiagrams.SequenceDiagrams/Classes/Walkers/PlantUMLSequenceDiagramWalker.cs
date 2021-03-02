@@ -296,7 +296,6 @@
         {
             string command1 = $"{PlantUML_else}";
 
-            // TODO: Check
             if (catchClause.Block.Statements.Count > 0)
             {
                 AddCommand(command1);
