@@ -6,6 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using DotNetDiagrams.Common.Classes.Diagrams;
+    using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
 
     internal sealed class PlantUMLClassDiagramGenerator : IPlantUMLClassDiagramGenerator
