@@ -6,6 +6,7 @@
 
     using DotNetDiagrams.Common.Classes.Diagrams;
     using DotNetDiagrams.Common.Interfaces.Diagrams;
+    using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
 
     internal sealed class PlantUMLClassDiagramGenerator : IPlantUMLClassDiagramGenerator
@@ -14,7 +15,6 @@
         {
         }
 
-        // TODO: Finish
         public IDiagrams Process(
             Solution solution)
         {
@@ -26,15 +26,15 @@
 
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
-                    //PlantUMLSequenceDiagramWalker walker = new PlantUMLSequenceDiagramWalker(
-                    //    compilation,
-                    //    syntaxTree,
-                    //    solution,
-                    //    project);
+                    PlantUMLClassDiagramWalker walker = new PlantUMLClassDiagramWalker(
+                        compilation,
+                        syntaxTree,
+                        solution,
+                        project);
 
-                    //walker.Visit(syntaxTree.GetRoot());
+                    walker.Visit(syntaxTree.GetRoot());
 
-                    //diagrams.Value.AddRange(walker.Diagrams.Value);
+                    diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
             }
 
