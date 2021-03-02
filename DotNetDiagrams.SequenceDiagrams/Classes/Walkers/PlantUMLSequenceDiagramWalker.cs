@@ -75,7 +75,7 @@
         {
             if (!string.IsNullOrEmpty(currentTitle))
             {
-                if (PlantUMLCode.Count > 4) // minimum # of lines in header
+                if (PlantUMLCode.Count > currentHeader.Count) // minimum # of lines in header
                     AddCommand(PlantUML_enduml);
                 else
                     Diagrams.RemoveAtTitle(currentTitle);
@@ -206,27 +206,31 @@
             bool footbox,
             string title)
         {
-            AddCommand(PlantUML_startuml);
+            currentHeader = new List<string>();
 
-            AddCommand($"{PlantUML_title} {title}");
+            currentHeader.Add(PlantUML_startuml);
+
+            currentHeader.Add($"{PlantUML_title} {title}");
 
             if (autoactivate)
             {
-                AddCommand($"{PlantUML_autoactivate} {PlantUML_on}");
+                currentHeader.Add($"{PlantUML_autoactivate} {PlantUML_on}");
             }
             else
             {
-                AddCommand($"{PlantUML_autoactivate} {PlantUML_off}");
+                currentHeader.Add($"{PlantUML_autoactivate} {PlantUML_off}");
             }
 
             if (footbox)
             {
-                AddCommand($"{PlantUML_show} {PlantUML_footbox}");
+                currentHeader.Add($"{PlantUML_show} {PlantUML_footbox}");
             }
             else
             {
-                AddCommand($"{PlantUML_hide} {PlantUML_footbox}");
+                currentHeader.Add($"{PlantUML_hide} {PlantUML_footbox}");
             }
+
+            currentHeader.ForEach(w => AddCommand(w));
         }
 
         public override void Visit(SyntaxNode node)
