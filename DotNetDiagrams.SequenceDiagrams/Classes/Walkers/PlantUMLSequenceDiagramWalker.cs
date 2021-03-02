@@ -81,7 +81,8 @@
             }
         }
 
-        private bool HasCallers(MethodDeclarationSyntax methodDeclaration)
+        private bool HasCallers(
+            MethodDeclarationSyntax methodDeclaration)
         {
             SemanticModel model = compilation.GetSemanticModel(syntaxTree);
 
@@ -139,7 +140,8 @@
             return $"{namespaceName}.{typeName}.{methodName}";
         }
 
-        private void StartDiagram(MethodDeclarationSyntax methodDeclaration)
+        private void StartDiagram(
+            MethodDeclarationSyntax methodDeclaration)
         {
             currentTitle = DetermineTitle(
                 methodDeclaration);
