@@ -108,8 +108,6 @@
             string namespaceName = this.GetNamespaceName(
                 this.syntaxTree);
 
-            string typeName = String.Empty;
-
             string methodName = methodDeclaration.Identifier.ValueText;
 
             List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
@@ -126,7 +124,7 @@
                 }
             }
 
-            typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
 
             return $"{namespaceName}.{typeName}.{methodName}";
         }
