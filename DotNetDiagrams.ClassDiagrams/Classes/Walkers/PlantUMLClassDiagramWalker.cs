@@ -121,15 +121,19 @@
                     Diagrams.AddTitle(currentTitle);
                 }
 
-                this.AddHeader();
+                this.AddHeader(
+                    currentTitle);
             }
         }
 
-        private void AddHeader()
+        private void AddHeader(
+            string title)
         {
             currentHeader = new List<string>();
 
             currentHeader.Add(PlantUML_startuml);
+
+            currentHeader.Add($"{PlantUML_title} {title}");
 
             currentHeader.ForEach(w => AddCommand(w));
         }
