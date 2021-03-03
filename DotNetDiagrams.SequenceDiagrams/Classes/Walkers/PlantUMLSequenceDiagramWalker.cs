@@ -101,11 +101,11 @@
 
             List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
-            foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
+            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
             {
-                if (typeDeclaration.DescendantNodesAndSelf().Contains(methodDeclaration))
+                if (declaredType.DescendantNodesAndSelf().Contains(methodDeclaration))
                 {
-                    parentTypes.Add(typeDeclaration);
+                    parentTypes.Add(declaredType);
                 }
             }
 
