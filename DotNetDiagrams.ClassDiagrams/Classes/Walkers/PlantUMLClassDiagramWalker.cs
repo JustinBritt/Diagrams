@@ -193,6 +193,8 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
+            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
             // TODO: Check
             if (this.PlantUMLCode.Count == 0)
             {
