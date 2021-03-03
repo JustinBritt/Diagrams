@@ -6,6 +6,9 @@ This project uses the Roslyn code analysis APIs to generate UML class and sequen
 
 ## Class Diagrams
 
-Based on: https://github.com/SoundLogic/Diagrams/wiki and https://github.com/msawczyn/Diagrams
+## Based on
 
-See also: https://github.com/pierre3/PlantUmlClassDiagramGenerator
+* https://github.com/SoundLogic/Diagrams/wiki 
+* https://github.com/msawczyn/Diagrams
+
+* https://github.com/pierre3/PlantUmlClassDiagramGenerator
