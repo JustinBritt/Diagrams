@@ -113,8 +113,7 @@
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
-            // TODO: Change
-            currentTitle = "Title " + Guid.NewGuid();
+            currentTitle = this.DetermineTitle(typeDeclaration);
 
             if (!String.IsNullOrEmpty(currentTitle))
             {
