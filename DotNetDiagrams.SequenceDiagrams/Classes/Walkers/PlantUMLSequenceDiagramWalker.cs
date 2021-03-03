@@ -347,7 +347,7 @@
             AddCommand(PlantUML_end);
         }
 
-        // TODO: How does this handle nesting?
+        // TODO: Add quotation marks around generics
         private void Visit(ExpressionSyntax invocation)
         {
             string callerTypeName = String.Empty;
