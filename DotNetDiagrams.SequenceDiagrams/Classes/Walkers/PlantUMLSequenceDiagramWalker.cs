@@ -126,18 +126,20 @@
                 }
             }
 
-            if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
-            {
-                typeName = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-            }
-            else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
-            {
-                typeName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-            }
-            else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
-            {
-                typeName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-            }
+            typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+
+            //if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
+            //{
+            //    typeName = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
+            //}
+            //else if (methodDeclaration.GetParent<InterfaceDeclarationSyntax>() is not null)
+            //{
+            //    typeName = methodDeclaration.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
+            //}
+            //else if (methodDeclaration.GetParent<StructDeclarationSyntax>() is not null)
+            //{
+            //    typeName = methodDeclaration.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
+            //}
 
             return $"{namespaceName}.{typeName}.{methodName}";
         }
