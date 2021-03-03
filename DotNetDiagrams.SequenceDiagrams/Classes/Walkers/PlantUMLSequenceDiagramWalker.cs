@@ -112,9 +112,7 @@
 
             foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
             {
-                IList<SyntaxNode> descendantNodesAndSelf = typeDeclaration.DescendantNodesAndSelf().ToList();
-
-                if (descendantNodesAndSelf.Contains(methodDeclaration))
+                if (typeDeclaration.DescendantNodesAndSelf().Contains(methodDeclaration))
                 {
                     parentTypes.Add(typeDeclaration);
                 }
