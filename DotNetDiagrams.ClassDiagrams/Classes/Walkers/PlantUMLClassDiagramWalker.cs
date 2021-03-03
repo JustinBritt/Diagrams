@@ -45,6 +45,7 @@
         private const string PlantUML_protected = "#";
         private const string PlantUML_public = "+";
         private const string PlantUML_startuml = "@startuml";
+        private const string PlantUML_title = "title";
 
         private readonly Compilation compilation;
         private readonly Project project;
