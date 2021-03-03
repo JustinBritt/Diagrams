@@ -90,6 +90,13 @@
         {
         }
 
+        private void AddHeader()
+        {
+            currentHeader = new List<string>();
+
+            currentHeader.Add(PlantUML_startuml);
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
