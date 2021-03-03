@@ -97,22 +97,7 @@
         private string GetNamespaceName(
             SyntaxTree syntaxTree)
         {
-            string namespaceName;
-
-            if (syntaxTree.GetRoot().IsKind(SyntaxKind.NamespaceDeclaration))
-            {
-                namespaceName = ((NamespaceDeclarationSyntax)syntaxTree.GetRoot()).Name.ToString();
-            }
-            else if (syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).Count() == 1)
-            {
-                namespaceName = ((NamespaceDeclarationSyntax)syntaxTree.GetRoot().DescendantNodes().Where(w => w.IsKind(SyntaxKind.NamespaceDeclaration)).SingleOrDefault()).Name.ToString();
-            }
-            else
-            {
-                namespaceName = AssemblyName;
-            }
-
-            return namespaceName;
+            return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
         }
 
         // TODO: How does this handle nested declarations?
