@@ -372,52 +372,19 @@
 
             if (methodHost != null)
             {
-                if (methodHost.GetParent<ClassDeclarationSyntax>() != null)
-                {
-                    callerTypeName = methodHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (methodHost.GetParent<InterfaceDeclarationSyntax>() != null)
-                {
-                    callerTypeName = methodHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (methodHost.GetParent<StructDeclarationSyntax>() != null)
-                {
-                    callerTypeName = methodHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-                }
+                callerTypeName = methodHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
 
                 semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
             }
             else if (constructorHost != null)
             {
-                if (constructorHost.GetParent<ClassDeclarationSyntax>() != null)
-                {
-                    callerTypeName = constructorHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (constructorHost.GetParent<InterfaceDeclarationSyntax>() != null)
-                {
-                    callerTypeName = constructorHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (constructorHost.GetParent<StructDeclarationSyntax>() != null)
-                {
-                    callerTypeName = constructorHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-                }
+                callerTypeName = constructorHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
 
                 semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
             }
             else if (arrowClauseHost != null)
             {
-                if (arrowClauseHost.GetParent<ClassDeclarationSyntax>() != null)
-                {
-                    callerTypeName = arrowClauseHost.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (arrowClauseHost.GetParent<InterfaceDeclarationSyntax>() != null)
-                {
-                    callerTypeName = arrowClauseHost.GetParent<InterfaceDeclarationSyntax>().Identifier.ValueText;
-                }
-                else if (arrowClauseHost.GetParent<StructDeclarationSyntax>() != null)
-                {
-                    callerTypeName = arrowClauseHost.GetParent<StructDeclarationSyntax>().Identifier.ValueText;
-                }
+                callerTypeName = arrowClauseHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
 
                 semanticModel = compilation.GetSemanticModel(arrowClauseHost.SyntaxTree, true);
             }
