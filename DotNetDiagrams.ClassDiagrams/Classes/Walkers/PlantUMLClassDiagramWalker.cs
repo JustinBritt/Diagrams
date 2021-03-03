@@ -132,6 +132,9 @@
                 case PropertyDeclarationSyntax propertyDeclaration:
                     this.Visit(propertyDeclaration);
                     break;
+                case SimpleBaseTypeSyntax simpleBaseType:
+                    this.Visit(simpleBaseType);
+                    break;
                 case StructDeclarationSyntax structDeclaration:
                     this.Visit(structDeclaration);
                     break;
@@ -220,6 +223,12 @@
         {
             base.Visit(
                 propertyDeclaration);
+        }
+
+        private void Visit(SimpleBaseTypeSyntax simpleBaseType)
+        {
+            base.Visit(
+                simpleBaseType);
         }
 
         private void Visit(
