@@ -18,6 +18,7 @@
 
     internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
+        private const string stereotype_partial = "<<partial>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
