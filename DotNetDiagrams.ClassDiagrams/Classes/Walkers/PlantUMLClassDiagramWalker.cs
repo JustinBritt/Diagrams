@@ -28,7 +28,7 @@
         private const string PlantUML_packageProtected = "~";
         private const string PlantUML_private = "-";
         private const string PlantUML_protected = "#";
-        private const string PlantUML_public = "";
+        private const string PlantUML_public = "+";
         private const string PlantUML_startuml = "@startuml";
 
         private readonly Compilation compilation;
