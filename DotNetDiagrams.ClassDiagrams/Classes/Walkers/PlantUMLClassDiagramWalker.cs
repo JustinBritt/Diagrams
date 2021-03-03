@@ -89,7 +89,7 @@
 
         // TODO: Finish and check
         private string DetermineTitle(
-            TypeDeclarationSyntax item)
+            TypeDeclarationSyntax typeDeclaration)
         {
             string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
 
@@ -97,11 +97,11 @@
 
             List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
-            foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
+            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
             {
-                if (typeDeclaration.DescendantNodesAndSelf().Contains(item))
+                if (declaredType.DescendantNodesAndSelf().Contains(typeDeclaration))
                 {
-                    parentTypes.Add(typeDeclaration);
+                    parentTypes.Add(declaredType);
                 }
             }
 
