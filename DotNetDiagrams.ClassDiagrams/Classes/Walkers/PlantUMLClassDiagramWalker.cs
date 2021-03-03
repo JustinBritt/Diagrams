@@ -114,6 +114,9 @@
                 case InterfaceDeclarationSyntax interfaceDeclaration:
                     this.Visit(interfaceDeclaration);
                     break;
+                case StructDeclarationSyntax structDeclaration:
+                    this.Visit(structDeclaration);
+                    break;
                 default:
                     base.Visit(node);
                     break;
@@ -157,6 +160,13 @@
 
             base.Visit(
                 interfaceDeclaration);
+        }
+
+        private void Visit(
+            StructDeclarationSyntax structDeclaration)
+        {
+            base.Visit(
+                structDeclaration);
         }
     }
 }
