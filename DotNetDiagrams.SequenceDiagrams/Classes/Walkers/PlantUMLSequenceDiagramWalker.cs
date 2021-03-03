@@ -112,6 +112,20 @@
 
             string methodName = methodDeclaration.Identifier.ValueText;
 
+            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
+
+            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
+            {
+                IList<SyntaxNode> descendantNodesAndSelf = typeDeclaration.DescendantNodesAndSelf().ToList();
+
+                if (descendantNodesAndSelf.Contains(methodDeclaration))
+                {
+                    parentTypes.Add(typeDeclaration);
+                }
+            }
+
             if (methodDeclaration.GetParent<ClassDeclarationSyntax>() is not null)
             {
                 typeName = methodDeclaration.GetParent<ClassDeclarationSyntax>().Identifier.ValueText;
