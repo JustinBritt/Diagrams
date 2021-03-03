@@ -192,6 +192,13 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
+            // TODO: Check
+            if (this.PlantUMLCode.Count == 0)
+            {
+                this.StartDiagram(
+                    classDeclaration);
+            }
+
             base.Visit(
                 classDeclaration);
         }
