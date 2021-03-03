@@ -87,7 +87,6 @@
             AddCommand(PlantUML_enduml);
         }
 
-        // TODO: Finish and check
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
         {
