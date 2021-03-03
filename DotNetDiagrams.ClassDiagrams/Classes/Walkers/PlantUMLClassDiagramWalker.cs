@@ -83,6 +83,7 @@
 
         private void EndDiagram()
         {
+            AddCommand(PlantUML_enduml);
         }
 
         private void StartDiagram(
