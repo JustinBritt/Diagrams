@@ -203,6 +203,11 @@
 
             base.Visit(
                 classDeclaration);
+
+            if (classDeclaration == declaredTypes.Last())
+            {
+                this.EndDiagram();
+            }
         }
 
         private void Visit(
