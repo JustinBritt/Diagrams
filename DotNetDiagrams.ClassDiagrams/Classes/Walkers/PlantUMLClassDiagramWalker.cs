@@ -123,6 +123,9 @@
                 case MethodDeclarationSyntax methodDeclaration:
                     this.Visit(methodDeclaration);
                     break;
+                case ParameterListSyntax parameterList:
+                    this.Visit(parameterList);
+                    break;
                 case PropertyDeclarationSyntax propertyDeclaration:
                     this.Visit(propertyDeclaration);
                     break;
@@ -193,6 +196,13 @@
         {
             base.Visit(
                 methodDeclarationSyntax);
+        }
+
+        private void Visit(
+            ParameterListSyntax parameterList)
+        {
+            base.Visit(
+                parameterList);
         }
 
         private void Visit(
