@@ -25,6 +25,10 @@
         private const string PlantUML_enum = "enum";
         private const string PlantUML_interface = "interface";
         private const string PlantUML_enduml = "@enduml";
+        private const string PlantUML_packageProtected = "~";
+        private const string PlantUML_private = "-";
+        private const string PlantUML_protected = "#";
+        private const string PlantUML_public = "";
         private const string PlantUML_startuml = "@startuml";
 
         private readonly Compilation compilation;
