@@ -90,7 +90,7 @@
             TypeDeclarationSyntax typeDeclaration)
         {
             // TODO: Change
-            currentTitle = "Title";
+            currentTitle = "Title " + Guid.NewGuid();
 
             if (!String.IsNullOrEmpty(currentTitle))
             {
