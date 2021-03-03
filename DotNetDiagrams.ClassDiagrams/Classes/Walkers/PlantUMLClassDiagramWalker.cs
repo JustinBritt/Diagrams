@@ -84,6 +84,9 @@
         {
             switch (node)
             {
+                case AccessorDeclarationSyntax accessorDeclaration:
+                    this.Visit(accessorDeclaration);
+                    break;
                 case AccessorListSyntax accessorList:
                     this.Visit(accessorList);
                     break;
@@ -100,6 +103,13 @@
                     base.Visit(node);
                     break;
             }
+        }
+
+        private void Visit(
+           AccessorDeclarationSyntax accessorDeclaration)
+        {
+            base.Visit(
+                accessorDeclaration);
         }
 
         private void Visit(
