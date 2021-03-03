@@ -88,6 +88,18 @@
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
+            // TODO: Change
+            currentTitle = "Title";
+
+            if (!String.IsNullOrEmpty(currentTitle))
+            {
+                if (!Diagrams.ContainsTitle(currentTitle))
+                {
+                    Diagrams.AddTitle(currentTitle);
+                }
+
+                this.AddHeader();
+            }
         }
 
         private void AddHeader()
