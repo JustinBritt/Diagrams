@@ -95,6 +95,8 @@
             currentHeader = new List<string>();
 
             currentHeader.Add(PlantUML_startuml);
+
+            currentHeader.ForEach(w => AddCommand(w));
         }
 
         /// <summary>
