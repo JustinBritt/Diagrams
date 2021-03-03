@@ -187,6 +187,7 @@
                 baseList);
         }
 
+        // TODO: How does this handle nesting?
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
