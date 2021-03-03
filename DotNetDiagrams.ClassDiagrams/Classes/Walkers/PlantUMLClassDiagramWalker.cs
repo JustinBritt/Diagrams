@@ -20,6 +20,7 @@
     {
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_class = "class";
+        private const string PlantUML_enum = "enum";
         private const string PlantUML_interface = "interface";
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_startuml = "@startuml";
