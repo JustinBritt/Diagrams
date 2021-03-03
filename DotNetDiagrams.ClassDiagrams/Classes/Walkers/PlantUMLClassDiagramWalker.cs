@@ -19,7 +19,9 @@
     internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
         private const string PlantUML_abstract = "abstract";
+        private const string PlantUML_annotation = "annotation";
         private const string PlantUML_class = "class";
+        private const string PlantUML_entity = "entity";
         private const string PlantUML_enum = "enum";
         private const string PlantUML_interface = "interface";
         private const string PlantUML_enduml = "@enduml";
