@@ -443,6 +443,7 @@
             else
             {
                 base.Visit(invocation);
+
                 return;
             }
 
