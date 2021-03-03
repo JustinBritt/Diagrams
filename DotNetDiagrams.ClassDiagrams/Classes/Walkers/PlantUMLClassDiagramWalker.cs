@@ -105,14 +105,26 @@
                 case AccessorListSyntax accessorList:
                     this.Visit(accessorList);
                     break;
+                case BaseListSyntax baseList:
+                    this.Visit(baseList);
+                    break;
                 case ClassDeclarationSyntax classDeclaration:
                     this.Visit(classDeclaration);
                     break;
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
+                case FieldDeclarationSyntax fieldDeclaration:
+                    this.Visit(fieldDeclaration);
+                    break;
                 case InterfaceDeclarationSyntax interfaceDeclaration:
                     this.Visit(interfaceDeclaration);
+                    break;
+                case MethodDeclarationSyntax methodDeclaration:
+                    this.Visit(methodDeclaration);
+                    break;
+                case PropertyDeclarationSyntax propertyDeclaration:
+                    this.Visit(propertyDeclaration);
                     break;
                 case StructDeclarationSyntax structDeclaration:
                     this.Visit(structDeclaration);
@@ -138,6 +150,13 @@
         }
 
         private void Visit(
+            BaseListSyntax baseList)
+        {
+            base.Visit(
+                baseList);
+        }
+
+        private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
             string className = classDeclaration.Identifier.ValueText;
@@ -154,12 +173,33 @@
         }
 
         private void Visit(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            base.Visit(
+                fieldDeclaration);
+        }
+
+        private void Visit(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
             string interfaceName = interfaceDeclaration.Identifier.ValueText;
 
             base.Visit(
                 interfaceDeclaration);
+        }
+
+        private void Visit(
+            MethodDeclarationSyntax methodDeclarationSyntax)
+        {
+            base.Visit(
+                methodDeclarationSyntax);
+        }
+
+        private void Visit(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            base.Visit(
+                propertyDeclaration);
         }
 
         private void Visit(
