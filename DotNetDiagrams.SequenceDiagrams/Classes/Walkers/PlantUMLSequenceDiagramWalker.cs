@@ -67,8 +67,6 @@
 
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
-        private string AssemblyName { get { return project.AssemblyName; } }
-
         public IPlantUMLDiagrams Diagrams { get; }
 
         private void EndDiagram()
