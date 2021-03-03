@@ -18,10 +18,20 @@
 
     internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
+        private const string modifier_abstract = "{abstract}";
+        private const string modifier_protectedInternal = "# <<internal>>";
+        private const string modifier_static = "{static}";
+
+        private const string stereotype_event = "<<event>>";
+        private const string stereotype_internal = "<<internal>>";
+        private const string stereotype_new = "<<new>>";
+        private const string stereotype_override = "<<override>>";
         private const string stereotype_partial = "<<partial>>";
+        private const string stereotype_readonly = "<<readonly>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
+        private const string stereotype_virtual = "<<virtual>>";
 
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_annotation = "annotation";
