@@ -435,7 +435,9 @@
             else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
             {
                 targetTypeName = targetType.ToString();
+
                 targetName = invocation.TryGetInferredMemberName();
+                
                 returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
             }
             else
