@@ -92,19 +92,10 @@
             return callers.Any();
         }
 
-        private string GetNamespaceName(
-            SyntaxTree syntaxTree)
-        {
-            return syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
-        }
-
         private string DetermineTitle(
             MethodDeclarationSyntax methodDeclaration)
         {
-            string namespaceName = this.GetNamespaceName(
-                this.syntaxTree);
-
-            string methodName = methodDeclaration.Identifier.ValueText;
+            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
 
             List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
 
@@ -119,6 +110,8 @@
             }
 
             string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+
+            string methodName = methodDeclaration.Identifier.ValueText;
 
             return $"{namespaceName}.{typeName}.{methodName}";
         }
