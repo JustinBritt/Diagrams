@@ -195,8 +195,7 @@
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
-            // TODO: Check
-            if (this.PlantUMLCode.Count == 0)
+            if (classDeclaration == declaredTypes.First())
             {
                 this.StartDiagram(
                     classDeclaration);
