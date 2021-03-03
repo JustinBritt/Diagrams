@@ -87,6 +87,29 @@
             AddCommand(PlantUML_enduml);
         }
 
+        // TODO: Finish and check
+        private string DetermineTitle(
+            TypeDeclarationSyntax item)
+        {
+            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+
+            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
+
+            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
+            {
+                if (typeDeclaration.DescendantNodesAndSelf().Contains(item))
+                {
+                    parentTypes.Add(typeDeclaration);
+                }
+            }
+
+            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+
+            return $"{namespaceName}.{typeName}";
+        }
+
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
