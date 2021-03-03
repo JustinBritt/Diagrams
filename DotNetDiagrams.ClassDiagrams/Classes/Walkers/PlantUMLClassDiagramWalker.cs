@@ -254,8 +254,21 @@
         {
             string interfaceName = interfaceDeclaration.Identifier.ValueText;
 
+            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            if (interfaceDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    interfaceDeclaration);
+            }
+
             base.Visit(
                 interfaceDeclaration);
+
+            if (interfaceDeclaration == declaredTypes.Last())
+            {
+                this.EndDiagram();
+            }
         }
 
         private void Visit(
@@ -295,8 +308,21 @@
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
+            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            if (structDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    structDeclaration);
+            }
+
             base.Visit(
                 structDeclaration);
+
+            if (structDeclaration == declaredTypes.Last())
+            {
+                this.EndDiagram();
+            }
         }
     }
 }
