@@ -256,7 +256,7 @@
                 PlantUMLModifiers.Add(PlantUMLModifier);
             }
 
-            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
@@ -268,7 +268,7 @@
 
             List<string> baseTypes = classDeclaration.BaseList.Types.Select(w => w.Type.ToString()).ToList();
 
-            this.AddCommand($"{PlantUML_class} {className} {combinedModifiers}");
+            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers}");
 
             base.Visit(
                 classDeclaration);
@@ -318,7 +318,7 @@
                 PlantUMLModifiers.Add(PlantUMLModifier);
             }
 
-            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
@@ -328,7 +328,7 @@
                     interfaceDeclaration);
             }
 
-            this.AddCommand($"{PlantUML_interface} {interfaceName} {combinedModifiers}");
+            this.AddCommand($"{PlantUML_interface} {interfaceName} {joinedModifiers}");
 
             base.Visit(
                 interfaceDeclaration);
@@ -404,7 +404,7 @@
                 PlantUMLModifiers.Add(PlantUMLModifier);
             }
 
-            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
