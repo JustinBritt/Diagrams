@@ -277,7 +277,14 @@
 
                     semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
 
-                    string baseTypeName = ModelExtensions.GetSymbolInfo(semanticModel, baseType.Type).Symbol.Name;
+                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type == null)
+                    {
+                        throw new Exception("");
+                    }
+                    else if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
+                    {
+                        string baseTypename = targetType.ToString();
+                    }
                 }
             }
 
