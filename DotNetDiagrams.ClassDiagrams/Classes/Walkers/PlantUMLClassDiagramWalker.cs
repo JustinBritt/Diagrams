@@ -266,6 +266,8 @@
                     classDeclaration);
             }
 
+            List<string> baseTypes = classDeclaration.BaseList.Types.Select(w => w.Type.ToString()).ToList();
+
             this.AddCommand($"{PlantUML_class} {className} {combinedModifiers}");
 
             base.Visit(
