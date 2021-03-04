@@ -218,6 +218,34 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
+            List<string> CSharpModifiers = classDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => PlantUML_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "private" => PlantUML_private,
+
+                    "protected" => PlantUML_protected,
+
+                    "public" => PlantUML_public,
+
+                    "sealed" => stereotype_sealed,
+
+                    _ => String.Empty
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (classDeclaration == declaredTypes.First())
