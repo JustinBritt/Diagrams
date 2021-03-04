@@ -197,6 +197,11 @@
                     base.Visit(node);
                     break;
             }
+
+            if (syntaxTree.GetRoot().DescendantNodesAndSelf().Last() == node)
+            {
+                this.EndDiagram();
+            }
         }
 
         private void Visit(
@@ -298,12 +303,6 @@
 
             base.Visit(
                 classDeclaration);
-
-            // TODO: There could be more code after this
-            if (classDeclaration == declaredTypes.Last())
-            {
-                this.EndDiagram();
-            }
         }
 
         private void Visit(
@@ -361,11 +360,6 @@
 
             base.Visit(
                 interfaceDeclaration);
-
-            if (interfaceDeclaration == declaredTypes.Last())
-            {
-                this.EndDiagram();
-            }
         }
 
         // TODO: Finish
@@ -456,11 +450,6 @@
 
             base.Visit(
                 structDeclaration);
-
-            if (structDeclaration == declaredTypes.Last())
-            {
-                this.EndDiagram();
-            }
         }
     }
 }
