@@ -287,9 +287,14 @@
                 }
             }
 
-            string joinedBaseTypeNames = String.Join(" ", baseTypeNames);
-
-            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers}");
+            string joinedBaseTypeNames = String.Empty;
+            
+            if(baseTypeNames.Count > 0)
+            {
+                joinedBaseTypeNames = PlantUML_implements +  String.Join(",", baseTypeNames);
+            }
+            
+            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
 
             base.Visit(
                 classDeclaration);
