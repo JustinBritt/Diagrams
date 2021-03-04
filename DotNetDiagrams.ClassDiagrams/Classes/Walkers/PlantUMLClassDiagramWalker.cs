@@ -266,7 +266,10 @@
                     classDeclaration);
             }
 
-            List<string> baseTypes = classDeclaration.BaseList.Types.Select(w => w.Type.ToString()).ToList();
+            if (classDeclaration.BaseList is not null)
+            {
+                List<string> baseTypes = classDeclaration.BaseList.Types.Select(w => w.Type.ToString()).ToList();
+            }
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers}");
 
