@@ -43,6 +43,7 @@
         private const string PlantUML_class = "class";
         private const string PlantUML_entity = "entity";
         private const string PlantUML_enum = "enum";
+        private const string PlantUML_implements = "implements";
         private const string PlantUML_interface = "interface";
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_packageProtected = "~";
