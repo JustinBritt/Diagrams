@@ -262,6 +262,8 @@
                     interfaceDeclaration);
             }
 
+            this.AddCommand($"{PlantUML_interface} {interfaceName}");
+
             base.Visit(
                 interfaceDeclaration);
 
