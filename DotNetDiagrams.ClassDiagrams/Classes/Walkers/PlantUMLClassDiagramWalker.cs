@@ -315,6 +315,8 @@
 
                     "public" => stereotype_public,
 
+                    "unsafe" => stereotype_unsafe,
+
                     _ => throw new Exception("")
                 };
 
