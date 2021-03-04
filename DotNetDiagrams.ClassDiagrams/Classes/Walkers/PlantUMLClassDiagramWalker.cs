@@ -395,7 +395,8 @@
                 propertyDeclaration);
         }
 
-        private void Visit(SimpleBaseTypeSyntax simpleBaseType)
+        private void Visit(
+            SimpleBaseTypeSyntax simpleBaseType)
         {
             base.Visit(
                 simpleBaseType);
