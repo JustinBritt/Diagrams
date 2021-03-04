@@ -371,7 +371,7 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             base.Visit(
-                methodDeclarationSyntax);
+                methodDeclaration);
         }
 
         private void Visit(
