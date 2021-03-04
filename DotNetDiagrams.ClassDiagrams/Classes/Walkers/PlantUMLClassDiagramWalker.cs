@@ -414,6 +414,8 @@
                     structDeclaration);
             }
 
+            this.AddCommand($"{PlantUML_interface} {structName} {joinedModifiers}");
+
             base.Visit(
                 structDeclaration);
 
