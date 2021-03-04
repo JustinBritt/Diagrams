@@ -369,6 +369,7 @@
         {
             string methodName = methodDeclaration.Identifier.ValueText;
 
+            // TODO: Need to get all parents to account for nesting
             string parentName = methodDeclaration.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
 
             AddCommand($"{parentName} : {methodName}");
