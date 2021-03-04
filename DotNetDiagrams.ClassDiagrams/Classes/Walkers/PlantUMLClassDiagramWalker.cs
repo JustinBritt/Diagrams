@@ -22,6 +22,7 @@
         private const string modifier_protectedInternal = "# <<internal>>";
         private const string modifier_static = "{static}";
 
+        private const string stereotype_abstract = "<<abstract>>";
         private const string stereotype_event = "<<event>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_new = "<<new>>";
@@ -231,7 +232,7 @@
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
-                    "abstract" => PlantUML_abstract,
+                    "abstract" => stereotype_abstract,
 
                     "internal" => stereotype_internal,
 
