@@ -254,7 +254,7 @@
                     classDeclaration);
             }
 
-            this.AddCommand($"{combinedModifiers} {PlantUML_class} {className}");
+            this.AddCommand($"{PlantUML_class} {className} {combinedModifiers}");
 
             base.Visit(
                 classDeclaration);
