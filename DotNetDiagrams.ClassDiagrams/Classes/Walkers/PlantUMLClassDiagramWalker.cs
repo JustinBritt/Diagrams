@@ -374,6 +374,42 @@
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
+            string structName = structDeclaration.Identifier.ValueText;
+
+            List<string> CSharpModifiers = structDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => stereotype_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "sealed" => stereotype_sealed,
+
+                    "static" => stereotype_static,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (structDeclaration == declaredTypes.First())
