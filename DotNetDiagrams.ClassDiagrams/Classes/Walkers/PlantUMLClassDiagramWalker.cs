@@ -238,7 +238,7 @@
 
                     "sealed" => stereotype_sealed,
 
-                    _ => String.Empty
+                    _ => throw new Exception("")
                 };
 
                 PlantUMLModifiers.Add(PlantUMLModifier);
