@@ -230,6 +230,8 @@
 
                     "internal" => stereotype_internal,
 
+                    "partial" => stereotype_partial,
+
                     "private" => PlantUML_private,
 
                     "protected" => PlantUML_protected,
