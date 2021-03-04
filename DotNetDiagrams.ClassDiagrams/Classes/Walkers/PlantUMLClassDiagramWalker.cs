@@ -367,10 +367,16 @@
             }
         }
 
+        // TODO: Finish
+        // TODO: How does this handle nesting?
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
             string methodName = methodDeclaration.Identifier.ValueText;
+
+            string parentName = methodDeclaration.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
+
+            AddCommand($"{parentName} : {methodName}");
 
             base.Visit(
                 methodDeclaration);
