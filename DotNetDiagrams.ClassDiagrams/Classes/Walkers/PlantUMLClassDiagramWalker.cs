@@ -254,6 +254,28 @@
         {
             string interfaceName = interfaceDeclaration.Identifier.ValueText;
 
+            List<string> CSharpModifiers = interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "private" => PlantUML_private,
+
+                    "public" => PlantUML_public,
+
+                    _ => String.Empty
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string combinedModifiers = String.Join(" ", PlantUMLModifiers);
+
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (interfaceDeclaration == declaredTypes.First())
@@ -262,7 +284,7 @@
                     interfaceDeclaration);
             }
 
-            this.AddCommand($"{PlantUML_interface} {interfaceName}");
+            this.AddCommand($"{combinedModifiers} {PlantUML_interface} {interfaceName}");
 
             base.Visit(
                 interfaceDeclaration);
