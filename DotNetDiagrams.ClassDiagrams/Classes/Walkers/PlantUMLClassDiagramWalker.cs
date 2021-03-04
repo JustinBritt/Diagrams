@@ -368,7 +368,7 @@
         }
 
         private void Visit(
-            MethodDeclarationSyntax methodDeclarationSyntax)
+            MethodDeclarationSyntax methodDeclaration)
         {
             base.Visit(
                 methodDeclarationSyntax);
