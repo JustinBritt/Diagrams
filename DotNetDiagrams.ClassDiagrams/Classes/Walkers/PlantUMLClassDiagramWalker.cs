@@ -31,6 +31,7 @@
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
+        private const string stereotype_unsafe = "<<unsafe>>";
         private const string stereotype_virtual = "<<virtual>>";
 
         private const string PlantUML_abstract = "abstract";
@@ -242,6 +243,8 @@
                     "sealed" => stereotype_sealed,
 
                     "static" => stereotype_static,
+                    
+                    "unsafe" => stereotype_unsafe,
 
                     _ => throw new Exception("")
                 };
