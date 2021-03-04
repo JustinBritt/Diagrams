@@ -266,9 +266,17 @@
                     classDeclaration);
             }
 
+            // TODO: Finish
             if (classDeclaration.BaseList is not null)
             {
-                List<string> baseTypes = classDeclaration.BaseList.Types.Select(w => w.Type.ToString()).ToList();
+                List<BaseTypeSyntax> baseTypes = classDeclaration.BaseList.Types.ToList();
+
+                foreach (BaseTypeSyntax baseType in baseTypes)
+                {
+                    SemanticModel semanticModel;
+
+                    semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
+                }
             }
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers}");
