@@ -238,6 +238,8 @@
 
                     "sealed" => stereotype_sealed,
 
+                    "static" => stereotype_static,
+
                     _ => throw new Exception("")
                 };
 
