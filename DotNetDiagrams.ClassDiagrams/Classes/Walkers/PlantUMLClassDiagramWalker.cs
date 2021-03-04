@@ -27,6 +27,9 @@
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
         private const string stereotype_partial = "<<partial>>";
+        private const string stereotype_public = "<<public>>";
+        private const string stereotype_private = "<<private>>";
+        private const string stereotype_protected = "<<protected>>";
         private const string stereotype_readonly = "<<readonly>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_static = "<<static>>";
@@ -234,11 +237,11 @@
 
                     "partial" => stereotype_partial,
 
-                    "private" => PlantUML_private,
+                    "private" => stereotype_private,
 
-                    "protected" => PlantUML_protected,
+                    "protected" => stereotype_protected,
 
-                    "public" => PlantUML_public,
+                    "public" => stereotype_public,
 
                     "sealed" => stereotype_sealed,
 
@@ -302,9 +305,9 @@
                 {
                     "internal" => stereotype_internal,
 
-                    "private" => PlantUML_private,
+                    "private" => stereotype_private,
 
-                    "public" => PlantUML_public,
+                    "public" => stereotype_public,
 
                     _ => throw new Exception("")
                 };
