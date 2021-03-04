@@ -299,6 +299,7 @@
             base.Visit(
                 classDeclaration);
 
+            // TODO: There could be more code after this
             if (classDeclaration == declaredTypes.Last())
             {
                 this.EndDiagram();
