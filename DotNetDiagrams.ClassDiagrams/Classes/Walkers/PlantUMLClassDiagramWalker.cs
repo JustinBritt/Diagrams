@@ -267,7 +267,6 @@
                     classDeclaration);
             }
 
-            // TODO: Finish
             List<string> baseTypeNames = new List<string>();
 
             if (classDeclaration.BaseList is not null)
