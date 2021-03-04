@@ -87,6 +87,7 @@
             AddCommand(PlantUML_enduml);
         }
 
+        // TOOD: namespaceName can be null in unit test projects
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
         {
