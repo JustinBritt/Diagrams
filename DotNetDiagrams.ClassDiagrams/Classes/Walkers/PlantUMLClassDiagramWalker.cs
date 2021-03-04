@@ -370,6 +370,8 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
+            string methodName = methodDeclaration.Identifier.ValueText;
+
             base.Visit(
                 methodDeclaration);
         }
