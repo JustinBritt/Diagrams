@@ -267,6 +267,8 @@
             }
 
             // TODO: Finish
+            List<string> baseTypeNames = new List<string>();
+
             if (classDeclaration.BaseList is not null)
             {
                 List<BaseTypeSyntax> baseTypes = classDeclaration.BaseList.Types.ToList();
@@ -277,16 +279,15 @@
 
                     semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
 
-                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type == null)
+                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
                     {
-                        throw new Exception("");
-                    }
-                    else if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
-                    {
-                        string baseTypename = targetType.ToString();
+                        baseTypeNames.Add(
+                            targetType.ToString());
                     }
                 }
             }
+
+            string joinedBaseTypeNames = String.Join(" ", baseTypeNames);
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers}");
 
