@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.SequenceDiag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.ClassDiagrams.ConsoleUI", "DotNetDiagrams.ClassDiagrams.ConsoleUI\DotNetDiagrams.ClassDiagrams.ConsoleUI.csproj", "{2CB614A2-2FAA-4C50-BD80-E710279A48BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.UseCaseDiagrams", "DotNetDiagrams.UseCaseDiagrams\DotNetDiagrams.UseCaseDiagrams.csproj", "{68A392DF-6C91-4A44-846F-672F41429678}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,14 @@ Global
 		{2CB614A2-2FAA-4C50-BD80-E710279A48BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2CB614A2-2FAA-4C50-BD80-E710279A48BE}.Release|x86.ActiveCfg = Release|Any CPU
 		{2CB614A2-2FAA-4C50-BD80-E710279A48BE}.Release|x86.Build.0 = Release|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Debug|x86.Build.0 = Debug|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Release|x86.ActiveCfg = Release|Any CPU
+		{68A392DF-6C91-4A44-846F-672F41429678}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
