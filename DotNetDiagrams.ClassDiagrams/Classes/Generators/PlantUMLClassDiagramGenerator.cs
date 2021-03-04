@@ -20,7 +20,7 @@
         {
             IDiagrams diagrams = new PlantUMLDiagrams();
 
-            foreach (Project project in solution.Projects.Where(w => w.Language == "C#"))
+            foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
             {
                 Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
 
