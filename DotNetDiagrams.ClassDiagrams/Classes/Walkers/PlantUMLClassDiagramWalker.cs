@@ -276,6 +276,8 @@
                     SemanticModel semanticModel;
 
                     semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
+
+                    string baseTypeName = ModelExtensions.GetSymbolInfo(semanticModel, baseType.Type).Symbol.Name;
                 }
             }
 
