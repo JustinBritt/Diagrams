@@ -322,7 +322,7 @@
                     interfaceDeclaration);
             }
 
-            this.AddCommand($"{combinedModifiers} {PlantUML_interface} {interfaceName}");
+            this.AddCommand($"{PlantUML_interface} {interfaceName} {combinedModifiers}");
 
             base.Visit(
                 interfaceDeclaration);
