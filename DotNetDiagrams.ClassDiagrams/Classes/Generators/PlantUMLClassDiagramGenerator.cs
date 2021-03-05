@@ -8,6 +8,7 @@
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
+    using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
 
     internal sealed class PlantUMLClassDiagramGenerator : IPlantUMLClassDiagramGenerator
     {
@@ -36,6 +37,11 @@
 
                     diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
+            }
+
+            foreach (IPlantUMLClassDiagram diagram in diagrams.Value)
+            {
+                diagram.EndDiagram();
             }
 
             return diagrams;

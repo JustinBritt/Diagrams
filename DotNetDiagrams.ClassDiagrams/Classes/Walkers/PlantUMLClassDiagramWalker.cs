@@ -96,7 +96,7 @@
         {
             if (currentTitle is not null)
             {
-                Diagram.EndDiagram();
+                //Diagram.EndDiagram();
             }
         }
 
