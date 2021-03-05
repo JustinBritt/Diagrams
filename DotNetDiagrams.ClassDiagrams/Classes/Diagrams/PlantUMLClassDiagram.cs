@@ -14,8 +14,16 @@
         {
         }
 
-        public string Title { get; set; }
+        public List<string> Body { get; set; }
 
         public List<string> Code { get; set; }
+
+        public List<string> End { get; set; }
+
+        public List<string> Header { get; set; }
+
+        public List<string> Start { get; set; }
+
+        public string Title { get; set; }
     }
 }
