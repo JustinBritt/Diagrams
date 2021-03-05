@@ -396,15 +396,19 @@
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
+            string propertyName = propertyDeclaration.Identifier.ValueText;
+
+            List<string> accessors = new List<string>();
+
             if (propertyDeclaration.AccessorList is not null)
             {
-                List<string> accessors = new List<string>();
-
                 foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
                 {
                     accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
                 }
-            }    
+            }
+
+            this.AddCommand($"{propertyName} : {string.Join(" ", accessors)}");
 
             base.Visit(
                 propertyDeclaration);
