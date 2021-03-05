@@ -308,6 +308,7 @@
                 }
             }
 
+            // Fields
             if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
             {
                 foreach (FieldDeclarationSyntax fieldDeclaration in classDeclaration.Members.OfType<FieldDeclarationSyntax>())
@@ -316,6 +317,7 @@
                 }
             }
 
+            // Methods
             if (classDeclaration.Members.OfType<MethodDeclarationSyntax>() is not null)
             {
                 foreach (MethodDeclarationSyntax methodDeclaration in classDeclaration.Members.OfType<MethodDeclarationSyntax>())
