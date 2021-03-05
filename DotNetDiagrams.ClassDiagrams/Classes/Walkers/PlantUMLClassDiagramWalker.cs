@@ -392,8 +392,7 @@
             }
             else
             {
-                // Generic return type
-                throw new Exception("");
+                returnType = methodDeclaration.ReturnType.ToString();
             }
 
             AddCommand($"{returnType} {methodName}" + "()");
