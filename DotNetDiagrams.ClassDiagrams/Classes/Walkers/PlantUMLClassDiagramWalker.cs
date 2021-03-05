@@ -349,8 +349,9 @@
                 }
             }
 
-            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
-
+            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+            this.AddCommand($"{joinedProperties}");
+            this.AddCommand($"{PlantUML_rightBrace}");
             base.Visit(
                 classDeclaration);
         }
