@@ -84,7 +84,7 @@
 
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
-        public IPlantUMLDiagrams Diagrams { get; }
+        public IPlantUMLClassDiagrams Diagrams { get; }
 
         private void AddCommand(
             string command)
