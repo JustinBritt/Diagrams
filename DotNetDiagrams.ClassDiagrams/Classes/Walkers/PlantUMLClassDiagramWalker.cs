@@ -398,11 +398,11 @@
         {
             if (propertyDeclaration.AccessorList is not null)
             {
-                List<AccessorDeclarationSyntax> accessorList = propertyDeclaration.AccessorList.Accessors.ToList();
+                List<string> accessors = new List<string>();
 
-                foreach (AccessorDeclarationSyntax accessorDeclaration in accessorList)
+                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
                 {
-                    AddCommand($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
                 }
             }    
 
