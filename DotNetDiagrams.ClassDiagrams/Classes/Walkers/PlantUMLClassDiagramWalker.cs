@@ -302,6 +302,8 @@
             }
 
             // Properties
+            List<string> properties = new List<string>();
+
             if (classDeclaration.Members.OfType<PropertyDeclarationSyntax>() is not null)
             {
                 foreach (PropertyDeclarationSyntax propertyDeclaration in classDeclaration.Members.OfType<PropertyDeclarationSyntax>())
@@ -318,7 +320,7 @@
                         }
                     }
 
-                    this.AddCommand($"{propertyName} : {string.Join(" ", accessors)}");
+                    properties.Add($"{propertyName} : {string.Join(" ", accessors)}");
                 }
             }
 
