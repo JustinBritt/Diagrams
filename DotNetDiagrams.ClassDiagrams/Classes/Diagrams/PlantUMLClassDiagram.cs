@@ -15,6 +15,11 @@
 
         public PlantUMLClassDiagram()
         {
+            this.Body = new List<string>();
+
+            this.Code = new List<string>();
+
+            this.Header = new List<string>();
         }
 
         public List<string> Body { get; set; }
