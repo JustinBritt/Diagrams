@@ -288,35 +288,7 @@
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
 
-            // Properties
-            List<string> properties = new List<string>();
-
-            if (classDeclaration.Members.OfType<PropertyDeclarationSyntax>() is not null)
-            {
-                foreach (PropertyDeclarationSyntax propertyDeclaration in classDeclaration.Members.OfType<PropertyDeclarationSyntax>())
-                {
-                    string propertyName = propertyDeclaration.Identifier.ValueText;
-
-                    List<string> accessors = new List<string>();
-
-                    if (propertyDeclaration.AccessorList is not null)
-                    {
-                        foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
-                        {
-                            accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
-                        }
-                    }
-
-                    properties.Add($"{propertyName} : {string.Join(" ", accessors)}");
-                }
-            }
-
-            string joinedProperties = String.Empty;
-
-            if (properties.Count > 0)
-            {
-                joinedProperties = $"{String.Join("\n", properties)}";
-            }
+            
 
             // Fields
             if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
@@ -337,7 +309,6 @@
             }
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
-            this.AddCommand($"{joinedProperties}");
 
             base.Visit(
                 classDeclaration);
@@ -436,19 +407,19 @@
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            //string propertyName = propertyDeclaration.Identifier.ValueText;
+            string propertyName = propertyDeclaration.Identifier.ValueText;
 
-            //List<string> accessors = new List<string>();
+            List<string> accessors = new List<string>();
 
-            //if (propertyDeclaration.AccessorList is not null)
-            //{
-            //    foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
-            //    {
-            //        accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
-            //    }
-            //}
+            if (propertyDeclaration.AccessorList is not null)
+            {
+                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
+                {
+                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                }
+            }
 
-            //this.AddCommand($"{propertyName} : {string.Join(" ", accessors)}");
+            this.AddCommand($"{propertyName} : {string.Join(" ", accessors)}");           
 
             base.Visit(
                 propertyDeclaration);
