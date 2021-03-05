@@ -10,6 +10,10 @@
     {
         List<string> Body { get; set; }
 
+        string End { get; set; }
+
         List<string> Header { get; set; }
+
+        string Start { get; set; }
     }
 }
