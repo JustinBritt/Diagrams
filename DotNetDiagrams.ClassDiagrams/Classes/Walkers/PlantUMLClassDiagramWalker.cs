@@ -92,14 +92,6 @@
             Diagram.Body.Add(command);
         }
 
-        private void EndDiagram()
-        {
-            if (currentTitle is not null)
-            {
-                //Diagram.EndDiagram();
-            }
-        }
-
         // TOOD: namespaceName can be null in unit test projects
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
@@ -201,11 +193,6 @@
                 default:
                     base.Visit(node);
                     break;
-            }
-
-            if (syntaxTree.GetRoot().DescendantNodesAndSelf().Last() == node)
-            {
-                this.EndDiagram();
             }
         }
 
