@@ -392,10 +392,19 @@
                 parameterList);
         }
 
+        // TODO: Finish
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            var accessorList = propertyDeclaration.AccessorList.Accessors.ToList();
+            if (propertyDeclaration.AccessorList is not null)
+            {
+                List<AccessorDeclarationSyntax> accessorList = propertyDeclaration.AccessorList.Accessors.ToList();
+
+                foreach (AccessorDeclarationSyntax accessorDeclaration in accessorList)
+                {
+                    AddCommand($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                }
+            }    
 
             base.Visit(
                 propertyDeclaration);
