@@ -300,6 +300,10 @@
             }
 
             // Properties
+            if (classDeclaration.Members.OfType<PropertyDeclarationSyntax>() is not null)
+            {
+
+            }
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
 
