@@ -96,7 +96,10 @@
 
         private void EndDiagram()
         {
-            AddCommand(PlantUML_enduml);
+            if (currentTitle is not null)
+            {
+                Diagram.EndDiagram();
+            }
         }
 
         // TOOD: namespaceName can be null in unit test projects
