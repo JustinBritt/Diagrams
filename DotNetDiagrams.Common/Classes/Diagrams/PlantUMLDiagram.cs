@@ -19,8 +19,8 @@
             this.Code = code;
         }
 
-        public string Title { get; set; }
-
         public List<string> Code { get; set; }
+
+        public string Title { get; set; }
     }
 }

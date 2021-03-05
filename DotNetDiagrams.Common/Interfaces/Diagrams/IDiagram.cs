@@ -8,8 +8,8 @@
 
     public interface IDiagram
     {
-        string Title { get; set; }
-
         List<string> Code { get; set; }
+
+        string Title { get; set; }
     }
 }
