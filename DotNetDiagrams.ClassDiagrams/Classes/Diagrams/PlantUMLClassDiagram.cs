@@ -19,7 +19,11 @@
 
             this.Code = new List<string>();
 
+            this.End = PlantUML_enduml;
+
             this.Header = new List<string>();
+
+            this.Start = PlantUML_startuml;
         }
 
         public List<string> Body { get; set; }
@@ -36,13 +40,13 @@
 
         public void EndDiagram()
         {
-            this.Code.Add(PlantUML_startuml);
+            this.Code.Add(this.Start);
 
             this.Code.AddRange(this.Header);
 
             this.Code.AddRange(this.Body);
 
-            this.Code.Add(PlantUML_enduml);
+            this.Code.Add(this.End);
         }
     }
 }
