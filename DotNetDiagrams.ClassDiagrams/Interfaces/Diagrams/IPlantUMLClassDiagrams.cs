@@ -8,7 +8,7 @@
 
     using DotNetDiagrams.Common.Interfaces.Diagrams;
 
-    public interface IPlantUMLClassDiagrams : IDiagrams
+    public interface IPlantUMLClassDiagrams : IPlantUMLDiagrams
     {
     }
 }
