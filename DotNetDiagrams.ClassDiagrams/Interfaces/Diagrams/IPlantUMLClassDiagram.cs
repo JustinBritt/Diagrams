@@ -10,5 +10,6 @@
 
     public interface IPlantUMLClassDiagram : IPlantUMLDiagram
     {
+        void EndDiagram();
     }
 }
