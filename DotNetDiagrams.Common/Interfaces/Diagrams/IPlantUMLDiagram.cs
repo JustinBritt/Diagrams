@@ -8,5 +8,8 @@
 
     public interface IPlantUMLDiagram : IDiagram
     {
+        List<string> Body { get; set; }
+
+        List<string> Header { get; set; }
     }
 }
