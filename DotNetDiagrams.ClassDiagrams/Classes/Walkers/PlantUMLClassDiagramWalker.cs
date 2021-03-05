@@ -351,10 +351,11 @@
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
             this.AddCommand($"{joinedProperties}");
-            this.AddCommand($"{PlantUML_rightBrace}");
 
             base.Visit(
                 classDeclaration);
+
+            this.AddCommand($"{PlantUML_rightBrace}");
         }
 
         private void Visit(
