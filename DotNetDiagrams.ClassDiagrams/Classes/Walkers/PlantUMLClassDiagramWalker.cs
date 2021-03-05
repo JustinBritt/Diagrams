@@ -403,7 +403,6 @@
                 parameterList);
         }
 
-        // TODO: Finish
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
