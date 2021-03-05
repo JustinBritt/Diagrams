@@ -220,11 +220,9 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
-            List<string> CSharpModifiers = classDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+            List<string> modifiers = new List<string>();
 
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -249,10 +247,10 @@
                     _ => throw new Exception("")
                 };
 
-                PlantUMLModifiers.Add(PlantUMLModifier);
+                modifiers.Add(PlantUMLModifier);
             }
 
-            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(" ", modifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
