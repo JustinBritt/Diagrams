@@ -15,6 +15,7 @@
     using DotNetDiagrams.Common.Extensions;
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Classes.Diagrams;
+    using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
     internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
@@ -70,7 +71,7 @@
             Solution solution,
             Project project)
         {
-            this.Diagrams = new PlantUMLDiagrams();
+            this.Diagrams = new PlantUMLClassDiagrams();
 
             this.compilation = compilation;
 
