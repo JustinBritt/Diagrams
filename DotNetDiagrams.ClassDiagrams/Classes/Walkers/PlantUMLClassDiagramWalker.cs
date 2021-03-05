@@ -395,6 +395,8 @@
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
+            var accessorList = propertyDeclaration.AccessorList.Accessors.ToList();
+
             base.Visit(
                 propertyDeclaration);
         }
