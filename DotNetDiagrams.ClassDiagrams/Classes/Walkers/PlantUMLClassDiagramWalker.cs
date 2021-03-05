@@ -147,11 +147,9 @@
         {
             currentHeader = new List<string>();
 
-            currentHeader.Add(PlantUML_startuml);
-
             currentHeader.Add($"{PlantUML_title} {title}");
 
-            currentHeader.ForEach(w => AddCommand(w));
+            Diagram.Header.AddRange(currentHeader);
         }
 
         /// <summary>
