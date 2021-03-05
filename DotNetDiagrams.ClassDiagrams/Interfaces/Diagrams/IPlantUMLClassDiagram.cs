@@ -10,8 +10,5 @@
 
     public interface IPlantUMLClassDiagram : IPlantUMLDiagram
     {
-        List<string> Body { get; set; }
-
-        List<string> Header { get; set; }
     }
 }
