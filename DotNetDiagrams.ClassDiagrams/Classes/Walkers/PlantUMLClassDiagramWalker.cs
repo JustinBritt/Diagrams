@@ -82,14 +82,14 @@
 
         private IPlantUMLClassDiagram Diagram => Diagrams.GetClassDiagramAtTitleOrDefault(currentTitle);
 
-        private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
+        //private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
         private void AddCommand(
             string command)
         {
-            this.PlantUMLCode.Add(command);
+            Diagram.Body.Add(command);
         }
 
         private void EndDiagram()
