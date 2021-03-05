@@ -386,7 +386,14 @@
 
             semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
-            returnType = ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type?.ToString().Split('.').Last() ?? "void";
+            if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
+            {
+                returnType = targetType.ToString();
+            }
+            else
+            {
+                throw new Exception("");
+            }
 
             AddCommand($"{returnType} {methodName}" + "()");
 
