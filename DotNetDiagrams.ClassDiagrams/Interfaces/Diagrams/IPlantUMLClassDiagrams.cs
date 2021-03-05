@@ -10,5 +10,7 @@
 
     public interface IPlantUMLClassDiagrams : IPlantUMLDiagrams
     {
+        IPlantUMLClassDiagram GetClassDiagramAtTitleOrDefault(
+            string title);
     }
 }

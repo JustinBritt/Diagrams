@@ -38,6 +38,14 @@
                 : new List<string>();
         }
 
+        public IPlantUMLClassDiagram GetClassDiagramAtTitleOrDefault(
+            string title)
+        {
+            return (IPlantUMLClassDiagram)(this.Value.Select(w => w.Title).Contains(title)
+                ? this.Value.Where(w => w.Title == title).SingleOrDefault()
+                : null);
+        }
+
         public bool RemoveAtTitle(
             string title)
         {
