@@ -20,7 +20,11 @@
 
             this.Body = new List<string>();
 
+            this.End = string.Empty;
+
             this.Header = new List<string>();
+
+            this.Start = String.Empty;
         }
 
         public List<string> Body { get; set; }
