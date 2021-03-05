@@ -302,17 +302,26 @@
             // Properties
             if (classDeclaration.Members.OfType<PropertyDeclarationSyntax>() is not null)
             {
+                foreach (PropertyDeclarationSyntax propertyDeclaration in classDeclaration.Members.OfType<PropertyDeclarationSyntax>())
+                {
 
+                }
             }
 
             if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
             {
+                foreach (FieldDeclarationSyntax fieldDeclaration in classDeclaration.Members.OfType<FieldDeclarationSyntax>())
+                {
 
+                }
             }
 
-            if (classDeclaration.Members.OfType<MemberAccessException>() is not null)
+            if (classDeclaration.Members.OfType<MethodDeclarationSyntax>() is not null)
             {
+                foreach (MethodDeclarationSyntax methodDeclaration in classDeclaration.Members.OfType<MethodDeclarationSyntax>())
+                {
 
+                }
             }
 
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
