@@ -28,5 +28,16 @@
         public string Start { get; set; }
 
         public string Title { get; set; }
+
+        public void EndDiagram()
+        {
+            this.Code.Add(PlantUML_startuml);
+
+            this.Code.AddRange(this.Header);
+
+            this.Code.AddRange(this.Body);
+
+            this.Code.Add(PlantUML_enduml);
+        }
     }
 }
