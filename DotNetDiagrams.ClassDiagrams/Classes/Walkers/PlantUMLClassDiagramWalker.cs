@@ -324,6 +324,13 @@
                 }
             }
 
+            string joinedProperties = String.Empty;
+
+            if (properties.Count > 0)
+            {
+                joinedProperties = $"{String.Join("\n", properties)}";
+            }
+
             // Fields
             if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
             {
