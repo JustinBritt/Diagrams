@@ -392,6 +392,7 @@
             }
             else
             {
+                // Generic return type
                 throw new Exception("");
             }
 
