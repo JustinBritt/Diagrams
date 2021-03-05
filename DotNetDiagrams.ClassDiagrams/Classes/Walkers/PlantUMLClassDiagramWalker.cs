@@ -380,10 +380,10 @@
         {
             string methodName = methodDeclaration.Identifier.ValueText;
 
-            // TODO: Need to get all parents to account for nesting
-            string parentName = methodDeclaration.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
+            // TODO: Update
+            string returnType = "returnType";
 
-            AddCommand($"{parentName} : {methodName}");
+            AddCommand($"{returnType} {methodName}" + "()");
 
             base.Visit(
                 methodDeclaration);
