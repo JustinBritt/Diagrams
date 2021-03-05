@@ -381,7 +381,7 @@
             string methodName = methodDeclaration.Identifier.ValueText;
 
             // TODO: Update
-            string returnType = "returnType";
+            string returnType = methodDeclaration.ReturnType.ToString();
 
             AddCommand($"{returnType} {methodName}" + "()");
 
