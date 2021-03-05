@@ -17,9 +17,17 @@
             this.Title = title;
 
             this.Code = code;
+
+            this.Body = new List<string>();
+
+            this.Header = new List<string>();
         }
 
+        public List<string> Body { get; set; }
+
         public List<string> Code { get; set; }
+
+        public List<string> Header { get; set; }
 
         public string Title { get; set; }
     }
