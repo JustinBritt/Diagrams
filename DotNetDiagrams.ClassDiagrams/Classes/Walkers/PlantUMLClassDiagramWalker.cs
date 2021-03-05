@@ -308,7 +308,15 @@
                 {
                     string propertyName = propertyDeclaration.Identifier.ValueText;
 
-                    this.AddCommand(propertyName);
+                    List<string> accessors = new List<string>();
+
+                    if (propertyDeclaration.AccessorList is not null)
+                    {
+                        foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
+                        {
+                            accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                        }
+                    }
                 }
             }
 
