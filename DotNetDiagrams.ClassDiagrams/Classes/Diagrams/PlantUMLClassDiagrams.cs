@@ -13,6 +13,7 @@
     {
         public PlantUMLClassDiagrams()
         {
+            this.Value = new List<IDiagram>();
         }
 
         public List<IDiagram> Value { get; set; }
