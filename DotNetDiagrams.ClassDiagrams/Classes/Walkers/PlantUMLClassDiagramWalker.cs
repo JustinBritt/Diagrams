@@ -298,7 +298,9 @@
             {
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
-            
+
+            // Properties
+
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
 
             base.Visit(
