@@ -305,6 +305,16 @@
 
             }
 
+            if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
+            {
+
+            }
+
+            if (classDeclaration.Members.OfType<MemberAccessException>() is not null)
+            {
+
+            }
+
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames}");
 
             base.Visit(
