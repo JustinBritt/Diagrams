@@ -82,6 +82,8 @@
             this.project = project;
         }
 
+        private IPlantUMLClassDiagram Diagram => Diagrams.GetClassDiagramAtTitleOrDefault(currentTitle);
+
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
         public IPlantUMLClassDiagrams Diagrams { get; }
