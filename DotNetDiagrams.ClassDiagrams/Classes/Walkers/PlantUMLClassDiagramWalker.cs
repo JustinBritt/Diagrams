@@ -380,8 +380,13 @@
         {
             string methodName = methodDeclaration.Identifier.ValueText;
 
-            // TODO: Update
-            string returnType = methodDeclaration.ReturnType.ToString();
+            string returnType = String.Empty;
+
+            SemanticModel semanticModel;
+
+            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+
+            returnType = ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type?.ToString().Split('.').Last() ?? "void";
 
             AddCommand($"{returnType} {methodName}" + "()");
 
