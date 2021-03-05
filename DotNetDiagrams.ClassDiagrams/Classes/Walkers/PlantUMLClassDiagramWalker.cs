@@ -306,7 +306,9 @@
             {
                 foreach (PropertyDeclarationSyntax propertyDeclaration in classDeclaration.Members.OfType<PropertyDeclarationSyntax>())
                 {
+                    string propertyName = propertyDeclaration.Identifier.ValueText;
 
+                    this.AddCommand(propertyName);
                 }
             }
 
