@@ -10,6 +10,8 @@
 
     internal sealed class PlantUMLClassDiagram : IPlantUMLClassDiagram
     {
+        private const string PlantUML_startuml = "@startuml";
+
         public PlantUMLClassDiagram()
         {
         }
