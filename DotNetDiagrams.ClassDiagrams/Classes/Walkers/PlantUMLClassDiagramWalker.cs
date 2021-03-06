@@ -428,10 +428,9 @@
         }
 
         private List<string> GetConstraintClauses(
-            MethodDeclarationSyntax methodDeclaration)
+            MethodDeclarationSyntax methodDeclaration,
+            SemanticModel semanticModel)
         {
-            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
-
             List<string> constraintClauses = new List<string>();
 
             if (methodDeclaration.ConstraintClauses.Count() > 0)
@@ -555,7 +554,8 @@
 
             // ConstraintClauses
             List<string> constraintClauses = this.GetConstraintClauses(
-                methodDeclaration);
+                methodDeclaration,
+                semanticModel);
 
             // TypeParameterList
             if (methodDeclaration.TypeParameterList is not null)
