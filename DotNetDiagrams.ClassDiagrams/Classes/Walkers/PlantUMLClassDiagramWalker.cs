@@ -296,6 +296,12 @@
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
 
+            // TypeParameterList
+            if (classDeclaration.TypeParameterList is not null)
+            {
+
+            }
+
             if (classDeclaration.BaseList is null)
             {
                 if (classDeclaration.Modifiers.Count > 0)
