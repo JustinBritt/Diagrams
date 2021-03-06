@@ -421,6 +421,13 @@
                 interfaceDeclaration);
         }
 
+        // TODO: Remove
+        private void GGG<T>(T value) where T : struct, IList<T>
+        { 
+
+        }
+
+        // TODO: Use semantic model
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -507,7 +514,9 @@
                 methodDeclaration);
 
             // ConstraintClauses
-            
+            var constraintClauses = this.GetConstraintClauses(
+                methodDeclaration);
+
             // TypeParameterList
             if (methodDeclaration.TypeParameterList is not null)
             {
