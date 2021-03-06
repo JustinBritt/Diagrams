@@ -427,7 +427,6 @@
 
         }
 
-        // TODO: Use semantic model
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
