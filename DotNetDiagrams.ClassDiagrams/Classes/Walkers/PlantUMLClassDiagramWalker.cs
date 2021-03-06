@@ -438,34 +438,10 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
                 {
-                    List<string> constraints = new List<string>();
-
-                    foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
-                    {
-                        string res = String.Empty;
-
-                        if (item is ClassOrStructConstraintSyntax)
-                        {
-                            res = item.ToString();
-                        }
-                        else if (item is TypeConstraintSyntax typeConstraint)
-                        {
-                            if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
-                            {
-                                res = targetType.ToString();
-                            }
-                            else
-                            {
-                                res = item.ToString();
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception(item.Kind().ToString());
-                        }
-
-                        constraints.Add(res);
-                    }
+                    List<string> constraints = this.GetConstraints(
+                        constraintClause,
+                        methodDeclaration,
+                        semanticModel);
 
                     constraintClauses.Add($"{constraintClause.Name.Identifier.ValueText} : {String.Join(", ", constraints.Select(w => w.ToString()))}");
                 }
@@ -475,9 +451,41 @@
         }
 
         // TODO: Finish
-        private List<string> GetConstraints()
+        private List<string> GetConstraints(
+            TypeParameterConstraintClauseSyntax constraintClause,
+            MethodDeclarationSyntax methodDeclaration,
+            SemanticModel semanticModel)
         {
-            throw new NotImplementedException();
+            List<string> constraints = new List<string>();
+
+            foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
+            {
+                string res = String.Empty;
+
+                if (item is ClassOrStructConstraintSyntax)
+                {
+                    res = item.ToString();
+                }
+                else if (item is TypeConstraintSyntax typeConstraint)
+                {
+                    if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
+                    {
+                        res = targetType.ToString();
+                    }
+                    else
+                    {
+                        res = item.ToString();
+                    }
+                }
+                else
+                {
+                    throw new Exception(item.Kind().ToString());
+                }
+
+                constraints.Add(res);
+            }
+
+            return constraints;
         }
 
         private List<string> GetParameters(
