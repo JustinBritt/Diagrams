@@ -462,11 +462,6 @@
                         }
                         else if (item is TypeConstraintSyntax)
                         {
-                            // Interface
-                            var c = ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type);
-
-                            //var d = (IdentifierNameSyntax)(item.ChildNodes().First());
-
                             if (ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type).Type is INamedTypeSymbol targetType)
                             {
                                 res = targetType.ToString();
