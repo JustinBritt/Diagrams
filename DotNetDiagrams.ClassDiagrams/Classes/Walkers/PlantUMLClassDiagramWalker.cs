@@ -459,21 +459,21 @@
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
-                string res = String.Empty;
+                string typeParameterConstraintName = String.Empty;
 
                 if (typeParameterConstraint is ClassOrStructConstraintSyntax)
                 {
-                    res = typeParameterConstraint.ToString();
+                    typeParameterConstraintName = typeParameterConstraint.ToString();
                 }
                 else if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
                 {
                     if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
                     {
-                        res = targetType.ToString();
+                        typeParameterConstraintName = targetType.ToString();
                     }
                     else
                     {
-                        res = typeParameterConstraint.ToString();
+                        typeParameterConstraintName = typeParameterConstraint.ToString();
                     }
                 }
                 else
@@ -481,7 +481,7 @@
                     throw new Exception(typeParameterConstraint.Kind().ToString());
                 }
 
-                constraints.Add(res);
+                constraints.Add(typeParameterConstraintName);
             }
 
             return constraints;
