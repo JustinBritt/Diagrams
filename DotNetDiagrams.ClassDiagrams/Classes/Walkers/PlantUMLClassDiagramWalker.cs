@@ -447,7 +447,18 @@
             // ConstraintClauses
             if (methodDeclaration.ConstraintClauses.Count() > 0)
             {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
+                {
+                    var name = constraintClause.Name;
 
+                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
+                    {
+                        // TODO: Change
+                        var val = constraint.ToString();
+
+                        var val2 = val;
+                    }
+                }
             }
 
             // TypeParameterList
