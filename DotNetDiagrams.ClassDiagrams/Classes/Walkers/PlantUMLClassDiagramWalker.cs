@@ -482,9 +482,7 @@
         {
             string methodName = methodDeclaration.Identifier.ValueText;
 
-            SemanticModel semanticModel;
-
-            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
             // Return type
             string returnType = this.GetReturnType(
