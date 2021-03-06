@@ -422,7 +422,7 @@
         }
 
         // TODO: Remove
-        private void GGG<T>(T value) where T : struct, IList<T>
+        private void GGG<T>(T value) where T : struct, IDisposable
         { 
 
         }
@@ -463,20 +463,22 @@
                         else if (item is TypeConstraintSyntax)
                         {
                             // Interface
-                            var c = 2;
+                            var c = ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type);
+
+                            //var d = (IdentifierNameSyntax)(item.ChildNodes().First());
+
+                            if (ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type).Type is INamedTypeSymbol targetType)
+                            {
+                                res = targetType.ToString();
+                            }
+                            else
+                            {
+                                res = item.ToString();
+                            }
                         }
                         else
                         {
                             throw new Exception(item.Kind().ToString());
-                        }
-
-                        if (ModelExtensions.GetTypeInfo(semanticModel, item).Type is INamedTypeSymbol targetType)
-                        {
-                            res = targetType.ToString();
-                        }
-                        else
-                        {
-                            res = item.ToString();
                         }
                     }
 
