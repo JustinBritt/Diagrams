@@ -278,6 +278,11 @@
                         baseTypeNames.Add(
                             targetType.ToString());
                     }
+                    else
+                    {
+                        baseTypeNames.Add(
+                            baseType.Type.ToString());
+                    }
                 }
             }
 
