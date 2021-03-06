@@ -339,6 +339,21 @@
 
             TypeSyntax type = fieldDeclaration.Declaration.Type;
 
+            SemanticModel semanticModel;
+
+            semanticModel = compilation.GetSemanticModel(fieldDeclaration.Declaration.Type.SyntaxTree, true);
+
+            string typeName = String.Empty;
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, fieldDeclaration.Declaration.Type).Type is INamedTypeSymbol targetType)
+            {
+                typeName = targetType.ToString();
+            }
+            else
+            {
+                typeName = type.ToString();
+            }
+
             base.Visit(
                 fieldDeclaration);
         }
