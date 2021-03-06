@@ -381,8 +381,6 @@
                 interfaceDeclaration);
         }
 
-        // TODO: Finish
-        // TODO: How does this handle nesting?
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
