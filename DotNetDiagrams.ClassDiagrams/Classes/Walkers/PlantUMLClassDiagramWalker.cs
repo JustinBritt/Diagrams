@@ -511,9 +511,7 @@
         {
             string returnType = String.Empty;
 
-            SemanticModel semanticModel;
-
-            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
             if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
             {
