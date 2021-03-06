@@ -401,6 +401,7 @@
                 interfaceDeclaration);
         }
 
+        // TODO: Finish
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -423,7 +424,14 @@
 
             if (methodDeclaration.ParameterList.Parameters.Count > 0)
             {
+                foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
+                {
+                    string A = parameter.Identifier.ValueText;
 
+                    TypeSyntax B = parameter.Type;
+
+                    var C = 2;
+                }
             }
 
             AddCommand($"{returnType} {methodName}" + "()");
