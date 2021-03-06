@@ -431,6 +431,8 @@
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
+            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+
             List<string> constraintClauses = new List<string>();
 
             if (methodDeclaration.ConstraintClauses.Count() > 0)
