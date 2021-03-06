@@ -430,8 +430,6 @@
 
                     string parameterTypeName = parameter.Identifier.ValueText;
 
-                    TypeSyntax B = parameter.Type;
-
                     if (ModelExtensions.GetTypeInfo(semanticModel, parameter.Type).Type is INamedTypeSymbol parameterTargetType)
                     {
                         parameterTypeName = parameterTargetType.ToString();
@@ -440,8 +438,6 @@
                     {
                         parameterTypeName = parameter.Type.ToString();
                     }
-
-                    var C = 2;
                 }
             }
 
