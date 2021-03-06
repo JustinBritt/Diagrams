@@ -437,14 +437,14 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
                 {
-                    string constraintClausename = constraintClause.Name.Identifier.ValueText;
+                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
                     string joinedConstraints = this.GetJoinedConstraints(
                         constraintClause,
                         methodDeclaration,
                         semanticModel);
 
-                    constraintClauses.Add($"{constraintClausename} : {joinedConstraints}");
+                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
                 }
             }
 
