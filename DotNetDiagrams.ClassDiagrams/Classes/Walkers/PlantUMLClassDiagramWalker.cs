@@ -421,6 +421,39 @@
                 interfaceDeclaration);
         }
 
+        private List<string> GetParameters(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            SemanticModel semanticModel;
+
+            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+
+            List<string> parameters = new List<string>();
+
+            if (methodDeclaration.ParameterList.Parameters.Count > 0)
+            {
+                foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
+                {
+                    string parameterName = parameter.Identifier.ValueText;
+
+                    string parameterTypeName = String.Empty;
+
+                    if (ModelExtensions.GetTypeInfo(semanticModel, parameter.Type).Type is INamedTypeSymbol parameterTargetType)
+                    {
+                        parameterTypeName = parameterTargetType.ToString();
+                    }
+                    else
+                    {
+                        parameterTypeName = parameter.Type.ToString();
+                    }
+
+                    parameters.Add($"{parameterTypeName} {parameterName}");
+                }
+            }
+
+            return parameters;
+        }
+
         private string GetReturnType(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -478,28 +511,8 @@
             }
 
             // Parameters
-            List<string> parameters = new List<string>();
-
-            if (methodDeclaration.ParameterList.Parameters.Count > 0)
-            {
-                foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
-                {
-                    string parameterName = parameter.Identifier.ValueText;
-
-                    string parameterTypeName = String.Empty;
-
-                    if (ModelExtensions.GetTypeInfo(semanticModel, parameter.Type).Type is INamedTypeSymbol parameterTargetType)
-                    {
-                        parameterTypeName = parameterTargetType.ToString();
-                    }
-                    else
-                    {
-                        parameterTypeName = parameter.Type.ToString();
-                    }
-
-                    parameters.Add($"{parameterTypeName} {parameterName}");
-                }
-            }
+            List<string> parameters = this.GetParameters(
+                methodDeclaration);
 
             AddCommand($"{returnType} {methodName}" + "(" + String.Join(", \n", parameters) + ")");
 
