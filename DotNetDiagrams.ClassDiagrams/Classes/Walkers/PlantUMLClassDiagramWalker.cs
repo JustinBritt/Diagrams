@@ -432,6 +432,11 @@
 
             semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
+            // ConstraintClauses
+
+            // TypeParameterList
+
+            // Return type
             string returnType = String.Empty;
 
             if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
@@ -443,6 +448,7 @@
                 returnType = methodDeclaration.ReturnType.ToString();
             }
 
+            // Parameters
             List<string> parameters = new List<string>();
 
             if (methodDeclaration.ParameterList.Parameters.Count > 0)
