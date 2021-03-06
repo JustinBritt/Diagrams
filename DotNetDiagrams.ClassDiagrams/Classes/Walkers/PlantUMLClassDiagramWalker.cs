@@ -449,9 +449,9 @@
                         {
                             res = item.ToString();
                         }
-                        else if (item is TypeConstraintSyntax)
+                        else if (item is TypeConstraintSyntax typeConstraint)
                         {
-                            if (ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type).Type is INamedTypeSymbol targetType)
+                            if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
                             {
                                 res = targetType.ToString();
                             }
