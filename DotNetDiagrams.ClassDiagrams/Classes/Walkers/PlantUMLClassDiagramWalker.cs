@@ -293,24 +293,6 @@
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
 
-            // Fields
-            if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
-            {
-                foreach (FieldDeclarationSyntax fieldDeclaration in classDeclaration.Members.OfType<FieldDeclarationSyntax>())
-                {
-
-                }
-            }
-
-            // Methods
-            if (classDeclaration.Members.OfType<MethodDeclarationSyntax>() is not null)
-            {
-                foreach (MethodDeclarationSyntax methodDeclaration in classDeclaration.Members.OfType<MethodDeclarationSyntax>())
-                {
-
-                }
-            }
-
             this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
 
             base.Visit(
