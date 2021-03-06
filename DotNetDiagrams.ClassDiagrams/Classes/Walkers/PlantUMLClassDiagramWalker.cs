@@ -459,32 +459,44 @@
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
-                string typeParameterConstraintName = String.Empty;
-
-                if (typeParameterConstraint is ClassOrStructConstraintSyntax)
-                {
-                    typeParameterConstraintName = typeParameterConstraint.ToString();
-                }
-                else if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-                {
-                    if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
-                    {
-                        typeParameterConstraintName = targetType.ToString();
-                    }
-                    else
-                    {
-                        typeParameterConstraintName = typeParameterConstraint.ToString();
-                    }
-                }
-                else
-                {
-                    throw new Exception(typeParameterConstraint.Kind().ToString());
-                }
+                string typeParameterConstraintName = this.GetConstraint(
+                    semanticModel,
+                    typeParameterConstraint);
 
                 constraints.Add(typeParameterConstraintName);
             }
 
             return constraints;
+        }
+
+        // TODO: Finish
+        private string GetConstraint(
+            SemanticModel semanticModel,
+            TypeParameterConstraintSyntax typeParameterConstraint)
+        {
+            string typeParameterConstraintName = String.Empty;
+
+            if (typeParameterConstraint is ClassOrStructConstraintSyntax)
+            {
+                typeParameterConstraintName = typeParameterConstraint.ToString();
+            }
+            else if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
+            {
+                if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
+                {
+                    typeParameterConstraintName = targetType.ToString();
+                }
+                else
+                {
+                    typeParameterConstraintName = typeParameterConstraint.ToString();
+                }
+            }
+            else
+            {
+                throw new Exception(typeParameterConstraint.Kind().ToString());
+            }
+
+            return typeParameterConstraintName;
         }
 
         private List<string> GetParameters(
