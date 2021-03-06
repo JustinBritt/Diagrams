@@ -441,6 +441,38 @@
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
+                    foreach (var item in constraintClause.Constraints)
+                    {
+                        string res;
+
+                        if (item is ClassOrStructConstraintSyntax)
+                        {
+                            var a = 2;
+                        }
+                        else if (item is ConstructorConstraintSyntax)
+                        {
+                            var b = 2;
+                        }
+                        else if (item is TypeConstraintSyntax)
+                        {
+                            // Interface
+                            var c = 2;
+                        }
+                        else
+                        {
+                            throw new Exception(item.Kind().ToString());
+                        }
+
+                        if (ModelExtensions.GetTypeInfo(semanticModel, item).Type is INamedTypeSymbol targetType)
+                        {
+                            res = targetType.ToString();
+                        }
+                        else
+                        {
+                            res = item.ToString();
+                        }
+                    }
+
                     constraintClauses.Add($"{constraintClause.Name} : {String.Join(", ", constraintClause.Constraints.Select(w => w.ToString()))}");
                 }
             }
