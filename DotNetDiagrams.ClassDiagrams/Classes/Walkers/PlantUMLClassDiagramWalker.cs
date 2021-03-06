@@ -432,10 +432,6 @@
 
             semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
-            // ConstraintClauses
-
-            // TypeParameterList
-
             // Return type
             string returnType = String.Empty;
 
@@ -447,6 +443,10 @@
             {
                 returnType = methodDeclaration.ReturnType.ToString();
             }
+
+            // ConstraintClauses
+
+            // TypeParameterList
 
             // Parameters
             List<string> parameters = new List<string>();
