@@ -86,7 +86,7 @@
         private void AddCommand(
             string command)
         {
-            Diagram.Body.Add(command);
+            this.Diagram.Body.Add(command);
         }
 
         // TOOD: namespaceName can be null in unit test projects
