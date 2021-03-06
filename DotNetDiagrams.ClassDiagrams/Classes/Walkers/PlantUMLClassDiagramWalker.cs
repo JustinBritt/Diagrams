@@ -438,8 +438,6 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
                 {
-                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
-
                     foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
                     {
                         string res = String.Empty;
@@ -465,7 +463,7 @@
                         }
                     }
 
-                    constraintClauses.Add($"{constraintClause.Name} : {String.Join(", ", constraintClause.Constraints.Select(w => w.ToString()))}");
+                    constraintClauses.Add($"{constraintClause.Name.Identifier.ValueText} : {String.Join(", ", constraintClause.Constraints.Select(w => w.ToString()))}");
                 }
             }
 
