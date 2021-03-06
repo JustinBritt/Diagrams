@@ -474,6 +474,12 @@
             return constraintClauses;
         }
 
+        // TODO: Finish
+        private List<string> GetConstraints()
+        {
+            throw new NotImplementedException();
+        }
+
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
