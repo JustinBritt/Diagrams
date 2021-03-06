@@ -441,7 +441,7 @@
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
-                    foreach (var item in constraintClause.Constraints)
+                    foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
                     {
                         string res;
 
