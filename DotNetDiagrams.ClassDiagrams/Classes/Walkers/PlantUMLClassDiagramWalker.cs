@@ -465,7 +465,8 @@
                     semanticModel,
                     typeParameterConstraint);
 
-                constraints.Add(typeParameterConstraintName);
+                constraints.Add(
+                    typeParameterConstraintName);
             }
 
             return constraints;
