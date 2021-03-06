@@ -297,6 +297,10 @@
             // TypeParameterList
             if (classDeclaration.TypeParameterList is not null)
             {
+                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
+                {
+
+                }    
             }
 
             if (classDeclaration.BaseList is null)
