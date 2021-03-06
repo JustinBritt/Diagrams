@@ -296,7 +296,14 @@
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
 
-            this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+            if (classDeclaration.BaseList is null)
+            {
+
+            }
+            else 
+            {
+                this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+            }
 
             base.Visit(
                 classDeclaration);
