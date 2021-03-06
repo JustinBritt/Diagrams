@@ -303,6 +303,18 @@
                 }    
             }
 
+            if (classDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
+                {
+                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
+                    {
+                        // TODO: Change
+                        string val = constraint.ToFullString();
+                    }
+                }
+            }
+
             if (classDeclaration.BaseList is null)
             {
                 if (classDeclaration.Modifiers.Count > 0)
