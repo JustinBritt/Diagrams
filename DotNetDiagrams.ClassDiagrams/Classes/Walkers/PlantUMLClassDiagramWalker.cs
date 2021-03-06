@@ -421,6 +421,11 @@
                 returnType = methodDeclaration.ReturnType.ToString();
             }
 
+            if (methodDeclaration.ParameterList.Parameters.Count > 0)
+            {
+
+            }
+
             AddCommand($"{returnType} {methodName}" + "()");
 
             base.Visit(
