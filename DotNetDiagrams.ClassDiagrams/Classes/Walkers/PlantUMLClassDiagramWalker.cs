@@ -386,11 +386,11 @@
         {
             string methodName = methodDeclaration.Identifier.ValueText;
 
-            string returnType = String.Empty;
-
             SemanticModel semanticModel;
 
             semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+
+            string returnType = String.Empty;
 
             if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
             {
