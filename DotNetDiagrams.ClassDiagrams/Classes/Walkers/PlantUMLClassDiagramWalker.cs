@@ -265,9 +265,7 @@
 
             if (classDeclaration.BaseList is not null)
             {
-                List<BaseTypeSyntax> baseTypes = classDeclaration.BaseList.Types.ToList();
-
-                foreach (BaseTypeSyntax baseType in baseTypes)
+                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
                 {
                     SemanticModel semanticModel;
 
@@ -299,7 +297,6 @@
             // TypeParameterList
             if (classDeclaration.TypeParameterList is not null)
             {
-
             }
 
             if (classDeclaration.BaseList is null)
