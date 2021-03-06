@@ -426,7 +426,7 @@
             {
                 foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
                 {
-                    string A = parameter.Identifier.ValueText;
+                    string parameterName = parameter.Identifier.ValueText;
 
                     TypeSyntax B = parameter.Type;
 
