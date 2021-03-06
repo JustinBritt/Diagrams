@@ -439,12 +439,12 @@
                 {
                     string constraintClausename = constraintClause.Name.Identifier.ValueText;
 
-                    List<string> constraints = this.GetConstraints(
+                    string joinedConstraints = this.GetJoinedConstraints(
                         constraintClause,
                         methodDeclaration,
                         semanticModel);
 
-                    constraintClauses.Add($"{constraintClausename} : {String.Join(", ", constraints.Select(w => w.ToString()))}");
+                    constraintClauses.Add($"{constraintClausename} : {joinedConstraints}");
                 }
             }
 
@@ -499,6 +499,19 @@
             }
 
             return typeParameterConstraintName;
+        }
+
+        private string GetJoinedConstraints(
+            TypeParameterConstraintClauseSyntax constraintClause,
+            MethodDeclarationSyntax methodDeclaration,
+            SemanticModel semanticModel)
+        {
+            List<string> constraints = this.GetConstraints(
+                constraintClause,
+                methodDeclaration,
+                semanticModel);
+
+            return String.Join(", ", constraints.Select(w => w.ToString()));
         }
 
         private List<string> GetParameters(
