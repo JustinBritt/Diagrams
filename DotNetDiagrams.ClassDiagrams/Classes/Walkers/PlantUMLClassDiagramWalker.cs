@@ -428,7 +428,7 @@
                 {
                     string parameterName = parameter.Identifier.ValueText;
 
-                    string parameterTypeName = parameter.Identifier.ValueText;
+                    string parameterTypeName = String.Empty;
 
                     if (ModelExtensions.GetTypeInfo(semanticModel, parameter.Type).Type is INamedTypeSymbol parameterTargetType)
                     {
