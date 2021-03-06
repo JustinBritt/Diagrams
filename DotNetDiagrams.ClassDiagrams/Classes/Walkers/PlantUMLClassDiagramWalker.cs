@@ -432,10 +432,7 @@
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
-                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
-                    {
-                        constraintClauses.Add($"{constraintClause.Name} : {constraint.ToString()}");
-                    }
+                    constraintClauses.Add($"{constraintClause.Name} : {String.Join(", ", constraintClause.Constraints.Select(w => w.ToString()))}");
                 }
             }
 
