@@ -457,15 +457,15 @@
         {
             List<string> constraints = new List<string>();
 
-            foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
+            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
                 string res = String.Empty;
 
-                if (item is ClassOrStructConstraintSyntax)
+                if (typeParameterConstraint is ClassOrStructConstraintSyntax)
                 {
-                    res = item.ToString();
+                    res = typeParameterConstraint.ToString();
                 }
-                else if (item is TypeConstraintSyntax typeConstraint)
+                else if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
                 {
                     if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
                     {
@@ -473,12 +473,12 @@
                     }
                     else
                     {
-                        res = item.ToString();
+                        res = typeParameterConstraint.ToString();
                     }
                 }
                 else
                 {
-                    throw new Exception(item.Kind().ToString());
+                    throw new Exception(typeParameterConstraint.Kind().ToString());
                 }
 
                 constraints.Add(res);
