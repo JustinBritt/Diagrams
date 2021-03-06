@@ -451,7 +451,6 @@
             return constraintClauses;
         }
 
-        // TODO: Finish
         private List<string> GetConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
             MethodDeclarationSyntax methodDeclaration,
