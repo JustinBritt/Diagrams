@@ -422,6 +422,8 @@
                 returnType = methodDeclaration.ReturnType.ToString();
             }
 
+            List<string> parameters = new List<string>();
+
             if (methodDeclaration.ParameterList.Parameters.Count > 0)
             {
                 foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
@@ -438,10 +440,12 @@
                     {
                         parameterTypeName = parameter.Type.ToString();
                     }
+
+                    parameters.Add($"{parameterTypeName} {parameterName}");
                 }
             }
 
-            AddCommand($"{returnType} {methodName}" + "()");
+            AddCommand($"{returnType} {methodName}" + "(" + String.Join(", \n", parameters) + ")");
 
             base.Visit(
                 methodDeclaration);
