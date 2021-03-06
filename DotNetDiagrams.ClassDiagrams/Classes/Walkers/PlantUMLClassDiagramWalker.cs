@@ -449,14 +449,11 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
                 {
-                    var name = constraintClause.Name;
+                    var constraintClauseName = constraintClause.Name;
 
                     foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
                     {
-                        // TODO: Change
-                        var val = constraint.ToString();
-
-                        var val2 = val;
+                        string con = $"{constraintClause.Name} : {constraint.ToString()}";
                     }
                 }
             }
