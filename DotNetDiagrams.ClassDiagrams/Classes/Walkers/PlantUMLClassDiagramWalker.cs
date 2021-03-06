@@ -447,14 +447,7 @@
 
                         if (item is ClassOrStructConstraintSyntax)
                         {
-                            if (ModelExtensions.GetTypeInfo(semanticModel, item).Type is INamedTypeSymbol targetTypeA)
-                            {
-                                res = targetTypeA.ToString();
-                            }
-                            else
-                            {
-                                res = item.ToString();
-                            }
+                            res = item.ToString();
                         }
                         else if (item is TypeConstraintSyntax)
                         {
