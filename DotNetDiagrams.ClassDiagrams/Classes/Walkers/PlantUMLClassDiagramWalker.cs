@@ -299,7 +299,7 @@
             {
                 foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
                 {
-
+                    string typeParameterName = typeParameter.Identifier.ValueText;
                 }    
             }
 
