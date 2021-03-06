@@ -445,8 +445,16 @@
             }
 
             // ConstraintClauses
+            if (methodDeclaration.ConstraintClauses.Count() > 0)
+            {
+
+            }
 
             // TypeParameterList
+            if (methodDeclaration.TypeParameterList is not null)
+            {
+
+            }
 
             // Parameters
             List<string> parameters = new List<string>();
