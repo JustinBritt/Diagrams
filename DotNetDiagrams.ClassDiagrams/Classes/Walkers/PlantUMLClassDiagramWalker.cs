@@ -421,6 +421,27 @@
                 interfaceDeclaration);
         }
 
+        private string GetReturnType(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            string returnType = String.Empty;
+
+            SemanticModel semanticModel;
+
+            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
+            {
+                returnType = targetType.ToString();
+            }
+            else
+            {
+                returnType = methodDeclaration.ReturnType.ToString();
+            }
+
+            return returnType;
+        }
+
         // TODO: Finish
         // TODO: Account for generics
         private void Visit(
@@ -433,16 +454,8 @@
             semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
             // Return type
-            string returnType = String.Empty;
-
-            if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
-            {
-                returnType = targetType.ToString();
-            }
-            else
-            {
-                returnType = methodDeclaration.ReturnType.ToString();
-            }
+            string returnType = this.GetReturnType(
+                methodDeclaration);
 
             // ConstraintClauses
             if (methodDeclaration.ConstraintClauses.Count() > 0)
