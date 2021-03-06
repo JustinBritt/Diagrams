@@ -214,6 +214,7 @@
                 baseList);
         }
 
+        // TODO: Need to account for ConstraintClauses and TypeParameterList
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
