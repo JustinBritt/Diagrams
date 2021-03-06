@@ -298,7 +298,14 @@
 
             if (classDeclaration.BaseList is null)
             {
-
+                if (classDeclaration.Modifiers.Count > 0)
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {PlantUML_leftBrace}");
+                }
+                else
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {PlantUML_leftBrace}");
+                }
             }
             else 
             {
