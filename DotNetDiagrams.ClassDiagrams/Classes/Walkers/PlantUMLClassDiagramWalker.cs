@@ -293,8 +293,6 @@
                 joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
             }
 
-            
-
             // Fields
             if (classDeclaration.Members.OfType<FieldDeclarationSyntax>() is not null)
             {
