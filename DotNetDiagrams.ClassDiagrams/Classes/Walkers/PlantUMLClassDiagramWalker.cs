@@ -554,7 +554,7 @@
                 methodDeclaration);
 
             // ConstraintClauses
-            var constraintClauses = this.GetConstraintClauses(
+            List<string> constraintClauses = this.GetConstraintClauses(
                 methodDeclaration);
 
             // TypeParameterList
