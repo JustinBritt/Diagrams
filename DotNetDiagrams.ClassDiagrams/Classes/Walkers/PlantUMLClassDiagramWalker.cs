@@ -308,7 +308,14 @@
             }
             else 
             {
-                this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+                if (classDeclaration.Modifiers.Count > 0)
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+                }
+                else
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+                }
             }
 
             base.Visit(
