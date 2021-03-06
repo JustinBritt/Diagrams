@@ -335,6 +335,10 @@
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
+            List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
+
+            TypeSyntax type = fieldDeclaration.Declaration.Type;
+
             base.Visit(
                 fieldDeclaration);
         }
