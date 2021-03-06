@@ -456,10 +456,6 @@
                                 res = item.ToString();
                             }
                         }
-                        else if (item is ConstructorConstraintSyntax)
-                        {
-                            var b = 2;
-                        }
                         else if (item is TypeConstraintSyntax)
                         {
                             if (ModelExtensions.GetTypeInfo(semanticModel, ((TypeConstraintSyntax)item).Type).Type is INamedTypeSymbol targetType)
