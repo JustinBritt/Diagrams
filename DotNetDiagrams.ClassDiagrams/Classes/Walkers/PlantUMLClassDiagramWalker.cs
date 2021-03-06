@@ -421,6 +421,27 @@
                 interfaceDeclaration);
         }
 
+        private List<string> GetConstraintClauses(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> constraintClauses = new List<string>();
+
+            if (methodDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
+                {
+                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
+
+                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
+                    {
+                        constraintClauses.Add($"{constraintClause.Name} : {constraint.ToString()}");
+                    }
+                }
+            }
+
+            return constraintClauses;
+        }
+
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -489,19 +510,7 @@
                 methodDeclaration);
 
             // ConstraintClauses
-            if (methodDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
-                {
-                    var constraintClauseName = constraintClause.Name;
-
-                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
-                    {
-                        string con = $"{constraintClause.Name} : {constraint.ToString()}";
-                    }
-                }
-            }
-
+            
             // TypeParameterList
             if (methodDeclaration.TypeParameterList is not null)
             {
