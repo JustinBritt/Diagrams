@@ -442,7 +442,7 @@
 
                     foreach (TypeParameterConstraintSyntax item in constraintClause.Constraints.ToList())
                     {
-                        string res;
+                        string res = String.Empty;
 
                         if (item is ClassOrStructConstraintSyntax)
                         {
