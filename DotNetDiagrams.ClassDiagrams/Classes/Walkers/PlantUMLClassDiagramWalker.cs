@@ -326,8 +326,6 @@
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
-            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
-
             List<string> parameters = new List<string>();
 
             if (methodDeclaration.ParameterList.Parameters.Count > 0)
