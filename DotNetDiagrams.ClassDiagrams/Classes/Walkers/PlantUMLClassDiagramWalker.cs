@@ -640,7 +640,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
