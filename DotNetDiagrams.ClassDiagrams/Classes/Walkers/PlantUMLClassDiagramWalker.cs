@@ -264,6 +264,17 @@
             return constraints;
         }
 
+        private string GetJoinedAccessors(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            List<string> accessors = this.GetAccessors(
+                propertyDeclaration);
+
+            return String.Join(
+                " ",
+                accessors);
+        }
+
         private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration,
             SemanticModel semanticModel)
@@ -645,7 +656,7 @@
         {
             string propertyName = propertyDeclaration.Identifier.ValueText;
 
-            List<string> accessors = this.GetAccessors(
+            string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
 
             if (propertyDeclaration.ExpressionBody is not null)
@@ -671,7 +682,7 @@
                 propertyTypeName = propertyDeclaration.Type.ToString();
             }
 
-            this.AddCommand($"{propertyTypeName} {propertyName} : {String.Join(" ", accessors)}");           
+            this.AddCommand($"{propertyTypeName} {propertyName} : {joinedAccessors}");           
 
             base.Visit(
                 propertyDeclaration);
