@@ -156,9 +156,6 @@
                 case AccessorListSyntax accessorList:
                     this.Visit(accessorList);
                     break;
-                case BaseListSyntax baseList:
-                    this.Visit(baseList);
-                    break;
                 case ClassDeclarationSyntax classDeclaration:
                     this.Visit(classDeclaration);
                     break;
@@ -176,9 +173,6 @@
                     break;
                 case PropertyDeclarationSyntax propertyDeclaration:
                     this.Visit(propertyDeclaration);
-                    break;
-                case SimpleBaseTypeSyntax simpleBaseType:
-                    this.Visit(simpleBaseType);
                     break;
                 case StructDeclarationSyntax structDeclaration:
                     this.Visit(structDeclaration);
@@ -201,13 +195,6 @@
         {
             base.Visit(
                 accessorList);
-        }
-
-        private void Visit(
-            BaseListSyntax baseList)
-        {
-            base.Visit(
-                baseList);
         }
 
         // TODO: Need to account for ConstraintClauses and TypeParameterList
@@ -668,13 +655,6 @@
 
             base.Visit(
                 propertyDeclaration);
-        }
-
-        private void Visit(
-            SimpleBaseTypeSyntax simpleBaseType)
-        {
-            base.Visit(
-                simpleBaseType);
         }
 
         private void Visit(
