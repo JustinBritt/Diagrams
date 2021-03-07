@@ -582,7 +582,7 @@
                 methodDeclaration);
 
             // ConstraintClauses
-            List<string> constraintClauses = this.GetConstraintClauses(
+            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
                 methodDeclaration,
                 semanticModel);
 
@@ -597,7 +597,7 @@
                 methodDeclaration);
 
             // TODO: Finish
-            if (constraintClauses.Count() > 0)
+            if (joinedConstraintClauses.Length > 0)
             {
                 string A = String.Empty;
             }
