@@ -660,6 +660,7 @@
             string propertyName = propertyDeclaration.Identifier.ValueText;
 
             // Modifiers
+            List<string> CSharpModifiers = propertyDeclaration.Modifiers.Select(w => w.ValueText).ToList();
 
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
