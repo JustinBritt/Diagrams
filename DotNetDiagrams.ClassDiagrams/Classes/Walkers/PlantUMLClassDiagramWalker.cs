@@ -193,6 +193,7 @@
 
         // TODO: Finish
         private string BuildPropertyDeclarationCommand(
+            string explicitInterfaceSpecifierTypeName,
             string joinedAccessors,
             string joinedModifiers,
             string propertyName,
@@ -207,6 +208,11 @@
             sb.Append(propertyTypeName);
 
             sb.Append(" ");
+
+            if (explicitInterfaceSpecifierTypeName.Length > 0)
+            {
+                sb.Append($"{explicitInterfaceSpecifierTypeName}.");
+            }
 
             sb.Append(propertyName);
 
@@ -816,6 +822,7 @@
             }
 
             string command = this.BuildPropertyDeclarationCommand(
+                explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
                 joinedAccessors: this.GetJoinedAccessors(
                     propertyDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
