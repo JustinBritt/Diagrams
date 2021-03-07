@@ -643,33 +643,19 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
-            string methodName = methodDeclaration.Identifier.ValueText;
-
             SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
-            // Return type
-            string returnType = this.GetReturnType(
-                methodDeclaration);
-
-            // ConstraintClauses
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                methodDeclaration,
-                semanticModel);
-
-            // TypeParameterList
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                methodDeclaration);
-
-            // Parameters
-            string joinedParameters = this.GetJoinedParameters(
-                methodDeclaration);
-
             string command = this.BuildMethodDeclarationCommand(
-                joinedConstraintClauses,
-                joinedParameters,
-                joinedTypeParameters,
-                methodName,
-                returnType);
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    methodDeclaration,
+                    semanticModel),
+                joinedParameters: this.GetJoinedParameters(
+                    methodDeclaration),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    methodDeclaration),
+                methodName: methodDeclaration.Identifier.ValueText,
+                returnType: this.GetReturnType(
+                    methodDeclaration));
 
             this.AddCommand(command);
 
