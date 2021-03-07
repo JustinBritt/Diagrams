@@ -18,7 +18,7 @@
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker, IDisposable
+    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
     {
         private const string modifier_abstract = "{abstract}";
         private const string modifier_protectedInternal = "# <<internal>>";
@@ -690,11 +690,6 @@
 
             base.Visit(
                 interfaceDeclaration);
-        }
-
-        void IDisposable.Dispose()
-        {
-
         }
 
         private void Visit(
