@@ -416,6 +416,8 @@
 
                     "public" => stereotype_public,
 
+                    "readonly" => stereotype_readonly,
+
                     _ => throw new Exception("")
                 };
 
