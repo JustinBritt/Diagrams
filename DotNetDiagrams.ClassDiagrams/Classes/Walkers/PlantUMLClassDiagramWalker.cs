@@ -151,6 +151,11 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+            }
+
             sb.Append(returnTypeName);
 
             sb.Append(" ");
