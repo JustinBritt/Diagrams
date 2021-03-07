@@ -667,6 +667,7 @@
             if(propertyDeclaration.Initializer is not null)
             {
                 // TODO: Add method
+                ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
             }
 
             string propertyTypeName = String.Empty;
