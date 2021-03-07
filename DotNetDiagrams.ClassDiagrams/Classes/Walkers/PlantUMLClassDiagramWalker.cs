@@ -346,24 +346,24 @@
             return parameters;
         }
 
-        private string GetPropertyTypeName(
-            PropertyDeclarationSyntax propertyDeclaration)
-        {
-            string propertyTypeName = String.Empty;
+        //private string GetPropertyTypeName(
+        //    PropertyDeclarationSyntax propertyDeclaration)
+        //{
+        //    string propertyTypeName = String.Empty;
 
-            SemanticModel semanticModel = compilation.GetSemanticModel(propertyDeclaration.SyntaxTree, true);
+        //    SemanticModel semanticModel = compilation.GetSemanticModel(propertyDeclaration.SyntaxTree, true);
 
-            if (ModelExtensions.GetTypeInfo(semanticModel, propertyDeclaration.Type).Type is INamedTypeSymbol targetType)
-            {
-                propertyTypeName = targetType.ToString();
-            }
-            else
-            {
-                propertyTypeName = propertyDeclaration.Type.ToString();
-            }
+        //    if (ModelExtensions.GetTypeInfo(semanticModel, propertyDeclaration.Type).Type is INamedTypeSymbol targetType)
+        //    {
+        //        propertyTypeName = targetType.ToString();
+        //    }
+        //    else
+        //    {
+        //        propertyTypeName = propertyDeclaration.Type.ToString();
+        //    }
 
-            return propertyTypeName;
-        }
+        //    return propertyTypeName;
+        //}
 
         private string GetTypeNameOrFallback(
             string fallback,
@@ -692,8 +692,10 @@
                 ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
             }
 
-            string propertyTypeName = this.GetPropertyTypeName(
-                propertyDeclaration);
+            string propertyTypeName = this.GetTypeNameOrFallback(
+                propertyDeclaration.Type.ToString(),
+                propertyDeclaration.Type,
+                propertyDeclaration.SyntaxTree);
 
             this.AddCommand($"{propertyTypeName} {propertyName} : {joinedAccessors}");           
 
