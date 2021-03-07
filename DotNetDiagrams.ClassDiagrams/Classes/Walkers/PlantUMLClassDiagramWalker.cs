@@ -471,7 +471,6 @@
             return constraints;
         }
 
-        // TODO: Finish
         private string GetConstraint(
             SemanticModel semanticModel,
             TypeParameterConstraintSyntax typeParameterConstraint)
