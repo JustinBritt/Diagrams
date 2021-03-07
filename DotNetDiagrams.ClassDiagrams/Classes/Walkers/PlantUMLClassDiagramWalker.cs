@@ -673,6 +673,8 @@
                 ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
             }
 
+            // Modifiers
+
             string propertyTypeName = this.GetTypeNameOrFallback(
                 propertyDeclaration.Type.ToString(),
                 propertyDeclaration.Type,
