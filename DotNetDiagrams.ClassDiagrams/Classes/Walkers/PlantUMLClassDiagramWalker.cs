@@ -185,6 +185,23 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private List<string> GetAccessors(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            List<string> accessors = new List<string>();
+
+            if (propertyDeclaration.AccessorList is not null)
+            {
+                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
+                {
+                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                }
+            }
+
+            return accessors;
+        }
+
         private string GetConstraint(
             SemanticModel semanticModel,
             TypeParameterConstraintSyntax typeParameterConstraint)
@@ -629,15 +646,8 @@
         {
             string propertyName = propertyDeclaration.Identifier.ValueText;
 
-            List<string> accessors = new List<string>();
-
-            if (propertyDeclaration.AccessorList is not null)
-            {
-                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
-                {
-                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
-                }
-            }
+            List<string> accessors = this.GetAccessors(
+                propertyDeclaration);
 
             if (propertyDeclaration.ExpressionBody is not null)
             {
