@@ -738,16 +738,10 @@
 
             semanticModel = compilation.GetSemanticModel(fieldDeclaration.Declaration.Type.SyntaxTree, true);
 
-            string typeName = String.Empty;
-
-            if (ModelExtensions.GetTypeInfo(semanticModel, fieldDeclaration.Declaration.Type).Type is INamedTypeSymbol targetType)
-            {
-                typeName = targetType.ToString();
-            }
-            else
-            {
-                typeName = type.ToString();
-            }
+            string fieldTypeName = this.GetTypeNameOrFallback(
+                fieldDeclaration.Declaration.Type.ToString(),
+                fieldDeclaration.Declaration,
+                fieldDeclaration.SyntaxTree);
 
             base.Visit(
                 fieldDeclaration);
