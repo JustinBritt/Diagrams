@@ -146,11 +146,11 @@
             string joinedParameters,
             string joinedTypeParameters,
             string methodName,
-            string returnType)
+            string returnTypeName)
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(returnType);
+            sb.Append(returnTypeName);
 
             sb.Append(" ");
 
@@ -643,7 +643,7 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     methodDeclaration),
                 methodName: methodDeclaration.Identifier.ValueText,
-                returnType: this.GetTypeNameOrFallback(
+                returnTypeName: this.GetTypeNameOrFallback(
                     fallback: methodDeclaration.ReturnType.ToString(),
                     syntaxNode: methodDeclaration.ReturnType,
                     syntaxTree: methodDeclaration.SyntaxTree));
