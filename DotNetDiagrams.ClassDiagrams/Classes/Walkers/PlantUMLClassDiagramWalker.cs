@@ -567,6 +567,25 @@
         }
 
         // TODO: Finish
+        private string GetJoinedTypeParameters(
+             MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> typeParameters = new List<string>();
+
+            if (methodDeclaration.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
+
+                    typeParameters.Add(typeParameterName);
+                }
+            }
+
+            return String.Join(", ", typeParameters);
+        }
+
+        // TODO: Finish
         // TODO: Account for generics
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
@@ -585,24 +604,8 @@
                 semanticModel);
 
             // TypeParameterList
-            List<string> typeParameters = new List<string>();
-
-            if (methodDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-
-                    typeParameters.Add(typeParameterName);
-                }
-            }
-
-            string joinedTypeParameters = String.Join(", ", typeParameters);
-
-            if (joinedTypeParameters.Length > 0)
-            {
-                var w = 2;
-            }
+            string joinedTypeParameters = this.GetJoinedTypeParameters(
+                methodDeclaration);
 
             // Parameters
             List<string> parameters = this.GetParameters(
