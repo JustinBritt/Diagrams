@@ -346,25 +346,6 @@
             return parameters;
         }
 
-        //private string GetPropertyTypeName(
-        //    PropertyDeclarationSyntax propertyDeclaration)
-        //{
-        //    string propertyTypeName = String.Empty;
-
-        //    SemanticModel semanticModel = compilation.GetSemanticModel(propertyDeclaration.SyntaxTree, true);
-
-        //    if (ModelExtensions.GetTypeInfo(semanticModel, propertyDeclaration.Type).Type is INamedTypeSymbol targetType)
-        //    {
-        //        propertyTypeName = targetType.ToString();
-        //    }
-        //    else
-        //    {
-        //        propertyTypeName = propertyDeclaration.Type.ToString();
-        //    }
-
-        //    return propertyTypeName;
-        //}
-
         private string GetTypeNameOrFallback(
             string fallback,
             SyntaxNode syntaxNode,
