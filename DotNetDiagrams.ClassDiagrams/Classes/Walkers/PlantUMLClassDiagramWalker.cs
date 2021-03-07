@@ -138,7 +138,7 @@
 
             currentHeader.Add($"{PlantUML_title} {title}");
 
-            Diagram.Header.AddRange(currentHeader);
+            this.Diagram.Header.AddRange(currentHeader);
         }
 
         /// <summary>
