@@ -188,17 +188,11 @@
         private List<string> GetAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            List<string> accessors = new List<string>();
-
-            if (propertyDeclaration.AccessorList is not null)
-            {
-                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
-                {
-                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
-                }
-            }
-
-            return accessors;
+            return propertyDeclaration
+                .AccessorList
+                .Accessors
+                .Select(w => $"<<{w.Keyword.ValueText}>>")
+                .ToList();
         }
 
         private string GetConstraint(
