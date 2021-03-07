@@ -178,7 +178,11 @@
         }
 
         // TODO: Finish
-        private string BuildPropertyDeclarationCommand()
+        private string BuildPropertyDeclarationCommand(
+            string joinedAccessors,
+            string joinedModifiers,
+            string propertyName,
+            string propertyTypeName)
         {
             StringBuilder sb = new StringBuilder();
 
