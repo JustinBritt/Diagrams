@@ -117,17 +117,17 @@
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
-            currentTitle = this.DetermineTitle(typeDeclaration);
+            this.currentTitle = this.DetermineTitle(typeDeclaration);
 
-            if (!String.IsNullOrEmpty(currentTitle))
+            if (!String.IsNullOrEmpty(this.currentTitle))
             {
-                if (!Diagrams.ContainsTitle(currentTitle))
+                if (!this.Diagrams.ContainsTitle(this.currentTitle))
                 {
-                    Diagrams.AddTitle(currentTitle);
+                    this.Diagrams.AddTitle(this.currentTitle);
                 }
 
                 this.AddHeader(
-                    currentTitle);
+                    this.currentTitle);
             }
         }
 
