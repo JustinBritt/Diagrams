@@ -42,7 +42,7 @@
 
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_annotation = "annotation";
-        private const string PlantUML_class = "class";   
+        private const string PlantUML_class = "class";
         private const string PlantUML_entity = "entity";
         private const string PlantUML_enum = "enum";
         private const string PlantUML_implements = "implements";
@@ -668,9 +668,17 @@
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
+                    "abstract" => modifier_abstract,
+
+                    "internal" => stereotype_internal,
+
                     "private" => stereotype_private,
 
+                    "protected" => stereotype_protected,
+
                     "public" => stereotype_public,
+
+                    "static" => modifier_static,
 
                     _ => throw new Exception("")
                 };
