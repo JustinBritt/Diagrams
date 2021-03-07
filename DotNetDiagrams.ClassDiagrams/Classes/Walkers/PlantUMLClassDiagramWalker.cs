@@ -732,12 +732,6 @@
 
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
-            TypeSyntax type = fieldDeclaration.Declaration.Type;
-
-            SemanticModel semanticModel;
-
-            semanticModel = compilation.GetSemanticModel(fieldDeclaration.Declaration.Type.SyntaxTree, true);
-
             string fieldTypeName = this.GetTypeNameOrFallback(
                 fieldDeclaration.Declaration.Type.ToString(),
                 fieldDeclaration.Declaration,
