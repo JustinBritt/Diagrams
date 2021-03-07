@@ -784,6 +784,11 @@
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
 
+            if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
+            {
+                // TODO: Account for this
+            }
+
             if (propertyDeclaration.ExpressionBody is not null)
             {
                 // TODO: Add method
