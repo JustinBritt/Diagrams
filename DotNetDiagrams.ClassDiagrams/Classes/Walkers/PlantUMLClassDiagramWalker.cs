@@ -734,6 +734,26 @@
 
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
+            foreach (VariableDeclaratorSyntax variable in variables)
+            {
+                string variableName = variable.Identifier.ValueText;
+
+                // TODO: Finish
+                if (variable.Initializer is not null)
+                {
+                    var variableInitializer = variable.Initializer;
+                }
+
+                // TODO: Finish
+                if (variable.ArgumentList is not null)
+                {
+                    foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
+                    {
+                        var B = 2;
+                    }
+                }
+            }
+
             string fieldTypeName = this.GetTypeNameOrFallback(
                 fieldDeclaration.Declaration.Type.ToString(),
                 fieldDeclaration.Declaration,
