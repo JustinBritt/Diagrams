@@ -631,7 +631,7 @@
                 }
             }
 
-            this.AddCommand($"{propertyName} : {string.Join(" ", accessors)}");           
+            this.AddCommand($"{propertyName} : {String.Join(" ", accessors)}");           
 
             base.Visit(
                 propertyDeclaration);
