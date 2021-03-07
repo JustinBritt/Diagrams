@@ -637,6 +637,31 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             // Modifiers
+            List<string> CSharpModifiers = methodDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "override" => stereotype_override,
+
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    "static" => modifier_static,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string joinedModifiers = String.Join(
+                " ",
+                PlantUMLModifiers);
 
             string command = this.BuildMethodDeclarationCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
