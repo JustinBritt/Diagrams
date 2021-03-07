@@ -150,6 +150,17 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+            }
+
+            sb.Append(" ");
+
+            sb.Append(fieldTypeName);
+
+            sb.Append(" ");
+
             return sb.ToString();
         }
 
