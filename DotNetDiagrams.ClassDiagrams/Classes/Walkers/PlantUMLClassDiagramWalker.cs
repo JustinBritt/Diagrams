@@ -694,7 +694,6 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
-            // TODO: Account for this
             string explicitInterfaceSpecifierTypeName = String.Empty;
 
             if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
