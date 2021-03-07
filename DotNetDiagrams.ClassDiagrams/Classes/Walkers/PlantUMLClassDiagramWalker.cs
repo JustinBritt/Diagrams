@@ -143,6 +143,7 @@
 
         private string BuildMethodDeclarationCommand(
             string joinedConstraintClauses,
+            string joinedModifiers,
             string joinedParameters,
             string joinedTypeParameters,
             string methodName,
@@ -675,6 +676,7 @@
                     semanticModel: compilation.GetSemanticModel(
                         methodDeclaration.SyntaxTree,
                         true)),
+                joinedModifiers: joinedModifiers,
                 joinedParameters: this.GetJoinedParameters(
                     methodDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
