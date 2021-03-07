@@ -373,25 +373,6 @@
             return propertyTypeName;
         }
 
-        //private string GetReturnType(
-        //    MethodDeclarationSyntax methodDeclaration)
-        //{
-        //    string returnType = String.Empty;
-
-        //    SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
-
-        //    if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
-        //    {
-        //        returnType = targetType.ToString();
-        //    }
-        //    else
-        //    {
-        //        returnType = methodDeclaration.ReturnType.ToString();
-        //    }
-
-        //    return returnType;
-        //}
-
         private string GetTypeNameOrFallback(
             string fallback,
             SyntaxNode syntaxNode,
