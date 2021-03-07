@@ -386,6 +386,27 @@
             return returnType;
         }
 
+        private string GetTypeNameOrFallback(
+            string fallback,
+            SyntaxNode syntaxNode,
+            SyntaxTree syntaxTree)
+        {
+            string name = String.Empty;
+
+            SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+            {
+                name = targetType.ToString();
+            }
+            else
+            {
+                name = fallback;
+            }
+
+            return name;
+        }
+
         private List<string> GetTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
