@@ -335,6 +335,40 @@
                 typeParameters);
         }
 
+        private List<string> GetModifiers(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> CSharpModifiers = methodDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => modifier_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "override" => stereotype_override,
+
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    "static" => modifier_static,
+
+                    "unafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -645,33 +679,7 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             // Modifiers
-            List<string> CSharpModifiers = methodDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in CSharpModifiers)
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "abstract" => modifier_abstract,
-
-                    "internal" => stereotype_internal,
-
-                    "override" => stereotype_override,
-
-                    "private" => stereotype_private,
-
-                    "public" => stereotype_public,
-
-                    "static" => modifier_static,
-
-                    "unafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
+            List<string> PlantUMLModifiers = this.GetModifiers(methodDeclaration);
 
             string joinedModifiers = String.Join(
                 " ",
