@@ -631,6 +631,11 @@
                 }
             }
 
+            if (propertyDeclaration.ExpressionBody is not null)
+            {
+                // TODO: Add method
+            }
+
             if(propertyDeclaration.Initializer is not null)
             {
                 // TODO: Add method
