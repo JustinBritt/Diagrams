@@ -589,7 +589,7 @@
                 string A = String.Empty;
             }
 
-            AddCommand($"{returnType} {methodName}" + "(" + String.Join(", \n", parameters) + ")");
+            AddCommand($"{returnType} {methodName} {PlantUML_leftParenthesis}{String.Join(", \n", parameters)}{PlantUML_rightParenthesis}");
 
             base.Visit(
                 methodDeclaration);
