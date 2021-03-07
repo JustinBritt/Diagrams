@@ -283,7 +283,9 @@
                 methodDeclaration,
                 semanticModel);
 
-            return String.Join(", ", constraintClauses);
+            return String.Join(
+                ", ",
+                constraintClauses);
         }
 
         private string GetJoinedConstraints(
@@ -294,7 +296,9 @@
                 constraintClause,
                 semanticModel);
 
-            return String.Join(", ", constraints.Select(w => w.ToString()));
+            return String.Join(
+                ", ",
+                constraints.Select(w => w.ToString()));
         }
 
         private string GetJoinedParameters(
@@ -303,7 +307,9 @@
             List<string> parameters = this.GetParameters(
                 methodDeclaration);
 
-            return String.Join(",", parameters);
+            return String.Join(
+                ",",
+                parameters);
         }
 
         private string GetJoinedTypeParameters(
@@ -397,7 +403,8 @@
                 {
                     string typeParameterName = typeParameter.Identifier.ValueText;
 
-                    typeParameters.Add(typeParameterName);
+                    typeParameters.Add(
+                        typeParameterName);
                 }
             }
 
