@@ -581,7 +581,9 @@
             List<string> typeParameters = this.GetTypeParameters(
                 methodDeclaration);
 
-            return String.Join(", ", typeParameters);
+            return String.Join(
+                ", ",
+                typeParameters);
         }
 
         private List<string> GetTypeParameters(
