@@ -200,6 +200,24 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append(joinedModifiers);
+
+            sb.Append(" ");
+
+            sb.Append(propertyTypeName);
+
+            sb.Append(" ");
+
+            sb.Append(propertyName);
+
+            sb.Append(" ");
+
+            sb.Append(":");
+
+            sb.Append(" ");
+
+            sb.Append(joinedAccessors);
+
             return sb.ToString();
         }
 
