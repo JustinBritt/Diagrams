@@ -575,9 +575,17 @@
             return returnType;
         }
 
-        // TODO: Finish
         private string GetJoinedTypeParameters(
              MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> typeParameters = this.GetTypeParameters(
+                methodDeclaration);
+
+            return String.Join(", ", typeParameters);
+        }
+
+        private List<string> GetTypeParameters(
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = new List<string>();
 
@@ -591,7 +599,7 @@
                 }
             }
 
-            return String.Join(", ", typeParameters);
+            return typeParameters;
         }
 
         private string BuildMethodDeclarationCommand(
