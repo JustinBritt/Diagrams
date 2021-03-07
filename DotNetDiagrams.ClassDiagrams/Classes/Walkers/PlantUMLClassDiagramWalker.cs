@@ -784,9 +784,14 @@
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
 
+            string explicitInterfaceSpecifierTypeName = String.Empty;
+
             if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
             {
-                // TODO: Account for this
+                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+                   propertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
+                   propertyDeclaration.ExplicitInterfaceSpecifier.Name,
+                   propertyDeclaration.SyntaxTree);
             }
 
             if (propertyDeclaration.ExpressionBody is not null)
