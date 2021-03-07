@@ -48,11 +48,13 @@
         private const string PlantUML_implements = "implements";
         private const string PlantUML_interface = "interface";
         private const string PlantUML_leftBrace = "{";
+        private const string PlantUML_leftParenthesis = "(";
         private const string PlantUML_packageProtected = "~";
         private const string PlantUML_private = "-";
         private const string PlantUML_protected = "#";
         private const string PlantUML_public = "+";
         private const string PlantUML_rightBrace = "}";
+        private const string PlantUML_rightParenthesis = ")";
         private const string PlantUML_title = "title";
 
         private readonly Compilation compilation;
