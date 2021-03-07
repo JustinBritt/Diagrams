@@ -336,16 +336,10 @@
                 {
                     string parameterName = parameter.Identifier.ValueText;
 
-                    string parameterTypeName = String.Empty;
-
-                    if (ModelExtensions.GetTypeInfo(semanticModel, parameter.Type).Type is INamedTypeSymbol parameterTargetType)
-                    {
-                        parameterTypeName = parameterTargetType.ToString();
-                    }
-                    else
-                    {
-                        parameterTypeName = parameter.Type.ToString();
-                    }
+                    string parameterTypeName = this.GetTypeNameOrFallback(
+                        parameter.Type.ToString(),
+                        parameter.Type,
+                        methodDeclaration.SyntaxTree);
 
                     parameters.Add($"{parameterTypeName} {parameterName}");
                 }
