@@ -626,7 +626,7 @@
                 string A = String.Empty;
             }
 
-            string command = $"{returnType} {methodName} {PlantUML_leftParenthesis}{joinedParameters)}{PlantUML_rightParenthesis}";
+            string command = $"{returnType} {methodName} {PlantUML_leftParenthesis}{joinedParameters}{PlantUML_rightParenthesis}";
 
             this.AddCommand(command);
 
