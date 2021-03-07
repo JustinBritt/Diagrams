@@ -794,14 +794,6 @@
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            string propertyName = propertyDeclaration.Identifier.ValueText;
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                propertyDeclaration);
-
-            string joinedAccessors = this.GetJoinedAccessors(
-                propertyDeclaration);
-
             string explicitInterfaceSpecifierTypeName = String.Empty;
 
             if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
@@ -823,12 +815,18 @@
                 ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
             }
 
-            string propertyTypeName = this.GetTypeNameOrFallback(
-                propertyDeclaration.Type.ToString(),
-                propertyDeclaration.Type,
-                propertyDeclaration.SyntaxTree);
+            string command = this.BuildPropertyDeclarationCommand(
+                joinedAccessors: this.GetJoinedAccessors(
+                    propertyDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    propertyDeclaration),
+                propertyName: propertyDeclaration.Identifier.ValueText,
+                propertyTypeName: this.GetTypeNameOrFallback(
+                    propertyDeclaration.Type.ToString(),
+                    propertyDeclaration.Type,
+                    propertyDeclaration.SyntaxTree));
 
-            this.AddCommand($"{joinedModifiers} {propertyTypeName} {propertyName} : {joinedAccessors}");           
+            this.AddCommand(command);           
 
             base.Visit(
                 propertyDeclaration);
