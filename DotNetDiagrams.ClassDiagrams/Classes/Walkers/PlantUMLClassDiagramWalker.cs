@@ -693,6 +693,8 @@
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
+            // Modifiers
+
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
             TypeSyntax type = fieldDeclaration.Declaration.Type;
