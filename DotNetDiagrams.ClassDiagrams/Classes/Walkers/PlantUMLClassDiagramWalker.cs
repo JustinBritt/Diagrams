@@ -678,7 +678,9 @@
                 PlantUMLModifiers.Add(PlantUMLModifier);
             }
 
-            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(
+                " ",
+                PlantUMLModifiers);
 
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
