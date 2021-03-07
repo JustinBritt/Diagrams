@@ -424,7 +424,9 @@
         }
 
         // TODO: Remove
-        private void GGG<T>(T value) where T : struct, IDisposable
+        private void GGG<T, U>(T value, U value2) 
+            where T : struct, IDisposable
+            where U : struct, IAliasSymbol
         { 
 
         }
