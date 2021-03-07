@@ -594,6 +594,42 @@
             return String.Join(", ", typeParameters);
         }
 
+        private string BuildMethodDeclarationCommand(
+            string joinedConstraintClauses,
+            string joinedParameters,
+            string joinedTypeParameters,
+            string methodName,
+            string returnType)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(returnType);
+
+            sb.Append(" ");
+
+            sb.Append(methodName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedTypeParameters}>");
+            }
+
+            sb.Append(PlantUML_leftParenthesis);
+
+            sb.Append(joinedParameters);
+
+            sb.Append(PlantUML_rightParenthesis);
+
+            if (joinedConstraintClauses.Length > 0)
+            {
+                sb.Append(" where ");
+
+                sb.Append(joinedConstraintClauses);
+            }
+
+            return sb.ToString();
+        }
+
         // TODO: Finish
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
@@ -619,32 +655,12 @@
             string joinedParameters = this.GetJoinedParameters(
                 methodDeclaration);
 
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(returnType);
-            
-            sb.Append(" ");
-            
-            sb.Append(methodName);
-
-            if (joinedTypeParameters.Length > 0)
-            {
-                sb.Append($"<{joinedTypeParameters}>");
-            }
-
-            sb.Append(PlantUML_leftParenthesis);
-
-            sb.Append(joinedParameters);
-
-            sb.Append(PlantUML_rightParenthesis);
-
-            if (joinedConstraintClauses.Length > 0)
-            {
-                sb.Append(" where ");
-                sb.Append(joinedConstraintClauses);
-            }
-
-            string command = sb.ToString();
+            string command = this.BuildMethodDeclarationCommand(
+                joinedConstraintClauses,
+                joinedParameters,
+                joinedTypeParameters,
+                methodName,
+                returnType);
 
             this.AddCommand(command);
 
