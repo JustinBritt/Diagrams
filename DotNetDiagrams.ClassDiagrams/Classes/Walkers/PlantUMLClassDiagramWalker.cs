@@ -494,6 +494,17 @@
             return typeParameterConstraintName;
         }
 
+        private string GetJoinedConstraintClauses(
+            MethodDeclarationSyntax methodDeclaration,
+            SemanticModel semanticModel)
+        {
+            List<string> constraintClauses = this.GetConstraintClauses(
+                methodDeclaration,
+                semanticModel);
+
+            return String.Join(", ", constraintClauses);
+        }
+
         private string GetJoinedConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
             SemanticModel semanticModel)
