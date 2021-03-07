@@ -156,6 +156,8 @@
                 sb.Append(joinedModifiers);
             }
 
+            sb.Append(" ");
+
             sb.Append(returnTypeName);
 
             sb.Append(" ");
