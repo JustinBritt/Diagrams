@@ -522,7 +522,7 @@
             List<string> parameters = this.GetParameters(
                 methodDeclaration);
 
-            return String.Join(", \n", parameters);
+            return String.Join(",", parameters);
         }
 
         private List<string> GetParameters(
