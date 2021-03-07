@@ -701,7 +701,7 @@
                 propertyDeclaration.Type,
                 propertyDeclaration.SyntaxTree);
 
-            this.AddCommand($"{propertyTypeName} {propertyName} : {joinedAccessors}");           
+            this.AddCommand($"{joinedModifiers} {propertyTypeName} {propertyName} : {joinedAccessors}");           
 
             base.Visit(
                 propertyDeclaration);
