@@ -431,6 +431,42 @@
 
         }
 
+        private string BuildMethodDeclarationCommand(
+            string joinedConstraintClauses,
+            string joinedParameters,
+            string joinedTypeParameters,
+            string methodName,
+            string returnType)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(returnType);
+
+            sb.Append(" ");
+
+            sb.Append(methodName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedTypeParameters}>");
+            }
+
+            sb.Append(PlantUML_leftParenthesis);
+
+            sb.Append(joinedParameters);
+
+            sb.Append(PlantUML_rightParenthesis);
+
+            if (joinedConstraintClauses.Length > 0)
+            {
+                sb.Append(" where ");
+
+                sb.Append(joinedConstraintClauses);
+            }
+
+            return sb.ToString();
+        }
+
         private string GetConstraint(
             SemanticModel semanticModel,
             TypeParameterConstraintSyntax typeParameterConstraint)
@@ -602,42 +638,6 @@
             }
 
             return typeParameters;
-        }
-
-        private string BuildMethodDeclarationCommand(
-            string joinedConstraintClauses,
-            string joinedParameters,
-            string joinedTypeParameters,
-            string methodName,
-            string returnType)
-        {
-            StringBuilder sb = new StringBuilder();
-
-            sb.Append(returnType);
-
-            sb.Append(" ");
-
-            sb.Append(methodName);
-
-            if (joinedTypeParameters.Length > 0)
-            {
-                sb.Append($"<{joinedTypeParameters}>");
-            }
-
-            sb.Append(PlantUML_leftParenthesis);
-
-            sb.Append(joinedParameters);
-
-            sb.Append(PlantUML_rightParenthesis);
-
-            if (joinedConstraintClauses.Length > 0)
-            {
-                sb.Append(" where ");
-
-                sb.Append(joinedConstraintClauses);
-            }
-
-            return sb.ToString();
         }
 
         private void Visit(
