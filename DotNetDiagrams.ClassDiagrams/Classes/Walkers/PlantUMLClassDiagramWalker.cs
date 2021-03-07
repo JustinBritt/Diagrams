@@ -431,6 +431,27 @@
 
         }
 
+        private string GetConstraint(
+            SemanticModel semanticModel,
+            TypeParameterConstraintSyntax typeParameterConstraint)
+        {
+            string typeParameterConstraintName = String.Empty;
+
+            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
+            {
+                if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
+                {
+                    typeParameterConstraintName = targetType.ToString();
+                }
+            }
+            else
+            {
+                typeParameterConstraintName = typeParameterConstraint.ToString();
+            }
+
+            return typeParameterConstraintName;
+        }
+
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration,
             SemanticModel semanticModel)
@@ -473,27 +494,6 @@
             return constraints;
         }
 
-        private string GetConstraint(
-            SemanticModel semanticModel,
-            TypeParameterConstraintSyntax typeParameterConstraint)
-        {
-            string typeParameterConstraintName = String.Empty;
-
-            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-            {
-                if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
-                {
-                    typeParameterConstraintName = targetType.ToString();
-                }
-            }
-            else
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-
-            return typeParameterConstraintName;
-        }
-
         private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration,
             SemanticModel semanticModel)
@@ -523,6 +523,17 @@
                 methodDeclaration);
 
             return String.Join(",", parameters);
+        }
+
+        private string GetJoinedTypeParameters(
+             MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> typeParameters = this.GetTypeParameters(
+                methodDeclaration);
+
+            return String.Join(
+                ", ",
+                typeParameters);
         }
 
         private List<string> GetParameters(
@@ -573,17 +584,6 @@
             }
 
             return returnType;
-        }
-
-        private string GetJoinedTypeParameters(
-             MethodDeclarationSyntax methodDeclaration)
-        {
-            List<string> typeParameters = this.GetTypeParameters(
-                methodDeclaration);
-
-            return String.Join(
-                ", ",
-                typeParameters);
         }
 
         private List<string> GetTypeParameters(
