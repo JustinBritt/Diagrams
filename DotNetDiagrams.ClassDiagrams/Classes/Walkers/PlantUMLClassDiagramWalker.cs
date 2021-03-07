@@ -689,6 +689,16 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
+            // TODO: Account for this
+            if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
+            {
+                var val = methodDeclaration.ExplicitInterfaceSpecifier;
+
+                var desc = val.DescendantNodesAndSelf();
+
+                var dotToken = val.DotToken.ValueText;
+            }
+
             string command = this.BuildMethodDeclarationCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodDeclaration: methodDeclaration,
