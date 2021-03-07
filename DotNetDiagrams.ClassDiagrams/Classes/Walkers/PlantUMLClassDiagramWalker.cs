@@ -654,7 +654,7 @@
                 propertyTypeName = propertyDeclaration.Type.ToString();
             }
 
-            this.AddCommand($"{propertyName} : {String.Join(" ", accessors)}");           
+            this.AddCommand($"{propertyTypeName} {propertyName} : {String.Join(" ", accessors)}");           
 
             base.Visit(
                 propertyDeclaration);
