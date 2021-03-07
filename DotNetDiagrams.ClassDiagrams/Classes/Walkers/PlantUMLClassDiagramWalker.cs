@@ -744,10 +744,6 @@
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            // Modifiers
-            string joinedModifiers = this.GetJoinedModifiers(
-                fieldDeclaration);
-
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
             foreach (VariableDeclaratorSyntax variable in variables)
@@ -777,10 +773,14 @@
                 }
             }
 
-            string fieldTypeName = this.GetTypeNameOrFallback(
-                fieldDeclaration.Declaration.Type.ToString(),
-                fieldDeclaration.Declaration,
-                fieldDeclaration.SyntaxTree);
+            string command = this.BuildFieldDeclarationCommand(
+                fieldTypeName: this.GetTypeNameOrFallback(
+                    fieldDeclaration.Declaration.Type.ToString(),
+                    fieldDeclaration.Declaration,
+                    fieldDeclaration.SyntaxTree),
+                joinedModifiers: this.GetJoinedModifiers(
+                    fieldDeclaration),
+                joinedVariables: "");
 
             base.Visit(
                 fieldDeclaration);
