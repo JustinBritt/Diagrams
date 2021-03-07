@@ -643,12 +643,12 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
-            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
-
             string command = this.BuildMethodDeclarationCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
-                    methodDeclaration,
-                    semanticModel),
+                    methodDeclaration: methodDeclaration,
+                    semanticModel: compilation.GetSemanticModel(
+                        methodDeclaration.SyntaxTree,
+                        true)),
                 joinedParameters: this.GetJoinedParameters(
                     methodDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
