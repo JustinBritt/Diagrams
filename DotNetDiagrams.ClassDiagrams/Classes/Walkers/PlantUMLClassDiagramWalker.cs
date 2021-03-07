@@ -478,24 +478,16 @@
         {
             string typeParameterConstraintName = String.Empty;
 
-            if (typeParameterConstraint is ClassOrStructConstraintSyntax)
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-            else if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
+            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
             {
                 if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
                 {
                     typeParameterConstraintName = targetType.ToString();
                 }
-                else
-                {
-                    typeParameterConstraintName = typeParameterConstraint.ToString();
-                }
             }
             else
             {
-                throw new Exception(typeParameterConstraint.Kind().ToString());
+                typeParameterConstraintName = typeParameterConstraint.ToString();
             }
 
             return typeParameterConstraintName;
