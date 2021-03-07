@@ -141,249 +141,6 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
-        /// <summary>
-        /// This visits a node in the syntax tree.
-        /// </summary>
-        /// <param name="node">Node</param>
-        public override void Visit(
-            SyntaxNode node)
-        {
-            switch (node)
-            {
-                case ClassDeclarationSyntax classDeclaration:
-                    this.Visit(classDeclaration);
-                    break;
-                case ConstructorDeclarationSyntax constructorDeclaration:
-                    this.Visit(constructorDeclaration);
-                    break;
-                case FieldDeclarationSyntax fieldDeclaration:
-                    this.Visit(fieldDeclaration);
-                    break;
-                case InterfaceDeclarationSyntax interfaceDeclaration:
-                    this.Visit(interfaceDeclaration);
-                    break;
-                case MethodDeclarationSyntax methodDeclaration:
-                    this.Visit(methodDeclaration);
-                    break;
-                case PropertyDeclarationSyntax propertyDeclaration:
-                    this.Visit(propertyDeclaration);
-                    break;
-                case StructDeclarationSyntax structDeclaration:
-                    this.Visit(structDeclaration);
-                    break;
-                default:
-                    base.Visit(node);
-                    break;
-            }
-        }
-
-        // TODO: Need to account for ConstraintClauses and TypeParameterList
-        private void Visit(
-            ClassDeclarationSyntax classDeclaration)
-        {
-            string className = classDeclaration.Identifier.ValueText;
-
-            List<string> modifiers = new List<string>();
-
-            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "abstract" => stereotype_abstract,
-
-                    "internal" => stereotype_internal,
-
-                    "partial" => stereotype_partial,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "sealed" => stereotype_sealed,
-
-                    "static" => stereotype_static,
-                    
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                modifiers.Add(PlantUMLModifier);
-            }
-
-            string joinedModifiers = String.Join(" ", modifiers);
-
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            if (classDeclaration == declaredTypes.First())
-            {
-                this.StartDiagram(
-                    classDeclaration);
-            }
-
-            // Base types
-            List<string> baseTypeNames = new List<string>();
-
-            if (classDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
-                {
-                    SemanticModel semanticModel;
-
-                    semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
-
-                    string baseTypeName = String.Empty;
-
-                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
-                    {
-                        baseTypeName = targetType.ToString();
-                    }
-                    else
-                    {
-                        baseTypeName = baseType.Type.ToString();
-                    }
-
-                    baseTypeNames.Add(
-                            baseTypeName);
-                }
-            }
-
-            string joinedBaseTypeNames = String.Empty;
-            
-            if(baseTypeNames.Count > 0)
-            {
-                joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
-            }
-
-            // TypeParameterList
-            if (classDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-                }    
-            }
-
-            if (classDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
-                {
-                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
-                    {
-                        // TODO: Change
-                        string val = constraint.ToFullString();
-                    }
-                }
-            }
-
-            if (classDeclaration.BaseList is null)
-            {
-                if (classDeclaration.Modifiers.Count > 0)
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {PlantUML_leftBrace}");
-                }
-                else
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {PlantUML_leftBrace}");
-                }
-            }
-            else 
-            {
-                if (classDeclaration.Modifiers.Count > 0)
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
-                }
-                else
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedBaseTypeNames} {PlantUML_leftBrace}");
-                }
-            }
-
-            base.Visit(
-                classDeclaration);
-
-            this.AddCommand($"{PlantUML_rightBrace}");
-        }
-
-        private void Visit(
-            ConstructorDeclarationSyntax constructorDeclaration)
-        {
-            base.Visit(
-                constructorDeclaration);
-        }
-
-        // TODO: Finish
-        private void Visit(
-            FieldDeclarationSyntax fieldDeclaration)
-        {
-            List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
-
-            TypeSyntax type = fieldDeclaration.Declaration.Type;
-
-            SemanticModel semanticModel;
-
-            semanticModel = compilation.GetSemanticModel(fieldDeclaration.Declaration.Type.SyntaxTree, true);
-
-            string typeName = String.Empty;
-
-            if (ModelExtensions.GetTypeInfo(semanticModel, fieldDeclaration.Declaration.Type).Type is INamedTypeSymbol targetType)
-            {
-                typeName = targetType.ToString();
-            }
-            else
-            {
-                typeName = type.ToString();
-            }
-
-            base.Visit(
-                fieldDeclaration);
-        }
-
-        private void Visit(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            string interfaceName = interfaceDeclaration.Identifier.ValueText;
-
-            List<string> CSharpModifiers = interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in CSharpModifiers)
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "internal" => stereotype_internal,
-
-                    "private" => stereotype_private,
-
-                    "public" => stereotype_public,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
-
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            if (interfaceDeclaration == declaredTypes.First())
-            {
-                this.StartDiagram(
-                    interfaceDeclaration);
-            }
-
-            this.AddCommand($"{PlantUML_interface} {interfaceName} {joinedModifiers}");
-
-            base.Visit(
-                interfaceDeclaration);
-        }
-
         private string BuildMethodDeclarationCommand(
             string joinedConstraintClauses,
             string joinedParameters,
@@ -591,6 +348,249 @@
             }
 
             return typeParameters;
+        }
+
+        /// <summary>
+        /// This visits a node in the syntax tree.
+        /// </summary>
+        /// <param name="node">Node</param>
+        public override void Visit(
+            SyntaxNode node)
+        {
+            switch (node)
+            {
+                case ClassDeclarationSyntax classDeclaration:
+                    this.Visit(classDeclaration);
+                    break;
+                case ConstructorDeclarationSyntax constructorDeclaration:
+                    this.Visit(constructorDeclaration);
+                    break;
+                case FieldDeclarationSyntax fieldDeclaration:
+                    this.Visit(fieldDeclaration);
+                    break;
+                case InterfaceDeclarationSyntax interfaceDeclaration:
+                    this.Visit(interfaceDeclaration);
+                    break;
+                case MethodDeclarationSyntax methodDeclaration:
+                    this.Visit(methodDeclaration);
+                    break;
+                case PropertyDeclarationSyntax propertyDeclaration:
+                    this.Visit(propertyDeclaration);
+                    break;
+                case StructDeclarationSyntax structDeclaration:
+                    this.Visit(structDeclaration);
+                    break;
+                default:
+                    base.Visit(node);
+                    break;
+            }
+        }
+
+        // TODO: Need to account for ConstraintClauses and TypeParameterList
+        private void Visit(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            string className = classDeclaration.Identifier.ValueText;
+
+            List<string> modifiers = new List<string>();
+
+            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => stereotype_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "sealed" => stereotype_sealed,
+
+                    "static" => stereotype_static,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                modifiers.Add(PlantUMLModifier);
+            }
+
+            string joinedModifiers = String.Join(" ", modifiers);
+
+            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            if (classDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    classDeclaration);
+            }
+
+            // Base types
+            List<string> baseTypeNames = new List<string>();
+
+            if (classDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
+                {
+                    SemanticModel semanticModel;
+
+                    semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
+
+                    string baseTypeName = String.Empty;
+
+                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
+                    {
+                        baseTypeName = targetType.ToString();
+                    }
+                    else
+                    {
+                        baseTypeName = baseType.Type.ToString();
+                    }
+
+                    baseTypeNames.Add(
+                            baseTypeName);
+                }
+            }
+
+            string joinedBaseTypeNames = String.Empty;
+
+            if (baseTypeNames.Count > 0)
+            {
+                joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
+            }
+
+            // TypeParameterList
+            if (classDeclaration.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
+                }
+            }
+
+            if (classDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
+                {
+                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
+                    {
+                        // TODO: Change
+                        string val = constraint.ToFullString();
+                    }
+                }
+            }
+
+            if (classDeclaration.BaseList is null)
+            {
+                if (classDeclaration.Modifiers.Count > 0)
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {PlantUML_leftBrace}");
+                }
+                else
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {PlantUML_leftBrace}");
+                }
+            }
+            else
+            {
+                if (classDeclaration.Modifiers.Count > 0)
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+                }
+                else
+                {
+                    this.AddCommand($"{PlantUML_class} {className} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+                }
+            }
+
+            base.Visit(
+                classDeclaration);
+
+            this.AddCommand($"{PlantUML_rightBrace}");
+        }
+
+        private void Visit(
+            ConstructorDeclarationSyntax constructorDeclaration)
+        {
+            base.Visit(
+                constructorDeclaration);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
+
+            TypeSyntax type = fieldDeclaration.Declaration.Type;
+
+            SemanticModel semanticModel;
+
+            semanticModel = compilation.GetSemanticModel(fieldDeclaration.Declaration.Type.SyntaxTree, true);
+
+            string typeName = String.Empty;
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, fieldDeclaration.Declaration.Type).Type is INamedTypeSymbol targetType)
+            {
+                typeName = targetType.ToString();
+            }
+            else
+            {
+                typeName = type.ToString();
+            }
+
+            base.Visit(
+                fieldDeclaration);
+        }
+
+        private void Visit(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            string interfaceName = interfaceDeclaration.Identifier.ValueText;
+
+            List<string> CSharpModifiers = interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
+
+            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            if (interfaceDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    interfaceDeclaration);
+            }
+
+            this.AddCommand($"{PlantUML_interface} {interfaceName} {joinedModifiers}");
+
+            base.Visit(
+                interfaceDeclaration);
         }
 
         private void Visit(
