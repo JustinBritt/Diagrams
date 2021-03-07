@@ -423,14 +423,6 @@
                 interfaceDeclaration);
         }
 
-        // TODO: Remove
-        private void GGG<T, U>(T value, U value2) 
-            where T : struct, IDisposable
-            where U : struct, IAliasSymbol
-        { 
-
-        }
-
         private string BuildMethodDeclarationCommand(
             string joinedConstraintClauses,
             string joinedParameters,
