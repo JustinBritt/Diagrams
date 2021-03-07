@@ -585,9 +585,23 @@
                 semanticModel);
 
             // TypeParameterList
+            List<string> typeParameters = new List<string>();
+
             if (methodDeclaration.TypeParameterList is not null)
             {
+                foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
 
+                    typeParameters.Add(typeParameterName);
+                }
+            }
+
+            string joinedTypeParameters = String.Join(", ", typeParameters);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                var w = 2;
             }
 
             // Parameters
