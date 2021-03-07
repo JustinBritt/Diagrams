@@ -161,6 +161,11 @@
 
             sb.Append(" ");
 
+            if (joinedVariables.Length > 0)
+            {
+                sb.Append(joinedVariables);
+            }
+
             return sb.ToString();
         }
 
