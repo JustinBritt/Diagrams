@@ -410,6 +410,8 @@
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
+                    "const" => stereotype_const,
+
                     "private" => stereotype_private,
 
                     "public" => stereotype_public,
