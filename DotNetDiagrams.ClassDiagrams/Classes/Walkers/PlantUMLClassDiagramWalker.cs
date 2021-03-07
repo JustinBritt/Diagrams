@@ -595,7 +595,6 @@
         }
 
         // TODO: Finish
-        // TODO: Account for generics
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
