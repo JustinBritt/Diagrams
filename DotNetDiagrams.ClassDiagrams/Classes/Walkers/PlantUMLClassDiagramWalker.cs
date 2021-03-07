@@ -185,14 +185,20 @@
             return sb.ToString();
         }
 
-        private List<string> GetAccessors(
+        private List<string>? GetAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            return propertyDeclaration
-                .AccessorList
-                .Accessors
-                .Select(w => $"<<{w.Keyword.ValueText}>>")
-                .ToList();
+            List<string> accessors = new List<string>();
+
+            if (propertyDeclaration.AccessorList is not null)
+            {
+                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
+                {
+                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                }
+            }
+
+            return accessors;
         }
 
         private string GetConstraint(
@@ -367,24 +373,24 @@
             return propertyTypeName;
         }
 
-        private string GetReturnType(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            string returnType = String.Empty;
+        //private string GetReturnType(
+        //    MethodDeclarationSyntax methodDeclaration)
+        //{
+        //    string returnType = String.Empty;
 
-            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+        //    SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
-            if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
-            {
-                returnType = targetType.ToString();
-            }
-            else
-            {
-                returnType = methodDeclaration.ReturnType.ToString();
-            }
+        //    if (ModelExtensions.GetTypeInfo(semanticModel, methodDeclaration.ReturnType).Type is INamedTypeSymbol targetType)
+        //    {
+        //        returnType = targetType.ToString();
+        //    }
+        //    else
+        //    {
+        //        returnType = methodDeclaration.ReturnType.ToString();
+        //    }
 
-            return returnType;
-        }
+        //    return returnType;
+        //}
 
         private string GetTypeNameOrFallback(
             string fallback,
@@ -683,8 +689,10 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     methodDeclaration),
                 methodName: methodDeclaration.Identifier.ValueText,
-                returnType: this.GetReturnType(
-                    methodDeclaration));
+                returnType: this.GetTypeNameOrFallback(
+                    fallback: methodDeclaration.ReturnType.ToString(),
+                    syntaxNode: methodDeclaration.ReturnType,
+                    syntaxTree: methodDeclaration.SyntaxTree));
 
             this.AddCommand(command);
 
