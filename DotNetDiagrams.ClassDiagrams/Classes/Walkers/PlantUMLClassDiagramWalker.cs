@@ -26,6 +26,7 @@
 
         private const string stereotype_abstract = "<<abstract>>";
         private const string stereotype_event = "<<event>>";
+        private const string stereotype_const = "<<const>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
