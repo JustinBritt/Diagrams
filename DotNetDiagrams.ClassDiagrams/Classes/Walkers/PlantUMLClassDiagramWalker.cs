@@ -619,12 +619,6 @@
             string joinedParameters = this.GetJoinedParameters(
                 methodDeclaration);
 
-            // TODO: Finish
-            if (joinedConstraintClauses.Length > 0)
-            {
-                string A = String.Empty;
-            }
-
             StringBuilder sb = new StringBuilder();
 
             sb.Append(returnType);
