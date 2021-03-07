@@ -330,6 +330,17 @@
                 PlantUMLModifiers);
         }
 
+        private string GetJoinedModifiers(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                propertyDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
         private string GetJoinedParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -376,6 +387,38 @@
                     "static" => modifier_static,
 
                     "unafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            List<string> CSharpModifiers = propertyDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => modifier_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "static" => modifier_static,
 
                     _ => throw new Exception("")
                 };
@@ -735,36 +778,8 @@
         {
             string propertyName = propertyDeclaration.Identifier.ValueText;
 
-            // Modifiers
-            List<string> CSharpModifiers = propertyDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in CSharpModifiers)
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "abstract" => modifier_abstract,
-
-                    "internal" => stereotype_internal,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "static" => modifier_static,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            string joinedModifiers = String.Join(
-                " ",
-                PlantUMLModifiers);
+            string joinedModifiers = this.GetJoinedModifiers(
+                propertyDeclaration);
 
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
