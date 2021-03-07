@@ -18,7 +18,7 @@
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
+    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker, IDisposable
     {
         private const string modifier_abstract = "{abstract}";
         private const string modifier_protectedInternal = "# <<internal>>";
@@ -686,17 +686,21 @@
                 interfaceDeclaration);
         }
 
+        void IDisposable.Dispose()
+        {
+
+        }
+
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
             // TODO: Account for this
             if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
             {
-                var val = methodDeclaration.ExplicitInterfaceSpecifier;
-
-                var desc = val.DescendantNodesAndSelf();
-
-                var dotToken = val.DotToken.ValueText;
+                string explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+                   methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
+                   methodDeclaration.ExplicitInterfaceSpecifier.Name,
+                   methodDeclaration.SyntaxTree);
             }
 
             string command = this.BuildMethodDeclarationCommand(
