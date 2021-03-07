@@ -757,6 +757,8 @@
         {
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
+            List<string> variableNames = new List<string>();
+
             foreach (VariableDeclaratorSyntax variable in variables)
             {
                 string variableName = variable.Identifier.ValueText;
@@ -782,7 +784,12 @@
                         throw new Exception("Remove");
                     }
                 }
+
+                variableNames.Add(variableName);
             }
+
+            // TODO: Update
+            string joinedVariables = String.Join(", ", variableNames);
 
             string command = this.BuildFieldDeclarationCommand(
                 fieldTypeName: this.GetTypeNameOrFallback(
@@ -791,7 +798,7 @@
                     fieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
                     fieldDeclaration),
-                joinedVariables: "");
+                joinedVariables: joinedVariables);
 
             this.AddCommand(command);
 
