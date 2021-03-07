@@ -695,9 +695,11 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             // TODO: Account for this
+            string explicitInterfaceSpecifierTypeName = String.Empty;
+
             if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
             {
-                string explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
                    methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                    methodDeclaration.ExplicitInterfaceSpecifier.Name,
                    methodDeclaration.SyntaxTree);
