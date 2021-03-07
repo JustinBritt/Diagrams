@@ -761,7 +761,7 @@
                 {
                     foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
                     {
-                        var B = 2;
+                        throw new Exception("Remove");
                     }
                 }
             }
