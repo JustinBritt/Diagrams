@@ -729,6 +729,8 @@
             FieldDeclarationSyntax fieldDeclaration)
         {
             // Modifiers
+            string joinedModifiers = this.GetJoinedModifiers(
+                fieldDeclaration);
 
             List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
 
