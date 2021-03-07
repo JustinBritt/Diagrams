@@ -313,6 +313,17 @@
                 constraints.Select(w => w.ToString()));
         }
 
+        private string GetJoinedModifiers(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                methodDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
         private string GetJoinedParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -678,20 +689,14 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
-            // Modifiers
-            List<string> PlantUMLModifiers = this.GetModifiers(methodDeclaration);
-
-            string joinedModifiers = String.Join(
-                " ",
-                PlantUMLModifiers);
-
             string command = this.BuildMethodDeclarationCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodDeclaration: methodDeclaration,
                     semanticModel: compilation.GetSemanticModel(
                         methodDeclaration.SyntaxTree,
                         true)),
-                joinedModifiers: joinedModifiers,
+                joinedModifiers: this.GetJoinedModifiers(
+                    methodDeclaration),
                 joinedParameters: this.GetJoinedParameters(
                     methodDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
