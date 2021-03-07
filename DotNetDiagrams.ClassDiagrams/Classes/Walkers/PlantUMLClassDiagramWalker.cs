@@ -344,6 +344,17 @@
         }
 
         private string GetJoinedModifiers(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                fieldDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
@@ -385,6 +396,30 @@
             return String.Join(
                 ", ",
                 typeParameters);
+        }
+
+        private List<string> GetModifiers(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            List<string> CSharpModifiers = fieldDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
         }
 
         private List<string> GetModifiers(
