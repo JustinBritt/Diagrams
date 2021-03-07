@@ -659,6 +659,8 @@
         {
             string propertyName = propertyDeclaration.Identifier.ValueText;
 
+            // Modifiers
+
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
 
@@ -672,8 +674,6 @@
                 // TODO: Add method
                 ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
             }
-
-            // Modifiers
 
             string propertyTypeName = this.GetTypeNameOrFallback(
                 propertyDeclaration.Type.ToString(),
