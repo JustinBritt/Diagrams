@@ -797,6 +797,7 @@
                 methodDeclaration);
         }
 
+        // TODO: Account for ExpressionBody and Initializer
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
