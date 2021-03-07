@@ -581,6 +581,12 @@
             List<string> parameters = this.GetParameters(
                 methodDeclaration);
 
+            // TODO: Finish
+            if (constraintClauses.Count() > 0)
+            {
+                string A = String.Empty;
+            }
+
             AddCommand($"{returnType} {methodName}" + "(" + String.Join(", \n", parameters) + ")");
 
             base.Visit(
