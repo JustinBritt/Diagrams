@@ -142,6 +142,17 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
+        // TODO: Finish
+        private string BuildFieldDeclarationCommand(
+            string fieldTypeName,
+            string joinedModifiers,
+            string joinedVariables)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
+
         private string BuildMethodDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
             string joinedConstraintClauses,
