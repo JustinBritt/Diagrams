@@ -753,7 +753,7 @@
                 // TODO: Finish
                 if (variable.Initializer is not null)
                 {
-                    if (variable.Initializer is EqualsValueClauseSyntax)
+                    if (variable.Initializer is EqualsValueClauseSyntax equalsValueClause)
                     {
                         var variableInitializer = variable.Initializer;
                     }
