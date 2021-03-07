@@ -519,9 +519,7 @@
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
-            SemanticModel semanticModel;
-
-            semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
+            SemanticModel semanticModel = compilation.GetSemanticModel(methodDeclaration.SyntaxTree, true);
 
             List<string> parameters = new List<string>();
 
