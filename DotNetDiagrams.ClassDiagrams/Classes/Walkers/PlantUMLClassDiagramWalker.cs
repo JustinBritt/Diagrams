@@ -516,6 +516,15 @@
             return String.Join(", ", constraints.Select(w => w.ToString()));
         }
 
+        private string GetJoinedParameters(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            List<string> parameters = this.GetParameters(
+                methodDeclaration);
+
+            return String.Join(", \n", parameters);
+        }
+
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -608,7 +617,7 @@
                 methodDeclaration);
 
             // Parameters
-            List<string> parameters = this.GetParameters(
+            string joinedParameters = this.GetJoinedParameters(
                 methodDeclaration);
 
             // TODO: Finish
@@ -617,7 +626,7 @@
                 string A = String.Empty;
             }
 
-            string command = $"{returnType} {methodName} {PlantUML_leftParenthesis}{String.Join(", \n", parameters)}{PlantUML_rightParenthesis}";
+            string command = $"{returnType} {methodName} {PlantUML_leftParenthesis}{joinedParameters)}{PlantUML_rightParenthesis}";
 
             this.AddCommand(command);
 
