@@ -631,6 +631,11 @@
                 }
             }
 
+            if(propertyDeclaration.Initializer is not null)
+            {
+                // TODO: Add method
+            }
+
             this.AddCommand($"{propertyName} : {String.Join(" ", accessors)}");           
 
             base.Visit(
