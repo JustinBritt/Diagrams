@@ -744,7 +744,14 @@
                 // TODO: Finish
                 if (variable.Initializer is not null)
                 {
-                    var variableInitializer = variable.Initializer;
+                    if (variable.Initializer is EqualsValueClauseSyntax)
+                    {
+                        var variableInitializer = variable.Initializer;
+                    }
+                    else
+                    {
+                        throw new Exception("Remove");
+                    }
                 }
 
                 // TODO: Finish
