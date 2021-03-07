@@ -636,6 +636,8 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
+            // Modifiers
+
             string command = this.BuildMethodDeclarationCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodDeclaration: methodDeclaration,
