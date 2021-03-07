@@ -177,6 +177,14 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private string BuildPropertyDeclarationCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
+
         private string GetConstraint(
             SemanticModel semanticModel,
             TypeParameterConstraintSyntax typeParameterConstraint)
