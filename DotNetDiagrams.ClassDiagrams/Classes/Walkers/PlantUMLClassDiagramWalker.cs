@@ -142,6 +142,7 @@
         }
 
         private string BuildMethodDeclarationCommand(
+            string explicitInterfaceSpecifierTypeName,
             string joinedConstraintClauses,
             string joinedModifiers,
             string joinedParameters,
@@ -161,6 +162,11 @@
             sb.Append(returnTypeName);
 
             sb.Append(" ");
+
+            if (explicitInterfaceSpecifierTypeName.Length > 0)
+            {
+                sb.Append($"{explicitInterfaceSpecifierTypeName}.");
+            }
 
             sb.Append(methodName);
 
@@ -705,6 +711,7 @@
             }
 
             string command = this.BuildMethodDeclarationCommand(
+                explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodDeclaration: methodDeclaration,
                     semanticModel: compilation.GetSemanticModel(
