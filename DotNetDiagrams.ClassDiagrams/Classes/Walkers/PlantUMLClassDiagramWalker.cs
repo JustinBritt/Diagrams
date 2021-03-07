@@ -662,6 +662,24 @@
             // Modifiers
             List<string> CSharpModifiers = propertyDeclaration.Modifiers.Select(w => w.ValueText).ToList();
 
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
+
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyDeclaration);
 
