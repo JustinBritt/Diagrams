@@ -645,6 +645,10 @@
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
+                    "abstract" => modifier_abstract,
+
+                    "internal" => stereotype_internal,
+
                     "override" => stereotype_override,
 
                     "private" => stereotype_private,
@@ -652,6 +656,8 @@
                     "public" => stereotype_public,
 
                     "static" => modifier_static,
+
+                    "unafe" => stereotype_unsafe,
 
                     _ => throw new Exception("")
                 };
