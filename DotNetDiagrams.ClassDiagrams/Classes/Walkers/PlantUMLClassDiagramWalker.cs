@@ -185,7 +185,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private List<string> GetAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
