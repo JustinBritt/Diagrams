@@ -197,7 +197,7 @@
             return sb.ToString();
         }
 
-        private List<string>? GetAccessors(
+        private List<string> GetAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
             List<string> accessors = new List<string>();
