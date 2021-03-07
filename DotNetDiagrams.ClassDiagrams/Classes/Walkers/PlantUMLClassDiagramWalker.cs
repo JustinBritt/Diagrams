@@ -782,6 +782,8 @@
                     fieldDeclaration),
                 joinedVariables: "");
 
+            this.AddCommand(command);
+
             base.Visit(
                 fieldDeclaration);
         }
