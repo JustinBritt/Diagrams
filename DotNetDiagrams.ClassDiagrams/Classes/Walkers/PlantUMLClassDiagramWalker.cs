@@ -1215,12 +1215,6 @@
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
-            // TODO: Account for nesting
-            if (classDeclaration.Parent is TypeDeclarationSyntax)
-            {
-                return;
-            }
-
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (classDeclaration == declaredTypes.First())
@@ -1240,8 +1234,12 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     classDeclaration));
 
-            this.AddCommand(command);
-
+            // TODO: Account for nesting
+            if (classDeclaration.Parent is not TypeDeclarationSyntax)
+            {
+                this.AddCommand(command);
+            }
+                
             base.Visit(
                 classDeclaration);
 
