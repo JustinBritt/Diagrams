@@ -574,6 +574,17 @@
                 PlantUMLModifiers);
         }
 
+        private string GetJoinedModifiers(
+            StructDeclarationSyntax structDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                structDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
         private string GetJoinedParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
