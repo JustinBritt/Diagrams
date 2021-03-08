@@ -270,6 +270,26 @@
             return accessors;
         }
 
+        private List<string> GetBaseListTypes(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> baseTypeNames = new List<string>();
+
+            if (classDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
+                {
+                    baseTypeNames.Add(
+                        this.GetTypeNameOrFallback(
+                            baseType.Type.ToString(),
+                            baseType.Type,
+                            baseType.SyntaxTree));
+                }
+            }
+
+            return baseTypeNames;
+        }
+
         private string GetConstraint(
             SemanticModel semanticModel,
             TypeParameterConstraintSyntax typeParameterConstraint)
@@ -342,6 +362,17 @@
             return String.Join(
                 " ",
                 accessors);
+        }
+
+        private string GetJoinedBaseListTypes(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> baseListTypes = this.GetBaseListTypes(
+                classDeclaration);
+
+            return String.Join(
+                ",",
+                baseListTypes);
         }
 
         private string GetJoinedConstraintClauses(
@@ -732,19 +763,7 @@
                 classDeclaration);
 
             // Base types
-            List<string> baseTypeNames = new List<string>();
-
-            if (classDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
-                {
-                    baseTypeNames.Add(
-                        this.GetTypeNameOrFallback(
-                            baseType.Type.ToString(),
-                            baseType.Type,
-                            baseType.SyntaxTree));
-                }
-            }
+            List<string> baseTypeNames = this.GetBaseListTypes(classDeclaration);
 
             string joinedBaseTypeNames = String.Empty;
 
