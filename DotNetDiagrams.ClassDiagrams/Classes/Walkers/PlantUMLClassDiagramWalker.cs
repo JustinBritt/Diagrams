@@ -1239,8 +1239,6 @@
                     classDeclaration);
             }
 
-            int depth = this.CalculateDepth(classDeclaration);
-
             string command = this.BuildClassDeclarationCommand(
                 className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
@@ -1252,10 +1250,16 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     classDeclaration));
 
+            int depth = this.CalculateDepth(classDeclaration);
+
             // TODO: Account for nesting
-            if (classDeclaration.Parent is not TypeDeclarationSyntax)
+            if (depth == 0)
             {
                 this.AddCommand(command);
+            }
+            else
+            {
+                throw new Exception(depth.ToString());
             }
                 
             base.Visit(
