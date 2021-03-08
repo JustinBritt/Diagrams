@@ -323,6 +323,14 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private string BuildStructDeclarationCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
+
         private List<string> GetAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
