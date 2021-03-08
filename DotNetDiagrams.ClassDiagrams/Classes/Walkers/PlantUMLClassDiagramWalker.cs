@@ -906,26 +906,12 @@
             {
             }
 
-            // ConstraintClauses
-            if (classDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
-                {
-                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
-                    {
-                        // TODO: Change
-                        string val = constraint.ToFullString();
-                    }
-                }
-            }
-
-            // TypeParameterList
-
             string command = this.BuildClassDeclarationCommand(
                 className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
-                joinedConstraintClauses: "", // TODO: Update
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    classDeclaration), 
                 joinedModifiers: this.GetJoinedModifiers(
                     classDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
