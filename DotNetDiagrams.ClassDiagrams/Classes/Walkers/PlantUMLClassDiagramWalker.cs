@@ -218,6 +218,8 @@
         // TODO: Finish
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
+            string joinedBaseListTypes,
+            string joinedConstraintClauses,
             string joinedModifiers,
             string joinedTypeParameters)
         {
@@ -1176,6 +1178,10 @@
 
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: interfaceDeclaration.Identifier.ValueText,
+                joinedBaseListTypes: this.GetJoinedBaseListTypes(
+                    interfaceDeclaration),
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    interfaceDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     interfaceDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
