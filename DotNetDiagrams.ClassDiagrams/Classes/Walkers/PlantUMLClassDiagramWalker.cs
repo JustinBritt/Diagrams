@@ -583,6 +583,44 @@
             return typeParameters;
         }
 
+        // TODO: Account for ArgumentList and Initializer
+        private List<string> GetVariables(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            List<string> variableNames = new List<string>();
+
+            foreach (VariableDeclaratorSyntax variable in fieldDeclaration.Declaration.Variables.ToList())
+            {
+                string variableName = variable.Identifier.ValueText;
+
+                // TODO: Finish
+                if (variable.Initializer is not null)
+                {
+                    if (variable.Initializer is EqualsValueClauseSyntax equalsValueClause)
+                    {
+                        var variableInitializer = variable.Initializer;
+                    }
+                    else
+                    {
+                        throw new Exception("Remove");
+                    }
+                }
+
+                // TODO: Finish
+                if (variable.ArgumentList is not null)
+                {
+                    foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
+                    {
+                        throw new Exception("Remove");
+                    }
+                }
+
+                variableNames.Add(variableName);
+            }
+
+            return variableNames;
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
@@ -756,46 +794,18 @@
                 constructorDeclaration);
         }
 
-        // TODO: Finish
-        // TODO: Account for ArgumentList and Initializer
+        // TODO: Finish      
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            List<VariableDeclaratorSyntax> variables = fieldDeclaration.Declaration.Variables.ToList();
-
-            List<string> variableNames = new List<string>();
-
-            foreach (VariableDeclaratorSyntax variable in variables)
-            {
-                string variableName = variable.Identifier.ValueText;
-
-                // TODO: Finish
-                if (variable.Initializer is not null)
-                {
-                    if (variable.Initializer is EqualsValueClauseSyntax equalsValueClause)
-                    {
-                        var variableInitializer = variable.Initializer;
-                    }
-                    else
-                    {
-                        throw new Exception("Remove");
-                    }
-                }
-
-                // TODO: Finish
-                if (variable.ArgumentList is not null)
-                {
-                    foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
-                    {
-                        throw new Exception("Remove");
-                    }
-                }
-
-                variableNames.Add(variableName);
-            }
+            // Variables
+            List<string> variables = this.GetVariables(
+                fieldDeclaration);
 
             // TODO: Update
-            string joinedVariables = String.Join(", ", variableNames);
+            string joinedVariables = String.Join(
+                ", ",
+                variables);
 
             string command = this.BuildFieldDeclarationCommand(
                 fieldTypeName: this.GetTypeNameOrFallback(
