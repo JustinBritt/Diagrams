@@ -639,7 +639,18 @@
         }
 
         private string GetJoinedTypeParameters(
-             MethodDeclarationSyntax methodDeclaration)
+             InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> typeParameters = this.GetTypeParameters(
+                interfaceDeclaration);
+
+            return String.Join(
+                ", ",
+                typeParameters);
+        }
+
+        private string GetJoinedTypeParameters(
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = this.GetTypeParameters(
                 methodDeclaration);
