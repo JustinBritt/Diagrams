@@ -688,6 +688,25 @@
         }
 
         private List<string> GetTypeParameters(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> typeParameters = new List<string>();
+
+            if (classDeclaration.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
+
+                    typeParameters.Add(
+                        typeParameterName);
+                }
+            }
+
+            return typeParameters;
+        }
+
+        private List<string> GetTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = new List<string>();
