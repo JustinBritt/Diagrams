@@ -110,6 +110,7 @@
         }
 
         // TOOD: namespaceName can be null in unit test projects
+        // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
         {
