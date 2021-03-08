@@ -55,9 +55,6 @@
 
             this.Code.AddRange(this.Header);
 
-            // TODO: Remove
-            this.Body.Clear();
-
             foreach (List<string> item in Types.Select(w => w.Value))
             {
                 this.Body.AddRange(item);
