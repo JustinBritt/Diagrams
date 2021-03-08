@@ -167,14 +167,12 @@
 
             if (joinedBaseListTypes.Length > 0)
             {
-                sb.Append(joinedBaseListTypes);
+                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
 
                 sb.Append(" ");
             }
 
             sb.Append(PlantUML_leftBrace);
-
-            sb.Append("\n");
 
             return sb.ToString();
         }
@@ -794,11 +792,6 @@
                     classDeclaration);
             }
 
-            string className = classDeclaration.Identifier.ValueText;
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                classDeclaration);
-
             // Members?
             if (classDeclaration.Members.Count > 0)
             {
@@ -817,15 +810,6 @@
                 }
             }
 
-            // Base types
-            string joinedBaseTypeNames = this.GetJoinedBaseListTypes(
-                classDeclaration);
-
-            if (joinedBaseTypeNames.Length > 0)
-            {
-                joinedBaseTypeNames = $"{PlantUML_implements} {joinedBaseTypeNames}";
-            }
-
             // TypeParameterList
             if (classDeclaration.TypeParameterList is not null)
             {
@@ -835,28 +819,37 @@
                 }
             }
 
-            if (classDeclaration.BaseList is null)
-            {
-                if (classDeclaration.Modifiers.Count > 0)
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {PlantUML_leftBrace}");
-                }
-                else
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {PlantUML_leftBrace}");
-                }
-            }
-            else
-            {
-                if (classDeclaration.Modifiers.Count > 0)
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
-                }
-                else
-                {
-                    this.AddCommand($"{PlantUML_class} {className} {joinedBaseTypeNames} {PlantUML_leftBrace}");
-                }
-            }
+            string command = this.BuildClassDeclarationCommand(
+                className: classDeclaration.Identifier.ValueText,
+                joinedBaseListTypes: this.GetJoinedBaseListTypes(
+                    classDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    classDeclaration));
+
+            this.AddCommand(command);
+
+            //if (classDeclaration.BaseList is null)
+            //{
+            //    if (classDeclaration.Modifiers.Count > 0)
+            //    {
+            //        this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {PlantUML_leftBrace}");
+            //    }
+            //    else
+            //    {
+            //        this.AddCommand($"{PlantUML_class} {className} {PlantUML_leftBrace}");
+            //    }
+            //}
+            //else
+            //{
+            //    if (classDeclaration.Modifiers.Count > 0)
+            //    {
+            //        this.AddCommand($"{PlantUML_class} {className} {joinedModifiers} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+            //    }
+            //    else
+            //    {
+            //        this.AddCommand($"{PlantUML_class} {className} {joinedBaseTypeNames} {PlantUML_leftBrace}");
+            //    }
+            //}
 
             base.Visit(
                 classDeclaration);
