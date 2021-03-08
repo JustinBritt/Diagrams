@@ -143,7 +143,9 @@
         }
 
         // TODO: Finish
-        private string BuildClassDeclarationCommand()
+        private string BuildClassDeclarationCommand(
+            string className,
+            string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
 
