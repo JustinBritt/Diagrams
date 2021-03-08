@@ -98,6 +98,14 @@
         {
             string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
 
+            string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
+
+            return $"{namespaceName}.{typeName}";
+        }
+
+        private string DetermineTypeDeclarationTypeName(
+            TypeDeclarationSyntax typeDeclaration)
+        {
             List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
 
             List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
@@ -110,9 +118,7 @@
                 }
             }
 
-            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
-
-            return $"{namespaceName}.{typeName}";
+            return String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
         }
 
         private void StartDiagram(
