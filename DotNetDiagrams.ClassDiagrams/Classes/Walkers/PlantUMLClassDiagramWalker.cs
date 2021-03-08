@@ -146,7 +146,8 @@
         private string BuildClassDeclarationCommand(
             string className,
             string joinedBaseListTypes,
-            string joinedModifiers)
+            string joinedModifiers,
+            string joinedTypeParameters)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -155,6 +156,11 @@
             sb.Append(" ");
 
             sb.Append(className);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedTypeParameters}>");
+            }
 
             sb.Append(" ");
 
@@ -847,6 +853,8 @@
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
+                    classDeclaration),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
                     classDeclaration));
 
             this.AddCommand(command);
