@@ -12,7 +12,7 @@
     {
         List<string> Relationships { get; set; }
 
-        List<Tuple<int, string>> Types { get; set; }
+        List<Tuple<string, int, List<string>>> Types { get; set; }
 
         void EndDiagram();
     }

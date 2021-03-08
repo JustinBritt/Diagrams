@@ -30,7 +30,7 @@
 
             this.Title = title;
 
-            this.Types = new List<Tuple<int, string>>();
+            this.Types = new List<Tuple<string, int, List<string>>>();
         }
 
         public List<string> Body { get; set; }
@@ -43,7 +43,7 @@
 
         public List<string> Relationships { get; set; }
 
-        public List<Tuple<int, string>> Types { get; set; }
+        public List<Tuple<string, int, List<string>>> Types { get; set; }
 
         public string Start { get; set; }
 
