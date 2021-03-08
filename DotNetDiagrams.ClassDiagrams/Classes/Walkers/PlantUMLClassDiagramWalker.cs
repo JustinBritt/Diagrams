@@ -92,6 +92,13 @@
             this.Diagram.Body.Add(command);
         }
 
+        private void AddCommand(
+            string command,
+            string typeName)
+        {
+            this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+        }
+
         // TOOD: namespaceName can be null in unit test projects
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
