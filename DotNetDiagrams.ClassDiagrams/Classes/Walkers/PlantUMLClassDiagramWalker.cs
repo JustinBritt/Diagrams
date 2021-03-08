@@ -523,6 +523,17 @@
                 baseListTypes);
         }
 
+        private string GetJoinedBaseListTypes(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> baseListTypes = this.GetBaseListTypes(
+                interfaceDeclaration);
+
+            return String.Join(
+                ",",
+                baseListTypes);
+        }
+
         private string GetJoinedConstraintClauses(
             ClassDeclarationSyntax classDeclaration)
         {
