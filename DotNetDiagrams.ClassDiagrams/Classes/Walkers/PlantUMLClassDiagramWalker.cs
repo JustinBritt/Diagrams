@@ -437,6 +437,42 @@
         }
 
         private List<string> GetModifiers(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "abstract" => stereotype_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "sealed" => stereotype_sealed,
+
+                    "static" => stereotype_static,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
             List<string> CSharpModifiers = fieldDeclaration.Modifiers.Select(w => w.ValueText).ToList();
@@ -673,35 +709,8 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
-            List<string> modifiers = new List<string>();
-
-            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "abstract" => stereotype_abstract,
-
-                    "internal" => stereotype_internal,
-
-                    "partial" => stereotype_partial,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "sealed" => stereotype_sealed,
-
-                    "static" => stereotype_static,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                modifiers.Add(PlantUMLModifier);
-            }
+            List<string> modifiers = this.GetModifiers(
+                classDeclaration);
 
             string joinedModifiers = String.Join(" ", modifiers);
 
