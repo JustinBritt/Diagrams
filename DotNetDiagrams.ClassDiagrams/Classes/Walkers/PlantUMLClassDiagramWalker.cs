@@ -1239,6 +1239,8 @@
                     classDeclaration);
             }
 
+            int depth = this.CalculateDepth(classDeclaration);
+
             string command = this.BuildClassDeclarationCommand(
                 className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
