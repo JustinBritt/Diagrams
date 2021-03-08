@@ -1157,12 +1157,6 @@
             return variableNames;
         }
 
-        // TODO: Finish
-        public void FindTypes()
-        {
-            List<TypeDeclarationSyntax> types = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-        }
-
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
