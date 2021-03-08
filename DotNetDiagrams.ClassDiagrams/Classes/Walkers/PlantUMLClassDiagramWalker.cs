@@ -479,6 +479,17 @@
         }
 
         private string GetJoinedConstraintClauses(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> constraintClauses = this.GetConstraintClauses(
+                classDeclaration);
+
+            return String.Join(
+                ", ",
+                constraintClauses);
+        }
+
+        private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = this.GetConstraintClauses(
