@@ -900,7 +900,7 @@
             }
         }
 
-        // TODO: Need to account for ConstraintClauses and TypeParameterList
+        // TODO: Account for Members?
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
@@ -910,11 +910,6 @@
             {
                 this.StartDiagram(
                     classDeclaration);
-            }
-
-            // Members?
-            if (classDeclaration.Members.Count > 0)
-            {
             }
 
             string command = this.BuildClassDeclarationCommand(
