@@ -215,6 +215,26 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private string BuildInterfaceDeclarationCommand(
+            string interfaceName,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PlantUML_interface);
+
+            sb.Append(" ");
+
+            sb.Append(interfaceName);
+
+            sb.Append(" ");
+
+            sb.Append(joinedModifiers);
+
+            return sb.ToString();
+        }
+
         private string BuildMethodDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
             string joinedConstraintClauses,
