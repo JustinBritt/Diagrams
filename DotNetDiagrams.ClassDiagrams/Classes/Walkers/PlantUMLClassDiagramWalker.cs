@@ -1132,6 +1132,7 @@
                 propertyDeclaration);
         }
 
+        // TODO: Finish
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
