@@ -426,6 +426,17 @@
                 typeParameters);
         }
 
+        private string GetJoinedVariables(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            List<string> variables = this.GetVariables(
+                fieldDeclaration);
+
+            return String.Join(
+                ", ",
+                variables);
+        }
+
         private List<string> GetModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
@@ -799,14 +810,7 @@
             FieldDeclarationSyntax fieldDeclaration)
         {
             // Variables
-            List<string> variables = this.GetVariables(
-                fieldDeclaration);
-
-            // TODO: Update
-            string joinedVariables = String.Join(
-                ", ",
-                variables);
-
+            
             string command = this.BuildFieldDeclarationCommand(
                 fieldTypeName: this.GetTypeNameOrFallback(
                     fieldDeclaration.Declaration.Type.ToString(),
@@ -814,7 +818,8 @@
                     fieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
                     fieldDeclaration),
-                joinedVariables: joinedVariables);
+                joinedVariables: this.GetJoinedVariables(
+                    fieldDeclaration));
 
             this.AddCommand(command);
 
