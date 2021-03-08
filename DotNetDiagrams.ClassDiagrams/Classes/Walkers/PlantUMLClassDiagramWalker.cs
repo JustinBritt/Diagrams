@@ -784,9 +784,9 @@
             string joinedBaseTypeNames = this.GetJoinedBaseListTypes(
                 classDeclaration);
 
-            if (baseTypeNames.Count > 0)
+            if (joinedBaseTypeNames.Length > 0)
             {
-                joinedBaseTypeNames = $"{PlantUML_implements} {String.Join(",", baseTypeNames)}";
+                joinedBaseTypeNames = $"{PlantUML_implements} {joinedBaseTypeNames}";
             }
 
             // TypeParameterList
