@@ -762,6 +762,21 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 classDeclaration);
 
+            // Members?
+
+            // ConstraintClauses
+            if (classDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
+                {
+                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
+                    {
+                        // TODO: Change
+                        string val = constraint.ToFullString();
+                    }
+                }
+            }
+
             // Base types
             List<string> baseTypeNames = this.GetBaseListTypes(classDeclaration);
 
@@ -778,18 +793,6 @@
                 foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
                 {
                     string typeParameterName = typeParameter.Identifier.ValueText;
-                }
-            }
-
-            if (classDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
-                {
-                    foreach (TypeParameterConstraintSyntax constraint in constraintClause.Constraints.ToList())
-                    {
-                        // TODO: Change
-                        string val = constraint.ToFullString();
-                    }
                 }
             }
 
