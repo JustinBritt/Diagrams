@@ -1184,19 +1184,10 @@
             return result;
         }
 
-        // TODO: Finish
+        // TODO: Check
         public int CalculateDepth(TypeDeclarationSyntax typeDeclaration)
         {
-            int depth = 0;
-
-            if (typeDeclaration.Parent is not TypeDeclarationSyntax)
-            {
-                depth = 0;
-
-                return depth;
-            }
-
-            return depth;
+            return typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Count() - 1;
         }
 
         /// <summary>
