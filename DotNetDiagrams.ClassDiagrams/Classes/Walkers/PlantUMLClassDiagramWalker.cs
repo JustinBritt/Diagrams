@@ -841,13 +841,6 @@
             }
 
             // TypeParameterList
-            if (classDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-                }
-            }
 
             string command = this.BuildClassDeclarationCommand(
                 className: classDeclaration.Identifier.ValueText,
