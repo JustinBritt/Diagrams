@@ -92,6 +92,16 @@
             this.Diagram.Body.Add(command);
         }
 
+        private void AddNestedCommand(
+            string command,
+            int depth)
+        {
+            this.Diagram.NestedTypes.Add(
+                Tuple.Create(
+                    depth,
+                    command));
+        }
+
         // TOOD: namespaceName can be null in unit test projects
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
