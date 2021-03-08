@@ -146,6 +146,7 @@
         private string BuildClassDeclarationCommand(
             string className,
             string joinedBaseListTypes,
+            string joinedConstraintClauses,
             string joinedModifiers,
             string joinedTypeParameters)
         {
@@ -852,6 +853,7 @@
                 className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
+                joinedConstraintClauses: "", // TODO: Update
                 joinedModifiers: this.GetJoinedModifiers(
                     classDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
