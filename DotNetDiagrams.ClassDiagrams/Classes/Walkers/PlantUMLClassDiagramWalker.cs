@@ -333,17 +333,17 @@
         }
 
         private string GetConstraint(
-            SemanticModel semanticModel,
+            MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
             string typeParameterConstraintName = String.Empty;
 
             if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
             {
-                if (ModelExtensions.GetTypeInfo(semanticModel, typeConstraint.Type).Type is INamedTypeSymbol targetType)
-                {
-                    typeParameterConstraintName = targetType.ToString();
-                }
+                typeParameterConstraintName = this.GetTypeNameOrFallback(
+                    typeConstraint.Type.ToString(),
+                    typeConstraint.Type,
+                    methodDeclaration.SyntaxTree);
             }
             else
             {
@@ -354,8 +354,7 @@
         }
 
         private List<string> GetConstraintClauses(
-            MethodDeclarationSyntax methodDeclaration,
-            SemanticModel semanticModel)
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = new List<string>();
 
@@ -367,7 +366,7 @@
 
                     string joinedConstraints = this.GetJoinedConstraints(
                         constraintClause,
-                        semanticModel);
+                        methodDeclaration);
 
                     constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
                 }
@@ -378,14 +377,14 @@
 
         private List<string> GetConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
-            SemanticModel semanticModel)
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraints = new List<string>();
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
                 string typeParameterConstraintName = this.GetConstraint(
-                    semanticModel,
+                    methodDeclaration,
                     typeParameterConstraint);
 
                 constraints.Add(
@@ -418,12 +417,10 @@
         }
 
         private string GetJoinedConstraintClauses(
-            MethodDeclarationSyntax methodDeclaration,
-            SemanticModel semanticModel)
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = this.GetConstraintClauses(
-                methodDeclaration,
-                semanticModel);
+                methodDeclaration);
 
             return String.Join(
                 ", ",
@@ -432,11 +429,11 @@
 
         private string GetJoinedConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
-            SemanticModel semanticModel)
+            MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraints = this.GetConstraints(
                 constraintClause,
-                semanticModel);
+                methodDeclaration);
 
             return String.Join(
                 ", ",
@@ -952,10 +949,7 @@
             string command = this.BuildMethodDeclarationCommand(
                 explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
-                    methodDeclaration: methodDeclaration,
-                    semanticModel: compilation.GetSemanticModel(
-                        methodDeclaration.SyntaxTree,
-                        true)),
+                    methodDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     methodDeclaration),
                 joinedParameters: this.GetJoinedParameters(
