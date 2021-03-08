@@ -1072,11 +1072,6 @@
         private void Visit(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
-            string interfaceName = interfaceDeclaration.Identifier.ValueText;
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                interfaceDeclaration);
-
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (interfaceDeclaration == declaredTypes.First())
@@ -1085,7 +1080,12 @@
                     interfaceDeclaration);
             }
 
-            this.AddCommand($"{PlantUML_interface} {interfaceName} {joinedModifiers}");
+            string command = this.BuildInterfaceDeclarationCommand(
+                interfaceName: interfaceDeclaration.Identifier.ValueText,
+                joinedModifiers: this.GetJoinedModifiers(
+                    interfaceDeclaration));
+
+            this.AddCommand(command);
 
             base.Visit(
                 interfaceDeclaration);
