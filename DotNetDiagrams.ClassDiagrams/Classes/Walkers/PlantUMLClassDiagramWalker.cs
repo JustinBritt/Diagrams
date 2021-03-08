@@ -1250,7 +1250,7 @@
         }
 
         // TODO: Finish
-        // TODO: Account for Members, ConstraintClauses, BaseList, TypeParameterList
+        // TODO: Account for Members
         private void Visit(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
