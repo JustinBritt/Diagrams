@@ -371,6 +371,17 @@
         }
 
         private string GetJoinedModifiers(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                classDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
