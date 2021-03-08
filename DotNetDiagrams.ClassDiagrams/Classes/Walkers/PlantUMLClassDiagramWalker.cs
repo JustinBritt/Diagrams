@@ -1258,6 +1258,10 @@
 
             int depth = this.CalculateDepth(classDeclaration);
 
+            this.AddCommand(
+                command: command,
+                typeName: classDeclaration.Identifier.ValueText);
+
             // TODO: Account for nesting
             if (depth == 0)
             {
