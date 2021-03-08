@@ -720,12 +720,8 @@
         {
             string className = classDeclaration.Identifier.ValueText;
 
-            List<string> modifiers = this.GetModifiers(
+            string joinedModifiers = this.GetJoinedModifiers(
                 classDeclaration);
-
-            string joinedModifiers = String.Join(
-                " ",
-                modifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
