@@ -92,23 +92,6 @@
             this.Diagram.Body.Add(command);
         }
 
-        // TODO: Update
-        private void AddCommand(
-            string command,
-            int depth,
-            string typeName)
-        {
-            //List<string> list = new List<string>();
-
-            //list.Add(command);
-
-            //this.Diagram.Types.Add(
-            //    Tuple.Create(
-            //        typeName,
-            //        depth,
-            //        list));
-        }
-
         // TOOD: namespaceName can be null in unit test projects
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
