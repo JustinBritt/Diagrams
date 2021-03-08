@@ -150,6 +150,32 @@
         {
             StringBuilder sb = new StringBuilder();
 
+            sb.Append(PlantUML_class);
+
+            sb.Append(" ");
+
+            sb.Append(className);
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedBaseListTypes.Length > 0)
+            {
+                sb.Append(joinedBaseListTypes);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            sb.Append("\n");
+
             return sb.ToString();
         }
 
