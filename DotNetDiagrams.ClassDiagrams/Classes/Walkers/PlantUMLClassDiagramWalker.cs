@@ -142,7 +142,6 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
-        // TODO: Finish
         private string BuildFieldDeclarationCommand(
             string fieldTypeName,
             string joinedModifiers,
