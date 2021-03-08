@@ -805,12 +805,9 @@
                 constructorDeclaration);
         }
 
-        // TODO: Finish      
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            // Variables
-            
             string command = this.BuildFieldDeclarationCommand(
                 fieldTypeName: this.GetTypeNameOrFallback(
                     fieldDeclaration.Declaration.Type.ToString(),
