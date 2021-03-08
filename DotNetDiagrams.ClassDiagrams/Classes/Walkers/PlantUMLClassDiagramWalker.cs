@@ -696,11 +696,9 @@
         private List<string> GetModifiers(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
-            List<string> CSharpModifiers = interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList())
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
