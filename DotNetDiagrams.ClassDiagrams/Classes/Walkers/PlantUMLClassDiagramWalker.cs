@@ -712,7 +712,9 @@
             List<string> modifiers = this.GetModifiers(
                 classDeclaration);
 
-            string joinedModifiers = String.Join(" ", modifiers);
+            string joinedModifiers = String.Join(
+                " ",
+                modifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
