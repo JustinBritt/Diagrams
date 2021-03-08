@@ -92,11 +92,11 @@
             this.Diagram.Body.Add(command);
         }
 
-        private void AddNestedCommand(
+        private void AddCommand(
             string command,
             int depth)
         {
-            this.Diagram.NestedTypes.Add(
+            this.Diagram.Types.Add(
                 Tuple.Create(
                     depth,
                     command));

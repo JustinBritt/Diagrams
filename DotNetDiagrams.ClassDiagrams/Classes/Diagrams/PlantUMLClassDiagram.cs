@@ -24,13 +24,13 @@
 
             this.Header = new List<string>();
 
-            this.NestedTypes = new List<Tuple<int, string>>();
-
             this.Relationships = new List<string>();
 
             this.Start = PlantUML_startuml;
 
             this.Title = title;
+
+            this.Types = new List<Tuple<int, string>>();
         }
 
         public List<string> Body { get; set; }
@@ -41,9 +41,9 @@
 
         public List<string> Header { get; set; }
 
-        public List<Tuple<int, string>> NestedTypes { get; set; }
-
         public List<string> Relationships { get; set; }
+
+        public List<Tuple<int, string>> Types { get; set; }
 
         public string Start { get; set; }
 
