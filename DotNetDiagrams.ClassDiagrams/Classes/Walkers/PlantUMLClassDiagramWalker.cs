@@ -763,6 +763,9 @@
                 classDeclaration);
 
             // Members?
+            if (classDeclaration.Members.Count > 0)
+            {
+            }
 
             // ConstraintClauses
             if (classDeclaration.ConstraintClauses.Count() > 0)
