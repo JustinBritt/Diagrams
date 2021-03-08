@@ -738,13 +738,11 @@
             {
                 foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
                 {
-                    string baseTypeName = this.GetTypeNameOrFallback(
-                        baseType.Type.ToString(),
-                        baseType.Type,
-                        baseType.SyntaxTree);
-
                     baseTypeNames.Add(
-                            baseTypeName);
+                        this.GetTypeNameOrFallback(
+                            baseType.Type.ToString(),
+                            baseType.Type,
+                            baseType.SyntaxTree));
                 }
             }
 
