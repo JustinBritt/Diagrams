@@ -333,6 +333,27 @@
         }
 
         private string GetConstraint(
+            ClassDeclarationSyntax classDeclaration,
+            TypeParameterConstraintSyntax typeParameterConstraint)
+        {
+            string typeParameterConstraintName = String.Empty;
+
+            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
+            {
+                typeParameterConstraintName = this.GetTypeNameOrFallback(
+                    typeConstraint.Type.ToString(),
+                    typeConstraint.Type,
+                    classDeclaration.SyntaxTree);
+            }
+            else
+            {
+                typeParameterConstraintName = typeParameterConstraint.ToString();
+            }
+
+            return typeParameterConstraintName;
+        }
+
+        private string GetConstraint(
             MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
@@ -351,6 +372,28 @@
             }
 
             return typeParameterConstraintName;
+        }
+
+        private List<string> GetConstraintClauses(
+            ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> constraintClauses = new List<string>();
+
+            if (classDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
+                {
+                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
+
+                    string joinedConstraints = this.GetJoinedConstraints(
+                        classDeclaration,
+                        constraintClause);
+
+                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
+                }
+            }
+
+            return constraintClauses;
         }
 
         private List<string> GetConstraintClauses(
@@ -373,6 +416,25 @@
             }
 
             return constraintClauses;
+        }
+
+        private List<string> GetConstraints(
+            ClassDeclarationSyntax classDeclaration,
+            TypeParameterConstraintClauseSyntax constraintClause)
+        {
+            List<string> constraints = new List<string>();
+
+            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
+            {
+                string typeParameterConstraintName = this.GetConstraint(
+                    classDeclaration,
+                    typeParameterConstraint);
+
+                constraints.Add(
+                    typeParameterConstraintName);
+            }
+
+            return constraints;
         }
 
         private List<string> GetConstraints(
@@ -425,6 +487,19 @@
             return String.Join(
                 ", ",
                 constraintClauses);
+        }
+
+        private string GetJoinedConstraints(
+            ClassDeclarationSyntax classDeclaration,
+            TypeParameterConstraintClauseSyntax constraintClause)
+        {
+            List<string> constraints = this.GetConstraints(
+                classDeclaration,
+                constraintClause);
+
+            return String.Join(
+                ", ",
+                constraints.Select(w => w.ToString()));
         }
 
         private string GetJoinedConstraints(
