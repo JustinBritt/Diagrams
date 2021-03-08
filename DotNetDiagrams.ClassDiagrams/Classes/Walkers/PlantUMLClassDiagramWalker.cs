@@ -98,15 +98,15 @@
             int depth,
             string typeName)
         {
-            List<string> list = new List<string>();
+            //List<string> list = new List<string>();
 
-            list.Add(command);
+            //list.Add(command);
 
-            this.Diagram.Types.Add(
-                Tuple.Create(
-                    typeName,
-                    depth,
-                    list));
+            //this.Diagram.Types.Add(
+            //    Tuple.Create(
+            //        typeName,
+            //        depth,
+            //        list));
         }
 
         // TOOD: namespaceName can be null in unit test projects
