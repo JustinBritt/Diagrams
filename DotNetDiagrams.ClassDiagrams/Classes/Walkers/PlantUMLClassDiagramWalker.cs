@@ -1138,10 +1138,8 @@
         {
             string structName = structDeclaration.Identifier.ValueText;
 
-            string joinedModifiers = String.Join(
-                " ",
-                this.GetModifiers(
-                    structDeclaration));
+            string joinedModifiers = this.GetJoinedModifiers(
+                structDeclaration);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
