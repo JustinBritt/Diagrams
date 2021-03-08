@@ -1267,7 +1267,9 @@
             base.Visit(
                 classDeclaration);
 
-            this.AddCommand($"{PlantUML_rightBrace}");
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: classDeclaration.Identifier.ValueText);
         }
 
         private void Visit(
