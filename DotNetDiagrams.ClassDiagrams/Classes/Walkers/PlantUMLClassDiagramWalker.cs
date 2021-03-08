@@ -748,6 +748,38 @@
             return PlantUMLModifiers;
         }
 
+        private List<string> GetModifiers(
+            StructDeclarationSyntax structDeclaration)
+        {
+            List<string> CSharpModifiers = structDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
         private List<string> GetParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -1093,32 +1125,6 @@
             StructDeclarationSyntax structDeclaration)
         {
             string structName = structDeclaration.Identifier.ValueText;
-
-            List<string> CSharpModifiers = structDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in CSharpModifiers)
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "internal" => stereotype_internal,
-
-                    "partial" => stereotype_partial,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
 
             string joinedModifiers = String.Join(" ", PlantUMLModifiers);
 
