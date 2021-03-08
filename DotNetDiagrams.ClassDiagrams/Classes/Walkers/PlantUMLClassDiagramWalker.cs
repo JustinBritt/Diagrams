@@ -781,9 +781,8 @@
             }
 
             // Base types
-            List<string> baseTypeNames = this.GetBaseListTypes(classDeclaration);
-
-            string joinedBaseTypeNames = String.Empty;
+            string joinedBaseTypeNames = this.GetJoinedBaseListTypes(
+                classDeclaration);
 
             if (baseTypeNames.Count > 0)
             {
