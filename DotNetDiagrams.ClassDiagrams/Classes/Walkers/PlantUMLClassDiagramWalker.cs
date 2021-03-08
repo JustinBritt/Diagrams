@@ -718,11 +718,6 @@
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
-            string className = classDeclaration.Identifier.ValueText;
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                classDeclaration);
-
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (classDeclaration == declaredTypes.First())
@@ -730,6 +725,11 @@
                 this.StartDiagram(
                     classDeclaration);
             }
+
+            string className = classDeclaration.Identifier.ValueText;
+
+            string joinedModifiers = this.GetJoinedModifiers(
+                classDeclaration);
 
             // Base types
             List<string> baseTypeNames = new List<string>();
