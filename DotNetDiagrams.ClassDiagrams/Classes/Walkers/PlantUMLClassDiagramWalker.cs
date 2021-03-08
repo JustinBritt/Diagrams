@@ -377,6 +377,26 @@
             return baseTypeNames;
         }
 
+        private List<string> GetBaseListTypes(
+            StructDeclarationSyntax structDeclaration)
+        {
+            List<string> baseTypeNames = new List<string>();
+
+            if (structDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax baseType in structDeclaration.BaseList.Types)
+                {
+                    baseTypeNames.Add(
+                        this.GetTypeNameOrFallback(
+                            baseType.Type.ToString(),
+                            baseType.Type,
+                            baseType.SyntaxTree));
+                }
+            }
+
+            return baseTypeNames;
+        }
+
         private string GetConstraint(
             ClassDeclarationSyntax classDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
@@ -528,6 +548,17 @@
         {
             List<string> baseListTypes = this.GetBaseListTypes(
                 interfaceDeclaration);
+
+            return String.Join(
+                ",",
+                baseListTypes);
+        }
+
+        private string GetJoinedBaseListTypes(
+            StructDeclarationSyntax structDeclaration)
+        {
+            List<string> baseListTypes = this.GetBaseListTypes(
+                structDeclaration);
 
             return String.Join(
                 ",",
