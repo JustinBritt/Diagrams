@@ -553,6 +553,17 @@
         }
 
         private string GetJoinedModifiers(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                interfaceDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
