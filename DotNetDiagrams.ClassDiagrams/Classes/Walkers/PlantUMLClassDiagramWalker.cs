@@ -92,6 +92,7 @@
             this.Diagram.Body.Add(command);
         }
 
+        // TODO: Add checks
         private void AddCommand(
             string command,
             string typeName)
