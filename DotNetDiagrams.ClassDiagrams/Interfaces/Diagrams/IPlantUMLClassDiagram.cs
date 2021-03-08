@@ -12,6 +12,8 @@
     {
         List<Tuple<int, string>> NestedTypes { get; set; }
 
+        List<string> Relationships { get; set; }
+
         void EndDiagram();
     }
 }
