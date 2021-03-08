@@ -1292,7 +1292,9 @@
                 joinedVariables: this.GetJoinedVariables(
                     fieldDeclaration));
 
-            this.AddCommand(command);
+            this.AddCommand(
+                command: command,
+                typeName: fieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
 
             base.Visit(
                 fieldDeclaration);
@@ -1322,7 +1324,9 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     interfaceDeclaration));
 
-            this.AddCommand(command);
+            this.AddCommand(
+                command: command,
+                typeName: interfaceDeclaration.Identifier.ValueText);
 
             base.Visit(
                 interfaceDeclaration);
@@ -1357,7 +1361,9 @@
                     syntaxNode: methodDeclaration.ReturnType,
                     syntaxTree: methodDeclaration.SyntaxTree));
 
-            this.AddCommand(command);
+            this.AddCommand(
+                command: command,
+                typeName: methodDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
 
             base.Visit(
                 methodDeclaration);
@@ -1400,7 +1406,9 @@
                     propertyDeclaration.Type,
                     propertyDeclaration.SyntaxTree));
 
-            this.AddCommand(command);           
+            this.AddCommand(
+                command: command,
+                typeName: propertyDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);           
 
             base.Visit(
                 propertyDeclaration);
@@ -1424,7 +1432,9 @@
                     structDeclaration);
             }
 
-            this.AddCommand($"{PlantUML_interface} {structName} {joinedModifiers}");
+            this.AddCommand(
+                command: $"{PlantUML_interface} {structName} {joinedModifiers}",
+                typeName: structDeclaration.Identifier.ValueText);
 
             base.Visit(
                 structDeclaration);
