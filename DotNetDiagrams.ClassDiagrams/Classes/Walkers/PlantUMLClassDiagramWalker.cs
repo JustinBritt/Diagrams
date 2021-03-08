@@ -142,7 +142,6 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
-        // TODO: Finish
         private string BuildClassDeclarationCommand(
             string className,
             string joinedBaseListTypes,
@@ -160,7 +159,7 @@
 
             if (joinedTypeParameters.Length > 0)
             {
-                sb.Append($"<{joinedTypeParameters}>");
+                sb.Append($"<{joinedConstraintClauses}>");
             }
 
             sb.Append(" ");
