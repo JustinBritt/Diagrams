@@ -265,7 +265,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private string BuildPropertyDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
             string joinedAccessors,
