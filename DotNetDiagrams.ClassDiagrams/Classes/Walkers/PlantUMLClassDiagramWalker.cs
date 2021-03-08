@@ -738,20 +738,10 @@
             {
                 foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
                 {
-                    SemanticModel semanticModel;
-
-                    semanticModel = compilation.GetSemanticModel(baseType.SyntaxTree, true);
-
-                    string baseTypeName = String.Empty;
-
-                    if (ModelExtensions.GetTypeInfo(semanticModel, baseType.Type).Type is INamedTypeSymbol targetType)
-                    {
-                        baseTypeName = targetType.ToString();
-                    }
-                    else
-                    {
-                        baseTypeName = baseType.Type.ToString();
-                    }
+                    string baseTypeName = this.GetTypeNameOrFallback(
+                        baseType.Type.ToString(),
+                        baseType.Type,
+                        baseType.SyntaxTree);
 
                     baseTypeNames.Add(
                             baseTypeName);
