@@ -1160,7 +1160,7 @@
         // TODO: Finish
         public void FindTypes()
         {
-            TypeDeclarationSyntax types = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>();
+            List<TypeDeclarationSyntax> types = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
         }
 
         /// <summary>
