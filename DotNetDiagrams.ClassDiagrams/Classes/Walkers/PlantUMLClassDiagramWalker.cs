@@ -912,6 +912,25 @@
         }
 
         private List<string> GetTypeParameters(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> typeParameters = new List<string>();
+
+            if (interfaceDeclaration.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax typeParameter in interfaceDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
+
+                    typeParameters.Add(
+                        typeParameterName);
+                }
+            }
+
+            return typeParameters;
+        }
+
+        private List<string> GetTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = new List<string>();
