@@ -218,7 +218,8 @@
         // TODO: Finish
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
-            string joinedModifiers)
+            string joinedModifiers,
+            string joinedTypeParameters)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -1114,6 +1115,8 @@
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: interfaceDeclaration.Identifier.ValueText,
                 joinedModifiers: this.GetJoinedModifiers(
+                    interfaceDeclaration),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
                     interfaceDeclaration));
 
             this.AddCommand(command);
