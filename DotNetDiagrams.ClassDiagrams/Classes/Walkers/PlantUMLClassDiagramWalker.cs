@@ -92,12 +92,20 @@
             this.Diagram.Body.Add(command);
         }
 
-        // TODO: Add checks
         private void AddCommand(
             string command,
             string typeName)
         {
-            this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+            if (this.Diagram.Types.ContainsKey(typeName))
+            {
+                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+            }
+            else
+            {
+                this.Diagram.Types.Add(typeName, new List<string>());
+
+                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+            }
         }
 
         // TOOD: namespaceName can be null in unit test projects
