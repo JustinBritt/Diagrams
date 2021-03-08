@@ -919,7 +919,7 @@
             }
 
             string command = this.BuildClassDeclarationCommand(
-                className: this.DetermineTypeDeclarationTypeName(classDeclaration),
+                className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
