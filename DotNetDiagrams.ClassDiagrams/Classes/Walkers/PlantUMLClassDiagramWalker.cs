@@ -1184,6 +1184,14 @@
             return result;
         }
 
+        // TODO: Finish
+        public int CalculateDepth(TypeDeclarationSyntax typeDeclaration)
+        {
+            int depth = 0;
+
+            return depth;
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
