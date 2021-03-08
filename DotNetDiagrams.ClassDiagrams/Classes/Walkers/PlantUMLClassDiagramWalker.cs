@@ -694,6 +694,34 @@
         }
 
         private List<string> GetModifiers(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> CSharpModifiers = interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> CSharpModifiers = methodDeclaration.Modifiers.Select(w => w.ValueText).ToList();
