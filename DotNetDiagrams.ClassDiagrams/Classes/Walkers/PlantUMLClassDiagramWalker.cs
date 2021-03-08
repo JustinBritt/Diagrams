@@ -1262,8 +1262,6 @@
             this.AddCommand(
                 command: command,
                 typeName: classDeclaration.Identifier.ValueText);
-
-            // TODO: Account for nesting
                 
             base.Visit(
                 classDeclaration);
