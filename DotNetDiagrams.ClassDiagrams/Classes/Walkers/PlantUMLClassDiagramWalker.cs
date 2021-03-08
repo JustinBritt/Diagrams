@@ -357,6 +357,26 @@
             return baseTypeNames;
         }
 
+        private List<string> GetBaseListTypes(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> baseTypeNames = new List<string>();
+
+            if (interfaceDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax baseType in interfaceDeclaration.BaseList.Types)
+                {
+                    baseTypeNames.Add(
+                        this.GetTypeNameOrFallback(
+                            baseType.Type.ToString(),
+                            baseType.Type,
+                            baseType.SyntaxTree));
+                }
+            }
+
+            return baseTypeNames;
+        }
+
         private string GetConstraint(
             ClassDeclarationSyntax classDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
