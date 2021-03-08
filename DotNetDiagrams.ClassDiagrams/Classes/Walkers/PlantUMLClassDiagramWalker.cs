@@ -492,6 +492,17 @@
         }
 
         private string GetJoinedTypeParameters(
+             ClassDeclarationSyntax classDeclaration)
+        {
+            List<string> typeParameters = this.GetTypeParameters(
+                classDeclaration);
+
+            return String.Join(
+                ", ",
+                typeParameters);
+        }
+
+        private string GetJoinedTypeParameters(
              MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = this.GetTypeParameters(
