@@ -10,6 +10,8 @@
 
     public interface IPlantUMLClassDiagram : IPlantUMLDiagram
     {
+        List<Tuple<int, string>> NestedTypes { get; set; }
+
         void EndDiagram();
     }
 }

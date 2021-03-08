@@ -24,6 +24,8 @@
 
             this.Header = new List<string>();
 
+            this.NestedTypes = new List<Tuple<int, string>>();
+
             this.Start = PlantUML_startuml;
 
             this.Title = title;
@@ -36,6 +38,8 @@
         public string End { get; set; }
 
         public List<string> Header { get; set; }
+
+        public List<Tuple<int, string>> NestedTypes { get; set; }
 
         public string Start { get; set; }
 
