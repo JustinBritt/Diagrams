@@ -1137,7 +1137,9 @@
         {
             string structName = structDeclaration.Identifier.ValueText;
 
-            string joinedModifiers = String.Join(" ", PlantUMLModifiers);
+            string joinedModifiers = String.Join(
+                " ",
+                PlantUMLModifiers);
 
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
