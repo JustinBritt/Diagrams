@@ -1263,14 +1263,6 @@
                 typeName: classDeclaration.Identifier.ValueText);
 
             // TODO: Account for nesting
-            if (depth == 0)
-            {
-                this.AddCommand(command);
-            }
-            else
-            {
-                throw new Exception(depth.ToString());
-            }
                 
             base.Visit(
                 classDeclaration);
