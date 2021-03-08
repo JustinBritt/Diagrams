@@ -145,6 +145,7 @@
         // TODO: Finish
         private string BuildClassDeclarationCommand(
             string className,
+            string joinedBaseListTypes,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
