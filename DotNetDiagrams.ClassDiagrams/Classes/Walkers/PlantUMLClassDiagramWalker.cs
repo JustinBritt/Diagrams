@@ -910,6 +910,12 @@
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
+            // TODO: Account for nesting
+            if (classDeclaration.Parent is TypeDeclarationSyntax)
+            {
+                return;
+            }
+
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (classDeclaration == declaredTypes.First())
