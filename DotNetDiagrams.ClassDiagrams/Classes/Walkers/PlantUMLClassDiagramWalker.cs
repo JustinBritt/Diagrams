@@ -86,6 +86,7 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
+        // TODO: Remove
         private void AddCommand(
             string command)
         {
