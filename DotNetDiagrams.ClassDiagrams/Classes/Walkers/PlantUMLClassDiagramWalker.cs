@@ -1189,6 +1189,13 @@
         {
             int depth = 0;
 
+            if (typeDeclaration.Parent is not TypeDeclarationSyntax)
+            {
+                depth = 0;
+
+                return depth;
+            }
+
             return depth;
         }
 
