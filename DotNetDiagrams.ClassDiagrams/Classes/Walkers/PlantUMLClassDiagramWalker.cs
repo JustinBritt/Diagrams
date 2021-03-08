@@ -421,6 +421,27 @@
         }
 
         private string GetConstraint(
+            InterfaceDeclarationSyntax interfaceDeclaration,
+            TypeParameterConstraintSyntax typeParameterConstraint)
+        {
+            string typeParameterConstraintName = String.Empty;
+
+            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
+            {
+                typeParameterConstraintName = this.GetTypeNameOrFallback(
+                    typeConstraint.Type.ToString(),
+                    typeConstraint.Type,
+                    interfaceDeclaration.SyntaxTree);
+            }
+            else
+            {
+                typeParameterConstraintName = typeParameterConstraint.ToString();
+            }
+
+            return typeParameterConstraintName;
+        }
+
+        private string GetConstraint(
             MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
@@ -464,6 +485,28 @@
         }
 
         private List<string> GetConstraintClauses(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> constraintClauses = new List<string>();
+
+            if (interfaceDeclaration.ConstraintClauses.Count() > 0)
+            {
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in interfaceDeclaration.ConstraintClauses.ToList())
+                {
+                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
+
+                    string joinedConstraints = this.GetJoinedConstraints(
+                        constraintClause,
+                        interfaceDeclaration);
+
+                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
+                }
+            }
+
+            return constraintClauses;
+        }
+
+        private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = new List<string>();
@@ -495,6 +538,25 @@
             {
                 string typeParameterConstraintName = this.GetConstraint(
                     classDeclaration,
+                    typeParameterConstraint);
+
+                constraints.Add(
+                    typeParameterConstraintName);
+            }
+
+            return constraints;
+        }
+
+        private List<string> GetConstraints(
+            TypeParameterConstraintClauseSyntax constraintClause,
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> constraints = new List<string>();
+
+            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
+            {
+                string typeParameterConstraintName = this.GetConstraint(
+                    interfaceDeclaration,
                     typeParameterConstraint);
 
                 constraints.Add(
@@ -579,6 +641,17 @@
         }
 
         private string GetJoinedConstraintClauses(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> constraintClauses = this.GetConstraintClauses(
+                interfaceDeclaration);
+
+            return String.Join(
+                ", ",
+                constraintClauses);
+        }
+
+        private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = this.GetConstraintClauses(
@@ -596,6 +669,19 @@
             List<string> constraints = this.GetConstraints(
                 classDeclaration,
                 constraintClause);
+
+            return String.Join(
+                ", ",
+                constraints.Select(w => w.ToString()));
+        }
+
+        private string GetJoinedConstraints(
+            TypeParameterConstraintClauseSyntax constraintClause,
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            List<string> constraints = this.GetConstraints(
+                constraintClause,
+                interfaceDeclaration);
 
             return String.Join(
                 ", ",
