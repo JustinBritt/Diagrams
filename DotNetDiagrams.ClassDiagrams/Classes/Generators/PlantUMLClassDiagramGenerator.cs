@@ -41,6 +41,7 @@
                 {
                     PlantUMLClassDiagramWalker walker = new PlantUMLClassDiagramWalker(
                         compilation,
+                        compilations,
                         syntaxTree,
                         solution,
                         project);

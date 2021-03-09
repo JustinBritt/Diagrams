@@ -1025,11 +1025,27 @@
         {
             TypeDeclarationSyntax typeDeclaration = null;
 
+            List<SemanticModel> semanticModels = new List<SemanticModel>();
+
+            SemanticModel semanticModel = null;
+
+            foreach (var item in compilations)
+            {
+                try
+                {
+                    semanticModels.Add(item.Value.GetSemanticModel(syntaxTree, true));
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+
+            semanticModel = semanticModels.FirstOrDefault();
+
             // TODO: Syntax tree could be in a different compilation
             try
             {
-                SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
-
                 if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
                 {
                     if (targetType.DeclaringSyntaxReferences.Length > 0)
@@ -1055,11 +1071,27 @@
         {
             string name = String.Empty;
 
+            List<SemanticModel> semanticModels = new List<SemanticModel>();
+
+            SemanticModel semanticModel = null;
+
+            foreach (var item in compilations)
+            {
+                try
+                {
+                    semanticModels.Add(item.Value.GetSemanticModel(syntaxTree, true));
+                }
+                catch (Exception e)
+                {
+
+                }
+            }
+
+            semanticModel = semanticModels.FirstOrDefault();
+
             // TODO: Syntax tree could be in a different compilation
             try
             {
-                SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
-
                 if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
                 {
                     name = targetType.ToString();
