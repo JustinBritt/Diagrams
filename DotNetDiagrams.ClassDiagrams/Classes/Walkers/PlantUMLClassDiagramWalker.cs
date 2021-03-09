@@ -1420,7 +1420,6 @@
         }
 
         // TODO: Finish
-        // TODO: Account for ConstraintClauses, BaseList, TypeParameterList
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
