@@ -1402,46 +1402,11 @@
                 // TODO: Add method
                 if (propertyDeclaration.ExpressionBody is ArrowExpressionClauseSyntax arrowExpressionClause)
                 {
-                    string targetTypeName;
-                    string targetName;
-                    string returnTypeName;
-
-                    SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
-                        this.compilations,
-                        propertyDeclaration.SyntaxTree);
-
                     ExpressionSyntax expression = arrowExpressionClause.Expression;
 
-                    if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type == null)
-                    {
-                        // same type as caller
-                        targetTypeName = "callerTypeName"; // TODO: Update
+                    var exp = expression.ToString();
 
-                        targetName = expression switch
-                        {
-                            GenericNameSyntax genericName => genericName.Identifier.ValueText,
-
-                            IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
-
-                            MemberAccessExpressionSyntax memberAccessExpression => memberAccessExpression.Name.Identifier.ValueText,
-
-                            MemberBindingExpressionSyntax memberBindingExpression => memberBindingExpression.Name.Identifier.ValueText,
-
-                            { } => throw new Exception(expression.ToFullString())
-                        };
-
-                        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, expression).Type?.ToString().Split('.').Last() ?? "void";
-                    }
-                    else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
-                    {
-                        targetTypeName = targetType.ToString();
-
-                        targetName = expression.TryGetInferredMemberName();
-
-                        returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, expression).Type?.ToString().Split('.').Last() ?? "void";
-                    }
-
-                    var c = 2;
+                    var b = 2;
                 }
                 else
                 {
