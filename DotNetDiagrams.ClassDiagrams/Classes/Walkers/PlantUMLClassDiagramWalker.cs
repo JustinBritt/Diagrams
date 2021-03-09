@@ -746,7 +746,7 @@
                 baseMethodDeclaration);
 
             return String.Join(
-                ",",
+                ", ",
                 parameters);
         }
 
