@@ -1193,10 +1193,6 @@
 
             // TODO: ParameterList
 
-            // TODO: Identifier
-
-            // TODO: Modifiers
-
             string command = this.BuildConstructorDeclarationCommand(
                 constructorName: constructorDeclaration.Identifier.ValueText,
                 joinedModifiers: this.GetJoinedModifiers(
