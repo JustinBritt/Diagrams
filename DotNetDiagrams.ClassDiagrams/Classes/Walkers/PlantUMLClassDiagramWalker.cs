@@ -1177,8 +1177,12 @@
             foreach (BaseTypeSyntax baseType in baseList.Types)
             {
                 TypeSyntax type = baseType.Type;
+
+                TypeDeclarationSyntax res = this.GetFirstTypeDeclarationOrDefault(
+                    type,
+                    baseType.SyntaxTree);
     
-                base.Visit(baseType.Type);
+                base.Visit(res);
             }
 
             base.Visit(baseList);
