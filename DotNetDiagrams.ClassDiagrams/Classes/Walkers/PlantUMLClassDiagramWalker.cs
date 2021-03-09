@@ -204,6 +204,35 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        // TODO: Account for initializer
+        private string BuildConstructorDeclarationCommand(
+            string constructorName,
+            string joinedModifiers,
+            string joinedParameters)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(constructorName);
+
+            sb.Append(" ");
+
+            sb.Append(PlantUML_leftParenthesis);
+
+            sb.Append(joinedParameters);
+
+            sb.Append(PlantUML_rightParenthesis);
+
+            return sb.ToString();
+        }
+
         private string BuildFieldDeclarationCommand(
             string fieldTypeName,
             string joinedModifiers,
@@ -1122,6 +1151,7 @@
                 typeName: classDeclaration.Identifier.ValueText);
         }
 
+        // TODO: Finish
         private void Visit(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
@@ -1133,8 +1163,17 @@
             // TODO: ParameterList
 
             // TODO: Identifier
-            
+
             // TODO: Modifiers
+
+            string command = this.BuildConstructorDeclarationCommand(
+                constructorName: constructorDeclaration.Identifier.ValueText,
+                joinedModifiers: "",
+                joinedParameters: "");
+
+            this.AddCommand(
+                command: command,
+                typeName: constructorDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
 
             base.Visit(
                 constructorDeclaration);
