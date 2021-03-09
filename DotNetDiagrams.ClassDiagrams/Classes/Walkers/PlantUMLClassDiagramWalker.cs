@@ -1079,26 +1079,11 @@
         {
             string name = String.Empty;
 
-            List<SemanticModel> semanticModels = new List<SemanticModel>();
+            SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
+                this.compilations,
+                syntaxTree);
 
-            SemanticModel semanticModel = null;
-
-            foreach (var item in compilations)
-            {
-                try
-                {
-                    semanticModels.Add(item.Value.GetSemanticModel(syntaxTree, true));
-                }
-                catch (Exception e)
-                {
-
-                }
-            }
-
-            semanticModel = semanticModels.FirstOrDefault();
-
-            // TODO: Syntax tree could be in a different compilation
-            try
+            if (semanticModel is not null)
             {
                 if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
                 {
@@ -1109,10 +1094,11 @@
                     name = fallback;
                 }
             }
-            catch (Exception e)
+            else
             {
-            }
-
+                name = fallback;
+            }    
+            
             return name;
         }
 
