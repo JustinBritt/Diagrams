@@ -1192,7 +1192,10 @@
                     type,
                     baseType.SyntaxTree);
     
-                base.Visit(res);
+                if (res is not null)
+                {
+                    base.Visit(res);
+                }               
             }
 
             base.Visit(baseList);
