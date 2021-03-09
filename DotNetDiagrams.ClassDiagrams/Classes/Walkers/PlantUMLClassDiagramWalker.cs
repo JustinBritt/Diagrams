@@ -1399,19 +1399,11 @@
 
             if (propertyDeclaration.ExpressionBody is not null)
             {
-                // TODO: Add method
-                if (propertyDeclaration.ExpressionBody is ArrowExpressionClauseSyntax arrowExpressionClause)
-                {
-                    ExpressionSyntax expression = arrowExpressionClause.Expression;
+                ExpressionSyntax expression = propertyDeclaration.ExpressionBody.Expression;
 
-                    var exp = expression.ToString();
+                var exp = expression.ToString();
 
-                    var b = 2;
-                }
-                else
-                {
-                    throw new Exception("");
-                }
+                var b = 2;
             }
 
             if(propertyDeclaration.Initializer is not null)
