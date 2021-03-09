@@ -1014,28 +1014,24 @@
             return parameters;
         }
 
-        // TODO: Finish
-        private string GetTypeDeclarationOrDefault(
+        // TODO: Check
+        private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
         {
-            string name = String.Empty;
+            TypeDeclarationSyntax typeDeclaration = null;
 
             SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
 
             if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
             {
-                var A = targetType.DeclaringSyntaxReferences;
-                var B = A.First();
-                var C = B.GetSyntax();
-                name = targetType.ToString();
-            }
-            else
-            {
-                name = String.Empty;
+                if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                {
+                    typeDeclaration = typeDeclarationSyntax;
+                }
             }
 
-            return name;
+            return typeDeclaration;
         }
 
         private string GetTypeNameOrFallback(
