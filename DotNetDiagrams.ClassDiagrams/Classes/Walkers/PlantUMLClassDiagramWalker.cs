@@ -562,28 +562,6 @@
         }
 
         private string GetJoinedConstraintClauses(
-            ClassDeclarationSyntax classDeclaration)
-        {
-            List<string> constraintClauses = this.GetConstraintClauses(
-                classDeclaration);
-
-            return String.Join(
-                ", ",
-                constraintClauses);
-        }
-
-        private string GetJoinedConstraintClauses(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> constraintClauses = this.GetConstraintClauses(
-                interfaceDeclaration);
-
-            return String.Join(
-                ", ",
-                constraintClauses);
-        }
-
-        private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = this.GetConstraintClauses(
@@ -595,10 +573,10 @@
         }
 
         private string GetJoinedConstraintClauses(
-            StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> constraintClauses = this.GetConstraintClauses(
-                structDeclaration);
+                typeDeclaration);
 
             return String.Join(
                 ", ",
