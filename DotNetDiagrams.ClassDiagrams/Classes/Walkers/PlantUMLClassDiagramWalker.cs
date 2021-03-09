@@ -551,32 +551,10 @@
         }
 
         private string GetJoinedBaseListTypes(
-            ClassDeclarationSyntax classDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> baseListTypes = this.GetBaseListTypes(
-                classDeclaration);
-
-            return String.Join(
-                ",",
-                baseListTypes);
-        }
-
-        private string GetJoinedBaseListTypes(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> baseListTypes = this.GetBaseListTypes(
-                interfaceDeclaration);
-
-            return String.Join(
-                ",",
-                baseListTypes);
-        }
-
-        private string GetJoinedBaseListTypes(
-            StructDeclarationSyntax structDeclaration)
-        {
-            List<string> baseListTypes = this.GetBaseListTypes(
-                structDeclaration);
+                typeDeclaration);
 
             return String.Join(
                 ",",
