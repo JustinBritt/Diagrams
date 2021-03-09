@@ -1128,11 +1128,12 @@
             // TODO: Initializer
             if (constructorDeclaration.Initializer is not null)
             {
-
             }
 
             // TODO: ParameterList
+
             // TODO: Identifier
+            
             // TODO: Modifiers
 
             base.Visit(
