@@ -1045,7 +1045,6 @@
             return semanticModel;
         }
 
-        // TODO: Finish
         private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
