@@ -1014,13 +1014,14 @@
             return parameters;
         }
 
-        // TODO: Check
+        // TODO: Finish
         private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
         {
             TypeDeclarationSyntax typeDeclaration = null;
 
+            // TODO: Syntax tree could be in a different compilation
             SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
 
             if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
