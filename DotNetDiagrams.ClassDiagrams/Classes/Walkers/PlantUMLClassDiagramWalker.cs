@@ -214,9 +214,9 @@
             if (joinedModifiers.Length > 0)
             {
                 sb.Append(joinedModifiers);
-            }
 
-            sb.Append(" ");
+                sb.Append(" ");
+            }
 
             sb.Append(fieldTypeName);
 
@@ -285,9 +285,9 @@
             if (joinedModifiers.Length > 0)
             {
                 sb.Append(joinedModifiers);
-            }
 
-            sb.Append(" ");
+                sb.Append(" ");
+            }
 
             sb.Append(returnTypeName);
 
@@ -330,9 +330,12 @@
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append(joinedModifiers);
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
 
-            sb.Append(" ");
+                sb.Append(" ");
+            }
 
             sb.Append(propertyTypeName);
 
@@ -351,7 +354,10 @@
 
             sb.Append(" ");
 
-            sb.Append(joinedAccessors);
+            if (joinedAccessors.Length > 0)
+            {
+                sb.Append(joinedAccessors);
+            }
 
             return sb.ToString();
         }
