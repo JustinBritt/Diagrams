@@ -86,22 +86,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        private void AddCommand(
-            string command,
-            string typeName)
-        {
-            if (this.Diagram.Types.ContainsKey(typeName))
-            {
-                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
-            }
-            else
-            {
-                this.Diagram.Types.Add(typeName, new List<string>());
-
-                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
-            }
-        }
-
         // TOOD: namespaceName can be null in unit test projects
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string DetermineTitle(
@@ -146,6 +130,22 @@
 
                 this.AddHeader(
                     this.currentTitle);
+            }
+        }
+
+        private void AddCommand(
+            string command,
+            string typeName)
+        {
+            if (this.Diagram.Types.ContainsKey(typeName))
+            {
+                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+            }
+            else
+            {
+                this.Diagram.Types.Add(typeName, new List<string>());
+
+                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
             }
         }
 
