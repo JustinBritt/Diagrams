@@ -1087,7 +1087,6 @@
             }
         }
 
-        // TODO: Account for Members?
         // TODO: Account for nesting; +-
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
