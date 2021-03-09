@@ -1424,11 +1424,6 @@
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
-            string structName = structDeclaration.Identifier.ValueText;
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                structDeclaration);
-
             List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
 
             if (structDeclaration == declaredTypes.First())
@@ -1437,8 +1432,19 @@
                     structDeclaration);
             }
 
+            string command = this.BuildStructDeclarationCommand(
+                joinedBaseListTypes: this.GetJoinedBaseListTypes(
+                    structDeclaration),
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    structDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    structDeclaration),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    structDeclaration),
+                structName: structDeclaration.Identifier.ValueText);
+
             this.AddCommand(
-                command: $"{PlantUML_interface} {structName} {joinedModifiers}",
+                command: command,
                 typeName: structDeclaration.Identifier.ValueText);
 
             base.Visit(
