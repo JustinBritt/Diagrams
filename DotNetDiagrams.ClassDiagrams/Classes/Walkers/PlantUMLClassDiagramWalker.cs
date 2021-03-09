@@ -740,10 +740,10 @@
         }
 
         private string GetJoinedParameters(
-            MethodDeclarationSyntax methodDeclaration)
+            BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
             List<string> parameters = this.GetParameters(
-                methodDeclaration);
+                baseMethodDeclaration);
 
             return String.Join(
                 ",",
@@ -992,20 +992,20 @@
         }
 
         private List<string> GetParameters(
-            MethodDeclarationSyntax methodDeclaration)
+            BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
             List<string> parameters = new List<string>();
 
-            if (methodDeclaration.ParameterList.Parameters.Count > 0)
+            if (baseMethodDeclaration.ParameterList.Parameters.Count > 0)
             {
-                foreach (ParameterSyntax parameter in methodDeclaration.ParameterList.Parameters)
+                foreach (ParameterSyntax parameter in baseMethodDeclaration.ParameterList.Parameters)
                 {
                     string parameterName = parameter.Identifier.ValueText;
 
                     string parameterTypeName = this.GetTypeNameOrFallback(
                         parameter.Type.ToString(),
                         parameter.Type,
-                        methodDeclaration.SyntaxTree);
+                        baseMethodDeclaration.SyntaxTree);
 
                     parameters.Add($"{parameterTypeName} {parameterName}");
                 }
