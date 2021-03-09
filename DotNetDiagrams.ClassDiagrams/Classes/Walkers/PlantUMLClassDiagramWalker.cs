@@ -96,30 +96,8 @@
             {
                 namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
-
-            List<string> typeNames = new List<string>();
-
-            if (this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>() is not null)
-            {
-                foreach (TypeDeclarationSyntax declaredType in this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().Where(w => w.Parent is not TypeDeclarationSyntax))
-                {
-                    typeNames.Add(
-                        this.DetermineTypeDeclarationTypeName(declaredType));
-                }
-            }
-
-            string joinedTypeNames = String.Join(", ", typeNames);
-
-            string typeName = String.Empty;
-
-            if (typeNames.Count > 1)
-            {
-                typeName = "{" + $"{joinedTypeNames}" + "}";
-            }
-            else
-            {
-                typeName = joinedTypeNames;
-            }
+            
+            string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
 
             return $"{namespaceName}.{typeName}";
         }
