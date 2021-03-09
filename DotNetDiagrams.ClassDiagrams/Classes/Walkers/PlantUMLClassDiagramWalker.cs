@@ -338,7 +338,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private string BuildStructDeclarationCommand(
             string joinedBaseListTypes,
             string joinedConstraintClauses,
@@ -347,6 +346,35 @@
             string structName)
         {
             StringBuilder sb = new StringBuilder();
+
+            sb.Append(stereotype_struct);
+
+            sb.Append(" ");
+
+            sb.Append(structName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedBaseListTypes.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
 
             return sb.ToString();
         }
