@@ -1151,7 +1151,6 @@
         }
 
         // TODO: Finish
-        // TODO: Account for Members
         private void Visit(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
