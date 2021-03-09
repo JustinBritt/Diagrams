@@ -396,53 +396,13 @@
         }
 
         private List<string> GetBaseListTypes(
-            ClassDeclarationSyntax classDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> baseTypeNames = new List<string>();
 
-            if (classDeclaration.BaseList is not null)
+            if (typeDeclaration.BaseList is not null)
             {
-                foreach (BaseTypeSyntax baseType in classDeclaration.BaseList.Types)
-                {
-                    baseTypeNames.Add(
-                        this.GetTypeNameOrFallback(
-                            baseType.Type.ToString(),
-                            baseType.Type,
-                            baseType.SyntaxTree));
-                }
-            }
-
-            return baseTypeNames;
-        }
-
-        private List<string> GetBaseListTypes(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> baseTypeNames = new List<string>();
-
-            if (interfaceDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax baseType in interfaceDeclaration.BaseList.Types)
-                {
-                    baseTypeNames.Add(
-                        this.GetTypeNameOrFallback(
-                            baseType.Type.ToString(),
-                            baseType.Type,
-                            baseType.SyntaxTree));
-                }
-            }
-
-            return baseTypeNames;
-        }
-
-        private List<string> GetBaseListTypes(
-            StructDeclarationSyntax structDeclaration)
-        {
-            List<string> baseTypeNames = new List<string>();
-
-            if (structDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax baseType in structDeclaration.BaseList.Types)
+                foreach (BaseTypeSyntax baseType in typeDeclaration.BaseList.Types)
                 {
                     baseTypeNames.Add(
                         this.GetTypeNameOrFallback(
