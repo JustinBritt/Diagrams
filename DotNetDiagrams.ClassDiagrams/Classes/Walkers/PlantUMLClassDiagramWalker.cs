@@ -1400,6 +1400,14 @@
             if (propertyDeclaration.ExpressionBody is not null)
             {
                 // TODO: Add method
+                if (propertyDeclaration.ExpressionBody is ArrowExpressionClauseSyntax arrowExpressionClause)
+                {
+
+                }
+                else
+                {
+                    throw new Exception("");
+                }
             }
 
             if(propertyDeclaration.Initializer is not null)
