@@ -974,44 +974,6 @@
         }
 
         private List<string> GetTypeParameters(
-            ClassDeclarationSyntax classDeclaration)
-        {
-            List<string> typeParameters = new List<string>();
-
-            if (classDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in classDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-
-                    typeParameters.Add(
-                        typeParameterName);
-                }
-            }
-
-            return typeParameters;
-        }
-
-        private List<string> GetTypeParameters(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> typeParameters = new List<string>();
-
-            if (interfaceDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in interfaceDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-
-                    typeParameters.Add(
-                        typeParameterName);
-                }
-            }
-
-            return typeParameters;
-        }
-
-        private List<string> GetTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = new List<string>();
@@ -1031,13 +993,13 @@
         }
 
         private List<string> GetTypeParameters(
-            StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> typeParameters = new List<string>();
 
-            if (structDeclaration.TypeParameterList is not null)
+            if (typeDeclaration.TypeParameterList is not null)
             {
-                foreach (TypeParameterSyntax typeParameter in structDeclaration.TypeParameterList.Parameters.ToList())
+                foreach (TypeParameterSyntax typeParameter in typeDeclaration.TypeParameterList.Parameters.ToList())
                 {
                     string typeParameterName = typeParameter.Identifier.ValueText;
 
