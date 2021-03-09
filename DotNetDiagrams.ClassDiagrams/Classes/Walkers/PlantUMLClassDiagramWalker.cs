@@ -1018,7 +1018,9 @@
             return parameters;
         }
 
-        private SemanticModel GetFirstSemanticModelOrDefault()
+        private SemanticModel GetFirstSemanticModelOrDefault(
+            Dictionary<Project, Compilation> compilations,
+            SyntaxTree syntaxTree)
         {
             SemanticModel semanticModel = null;
 
@@ -1028,7 +1030,10 @@
             {
                 try
                 {
-                    semanticModels.Add(item.Value.GetSemanticModel(syntaxTree, true));
+                    semanticModels.Add(
+                        item.Value.GetSemanticModel(
+                            syntaxTree,
+                            true));
                 }
                 catch (Exception e)
                 {
