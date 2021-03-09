@@ -458,50 +458,6 @@
         }
 
         private List<string> GetConstraintClauses(
-            ClassDeclarationSyntax classDeclaration)
-        {
-            List<string> constraintClauses = new List<string>();
-
-            if (classDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in classDeclaration.ConstraintClauses.ToList())
-                {
-                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
-
-                    string joinedConstraints = this.GetJoinedConstraints(
-                        classDeclaration,
-                        constraintClause);
-
-                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
-                }
-            }
-
-            return constraintClauses;
-        }
-
-        private List<string> GetConstraintClauses(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> constraintClauses = new List<string>();
-
-            if (interfaceDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in interfaceDeclaration.ConstraintClauses.ToList())
-                {
-                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
-
-                    string joinedConstraints = this.GetJoinedConstraints(
-                        constraintClause,
-                        interfaceDeclaration);
-
-                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
-                }
-            }
-
-            return constraintClauses;
-        }
-
-        private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> constraintClauses = new List<string>();
@@ -524,63 +480,25 @@
         }
 
         private List<string> GetConstraintClauses(
-            StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> constraintClauses = new List<string>();
 
-            if (structDeclaration.ConstraintClauses.Count() > 0)
+            if (typeDeclaration.ConstraintClauses.Count() > 0)
             {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in structDeclaration.ConstraintClauses.ToList())
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in typeDeclaration.ConstraintClauses.ToList())
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
                     string joinedConstraints = this.GetJoinedConstraints(
                         constraintClause,
-                        structDeclaration);
+                        typeDeclaration);
 
                     constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
                 }
             }
 
             return constraintClauses;
-        }
-
-        private List<string> GetConstraints(
-            ClassDeclarationSyntax classDeclaration,
-            TypeParameterConstraintClauseSyntax constraintClause)
-        {
-            List<string> constraints = new List<string>();
-
-            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
-            {
-                string typeParameterConstraintName = this.GetConstraint(
-                    classDeclaration,
-                    typeParameterConstraint);
-
-                constraints.Add(
-                    typeParameterConstraintName);
-            }
-
-            return constraints;
-        }
-
-        private List<string> GetConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> constraints = new List<string>();
-
-            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
-            {
-                string typeParameterConstraintName = this.GetConstraint(
-                    interfaceDeclaration,
-                    typeParameterConstraint);
-
-                constraints.Add(
-                    typeParameterConstraintName);
-            }
-
-            return constraints;
         }
 
         private List<string> GetConstraints(
@@ -604,14 +522,14 @@
 
         private List<string> GetConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
-            StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> constraints = new List<string>();
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
                 string typeParameterConstraintName = this.GetConstraint(
-                    structDeclaration,
+                    typeDeclaration,
                     typeParameterConstraint);
 
                 constraints.Add(
@@ -710,32 +628,6 @@
         }
 
         private string GetJoinedConstraints(
-            ClassDeclarationSyntax classDeclaration,
-            TypeParameterConstraintClauseSyntax constraintClause)
-        {
-            List<string> constraints = this.GetConstraints(
-                classDeclaration,
-                constraintClause);
-
-            return String.Join(
-                ", ",
-                constraints.Select(w => w.ToString()));
-        }
-
-        private string GetJoinedConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> constraints = this.GetConstraints(
-                constraintClause,
-                interfaceDeclaration);
-
-            return String.Join(
-                ", ",
-                constraints.Select(w => w.ToString()));
-        }
-
-        private string GetJoinedConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -750,11 +642,11 @@
 
         private string GetJoinedConstraints(
             TypeParameterConstraintClauseSyntax constraintClause,
-            StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> constraints = this.GetConstraints(
                 constraintClause,
-                structDeclaration);
+                typeDeclaration);
 
             return String.Join(
                 ", ",
