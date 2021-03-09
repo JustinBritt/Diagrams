@@ -86,12 +86,16 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        // TOOD: namespaceName can be null in unit test projects
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string DetermineTitle(
             TypeDeclarationSyntax typeDeclaration)
         {
-            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+            string namespaceName = String.Empty;
+
+            if (this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>() is not null)
+            {
+                namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+            }
 
             string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
 
