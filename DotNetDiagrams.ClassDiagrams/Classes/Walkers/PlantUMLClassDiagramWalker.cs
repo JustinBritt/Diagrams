@@ -1172,29 +1172,6 @@
             return variableNames;
         }
 
-        public bool HasNestedTypeDeclarations()
-        {
-            bool result = false;
-
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            foreach (TypeDeclarationSyntax typeDeclaration in declaredTypes)
-            {
-                if (typeDeclaration.Members.OfType<TypeDeclarationSyntax>().Count() > 0)
-                {
-                    result = true;
-                }
-            }
-
-            return result;
-        }
-
-        // TODO: Check
-        public int CalculateDepth(TypeDeclarationSyntax typeDeclaration)
-        {
-            return typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Count() - 1;
-        }
-
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
@@ -1254,8 +1231,6 @@
                     classDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     classDeclaration));
-
-            int depth = this.CalculateDepth(classDeclaration);
 
             this.AddCommand(
                 command: command,
