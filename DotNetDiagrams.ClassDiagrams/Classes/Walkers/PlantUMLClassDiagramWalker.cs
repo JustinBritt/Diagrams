@@ -339,7 +339,12 @@
         }
 
         // TODO: Finish
-        private string BuildStructDeclarationCommand()
+        private string BuildStructDeclarationCommand(
+            string joinedBaseListTypes,
+            string joinedConstraintClauses,
+            string joinedModifiers,
+            string joinedTypeParameters,
+            string structName)
         {
             StringBuilder sb = new StringBuilder();
 
