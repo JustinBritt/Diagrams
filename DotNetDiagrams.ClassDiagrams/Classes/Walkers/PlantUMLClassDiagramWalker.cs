@@ -1125,6 +1125,11 @@
         private void Visit(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
+            // TODO: Initializer
+            // TODO: ParameterList
+            // TODO: Identifier
+            // TODO: Modifiers
+
             base.Visit(
                 constructorDeclaration);
         }
