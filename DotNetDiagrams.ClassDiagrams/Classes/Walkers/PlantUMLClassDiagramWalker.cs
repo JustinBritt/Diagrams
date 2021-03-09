@@ -1052,13 +1052,11 @@
         {
             TypeDeclarationSyntax typeDeclaration = null;
 
-            List<SemanticModel> semanticModels = new List<SemanticModel>();
-
             SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
                 this.compilations,
                 syntaxTree);
 
-            try
+            if (semanticModel is not null)
             {
                 if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
                 {
@@ -1070,9 +1068,6 @@
                         }
                     }
                 }
-            }
-            catch(Exception e)
-            {
             }
 
             return typeDeclaration;
