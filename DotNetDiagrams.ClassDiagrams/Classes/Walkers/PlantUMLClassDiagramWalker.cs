@@ -1154,6 +1154,13 @@
         private void Visit(
             BaseListSyntax baseList)
         {
+            foreach (BaseTypeSyntax baseType in baseList.Types)
+            {
+                TypeSyntax type = baseType.Type;
+
+                base.Visit(baseType);
+            }
+
             base.Visit(baseList);
         }
 
