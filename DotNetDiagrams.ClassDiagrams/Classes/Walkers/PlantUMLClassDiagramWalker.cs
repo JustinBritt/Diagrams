@@ -86,13 +86,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        // TODO: Remove
-        private void AddCommand(
-            string command)
-        {
-            this.Diagram.Body.Add(command);
-        }
-
         private void AddCommand(
             string command,
             string typeName)
