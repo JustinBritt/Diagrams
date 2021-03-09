@@ -1025,9 +1025,12 @@
 
             if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
             {
-                if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                if (targetType.DeclaringSyntaxReferences.Length > 0)
                 {
-                    typeDeclaration = typeDeclarationSyntax;
+                    if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                    {
+                        typeDeclaration = typeDeclarationSyntax;
+                    }
                 }
             }
 
