@@ -1014,6 +1014,30 @@
             return parameters;
         }
 
+        // TODO: Finish
+        private string GetTypeDeclarationOrDefault(
+            SyntaxNode syntaxNode,
+            SyntaxTree syntaxTree)
+        {
+            string name = String.Empty;
+
+            SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
+
+            if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+            {
+                var A = targetType.DeclaringSyntaxReferences;
+                var B = A.First();
+                var C = B.GetSyntax();
+                name = targetType.ToString();
+            }
+            else
+            {
+                name = String.Empty;
+            }
+
+            return name;
+        }
+
         private string GetTypeNameOrFallback(
             string fallback,
             SyntaxNode syntaxNode,
