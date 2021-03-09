@@ -1274,6 +1274,7 @@
         }
 
         // TODO: Finish
+        // TODO: Account for initializer
         private void Visit(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
