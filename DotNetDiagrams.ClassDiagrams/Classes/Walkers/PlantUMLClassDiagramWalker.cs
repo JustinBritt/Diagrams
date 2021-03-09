@@ -1237,7 +1237,7 @@
     
                 if (res is not null)
                 {
-                    base.Visit(res);
+                    this.Visit(res);
                 }               
             }
 
@@ -1353,6 +1353,10 @@
 
             base.Visit(
                 interfaceDeclaration);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: interfaceDeclaration.Identifier.ValueText);
         }
 
         private void Visit(
@@ -1465,6 +1469,10 @@
 
             base.Visit(
                 structDeclaration);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: structDeclaration.Identifier.ValueText);
         }
     }
 }
