@@ -687,28 +687,6 @@
         }
 
         private string GetJoinedTypeParameters(
-             ClassDeclarationSyntax classDeclaration)
-        {
-            List<string> typeParameters = this.GetTypeParameters(
-                classDeclaration);
-
-            return String.Join(
-                ", ",
-                typeParameters);
-        }
-
-        private string GetJoinedTypeParameters(
-             InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> typeParameters = this.GetTypeParameters(
-                interfaceDeclaration);
-
-            return String.Join(
-                ", ",
-                typeParameters);
-        }
-
-        private string GetJoinedTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
             List<string> typeParameters = this.GetTypeParameters(
@@ -720,10 +698,10 @@
         }
 
         private string GetJoinedTypeParameters(
-             StructDeclarationSyntax structDeclaration)
+            TypeDeclarationSyntax typeDeclaration)
         {
             List<string> typeParameters = this.GetTypeParameters(
-                structDeclaration);
+                typeDeclaration);
 
             return String.Join(
                 ", ",
