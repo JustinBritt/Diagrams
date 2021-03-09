@@ -35,11 +35,6 @@
 
                     walker.Visit(syntaxTree.GetRoot());
 
-                    if (walker.HasNestedTypeDeclarations())
-                    {
-                        bool nesting = true;
-                    }
-
                     diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
             }
