@@ -1018,6 +1018,28 @@
             return parameters;
         }
 
+        private SemanticModel GetFirstSemanticModelOrDefault()
+        {
+            SemanticModel semanticModel = null;
+
+            List<SemanticModel> semanticModels = new List<SemanticModel>();
+
+            foreach (KeyValuePair<Project, Compilation> item in compilations)
+            {
+                try
+                {
+                    semanticModels.Add(item.Value.GetSemanticModel(syntaxTree, true));
+                }
+                catch (Exception e)
+                {
+                }
+            }
+
+            semanticModel = semanticModels.FirstOrDefault();
+
+            return semanticModel;
+        }
+
         // TODO: Finish
         private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
             SyntaxNode syntaxNode,
