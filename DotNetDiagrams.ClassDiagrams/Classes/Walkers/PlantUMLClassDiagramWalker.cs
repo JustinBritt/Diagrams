@@ -416,7 +416,7 @@
         }
 
         private string GetConstraint(
-            ClassDeclarationSyntax classDeclaration,
+            TypeDeclarationSyntax typeDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
             string typeParameterConstraintName = String.Empty;
@@ -426,28 +426,7 @@
                 typeParameterConstraintName = this.GetTypeNameOrFallback(
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
-                    classDeclaration.SyntaxTree);
-            }
-            else
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-
-            return typeParameterConstraintName;
-        }
-
-        private string GetConstraint(
-            InterfaceDeclarationSyntax interfaceDeclaration,
-            TypeParameterConstraintSyntax typeParameterConstraint)
-        {
-            string typeParameterConstraintName = String.Empty;
-
-            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-            {
-                typeParameterConstraintName = this.GetTypeNameOrFallback(
-                    typeConstraint.Type.ToString(),
-                    typeConstraint.Type,
-                    interfaceDeclaration.SyntaxTree);
+                    typeDeclaration.SyntaxTree);
             }
             else
             {
@@ -469,27 +448,6 @@
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
                     methodDeclaration.SyntaxTree);
-            }
-            else
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-
-            return typeParameterConstraintName;
-        }
-
-        private string GetConstraint(
-            StructDeclarationSyntax structDeclaration,
-            TypeParameterConstraintSyntax typeParameterConstraint)
-        {
-            string typeParameterConstraintName = String.Empty;
-
-            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-            {
-                typeParameterConstraintName = this.GetTypeNameOrFallback(
-                    typeConstraint.Type.ToString(),
-                    typeConstraint.Type,
-                    structDeclaration.SyntaxTree);
             }
             else
             {
