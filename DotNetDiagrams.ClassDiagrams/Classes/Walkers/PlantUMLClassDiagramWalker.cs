@@ -1157,8 +1157,8 @@
             foreach (BaseTypeSyntax baseType in baseList.Types)
             {
                 TypeSyntax type = baseType.Type;
-
-                base.Visit(baseType);
+    
+                base.Visit(baseType.Type);
             }
 
             base.Visit(baseList);
