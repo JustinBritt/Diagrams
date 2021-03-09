@@ -1199,7 +1199,8 @@
 
             string command = this.BuildConstructorDeclarationCommand(
                 constructorName: constructorDeclaration.Identifier.ValueText,
-                joinedModifiers: "",
+                joinedModifiers: this.GetJoinedModifiers(
+                    constructorDeclaration),
                 joinedParameters: "");
 
             this.AddCommand(
