@@ -674,6 +674,17 @@
         }
 
         private string GetJoinedModifiers(
+            ConstructorDeclarationSyntax constructorDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                constructorDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
@@ -798,6 +809,26 @@
                     "static" => stereotype_static,
 
                     "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
+            ConstructorDeclarationSyntax constructorDeclaration)
+        {
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in constructorDeclaration.Modifiers.Select(w => w.ValueText))
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "public" => stereotype_public,
 
                     _ => throw new Exception("")
                 };
