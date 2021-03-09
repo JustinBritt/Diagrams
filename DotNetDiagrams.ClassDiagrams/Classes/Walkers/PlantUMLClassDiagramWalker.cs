@@ -230,7 +230,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
             string joinedBaseListTypes,
@@ -246,9 +245,28 @@
 
             sb.Append(interfaceName);
 
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
             sb.Append(" ");
 
-            sb.Append(joinedModifiers);
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedBaseListTypes.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
 
             return sb.ToString();
         }
