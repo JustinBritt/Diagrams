@@ -1022,17 +1022,23 @@
             TypeDeclarationSyntax typeDeclaration = null;
 
             // TODO: Syntax tree could be in a different compilation
-            SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
-
-            if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+            try
             {
-                if (targetType.DeclaringSyntaxReferences.Length > 0)
+                SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
+
+                if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
                 {
-                    if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                    if (targetType.DeclaringSyntaxReferences.Length > 0)
                     {
-                        typeDeclaration = typeDeclarationSyntax;
+                        if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                        {
+                            typeDeclaration = typeDeclarationSyntax;
+                        }
                     }
                 }
+            }
+            catch(Exception e)
+            {
             }
 
             return typeDeclaration;
