@@ -1191,13 +1191,12 @@
             {
             }
 
-            // TODO: ParameterList
-
             string command = this.BuildConstructorDeclarationCommand(
                 constructorName: constructorDeclaration.Identifier.ValueText,
                 joinedModifiers: this.GetJoinedModifiers(
                     constructorDeclaration),
-                joinedParameters: "");
+                joinedParameters: this.GetJoinedParameters(
+                    constructorDeclaration));
 
             this.AddCommand(
                 command: command,
