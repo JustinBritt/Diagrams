@@ -1051,15 +1051,22 @@
         {
             string name = String.Empty;
 
-            SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
+            // TODO: Syntax tree could be in a different compilation
+            try
+            {
+                SemanticModel semanticModel = compilation.GetSemanticModel(syntaxTree, true);
 
-            if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
-            {
-                name = targetType.ToString();
+                if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+                {
+                    name = targetType.ToString();
+                }
+                else
+                {
+                    name = fallback;
+                }
             }
-            else
+            catch (Exception e)
             {
-                name = fallback;
             }
 
             return name;
