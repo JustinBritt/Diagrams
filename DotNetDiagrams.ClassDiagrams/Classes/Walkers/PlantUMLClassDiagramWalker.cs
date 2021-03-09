@@ -1120,6 +1120,9 @@
         {
             switch (node)
             {
+                case BaseListSyntax baseList:
+                    this.Visit(baseList);
+                    break;
                 case ClassDeclarationSyntax classDeclaration:
                     this.Visit(classDeclaration);
                     break;
@@ -1145,6 +1148,13 @@
                     base.Visit(node);
                     break;
             }
+        }
+
+        // TODO: Finish
+        private void Visit(
+            BaseListSyntax baseList)
+        {
+            base.Visit(baseList);
         }
 
         // TODO: Account for nesting; +-
