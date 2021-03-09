@@ -1402,7 +1402,7 @@
                 // TODO: Add method
                 if (propertyDeclaration.ExpressionBody is ArrowExpressionClauseSyntax arrowExpressionClause)
                 {
-
+                    ExpressionSyntax expression = arrowExpressionClause.Expression;
                 }
                 else
                 {
