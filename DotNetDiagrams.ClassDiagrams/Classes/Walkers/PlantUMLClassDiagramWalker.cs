@@ -1418,6 +1418,10 @@
             {
                 // TODO: Add method
                 ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
+
+                var exp2 = initializer.ToString();
+
+                var c = 2;
             }
 
             string command = this.BuildPropertyDeclarationCommand(
