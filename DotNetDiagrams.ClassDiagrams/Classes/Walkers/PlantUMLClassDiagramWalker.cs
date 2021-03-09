@@ -1273,16 +1273,9 @@
                 typeName: classDeclaration.Identifier.ValueText);
         }
 
-        // TODO: Finish
-        // TODO: Account for initializer
         private void Visit(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
-            // TODO: Initializer
-            if (constructorDeclaration.Initializer is not null)
-            {
-            }
-
             string command = this.BuildConstructorDeclarationCommand(
                 constructorName: constructorDeclaration.Identifier.ValueText,
                 joinedModifiers: this.GetJoinedModifiers(
