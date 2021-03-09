@@ -9,6 +9,7 @@
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
+    using System.Collections.Generic;
 
     internal sealed class PlantUMLClassDiagramGenerator : IPlantUMLClassDiagramGenerator
     {
@@ -20,6 +21,17 @@
             Solution solution)
         {
             IDiagrams diagrams = new PlantUMLDiagrams();
+
+            Dictionary<Project, Compilation> compilations = new Dictionary<Project, Compilation>();
+
+            foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
+            {
+                Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+                compilations.Add(
+                    project,
+                    compilation);
+            }
 
             foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
             {
