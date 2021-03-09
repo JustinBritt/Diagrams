@@ -867,6 +867,17 @@
                 typeParameters);
         }
 
+        private string GetJoinedTypeParameters(
+             StructDeclarationSyntax structDeclaration)
+        {
+            List<string> typeParameters = this.GetTypeParameters(
+                structDeclaration);
+
+            return String.Join(
+                ", ",
+                typeParameters);
+        }
+
         private string GetJoinedVariables(
             FieldDeclarationSyntax fieldDeclaration)
         {
@@ -1156,6 +1167,25 @@
             if (methodDeclaration.TypeParameterList is not null)
             {
                 foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
+                {
+                    string typeParameterName = typeParameter.Identifier.ValueText;
+
+                    typeParameters.Add(
+                        typeParameterName);
+                }
+            }
+
+            return typeParameters;
+        }
+
+        private List<string> GetTypeParameters(
+            StructDeclarationSyntax structDeclaration)
+        {
+            List<string> typeParameters = new List<string>();
+
+            if (structDeclaration.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax typeParameter in structDeclaration.TypeParameterList.Parameters.ToList())
                 {
                     string typeParameterName = typeParameter.Identifier.ValueText;
 
