@@ -1299,7 +1299,7 @@
                 {
                     foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
                     {
-                        throw new Exception("Remove");
+                        //throw new Exception("Remove");
                     }
                 }
 
