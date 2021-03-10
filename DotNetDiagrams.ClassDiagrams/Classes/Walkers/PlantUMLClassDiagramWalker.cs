@@ -1509,7 +1509,14 @@
             {
                 foreach (BaseTypeSyntax item in classDeclaration.BaseList.Types.ToList())
                 {
-                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + classDeclaration.Identifier.ValueText);
+                    string itemName = this.GetTypeNameOrFallback(
+                        item.Type.ToString(),
+                        item.Type,
+                        classDeclaration.SyntaxTree);
+
+                    string className = this.DetermineTitle(classDeclaration);
+
+                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
                 }
             }
 
