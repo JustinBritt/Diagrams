@@ -359,40 +359,9 @@
         private void Visit(
             ExpressionSyntax invocation)
         {
-            string callerTypeName = String.Empty;
+            SemanticModel semanticModel = this.solution.GetDocument(this.syntaxTree).GetSemanticModelAsync().Result;
 
-            SemanticModel semanticModel;
-
-            ArrowExpressionClauseSyntax arrowClauseHost = invocation.GetParent<ArrowExpressionClauseSyntax>();
-
-            MethodDeclarationSyntax methodHost = invocation.GetParent<MethodDeclarationSyntax>();
-
-            ConstructorDeclarationSyntax constructorHost = invocation.GetParent<ConstructorDeclarationSyntax>();
-
-            if (methodHost != null)
-            {
-                callerTypeName = methodHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
-
-                semanticModel = compilation.GetSemanticModel(methodHost.SyntaxTree, true);
-            }
-            else if (constructorHost != null)
-            {
-                callerTypeName = constructorHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
-
-                semanticModel = compilation.GetSemanticModel(constructorHost.SyntaxTree, true);
-            }
-            else if (arrowClauseHost != null)
-            {
-                callerTypeName = arrowClauseHost.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
-
-                semanticModel = compilation.GetSemanticModel(arrowClauseHost.SyntaxTree, true);
-            }
-            else
-            {
-                base.Visit(invocation);
-
-                return;
-            }
+            string callerTypeName = invocation.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
 
             string targetTypeName;
             string targetName;
