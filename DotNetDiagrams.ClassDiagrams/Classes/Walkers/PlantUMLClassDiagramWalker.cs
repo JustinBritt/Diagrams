@@ -97,7 +97,12 @@
         {
             string namespaceName = String.Empty;
 
-            if (this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>() is not null)
+            if (
+                this.syntaxTree.GetRoot().DescendantNodes().Count() > 0
+                &&
+                this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>() is not null 
+                && 
+                this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
             {
                 namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
