@@ -1188,23 +1188,8 @@
         {
             string name = String.Empty;
 
-            SemanticModel semanticModel = null;
-            
-            try
-            {
-                semanticModel = compilation.GetSemanticModel(
-                    syntaxTree,
-                    true);
-            }
-            catch(Exception e)
-            {
-            }
-
-            if (semanticModel is null)
-            {
-                semanticModel = this.GetFirstSemanticModelOrDefault(
-                    syntaxTree);
-            }
+            SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
+                syntaxTree);
 
             if (semanticModel is not null)
             {
