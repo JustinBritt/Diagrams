@@ -42,6 +42,7 @@
         private const string stereotype_struct = "<<struct>>";
         private const string stereotype_unsafe = "<<unsafe>>";
         private const string stereotype_virtual = "<<virtual>>";
+        private const string stereotype_volatile = "<<volatile>>";
 
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_annotation = "annotation";
@@ -962,6 +963,8 @@
                     "readonly" => stereotype_readonly,
 
                     "static" => modifier_static,
+                    
+                    "volatile" => stereotype_volatile,
 
                     _ => throw new Exception("")
                 };
