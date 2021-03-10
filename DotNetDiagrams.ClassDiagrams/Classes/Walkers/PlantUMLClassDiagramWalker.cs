@@ -668,6 +668,19 @@
             return initializer;
         }
 
+        private string GetInitializer(
+            VariableDeclaratorSyntax variableDeclarator)
+        {
+            string initializer = String.Empty;
+
+            if (variableDeclarator.Initializer is not null)
+            {
+                initializer = $"= {variableDeclarator.Initializer.Value.ToString()}";
+            }
+
+            return initializer;
+        }
+
         private string GetJoinedAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1222,18 +1235,7 @@
             {
                 string variableName = variable.Identifier.ValueText;
 
-                // TODO: Finish
-                if (variable.Initializer is not null)
-                {
-                    if (variable.Initializer is EqualsValueClauseSyntax equalsValueClause)
-                    {
-                        var variableInitializer = variable.Initializer;
-                    }
-                    else
-                    {
-                        throw new Exception("Remove");
-                    }
-                }
+                string initializer = this.GetInitializer(variable);
 
                 // TODO: Finish
                 if (variable.ArgumentList is not null)
