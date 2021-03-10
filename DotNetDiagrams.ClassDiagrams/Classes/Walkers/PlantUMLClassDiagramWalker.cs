@@ -604,6 +604,19 @@
             return constraints;
         }
 
+        private string GetExpression(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            string expression = String.Empty;
+
+            if (propertyDeclaration.ExpressionBody is not null)
+            {
+                expression = $" => {propertyDeclaration.ExpressionBody.Expression.ToString()}";
+            }
+
+            return expression;
+        }
+
         private string GetJoinedAccessors(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1417,7 +1430,8 @@
 
             string command = this.BuildPropertyDeclarationCommand(
                 explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
-                expression: propertyDeclaration.ExpressionBody.Expression.ToString(),
+                expression: this.GetExpression(
+                    propertyDeclaration),
                 joinedAccessors: this.GetJoinedAccessors(
                     propertyDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
