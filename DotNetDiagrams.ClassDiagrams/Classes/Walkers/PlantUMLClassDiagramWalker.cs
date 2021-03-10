@@ -1144,7 +1144,7 @@
             return parameters;
         }
 
-        private SemanticModel GetFirstSemanticModelOrDefault(
+        private SemanticModel GetSemanticModelOrDefault(
             SyntaxTree syntaxTree)
         {
             return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
@@ -1156,7 +1156,7 @@
         {
             TypeDeclarationSyntax typeDeclaration = null;
 
-            SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
+            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
                 syntaxTree);
 
             if (semanticModel is not null)
@@ -1183,7 +1183,7 @@
         {
             string name = String.Empty;
 
-            SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
+            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
                 syntaxTree);
 
             if (semanticModel is not null)
