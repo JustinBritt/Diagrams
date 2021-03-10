@@ -1029,6 +1029,8 @@
 
                     "internal" => stereotype_internal,
 
+                    "new" => stereotype_new,
+
                     "override" => stereotype_override,
 
                     "partial" => stereotype_partial,
