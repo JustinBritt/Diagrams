@@ -240,6 +240,53 @@
             return sb.ToString();
         }
 
+        private string BuildEventDeclarationCommand(
+            string eventName,
+            string eventTypeName,
+            string explicitInterfaceSpecifierTypeName,
+            string joinedAccessors,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(stereotype_event);
+
+            sb.Append(" ");
+
+            sb.Append(eventTypeName);
+
+            sb.Append(" ");
+
+            if (explicitInterfaceSpecifierTypeName.Length > 0)
+            {
+                sb.Append($"{explicitInterfaceSpecifierTypeName}.");
+            }
+
+            sb.Append(eventName);
+
+            sb.Append(" ");
+
+            sb.Append(":");
+
+            sb.Append(" ");
+
+            if (joinedAccessors.Length > 0)
+            {
+                sb.Append(joinedAccessors);
+
+                sb.Append(" ");
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildFieldDeclarationCommand(
             string fieldTypeName,
             string joinedModifiers,
@@ -454,13 +501,13 @@
         }
 
         private List<string> GetAccessors(
-            PropertyDeclarationSyntax propertyDeclaration)
+            BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             List<string> accessors = new List<string>();
 
-            if (propertyDeclaration.AccessorList is not null)
+            if (basePropertyDeclaration.AccessorList is not null)
             {
-                foreach (AccessorDeclarationSyntax accessorDeclaration in propertyDeclaration.AccessorList.Accessors)
+                foreach (AccessorDeclarationSyntax accessorDeclaration in basePropertyDeclaration.AccessorList.Accessors)
                 {
                     accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
                 }
@@ -630,16 +677,16 @@
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
-            PropertyDeclarationSyntax propertyDeclaration)
+            BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             string explicitInterfaceSpecifierTypeName = String.Empty;
 
-            if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
+            if (basePropertyDeclaration.ExplicitInterfaceSpecifier is not null)
             {
                 explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
-                    propertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
-                    propertyDeclaration.ExplicitInterfaceSpecifier.Name,
-                    propertyDeclaration.SyntaxTree);
+                    basePropertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
+                    basePropertyDeclaration.ExplicitInterfaceSpecifier.Name,
+                    basePropertyDeclaration.SyntaxTree);
             }
 
             return explicitInterfaceSpecifierTypeName;
@@ -685,10 +732,10 @@
         }
 
         private string GetJoinedAccessors(
-            PropertyDeclarationSyntax propertyDeclaration)
+            BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             List<string> accessors = this.GetAccessors(
-                propertyDeclaration);
+                basePropertyDeclaration);
 
             return String.Join(
                 " ",
@@ -770,6 +817,17 @@
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
                 constructorDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
+            EventDeclarationSyntax eventDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                eventDeclaration);
 
             return String.Join(
                 " ",
@@ -931,6 +989,28 @@
                     "static" => stereotype_static,
 
                     "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
+            EventDeclarationSyntax eventDeclaration)
+        {
+            List<string> CSharpModifiers = eventDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "public" => stereotype_public,
 
                     _ => throw new Exception("")
                 };
@@ -1376,10 +1456,26 @@
                 constructorDeclaration);
         }
 
-        // TODO: Finish
         private void Visit(
             EventDeclarationSyntax eventDeclaration)
         {
+            string command = this.BuildEventDeclarationCommand(
+                eventName: eventDeclaration.Identifier.ValueText,
+                eventTypeName: this.GetTypeNameOrFallback(
+                    eventDeclaration.Type.ToString(),
+                    eventDeclaration.Type,
+                    eventDeclaration.SyntaxTree),
+                explicitInterfaceSpecifierTypeName: this.GetExplicitInterfaceSpecifierTypeName(
+                    eventDeclaration),
+                joinedAccessors: this.GetJoinedAccessors(
+                    eventDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    eventDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: eventDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
+
             base.Visit(eventDeclaration);
         }
 
