@@ -356,6 +356,7 @@
 
         private string BuildPropertyDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
+            string expression,
             string joinedAccessors,
             string joinedModifiers,
             string propertyName,
@@ -1383,7 +1384,7 @@
                 methodDeclaration);
         }
 
-        // TODO: Account for ExpressionBody and Initializer
+        // TODO: Account for Initializer
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1395,15 +1396,6 @@
                    propertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                    propertyDeclaration.ExplicitInterfaceSpecifier.Name,
                    propertyDeclaration.SyntaxTree);
-            }
-
-            if (propertyDeclaration.ExpressionBody is not null)
-            {
-                ExpressionSyntax expression = propertyDeclaration.ExpressionBody.Expression;
-
-                var exp = expression.ToString();
-
-                var b = 2;
             }
 
             if(propertyDeclaration.Initializer is not null)
@@ -1418,6 +1410,7 @@
 
             string command = this.BuildPropertyDeclarationCommand(
                 explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
+                expression: propertyDeclaration.ExpressionBody.Expression.ToString(),
                 joinedAccessors: this.GetJoinedAccessors(
                     propertyDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
