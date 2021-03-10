@@ -264,7 +264,8 @@
         }
 
         // TODO: Finish
-        private void Visit(BreakStatementSyntax breakStatement)
+        private void Visit(
+            BreakStatementSyntax breakStatement)
         {
             base.Visit(breakStatement);
         }
@@ -274,7 +275,8 @@
         /// Mapping: C# "catch" -> PlantUML "else"
         /// </summary>
         /// <param name="catchClause">Catch clause</param>
-        private void Visit(CatchClauseSyntax catchClause)
+        private void Visit(
+            CatchClauseSyntax catchClause)
         {
             if (catchClause.Block.Statements.Count > 0)
             {
@@ -293,12 +295,14 @@
             }
         }
 
-        private void Visit(ConstructorDeclarationSyntax constructorDeclaration)
+        private void Visit(
+            ConstructorDeclarationSyntax constructorDeclaration)
         {
             base.Visit(constructorDeclaration);
         }
 
-        private void Visit(DoStatementSyntax doStatement)
+        private void Visit(
+            DoStatementSyntax doStatement)
         {
             AddCommand(group_doWhile);
 
@@ -312,7 +316,8 @@
         /// Mapping: C# "else" and "else if" -> PlantUML "else"
         /// </summary>
         /// <param name="elseClause">Else clause/param>
-        private void Visit(ElseClauseSyntax elseClause)
+        private void Visit(
+            ElseClauseSyntax elseClause)
         {
             AddCommand(PlantUML_else);
 
@@ -324,12 +329,14 @@
             }
         }
 
-        private void Visit(FinallyClauseSyntax finallyClause)
+        private void Visit(
+            FinallyClauseSyntax finallyClause)
         {
             base.Visit(finallyClause);
         }
 
-        private void Visit(ForStatementSyntax forStatement)
+        private void Visit(
+            ForStatementSyntax forStatement)
         {
             AddCommand(group_for);
 
@@ -338,7 +345,8 @@
             AddCommand(PlantUML_end);
         }
 
-        private void Visit(ForEachStatementSyntax forEachStatement)
+        private void Visit(
+            ForEachStatementSyntax forEachStatement)
         {
             AddCommand(group_foreach);
 
@@ -348,7 +356,8 @@
         }
 
         // TODO: Add quotation marks around generics
-        private void Visit(ExpressionSyntax invocation)
+        private void Visit(
+            ExpressionSyntax invocation)
         {
             string callerTypeName = String.Empty;
 
@@ -455,7 +464,8 @@
         /// Mapping: C# "if" -> PlantUML "opt" or "alt"
         /// </summary>
         /// <param name="ifStatement">If statement</param>
-        private void Visit(IfStatementSyntax ifStatement)
+        private void Visit(
+            IfStatementSyntax ifStatement)
         {
             string command1;
 
@@ -481,7 +491,8 @@
             }
         }
 
-        private void Visit(MethodDeclarationSyntax methodDeclaration)
+        private void Visit(
+            MethodDeclarationSyntax methodDeclaration)
         {
             // we only care about method declarations that don't have callers
             ignore = HasCallers(methodDeclaration);
@@ -507,7 +518,8 @@
         /// Mapping: C# "Try" -> PlantUML "alt"
         /// </summary>
         /// <param name="tryStatement">Try statement</param>
-        private void Visit(TryStatementSyntax tryStatement)
+        private void Visit(
+            TryStatementSyntax tryStatement)
         {
             if (tryStatement.Parent is BlockSyntax)
             {
@@ -527,7 +539,8 @@
         /// Mapping: C# "while" -> PlantUML "group while"
         /// </summary>
         /// <param name="whileStatement"></param>
-        private void Visit(WhileStatementSyntax whileStatement)
+        private void Visit(
+            WhileStatementSyntax whileStatement)
         {
             AddCommand(group_while);
 
