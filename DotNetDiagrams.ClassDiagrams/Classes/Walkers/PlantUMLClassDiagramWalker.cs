@@ -1636,9 +1636,9 @@
                         item.Type,
                         interfaceDeclaration.SyntaxTree);
 
-                    string className = this.DetermineTitle(interfaceDeclaration);
+                    string interfaceName = this.DetermineTitle(interfaceDeclaration);
 
-                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
+                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + interfaceName);
                 }
             }
 
