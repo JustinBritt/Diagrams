@@ -1295,15 +1295,14 @@
         {
             foreach (BaseTypeSyntax baseType in baseList.Types)
             {
-                TypeSyntax type = baseType.Type;
-
-                TypeDeclarationSyntax res = this.GetFirstTypeDeclarationOrDefault(
-                    type,
+                TypeDeclarationSyntax typeDeclaration = this.GetFirstTypeDeclarationOrDefault(
+                    baseType.Type,
                     baseType.SyntaxTree);
 
-                if (res is not null)
+                if (typeDeclaration is not null)
                 {
-                    this.Visit(res);
+                    this.Visit(
+                        typeDeclaration);
                 }
             }
 
