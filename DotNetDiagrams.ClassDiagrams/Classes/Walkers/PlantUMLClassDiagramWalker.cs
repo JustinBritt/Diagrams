@@ -1163,11 +1163,6 @@
                 try
                 {
                     semanticModel = this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
-
-                    //semanticModels.Add(
-                    //    item.Value.GetSemanticModel(
-                    //        syntaxTree,
-                    //        true));
                 }
                 catch (Exception e)
                 {
