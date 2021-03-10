@@ -1643,7 +1643,14 @@
             {
                 foreach (BaseTypeSyntax item in interfaceDeclaration.BaseList.Types.ToList())
                 {
-                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + interfaceDeclaration.Identifier.ValueText);
+                    string itemName = this.GetTypeNameOrFallback(
+                        item.Type.ToString(),
+                        item.Type,
+                        interfaceDeclaration.SyntaxTree);
+
+                    string className = this.DetermineTitle(interfaceDeclaration);
+
+                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
                 }
             }
 
@@ -1742,7 +1749,14 @@
             {
                 foreach (BaseTypeSyntax item in structDeclaration.BaseList.Types.ToList())
                 {
-                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + structDeclaration.Identifier.ValueText);
+                    string itemName = this.GetTypeNameOrFallback(
+                        item.Type.ToString(),
+                        item.Type,
+                        structDeclaration.SyntaxTree);
+
+                    string structName = this.DetermineTitle(structDeclaration);
+
+                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + structName);
                 }
             }
 
