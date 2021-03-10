@@ -927,6 +927,8 @@
                 {
                     "protected" => stereotype_protected,
 
+                    "private" => stereotype_private,
+
                     "public" => stereotype_public,
 
                     "static" => stereotype_static,
