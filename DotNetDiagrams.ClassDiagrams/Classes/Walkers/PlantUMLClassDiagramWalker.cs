@@ -119,19 +119,7 @@
         private string DetermineTypeDeclarationTypeName(
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
-
-            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
-            {
-                if (declaredType.DescendantNodesAndSelf().Contains(typeDeclaration))
-                {
-                    parentTypes.Add(declaredType);
-                }
-            }
-
-            return String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+            return String.Join(".", typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText));
         }
 
         private void StartDiagram(
