@@ -1421,18 +1421,9 @@
         private void Visit(
             MethodDeclarationSyntax methodDeclaration)
         {
-            string explicitInterfaceSpecifierTypeName = String.Empty;
-
-            if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
-            {
-                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
-                   methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
-                   methodDeclaration.ExplicitInterfaceSpecifier.Name,
-                   methodDeclaration.SyntaxTree);
-            }
-
             string command = this.BuildMethodDeclarationCommand(
-                explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
+                explicitInterfaceSpecifierTypeName: this.GetExplicitInterfaceSpecifierTypeName(
+                    methodDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
