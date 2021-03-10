@@ -994,6 +994,8 @@
                 {
                     "abstract" => modifier_abstract,
 
+                    "async" => stereotype_async,
+
                     "internal" => stereotype_internal,
 
                     "override" => stereotype_override,
