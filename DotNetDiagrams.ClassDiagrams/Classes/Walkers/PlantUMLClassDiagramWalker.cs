@@ -929,6 +929,8 @@
 
                     "static" => stereotype_static,
 
+                    "unsafe" => stereotype_unsafe,
+
                     _ => throw new Exception("")
                 };
 
