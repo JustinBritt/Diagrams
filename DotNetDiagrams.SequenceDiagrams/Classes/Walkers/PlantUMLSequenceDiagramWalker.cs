@@ -208,6 +208,20 @@
             currentHeader.ForEach(w => AddCommand(w));
         }
 
+        private string EscapeGreaterThanLessThan(
+            string value)
+        {
+            if (!String.IsNullOrWhiteSpace(value))
+            {
+                if (value.Contains("<") || value.Contains(">"))
+                {
+                    value = @"""" + $"{value}" + @"""";
+                }
+            }
+
+            return value;
+        }
+
         public override void Visit(SyntaxNode node)
         {
             if (ignore)
@@ -353,20 +367,6 @@
             base.Visit(forEachStatement);
 
             AddCommand(PlantUML_end);
-        }
-
-        private string EscapeGreaterThanLessThan(
-            string value)
-        {
-            if (!String.IsNullOrWhiteSpace(value))
-            {
-                if (value.Contains("<") || value.Contains(">"))
-                {
-                    value = @"""" + $"{value}" + @"""";
-                }
-            }
-
-            return value;
         }
 
         private void Visit(
