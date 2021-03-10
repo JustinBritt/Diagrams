@@ -924,6 +924,8 @@
                 {
                     "public" => stereotype_public,
 
+                    "static" => stereotype_static,
+
                     _ => throw new Exception("")
                 };
 
