@@ -611,7 +611,7 @@
 
             if (propertyDeclaration.ExpressionBody is not null)
             {
-                expression = $" => {propertyDeclaration.ExpressionBody.Expression.ToString()}";
+                expression = $"=> {propertyDeclaration.ExpressionBody.Expression.ToString()}";
             }
 
             return expression;
