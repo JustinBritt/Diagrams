@@ -357,6 +357,7 @@
         private string BuildPropertyDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
             string expression,
+            string initializer,
             string joinedAccessors,
             string joinedModifiers,
             string propertyName,
@@ -398,6 +399,11 @@
             if (expression.Length > 0)
             {
                 sb.Append(expression);
+            }
+
+            if (initializer.Length > 0)
+            {
+                sb.Append(initializer);
             }
 
             return sb.ToString();
@@ -615,6 +621,19 @@
             }
 
             return expression;
+        }
+
+        private string GetInitializer(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            string initializer = string.Empty;
+
+            if (propertyDeclaration.Initializer is not null)
+            {
+                initializer = propertyDeclaration.Initializer.Value.ToString();
+            }
+
+            return initializer;
         }
 
         private string GetJoinedAccessors(
@@ -1407,7 +1426,6 @@
         // TODO: Remove
         public int FooProperty { get; } = 2;
 
-        // TODO: Account for Initializer
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1421,19 +1439,11 @@
                    propertyDeclaration.SyntaxTree);
             }
 
-            if(propertyDeclaration.Initializer is not null)
-            {
-                // TODO: Add method
-                ExpressionSyntax initializer = propertyDeclaration.Initializer.Value;
-
-                var exp2 = initializer.ToString();
-
-                var c = 2;
-            }
-
             string command = this.BuildPropertyDeclarationCommand(
                 explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
                 expression: this.GetExpression(
+                    propertyDeclaration),
+                initializer: this.GetInitializer(
                     propertyDeclaration),
                 joinedAccessors: this.GetJoinedAccessors(
                     propertyDeclaration),
