@@ -1055,6 +1055,8 @@
 
                     "internal" => stereotype_internal,
 
+                    "override" => stereotype_override,
+
                     "private" => stereotype_private,
 
                     "protected" => stereotype_protected,
