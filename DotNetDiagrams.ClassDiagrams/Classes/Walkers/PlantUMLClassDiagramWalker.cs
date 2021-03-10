@@ -1156,20 +1156,13 @@
         {
             SemanticModel semanticModel = null;
 
-            List<SemanticModel> semanticModels = new List<SemanticModel>();
-
-            foreach (KeyValuePair<Project, Compilation> item in compilations)
+            try
             {
-                try
-                {
-                    semanticModel = this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
-                }
-                catch (Exception e)
-                {
-                }
+                semanticModel = this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
             }
-
-            semanticModel = semanticModels.FirstOrDefault();
+            catch (Exception e)
+            {
+            }
 
             return semanticModel;
         }
