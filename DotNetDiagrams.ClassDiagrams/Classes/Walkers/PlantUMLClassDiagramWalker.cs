@@ -213,7 +213,6 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private string BuildConstructorDeclarationCommand(
             string constructorName,
             string joinedModifiers,
