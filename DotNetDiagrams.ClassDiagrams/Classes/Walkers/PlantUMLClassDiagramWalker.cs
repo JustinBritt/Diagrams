@@ -1504,7 +1504,7 @@
                     classDeclaration);
             }
 
-            // TODO: Update
+            // TODO: Add method
             if (classDeclaration.BaseList is not null)
             {
                 foreach (BaseTypeSyntax item in classDeclaration.BaseList.Types.ToList())
@@ -1631,6 +1631,15 @@
                     interfaceDeclaration);
             }
 
+            // TODO: Add method
+            if (interfaceDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax item in interfaceDeclaration.BaseList.Types.ToList())
+                {
+                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + interfaceDeclaration.Identifier.ValueText);
+                }
+            }
+
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: interfaceDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
@@ -1719,6 +1728,15 @@
             {
                 this.StartDiagram(
                     structDeclaration);
+            }
+
+            // TODO: Add method
+            if (structDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax item in structDeclaration.BaseList.Types.ToList())
+                {
+                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + structDeclaration.Identifier.ValueText);
+                }
             }
 
             string command = this.BuildStructDeclarationCommand(
