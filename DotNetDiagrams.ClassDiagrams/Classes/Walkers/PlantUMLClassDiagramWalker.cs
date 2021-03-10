@@ -209,7 +209,6 @@
         }
 
         // TODO: Finish
-        // TODO: Account for initializer
         private string BuildConstructorDeclarationCommand(
             string constructorName,
             string joinedModifiers,
