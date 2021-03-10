@@ -1289,7 +1289,6 @@
             }
         }
 
-        // TODO: Finish
         private void Visit(
             BaseListSyntax baseList)
         {
