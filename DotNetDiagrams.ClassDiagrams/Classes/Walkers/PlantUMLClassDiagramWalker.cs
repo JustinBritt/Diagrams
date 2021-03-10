@@ -25,6 +25,7 @@
         private const string modifier_static = "{static}";
 
         private const string stereotype_abstract = "<<abstract>>";
+        private const string stereotype_add = "<<add>>";
         private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_event = "<<event>>";
@@ -38,6 +39,7 @@
         private const string stereotype_private = "<<private>>";
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_readonly = "<<readonly>>";
+        private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
