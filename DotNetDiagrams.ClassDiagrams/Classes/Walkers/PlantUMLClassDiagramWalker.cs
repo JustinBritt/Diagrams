@@ -1250,7 +1250,7 @@
                     }
                 }
 
-                variables.Add(variableName);
+                variables.Add($"{variableName} {initializer}");
             }
 
             return variables;
