@@ -1232,7 +1232,7 @@
         private List<string> GetVariables(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            List<string> variableNames = new List<string>();
+            List<string> variables = new List<string>();
 
             foreach (VariableDeclaratorSyntax variable in fieldDeclaration.Declaration.Variables.ToList())
             {
@@ -1250,10 +1250,10 @@
                     }
                 }
 
-                variableNames.Add(variableName);
+                variables.Add(variableName);
             }
 
-            return variableNames;
+            return variables;
         }
 
         /// <summary>
