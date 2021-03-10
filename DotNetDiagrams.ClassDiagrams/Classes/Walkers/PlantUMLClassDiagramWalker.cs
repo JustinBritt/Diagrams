@@ -1175,9 +1175,24 @@
         {
             string name = String.Empty;
 
-            SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
-                this.compilations,
-                syntaxTree);
+            SemanticModel semanticModel = null;
+            
+            try
+            {
+                semanticModel = compilation.GetSemanticModel(
+                    syntaxTree,
+                    true);
+            }
+            catch(Exception e)
+            {
+            }
+
+            if (semanticModel is null)
+            {
+                semanticModel = this.GetFirstSemanticModelOrDefault(
+                    this.compilations,
+                    syntaxTree);
+            }
 
             if (semanticModel is not null)
             {
