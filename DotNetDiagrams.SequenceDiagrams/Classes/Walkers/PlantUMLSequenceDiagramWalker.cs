@@ -222,7 +222,8 @@
             return value;
         }
 
-        public override void Visit(SyntaxNode node)
+        public override void Visit(
+            SyntaxNode node)
         {
             if (ignore)
             {
