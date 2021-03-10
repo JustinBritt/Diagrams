@@ -1000,6 +1000,8 @@
 
                     "private" => stereotype_private,
 
+                    "protected" => stereotype_protected,
+
                     "public" => stereotype_public,
 
                     "static" => modifier_static,
