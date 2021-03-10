@@ -963,6 +963,8 @@
 
                     "internal" => stereotype_internal,
 
+                    "protected" => stereotype_protected,
+
                     "private" => stereotype_private,
 
                     "public" => stereotype_public,
