@@ -355,6 +355,20 @@
             AddCommand(PlantUML_end);
         }
 
+        private string EscapeGreaterThanLessThan(
+            string value)
+        {
+            if (!String.IsNullOrWhiteSpace(value))
+            {
+                if (value.Contains("<") || value.Contains(">"))
+                {
+                    value = @"""" + $"{value}" + @"""";
+                }
+            }
+
+            return value;
+        }
+
         // TODO: Finish
         private void Visit(
             ExpressionSyntax invocation)
@@ -417,38 +431,17 @@
                 return;
             }
 
-            // TODO: Add method
-            if (!String.IsNullOrWhiteSpace(callerTypeName))
-            {
-                if (callerTypeName.Contains("<") || callerTypeName.Contains(">"))
-                {
-                    callerTypeName = @"""" + $"{callerTypeName}" + @"""";
-                }
-            }
+            callerTypeName = this.EscapeGreaterThanLessThan(
+                callerTypeName);
 
-            if (!String.IsNullOrWhiteSpace(targetName))
-            {
-                if (targetName.Contains("<") || targetName.Contains(">"))
-                {
-                    targetName = @"""" + $"{targetName}" + @"""";
-                }
-            }
+            returnTypeName = this.EscapeGreaterThanLessThan(
+                returnTypeName);
 
-            if (!String.IsNullOrWhiteSpace(targetTypeName))
-            {
-                if (targetTypeName.Contains("<") || targetTypeName.Contains(">"))
-                {
-                    targetTypeName = @"""" + $"{targetTypeName}" + @"""";
-                }
-            }
+            targetName = this.EscapeGreaterThanLessThan(
+                targetName);
 
-            if (!String.IsNullOrWhiteSpace(targetTypeName))
-            {
-                if (returnTypeName.Contains("<") || returnTypeName.Contains(">"))
-                {
-                    returnTypeName = @"""" + $"{returnTypeName}" + @"""";
-                }
-            }
+            targetTypeName = this.EscapeGreaterThanLessThan(
+                targetTypeName);
 
             string command = $"{callerTypeName} -> {targetTypeName}: {targetName}";
 
