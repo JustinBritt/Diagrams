@@ -26,6 +26,7 @@
 
         private const string stereotype_abstract = "<<abstract>>";
         private const string stereotype_add = "<<add>>";
+        private const string stereotype_arrowEquals = @"<<""=>"">>";
         private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_equals = "<<=>>";
@@ -725,6 +726,7 @@
             return explicitInterfaceSpecifierTypeName;
         }
 
+        // TODO: Add const
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
