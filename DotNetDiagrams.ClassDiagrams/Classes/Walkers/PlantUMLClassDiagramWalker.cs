@@ -1149,22 +1149,10 @@
             return parameters;
         }
 
-        // TODO: Update
         private SemanticModel GetFirstSemanticModelOrDefault(
-            Dictionary<Project, Compilation> compilations,
             SyntaxTree syntaxTree)
         {
-            SemanticModel semanticModel = null;
-
-            try
-            {
-                semanticModel = this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
-            }
-            catch (Exception e)
-            {
-            }
-
-            return semanticModel;
+            return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
         }
 
         private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
@@ -1174,7 +1162,6 @@
             TypeDeclarationSyntax typeDeclaration = null;
 
             SemanticModel semanticModel = this.GetFirstSemanticModelOrDefault(
-                this.compilations,
                 syntaxTree);
 
             if (semanticModel is not null)
@@ -1216,7 +1203,6 @@
             if (semanticModel is null)
             {
                 semanticModel = this.GetFirstSemanticModelOrDefault(
-                    this.compilations,
                     syntaxTree);
             }
 
