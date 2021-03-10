@@ -1225,9 +1225,6 @@
             return typeParameters;
         }
 
-        // TODO: Remove
-        int x, y, z = 2;
-
         // TODO: Account for ArgumentList and Initializer
         private List<string> GetVariables(
             FieldDeclarationSyntax fieldDeclaration)
