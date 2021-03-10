@@ -1010,6 +1010,8 @@
 
                     "override" => stereotype_override,
 
+                    "partial" => stereotype_partial,
+
                     "private" => stereotype_private,
 
                     "protected" => stereotype_protected,
