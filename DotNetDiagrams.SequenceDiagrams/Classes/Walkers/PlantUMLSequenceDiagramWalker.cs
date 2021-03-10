@@ -417,6 +417,39 @@
                 return;
             }
 
+            // TODO: Add method
+            if (!String.IsNullOrWhiteSpace(callerTypeName))
+            {
+                if (callerTypeName.Contains("<") || callerTypeName.Contains(">"))
+                {
+                    callerTypeName = @"" + $"{callerTypeName}" + @"";
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(targetName))
+            {
+                if (targetName.Contains("<") || targetName.Contains(">"))
+                {
+                    targetName = @"" + $"{targetName}" + @"";
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(targetTypeName))
+            {
+                if (targetTypeName.Contains("<") || targetTypeName.Contains(">"))
+                {
+                    targetTypeName = @"" + $"{targetTypeName}" + @"";
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(targetTypeName))
+            {
+                if (returnTypeName.Contains("<") || returnTypeName.Contains(">"))
+                {
+                    returnTypeName = @"" + $"{returnTypeName}" + @"";
+                }
+            }
+
             string command = $"{callerTypeName} -> {targetTypeName}: {targetName}";
 
             AddCommand(command);
