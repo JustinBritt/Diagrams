@@ -1507,7 +1507,7 @@
             // TODO: Update
             if (classDeclaration.BaseList is not null)
             {
-                foreach (var item in classDeclaration.BaseList.Types.ToList())
+                foreach (BaseTypeSyntax item in classDeclaration.BaseList.Types.ToList())
                 {
                     this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + classDeclaration.Identifier.ValueText);
                 }
