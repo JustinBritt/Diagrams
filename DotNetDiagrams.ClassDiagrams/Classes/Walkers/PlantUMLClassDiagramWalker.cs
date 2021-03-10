@@ -1439,9 +1439,6 @@
                 methodDeclaration);
         }
 
-        // TODO: Remove
-        public int FooProperty { get; } = 2;
-
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
