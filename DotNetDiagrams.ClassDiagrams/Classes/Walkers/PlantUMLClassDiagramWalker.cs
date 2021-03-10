@@ -746,12 +746,7 @@
 
             if (propertyDeclaration.Initializer is not null)
             {
-                initializer = propertyDeclaration.Initializer switch
-                {
-                    EqualsValueClauseSyntax => stereotype_equals,
-
-                    _ => throw new Exception("")
-                };
+                initializer = stereotype_equals;
             }
 
             return initializer;
@@ -764,12 +759,7 @@
 
             if (variableDeclarator.Initializer is not null)
             {
-                initializer = variableDeclarator.Initializer switch
-                {
-                    EqualsValueClauseSyntax => stereotype_equals,
-
-                    _ => throw new Exception("")
-                };
+                initializer = stereotype_equals;
             }
 
             return initializer;
