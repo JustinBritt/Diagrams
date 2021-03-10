@@ -60,6 +60,8 @@
                 this.Body.AddRange(item);
             }
 
+            this.Body.AddRange(this.Relationships);
+
             this.Code.AddRange(this.Body);
 
             this.Code.Add(this.End);
