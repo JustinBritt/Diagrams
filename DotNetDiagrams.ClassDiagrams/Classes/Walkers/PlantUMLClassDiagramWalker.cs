@@ -1256,15 +1256,6 @@
                 string initializer = this.GetInitializer(
                     variable);
 
-                // TODO: Finish
-                if (variable.ArgumentList is not null)
-                {
-                    foreach (ArgumentSyntax argument in variable.ArgumentList.Arguments.ToList())
-                    {
-                        //throw new Exception("Remove");
-                    }
-                }
-
                 variables.Add($"{variableName} {initializer}");
             }
 
