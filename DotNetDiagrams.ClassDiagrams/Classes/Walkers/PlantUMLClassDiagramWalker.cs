@@ -952,6 +952,8 @@
 
                     "readonly" => stereotype_readonly,
 
+                    "static" => modifier_static,
+
                     _ => throw new Exception("")
                 };
 
