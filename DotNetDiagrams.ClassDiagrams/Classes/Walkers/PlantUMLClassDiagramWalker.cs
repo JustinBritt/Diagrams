@@ -28,6 +28,7 @@
         private const string stereotype_async = "<<async>>";
         private const string stereotype_event = "<<event>>";
         private const string stereotype_const = "<<const>>";
+        private const string stereotype_extern = "<<extern>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
@@ -1007,6 +1008,8 @@
                     "abstract" => modifier_abstract,
 
                     "async" => stereotype_async,
+
+                    "extern" => stereotype_extern,
 
                     "internal" => stereotype_internal,
 
