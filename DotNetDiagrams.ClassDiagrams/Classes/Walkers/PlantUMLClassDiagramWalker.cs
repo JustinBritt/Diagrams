@@ -28,6 +28,7 @@
         private const string stereotype_add = "<<add>>";
         private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
+        private const string stereotype_equals = "<<=>>";
         private const string stereotype_event = "<<event>>";
         private const string stereotype_extern = "<<extern>>";
         private const string stereotype_fixed = "<<fixed>>";
@@ -740,11 +741,16 @@
         private string GetInitializer(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            string initializer = string.Empty;
+            string initializer = String.Empty;
 
             if (propertyDeclaration.Initializer is not null)
             {
-                initializer = $"= {propertyDeclaration.Initializer.Value.ToString()}";
+                initializer = propertyDeclaration.Initializer switch
+                {
+                    EqualsValueClauseSyntax => stereotype_equals,
+
+                    _ => throw new Exception("")
+                };
             }
 
             return initializer;
@@ -757,7 +763,12 @@
 
             if (variableDeclarator.Initializer is not null)
             {
-                initializer = $"= {variableDeclarator.Initializer.Value.ToString()}";
+                initializer = variableDeclarator.Initializer switch
+                {
+                    EqualsValueClauseSyntax => stereotype_equals,
+
+                    _ => throw new Exception("")
+                };
             }
 
             return initializer;
