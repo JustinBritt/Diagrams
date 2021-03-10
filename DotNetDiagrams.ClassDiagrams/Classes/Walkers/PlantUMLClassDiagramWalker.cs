@@ -1073,7 +1073,15 @@
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
                     "public" => stereotype_public,
+
+                    "static" => modifier_static,
 
                     _ => throw new Exception("")
                 };
