@@ -1238,7 +1238,8 @@
             {
                 string variableName = variable.Identifier.ValueText;
 
-                string initializer = this.GetInitializer(variable);
+                string initializer = this.GetInitializer(
+                    variable);
 
                 // TODO: Finish
                 if (variable.ArgumentList is not null)
