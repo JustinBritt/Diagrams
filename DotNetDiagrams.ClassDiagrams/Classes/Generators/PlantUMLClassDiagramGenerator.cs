@@ -35,7 +35,7 @@
 
             foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
             {
-                Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+                Compilation compilation = compilations.Where(w => w.Key == project).SingleOrDefault();
 
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
