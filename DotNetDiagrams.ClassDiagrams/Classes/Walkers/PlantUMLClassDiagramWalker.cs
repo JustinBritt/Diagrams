@@ -1225,7 +1225,7 @@
             return typeParameters;
         }
 
-        // TODO: Account for ArgumentList and Initializer
+        // TODO: Account for ArgumentList
         private List<string> GetVariables(
             FieldDeclarationSyntax fieldDeclaration)
         {
