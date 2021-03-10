@@ -726,7 +726,6 @@
             return explicitInterfaceSpecifierTypeName;
         }
 
-        // TODO: Add const
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -734,7 +733,7 @@
 
             if (propertyDeclaration.ExpressionBody is not null)
             {
-                expression = $"=> {propertyDeclaration.ExpressionBody.Expression.ToString()}";
+                expression = stereotype_arrowExpression;
             }
 
             return expression;
