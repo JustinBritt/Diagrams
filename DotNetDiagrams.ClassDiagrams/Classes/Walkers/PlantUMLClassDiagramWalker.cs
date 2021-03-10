@@ -1426,6 +1426,9 @@
                 case EventDeclarationSyntax eventDeclaration:
                     this.Visit(eventDeclaration);
                     break;
+                case EventFieldDeclarationSyntax eventFieldDeclaration:
+                    this.Visit(eventFieldDeclaration);
+                    break;
                 case FieldDeclarationSyntax fieldDeclaration:
                     this.Visit(fieldDeclaration);
                     break;
