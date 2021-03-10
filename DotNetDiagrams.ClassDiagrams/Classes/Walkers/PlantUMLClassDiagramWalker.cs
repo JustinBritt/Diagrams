@@ -610,6 +610,22 @@
             return constraints;
         }
 
+        private string GetExplicitInterfaceSpecifierTypeName(
+            PropertyDeclarationSyntax propertyDeclaration)
+        {
+            string explicitInterfaceSpecifierTypeName = String.Empty;
+
+            if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
+            {
+                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+                    propertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
+                    propertyDeclaration.ExplicitInterfaceSpecifier.Name,
+                    propertyDeclaration.SyntaxTree);
+            }
+
+            return explicitInterfaceSpecifierTypeName;
+        }
+
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1429,19 +1445,9 @@
         private void Visit(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            // TODO: Add method
-            string explicitInterfaceSpecifierTypeName = String.Empty;
-
-            if (propertyDeclaration.ExplicitInterfaceSpecifier is not null)
-            {
-                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
-                   propertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
-                   propertyDeclaration.ExplicitInterfaceSpecifier.Name,
-                   propertyDeclaration.SyntaxTree);
-            }
-
             string command = this.BuildPropertyDeclarationCommand(
-                explicitInterfaceSpecifierTypeName: explicitInterfaceSpecifierTypeName,
+                explicitInterfaceSpecifierTypeName: this.GetExplicitInterfaceSpecifierTypeName(
+                    propertyDeclaration),
                 expression: this.GetExpression(
                     propertyDeclaration),
                 initializer: this.GetInitializer(
