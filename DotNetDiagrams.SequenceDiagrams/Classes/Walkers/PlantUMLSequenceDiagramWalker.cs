@@ -422,7 +422,7 @@
             {
                 if (callerTypeName.Contains("<") || callerTypeName.Contains(">"))
                 {
-                    callerTypeName = @"" + $"{callerTypeName}" + @"";
+                    callerTypeName = @"""" + $"{callerTypeName}" + @"""";
                 }
             }
 
@@ -430,7 +430,7 @@
             {
                 if (targetName.Contains("<") || targetName.Contains(">"))
                 {
-                    targetName = @"" + $"{targetName}" + @"";
+                    targetName = @"""" + $"{targetName}" + @"""";
                 }
             }
 
@@ -438,7 +438,7 @@
             {
                 if (targetTypeName.Contains("<") || targetTypeName.Contains(">"))
                 {
-                    targetTypeName = @"" + $"{targetTypeName}" + @"";
+                    targetTypeName = @"""" + $"{targetTypeName}" + @"""";
                 }
             }
 
@@ -446,7 +446,7 @@
             {
                 if (returnTypeName.Contains("<") || returnTypeName.Contains(">"))
                 {
-                    returnTypeName = @"" + $"{returnTypeName}" + @"";
+                    returnTypeName = @"""" + $"{returnTypeName}" + @"""";
                 }
             }
 
