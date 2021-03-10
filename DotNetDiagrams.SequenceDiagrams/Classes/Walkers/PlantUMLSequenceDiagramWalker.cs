@@ -369,7 +369,6 @@
             return value;
         }
 
-        // TODO: Finish
         private void Visit(
             ExpressionSyntax invocation)
         {
