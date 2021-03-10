@@ -1280,6 +1280,9 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
+                case EventDeclarationSyntax eventDeclaration:
+                    this.Visit(eventDeclaration);
+                    break;
                 case FieldDeclarationSyntax fieldDeclaration:
                     this.Visit(fieldDeclaration);
                     break;
@@ -1371,6 +1374,13 @@
 
             base.Visit(
                 constructorDeclaration);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            EventDeclarationSyntax eventDeclaration)
+        {
+            base.Visit(eventDeclaration);
         }
 
         private void Visit(
