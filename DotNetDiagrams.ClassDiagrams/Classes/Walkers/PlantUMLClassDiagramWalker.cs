@@ -951,6 +951,8 @@
                 {
                     "const" => stereotype_const,
 
+                    "internal" => stereotype_internal,
+
                     "private" => stereotype_private,
 
                     "public" => stereotype_public,
