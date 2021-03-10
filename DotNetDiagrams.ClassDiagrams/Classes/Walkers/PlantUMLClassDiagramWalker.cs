@@ -1053,6 +1053,8 @@
                 {
                     "internal" => stereotype_internal,
 
+                    "new" => stereotype_new,
+
                     "private" => stereotype_private,
 
                     "protected" => stereotype_protected,
