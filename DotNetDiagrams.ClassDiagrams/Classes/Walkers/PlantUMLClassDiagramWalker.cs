@@ -1504,6 +1504,15 @@
                     classDeclaration);
             }
 
+            // TODO: Update
+            if (classDeclaration.BaseList is not null)
+            {
+                foreach (var item in classDeclaration.BaseList.Types.ToList())
+                {
+                    this.Diagram.Relationships.Add(item.ToString() + " " + PlantUML_extension + " " + classDeclaration.Identifier.ValueText);
+                }
+            }
+
             string command = this.BuildClassDeclarationCommand(
                 className: classDeclaration.Identifier.ValueText,
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
