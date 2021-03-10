@@ -693,22 +693,6 @@
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            string explicitInterfaceSpecifierTypeName = String.Empty;
-
-            if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
-            {
-                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
-                    methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
-                    methodDeclaration.ExplicitInterfaceSpecifier.Name,
-                    methodDeclaration.SyntaxTree);
-            }
-
-            return explicitInterfaceSpecifierTypeName;
-        }
-
-        private string GetExplicitInterfaceSpecifierTypeName(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             string explicitInterfaceSpecifierTypeName = String.Empty;
@@ -719,6 +703,22 @@
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name,
                     basePropertyDeclaration.SyntaxTree);
+            }
+
+            return explicitInterfaceSpecifierTypeName;
+        }
+
+        private string GetExplicitInterfaceSpecifierTypeName(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            string explicitInterfaceSpecifierTypeName = String.Empty;
+
+            if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
+            {
+                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+                    methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
+                    methodDeclaration.ExplicitInterfaceSpecifier.Name,
+                    methodDeclaration.SyntaxTree);
             }
 
             return explicitInterfaceSpecifierTypeName;
