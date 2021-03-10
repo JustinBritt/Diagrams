@@ -278,13 +278,6 @@
             }
         }
 
-        // TODO: Finish
-        private void Visit(
-            BreakStatementSyntax breakStatement)
-        {
-            base.Visit(breakStatement);
-        }
-
         /// <summary>
         /// This visits a catch clause.
         /// Mapping: C# "catch" -> PlantUML "else"
