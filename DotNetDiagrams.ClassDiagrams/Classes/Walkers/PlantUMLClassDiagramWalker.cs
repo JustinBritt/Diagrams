@@ -29,6 +29,7 @@
         private const string stereotype_event = "<<event>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_extern = "<<extern>>";
+        private const string stereotype_fixed = "<<fixed>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
@@ -953,6 +954,8 @@
                 string PlantUMLModifier = CSharpModifier switch
                 {
                     "const" => stereotype_const,
+
+                    "fixed" => stereotype_fixed,
 
                     "internal" => stereotype_internal,
 
