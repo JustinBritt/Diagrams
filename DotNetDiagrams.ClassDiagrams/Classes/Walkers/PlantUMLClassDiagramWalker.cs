@@ -287,6 +287,36 @@
             return sb.ToString();
         }
 
+        private string BuildEventFieldDeclarationCommand(
+            string eventFieldTypeName,
+            string joinedModifiers,
+            string joinedVariables)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(stereotype_event);
+
+            sb.Append(" ");
+
+            sb.Append(eventFieldTypeName);
+
+            sb.Append(" ");
+
+            if (joinedVariables.Length > 0)
+            {
+                sb.Append(joinedVariables);
+            }
+
+            return sb.ToString();   
+        }
+
         private string BuildFieldDeclarationCommand(
             string fieldTypeName,
             string joinedModifiers,
@@ -835,6 +865,17 @@
         }
 
         private string GetJoinedModifiers(
+            EventFieldDeclarationSyntax eventFieldDeclaration)
+        {
+            List<string> PlantUMLModifiers = this.GetModifiers(
+                eventFieldDeclaration);
+
+            return String.Join(
+                " ",
+                PlantUMLModifiers);
+        }
+
+        private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
             List<string> PlantUMLModifiers = this.GetModifiers(
@@ -923,10 +964,10 @@
         }
 
         private string GetJoinedVariables(
-            FieldDeclarationSyntax fieldDeclaration)
+            BaseFieldDeclarationSyntax baseFieldDeclaration)
         {
             List<string> variables = this.GetVariables(
-                fieldDeclaration);
+                baseFieldDeclaration);
 
             return String.Join(
                 ", ",
@@ -1003,6 +1044,28 @@
             EventDeclarationSyntax eventDeclaration)
         {
             List<string> CSharpModifiers = eventDeclaration.Modifiers.Select(w => w.ValueText).ToList();
+
+            List<string> PlantUMLModifiers = new List<string>();
+
+            foreach (string CSharpModifier in CSharpModifiers)
+            {
+                string PlantUMLModifier = CSharpModifier switch
+                {
+                    "public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                };
+
+                PlantUMLModifiers.Add(PlantUMLModifier);
+            }
+
+            return PlantUMLModifiers;
+        }
+
+        private List<string> GetModifiers(
+            EventFieldDeclarationSyntax eventFieldDeclaration)
+        {
+            List<string> CSharpModifiers = eventFieldDeclaration.Modifiers.Select(w => w.ValueText).ToList();
 
             List<string> PlantUMLModifiers = new List<string>();
 
@@ -1325,11 +1388,11 @@
 
         // TODO: Account for ArgumentList
         private List<string> GetVariables(
-            FieldDeclarationSyntax fieldDeclaration)
+            BaseFieldDeclarationSyntax baseFieldDeclaration)
         {
             List<string> variables = new List<string>();
 
-            foreach (VariableDeclaratorSyntax variable in fieldDeclaration.Declaration.Variables.ToList())
+            foreach (VariableDeclaratorSyntax variable in baseFieldDeclaration.Declaration.Variables.ToList())
             {
                 string variableName = variable.Identifier.ValueText;
 
@@ -1478,6 +1541,27 @@
 
             base.Visit(
                 eventDeclaration);
+        }
+
+        private void Visit(
+            EventFieldDeclarationSyntax eventFieldDeclaration)
+        {
+            string command = this.BuildEventFieldDeclarationCommand(
+                eventFieldTypeName: this.GetTypeNameOrFallback(
+                    eventFieldDeclaration.Declaration.Type.ToString(),
+                    eventFieldDeclaration.Declaration,
+                    eventFieldDeclaration.SyntaxTree),
+                joinedModifiers: this.GetJoinedModifiers(
+                    eventFieldDeclaration),
+                joinedVariables: this.GetJoinedVariables(
+                    eventFieldDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: eventFieldDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
+
+            base.Visit(
+                eventFieldDeclaration);
         }
 
         private void Visit(
