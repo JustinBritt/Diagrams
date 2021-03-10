@@ -1038,6 +1038,8 @@
 
                     "static" => modifier_static,
 
+                    "virtual" => stereotype_virtual,
+
                     _ => throw new Exception("")
                 };
 
