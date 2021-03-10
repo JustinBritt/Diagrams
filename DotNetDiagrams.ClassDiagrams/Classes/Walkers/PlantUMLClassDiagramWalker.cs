@@ -100,7 +100,7 @@
             {
                 namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
-            
+
             string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
 
             return $"{namespaceName}.{typeName}";
@@ -1118,8 +1118,8 @@
             else
             {
                 name = fallback;
-            }    
-            
+            }
+
             return name;
         }
 
@@ -1249,11 +1249,11 @@
                 TypeDeclarationSyntax res = this.GetFirstTypeDeclarationOrDefault(
                     type,
                     baseType.SyntaxTree);
-    
+
                 if (res is not null)
                 {
                     this.Visit(res);
-                }               
+                }
             }
 
             base.Visit(baseList);
@@ -1276,7 +1276,7 @@
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
-                    classDeclaration), 
+                    classDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     classDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
@@ -1285,7 +1285,7 @@
             this.AddCommand(
                 command: command,
                 typeName: classDeclaration.Identifier.ValueText);
-                
+
             base.Visit(
                 classDeclaration);
 
@@ -1403,6 +1403,9 @@
             base.Visit(
                 methodDeclaration);
         }
+
+        // TODO: Remove
+        public int FooProperty { get; } = 2;
 
         // TODO: Account for Initializer
         private void Visit(
