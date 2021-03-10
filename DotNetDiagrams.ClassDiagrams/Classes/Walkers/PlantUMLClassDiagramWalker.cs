@@ -630,7 +630,7 @@
 
             if (propertyDeclaration.Initializer is not null)
             {
-                initializer = propertyDeclaration.Initializer.Value.ToString();
+                initializer = $"= {propertyDeclaration.Initializer.Value.ToString()}";
             }
 
             return initializer;
