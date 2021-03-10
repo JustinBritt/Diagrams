@@ -1127,6 +1127,7 @@
             return parameters;
         }
 
+        // TODO: Update
         private SemanticModel GetFirstSemanticModelOrDefault(
             Dictionary<Project, Compilation> compilations,
             SyntaxTree syntaxTree)
@@ -1139,10 +1140,12 @@
             {
                 try
                 {
-                    semanticModels.Add(
-                        item.Value.GetSemanticModel(
-                            syntaxTree,
-                            true));
+                    semanticModel = this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
+
+                    //semanticModels.Add(
+                    //    item.Value.GetSemanticModel(
+                    //        syntaxTree,
+                    //        true));
                 }
                 catch (Exception e)
                 {
