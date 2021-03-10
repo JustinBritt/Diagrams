@@ -1020,7 +1020,9 @@
 
                     "static" => modifier_static,
 
-                    "unafe" => stereotype_unsafe,
+                    "unsafe" => stereotype_unsafe,
+
+                    "virtual" => stereotype_virtual,
 
                     _ => throw new Exception("")
                 };
