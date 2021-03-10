@@ -22,26 +22,14 @@
         {
             IDiagrams diagrams = new PlantUMLDiagrams();
 
-            Dictionary<Project, Compilation> compilations = new Dictionary<Project, Compilation>();
-
             foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
             {
                 Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
-
-                compilations.Add(
-                    project,
-                    compilation);
-            }
-
-            foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.CSharp))
-            {
-                Compilation compilation = compilations.Where(w => w.Key == project).Select(w => w.Value).SingleOrDefault();
 
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
                     PlantUMLClassDiagramWalker walker = new PlantUMLClassDiagramWalker(
                         compilation,
-                        compilations,
                         syntaxTree,
                         solution,
                         project);

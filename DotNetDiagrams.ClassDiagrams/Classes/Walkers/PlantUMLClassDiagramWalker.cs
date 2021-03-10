@@ -62,7 +62,6 @@
         private const string PlantUML_rightParenthesis = ")";
         private const string PlantUML_title = "title";
 
-        private readonly Dictionary<Project, Compilation> compilations;
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
@@ -72,7 +71,6 @@
 
         public PlantUMLClassDiagramWalker(
             Compilation compilation,
-            Dictionary<Project, Compilation> compilations,
             SyntaxTree syntaxTree,
             Solution solution,
             Project project)
@@ -80,8 +78,6 @@
             this.Diagrams = new PlantUMLClassDiagrams();
 
             this.compilation = compilation;
-
-            this.compilations = compilations;
 
             this.syntaxTree = syntaxTree;
 
