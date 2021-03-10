@@ -1476,7 +1476,8 @@
                 command: command,
                 typeName: eventDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
 
-            base.Visit(eventDeclaration);
+            base.Visit(
+                eventDeclaration);
         }
 
         private void Visit(
