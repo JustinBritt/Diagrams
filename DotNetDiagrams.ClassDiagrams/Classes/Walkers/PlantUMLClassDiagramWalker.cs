@@ -92,7 +92,7 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        private string DetermineTypeDeclarationTypeName(
+        private string GetTypeDeclarationTypeName(
             TypeDeclarationSyntax typeDeclaration)
         {
             return String.Join(
@@ -965,7 +965,7 @@
                 namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
 
-            string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
+            string typeName = this.GetTypeDeclarationTypeName(typeDeclaration);
 
             return $"{namespaceName}.{typeName}";
         }
