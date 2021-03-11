@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using DotNetDiagrams.Common.Interfaces.Diagrams;
+
     using DotNetDiagrams.UseCaseDiagrams.Interfaces.Diagrams;
 
     internal sealed class PlantUMLUseCaseDiagram : IPlantUMLUseCaseDiagram
