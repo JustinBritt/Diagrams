@@ -93,7 +93,7 @@
         public IPlantUMLClassDiagrams Diagrams { get; }
 
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
-        private string DetermineTitle(
+        private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
         {
             string namespaceName = String.Empty;
@@ -126,7 +126,8 @@
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
-            this.currentTitle = this.DetermineTitle(typeDeclaration);
+            this.currentTitle = this.GetJoinedNamespaceTypeName(
+                typeDeclaration);
 
             if (!String.IsNullOrEmpty(this.currentTitle))
             {
@@ -553,7 +554,7 @@
 
                     if (item is not null && parent is not null)
                     {
-                        relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
+                        relationships.Add($"{this.GetJoinedNamespaceTypeName(parent)} {PlantUML_anchor} {this.GetJoinedNamespaceTypeName(item)}");
                     }
                 }
             }
@@ -751,7 +752,7 @@
                         item.Type,
                         typeDeclaration.SyntaxTree);
 
-                    string typeName = this.DetermineTitle(
+                    string typeName = this.GetJoinedNamespaceTypeName(
                         typeDeclaration);
 
                     relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
@@ -1546,7 +1547,7 @@
             }
 
             string command = this.BuildClassDeclarationCommand(
-                className: this.DetermineTitle(
+                className: this.GetJoinedNamespaceTypeName(
                     classDeclaration),
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
@@ -1673,7 +1674,7 @@
             }
 
             string command = this.BuildInterfaceDeclarationCommand(
-                interfaceName: this.DetermineTitle(
+                interfaceName: this.GetJoinedNamespaceTypeName(
                     interfaceDeclaration),
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     interfaceDeclaration),
@@ -1780,7 +1781,7 @@
                     structDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     structDeclaration),
-                structName: this.DetermineTitle(
+                structName: this.GetJoinedNamespaceTypeName(
                     structDeclaration));
 
             this.AddCommand(
