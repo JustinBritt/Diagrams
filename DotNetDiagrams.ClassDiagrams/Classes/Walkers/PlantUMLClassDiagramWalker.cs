@@ -1507,8 +1507,7 @@
         }
 
         // TODO: Finish
-        // TODO: Rename
-        private List<string> AddNestedRelationship(
+        private List<string> GetAnchorRelationships(
             TypeDeclarationSyntax typeDeclaration)
         {
             List<string> relationships = new List<string>();
@@ -1542,8 +1541,13 @@
                     classDeclaration);
             }
 
-            this.AddNestedRelationship(
+            List<string> anchorRelationships = this.GetAnchorRelationships(
                 classDeclaration);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(anchorRelationships);
+            }
 
             string command = this.BuildClassDeclarationCommand(
                 className: this.DetermineTitle(
@@ -1664,8 +1668,13 @@
                     interfaceDeclaration);
             }
 
-            this.AddNestedRelationship(
+            List<string> anchorRelationships = this.GetAnchorRelationships(
                 interfaceDeclaration);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(anchorRelationships);
+            }
 
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: this.DetermineTitle(
@@ -1758,8 +1767,13 @@
                     structDeclaration);
             }
 
-            this.AddNestedRelationship(
+            List<string> anchorRelationships = this.GetAnchorRelationships(
                 structDeclaration);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(anchorRelationships);
+            }
 
             string command = this.BuildStructDeclarationCommand(
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
