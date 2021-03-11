@@ -401,6 +401,8 @@
 
                 targetName = expression switch
                 {
+                    AliasQualifiedNameSyntax aliasQualifiedName => aliasQualifiedName.Alias.Identifier.ValueText;
+
                     GenericNameSyntax genericName => genericName.Identifier.ValueText,
 
                     IdentifierNameSyntax identifierName => identifierName.Identifier.ValueText,
