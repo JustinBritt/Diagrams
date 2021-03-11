@@ -1501,6 +1501,11 @@
             }
         }
 
+        internal class Foo
+        {
+
+        }
+
         // TODO: Account for nesting; +-
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
@@ -1520,7 +1525,10 @@
                 {
                     TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().SingleOrDefault();
 
-                    this.Diagram.Relationships.Add($"{parent} += {item}");
+                    if (item is not null && parent is not null)
+                    {
+                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} += {this.DetermineTitle(item)}");
+                    }
                 }
             }
 
