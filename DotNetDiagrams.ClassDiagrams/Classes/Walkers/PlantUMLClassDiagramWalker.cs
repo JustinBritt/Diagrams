@@ -92,24 +92,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        private void StartDiagram(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            this.currentTitle = this.GetJoinedNamespaceTypeName(
-                typeDeclaration);
-
-            if (!String.IsNullOrEmpty(this.currentTitle))
-            {
-                if (!this.Diagrams.ContainsTitle(this.currentTitle))
-                {
-                    this.Diagrams.AddTitle(this.currentTitle);
-                }
-
-                this.AddHeader(
-                    this.currentTitle);
-            }
-        }
-
         private void AddCommand(
             string command,
             string typeName)
@@ -1462,6 +1444,24 @@
             }
 
             return variables;
+        }
+
+        private void StartDiagram(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            this.currentTitle = this.GetJoinedNamespaceTypeName(
+                typeDeclaration);
+
+            if (!String.IsNullOrEmpty(this.currentTitle))
+            {
+                if (!this.Diagrams.ContainsTitle(this.currentTitle))
+                {
+                    this.Diagrams.AddTitle(this.currentTitle);
+                }
+
+                this.AddHeader(
+                    this.currentTitle);
+            }
         }
 
         /// <summary>
