@@ -8,7 +8,7 @@
 
     using DotNetDiagrams.Common.Interfaces.Diagrams;
 
-    public interface IPlantUMLUseCaseDiagram
+    public interface IPlantUMLUseCaseDiagram : IPlantUMLDiagram
     {
     }
 }
