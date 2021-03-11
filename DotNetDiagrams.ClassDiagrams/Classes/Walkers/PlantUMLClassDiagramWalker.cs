@@ -50,6 +50,7 @@
         private const string stereotype_volatile = "<<volatile>>";
 
         private const string PlantUML_abstract = "abstract";
+        private const string PlantUML_anchor = "+--";
         private const string PlantUML_annotation = "annotation";
         private const string PlantUML_class = "class";
         private const string PlantUML_entity = "entity";
@@ -1518,7 +1519,7 @@
 
                     if (item is not null && parent is not null)
                     {
-                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} += {this.DetermineTitle(item)}");
+                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
                     }
                 }
             }
