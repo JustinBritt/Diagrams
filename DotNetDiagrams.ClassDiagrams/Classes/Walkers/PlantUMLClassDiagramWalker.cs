@@ -121,10 +121,9 @@
         {
             return String.Join(
                 ".",
-                String.Join(
-                    ".",
-                    typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText)),
-                    typeDeclaration.Identifier.ValueText);
+                typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
+                +
+                typeDeclaration.Identifier.ValueText;
         }
 
         private void StartDiagram(
