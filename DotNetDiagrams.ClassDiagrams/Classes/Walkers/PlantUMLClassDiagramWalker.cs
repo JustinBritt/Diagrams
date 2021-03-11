@@ -544,7 +544,6 @@
             return accessors;
         }
 
-        // TODO: Finish
         private List<string> GetAnchorRelationships(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -559,8 +558,6 @@
                     if (item is not null && parent is not null)
                     {
                         relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
-
-                        //this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
                     }
                 }
             }
