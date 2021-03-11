@@ -1479,6 +1479,27 @@
 
             base.Visit(baseList);
         }
+        
+        // TODO: Finish
+        private void AddInheritanceRelationship(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            if (typeDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
+                {
+                    string itemName = this.GetTypeNameOrFallback(
+                        item.Type.ToString(),
+                        item.Type,
+                        typeDeclaration.SyntaxTree);
+
+                    string className = this.DetermineTitle(
+                        typeDeclaration);
+
+                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
+                }
+            }
+        }
 
         // TODO: Account for nesting; +-
         private void Visit(
@@ -1490,22 +1511,6 @@
             {
                 this.StartDiagram(
                     classDeclaration);
-            }
-
-            // TODO: Add method
-            if (classDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax item in classDeclaration.BaseList.Types.ToList())
-                {
-                    string itemName = this.GetTypeNameOrFallback(
-                        item.Type.ToString(),
-                        item.Type,
-                        classDeclaration.SyntaxTree);
-
-                    string className = this.DetermineTitle(classDeclaration);
-
-                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
-                }
             }
 
             string command = this.BuildClassDeclarationCommand(
@@ -1627,22 +1632,6 @@
                     interfaceDeclaration);
             }
 
-            // TODO: Add method
-            if (interfaceDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax item in interfaceDeclaration.BaseList.Types.ToList())
-                {
-                    string itemName = this.GetTypeNameOrFallback(
-                        item.Type.ToString(),
-                        item.Type,
-                        interfaceDeclaration.SyntaxTree);
-
-                    string interfaceName = this.DetermineTitle(interfaceDeclaration);
-
-                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + interfaceName);
-                }
-            }
-
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: this.DetermineTitle(
                     interfaceDeclaration),
@@ -1732,22 +1721,6 @@
             {
                 this.StartDiagram(
                     structDeclaration);
-            }
-
-            // TODO: Add method
-            if (structDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax item in structDeclaration.BaseList.Types.ToList())
-                {
-                    string itemName = this.GetTypeNameOrFallback(
-                        item.Type.ToString(),
-                        item.Type,
-                        structDeclaration.SyntaxTree);
-
-                    string structName = this.DetermineTitle(structDeclaration);
-
-                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + structName);
-                }
             }
 
             string command = this.BuildStructDeclarationCommand(
