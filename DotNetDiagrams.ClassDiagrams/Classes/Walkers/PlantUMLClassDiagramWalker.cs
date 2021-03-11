@@ -1659,6 +1659,9 @@
                     interfaceDeclaration);
             }
 
+            this.AddNestedRelationship(
+                interfaceDeclaration);
+
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: this.DetermineTitle(
                     interfaceDeclaration),
@@ -1749,6 +1752,9 @@
                 this.StartDiagram(
                     structDeclaration);
             }
+
+            this.AddNestedRelationship(
+                structDeclaration);
 
             string command = this.BuildStructDeclarationCommand(
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
