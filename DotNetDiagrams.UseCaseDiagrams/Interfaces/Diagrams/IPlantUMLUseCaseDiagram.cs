@@ -6,6 +6,8 @@
     using System.Text;
     using System.Threading.Tasks;
 
+    using DotNetDiagrams.Common.Interfaces.Diagrams;
+
     public interface IPlantUMLUseCaseDiagram
     {
     }
