@@ -1522,6 +1522,7 @@
                 }
             }
 
+            // TODO: Remove
             var b = 2;
 
             string command = this.BuildClassDeclarationCommand(
