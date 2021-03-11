@@ -190,6 +190,39 @@
             return value;
         }
 
+        private string GetJoinedNamespaceTypeMethodName(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            string namespaceName = String.Empty;
+
+            if (
+                methodDeclaration.Ancestors().Count() > 0
+                &&
+                methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null
+                &&
+                methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
+            {
+                namespaceName = methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+            }
+
+            string typeName = this.GetTypeDeclarationTypeName(
+                methodDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>());
+
+            string methodName = methodDeclaration.Identifier.ValueText;
+
+            return $"{namespaceName}.{typeName}.{methodName}";
+        }
+
+        private string GetTypeDeclarationTypeName(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            return String.Join(
+                ".",
+                typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
+                +
+                typeDeclaration.Identifier.ValueText;
+        }
+
         private bool HasCallers(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -205,7 +238,7 @@
         private void StartDiagram(
             MethodDeclarationSyntax methodDeclaration)
         {
-            currentTitle = DetermineTitle(
+            currentTitle = this.GetJoinedNamespaceTypeMethodName(
                 methodDeclaration);
 
             if (!String.IsNullOrEmpty(currentTitle))
