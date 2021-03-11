@@ -741,6 +741,30 @@
             return explicitInterfaceSpecifierTypeName;
         }
 
+        private List<string> GetInheritanceRelationships(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            List<string> relationships = new List<string>();
+
+            if (typeDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
+                {
+                    string itemName = this.GetTypeNameOrFallback(
+                        item.Type.ToString(),
+                        item.Type,
+                        typeDeclaration.SyntaxTree);
+
+                    string typeName = this.DetermineTitle(
+                        typeDeclaration);
+
+                    relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
+                }
+            }
+
+            return relationships;
+        }
+
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1506,27 +1530,6 @@
             base.Visit(baseList);
         }
         
-        // TODO: Finish
-        private void AddInheritanceRelationship(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            if (typeDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
-                {
-                    string itemName = this.GetTypeNameOrFallback(
-                        item.Type.ToString(),
-                        item.Type,
-                        typeDeclaration.SyntaxTree);
-
-                    string typeName = this.DetermineTitle(
-                        typeDeclaration);
-
-                    this.Diagram.Relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
-                }
-            }
-        }
-
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
