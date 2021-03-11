@@ -92,16 +92,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        private string GetTypeDeclarationTypeName(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            return String.Join(
-                ".",
-                typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
-                +
-                typeDeclaration.Identifier.ValueText;
-        }
-
         private void StartDiagram(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -1376,6 +1366,16 @@
             }
 
             return typeDeclaration;
+        }
+
+        private string GetTypeDeclarationTypeName(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            return String.Join(
+                ".",
+                typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
+                +
+                typeDeclaration.Identifier.ValueText;
         }
 
         private string GetTypeNameOrFallback(
