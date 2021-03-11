@@ -141,30 +141,6 @@
             currentHeader.ForEach(w => AddCommand(w));
         }
 
-        private string DetermineTitle(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
-
-            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
-
-            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
-            {
-                if (declaredType.DescendantNodesAndSelf().Contains(methodDeclaration))
-                {
-                    parentTypes.Add(declaredType);
-                }
-            }
-
-            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
-
-            string methodName = methodDeclaration.Identifier.ValueText;
-
-            return $"{namespaceName}.{typeName}.{methodName}";
-        }
-
         private void EndDiagram()
         {
             if (!string.IsNullOrEmpty(currentTitle))
