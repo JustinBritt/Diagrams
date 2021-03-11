@@ -102,13 +102,13 @@
             string namespaceName = String.Empty;
 
             if (
-                this.syntaxTree.GetRoot().DescendantNodes().Count() > 0
+                typeDeclaration.Ancestors().Count() > 0
                 &&
-                this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>() is not null 
-                && 
-                this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
+                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null 
+                &&
+                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
             {
-                namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+                namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
 
             string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
