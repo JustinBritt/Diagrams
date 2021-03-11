@@ -69,73 +69,6 @@
 
         public IPlantUMLDiagrams Diagrams { get; }
 
-        private void EndDiagram()
-        {
-            if (!string.IsNullOrEmpty(currentTitle))
-            {
-                if (PlantUMLCode.Count > currentHeader.Count) // minimum # of lines in header
-                    AddCommand(PlantUML_enduml);
-                else
-                    Diagrams.RemoveAtTitle(currentTitle);
-            }
-        }
-
-        private bool HasCallers(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            SemanticModel model = compilation.GetSemanticModel(syntaxTree);
-
-            IMethodSymbol methodSymbol = ModelExtensions.GetDeclaredSymbol(model, methodDeclaration) as IMethodSymbol;
-
-            IEnumerable<SymbolCallerInfo> callers = SymbolFinder.FindCallersAsync(methodSymbol, solution).GetAwaiter().GetResult();
-
-            return callers.Any();
-        }
-
-        private string DetermineTitle(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
-
-            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
-
-            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
-
-            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
-            {
-                if (declaredType.DescendantNodesAndSelf().Contains(methodDeclaration))
-                {
-                    parentTypes.Add(declaredType);
-                }
-            }
-
-            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
-
-            string methodName = methodDeclaration.Identifier.ValueText;
-
-            return $"{namespaceName}.{typeName}.{methodName}";
-        }
-
-        private void StartDiagram(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            currentTitle = DetermineTitle(
-                methodDeclaration);
-
-            if (!String.IsNullOrEmpty(currentTitle))
-            {
-                if (!Diagrams.ContainsTitle(currentTitle))
-                {
-                    Diagrams.AddTitle(currentTitle);
-                }
-
-                this.AddHeader(
-                    autoactivate: true,
-                    footbox: true,
-                    title: currentTitle);
-            }
-        }
-
         private void AddCommand(
             string command)
         {
@@ -208,6 +141,41 @@
             currentHeader.ForEach(w => AddCommand(w));
         }
 
+        private string DetermineTitle(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            string namespaceName = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+
+            List<TypeDeclarationSyntax> parentTypes = new List<TypeDeclarationSyntax>();
+
+            List<TypeDeclarationSyntax> declaredTypes = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+
+            foreach (TypeDeclarationSyntax declaredType in declaredTypes)
+            {
+                if (declaredType.DescendantNodesAndSelf().Contains(methodDeclaration))
+                {
+                    parentTypes.Add(declaredType);
+                }
+            }
+
+            string typeName = String.Join(".", parentTypes.Select(w => w.Identifier.ValueText));
+
+            string methodName = methodDeclaration.Identifier.ValueText;
+
+            return $"{namespaceName}.{typeName}.{methodName}";
+        }
+
+        private void EndDiagram()
+        {
+            if (!string.IsNullOrEmpty(currentTitle))
+            {
+                if (PlantUMLCode.Count > currentHeader.Count) // minimum # of lines in header
+                    AddCommand(PlantUML_enduml);
+                else
+                    Diagrams.RemoveAtTitle(currentTitle);
+            }
+        }
+
         private string EscapeGreaterThanLessThan(
             string value)
         {
@@ -220,6 +188,38 @@
             }
 
             return value;
+        }
+
+        private bool HasCallers(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            SemanticModel model = compilation.GetSemanticModel(syntaxTree);
+
+            IMethodSymbol methodSymbol = ModelExtensions.GetDeclaredSymbol(model, methodDeclaration) as IMethodSymbol;
+
+            IEnumerable<SymbolCallerInfo> callers = SymbolFinder.FindCallersAsync(methodSymbol, solution).GetAwaiter().GetResult();
+
+            return callers.Any();
+        }
+
+        private void StartDiagram(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            currentTitle = DetermineTitle(
+                methodDeclaration);
+
+            if (!String.IsNullOrEmpty(currentTitle))
+            {
+                if (!Diagrams.ContainsTitle(currentTitle))
+                {
+                    Diagrams.AddTitle(currentTitle);
+                }
+
+                this.AddHeader(
+                    autoactivate: true,
+                    footbox: true,
+                    title: currentTitle);
+            }
         }
 
         public override void Visit(
