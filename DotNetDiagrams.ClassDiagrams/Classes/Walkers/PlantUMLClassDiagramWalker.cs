@@ -1515,7 +1515,8 @@
             {
                 foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
                 {
-                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().SingleOrDefault();
+                    // TODO: Check first/last
+                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
 
                     if (item is not null && parent is not null)
                     {
