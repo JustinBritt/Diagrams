@@ -1506,6 +1506,26 @@
             }
         }
 
+        // TODO: Finish
+        // TODO: Rename
+        private void AddNestedRelationship(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            // TODO: Check
+            if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
+            {
+                foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
+                {
+                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().SingleOrDefault();
+
+                    if (item is not null && parent is not null)
+                    {
+                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} += {this.DetermineTitle(item)}");
+                    }
+                }
+            }
+        }
+
         // TODO: Account for nesting; +-
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
@@ -1518,19 +1538,8 @@
                     classDeclaration);
             }
 
-            // TODO: Check
-            if (classDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
-            {
-                foreach (TypeDeclarationSyntax item in classDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
-                {
-                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().SingleOrDefault();
-
-                    if (item is not null && parent is not null)
-                    {
-                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} += {this.DetermineTitle(item)}");
-                    }
-                }
-            }
+            this.AddNestedRelationship(
+                classDeclaration);
 
             string command = this.BuildClassDeclarationCommand(
                 className: this.DetermineTitle(
