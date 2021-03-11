@@ -1516,9 +1516,11 @@
             // TODO: Check
             if (classDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
             {
-                foreach (var item in classDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
+                foreach (TypeDeclarationSyntax item in classDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
                 {
-                    this.Diagram.Relationships.Add($"{item.Parent} += {item}");
+                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().SingleOrDefault();
+
+                    this.Diagram.Relationships.Add($"{parent} += {item}");
                 }
             }
 
