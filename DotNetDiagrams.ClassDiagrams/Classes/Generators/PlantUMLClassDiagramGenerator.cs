@@ -28,7 +28,7 @@
 
                 foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
                 {
-                    PlantUMLClassDiagramWalker walker = new PlantUMLClassDiagramWalker(
+                    PlantUMLClassDiagramCSharpSyntaxWalker walker = new PlantUMLClassDiagramCSharpSyntaxWalker(
                         compilation,
                         syntaxTree,
                         solution,

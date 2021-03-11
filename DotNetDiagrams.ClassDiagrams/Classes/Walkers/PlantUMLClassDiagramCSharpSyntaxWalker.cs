@@ -14,7 +14,7 @@
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLClassDiagramWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramWalker
+    internal sealed class PlantUMLClassDiagramCSharpSyntaxWalker : CSharpSyntaxWalker, IPlantUMLClassDiagramCSharpSyntaxWalker
     {
         private const string modifier_abstract = "{abstract}";
         private const string modifier_protectedInternal = "# <<internal>>";
@@ -71,7 +71,7 @@
 
         private string currentTitle;
 
-        public PlantUMLClassDiagramWalker(
+        public PlantUMLClassDiagramCSharpSyntaxWalker(
             Compilation compilation,
             SyntaxTree syntaxTree,
             Solution solution,
