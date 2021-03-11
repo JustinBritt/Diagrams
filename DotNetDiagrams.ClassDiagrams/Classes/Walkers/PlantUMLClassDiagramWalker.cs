@@ -544,6 +544,30 @@
             return accessors;
         }
 
+        // TODO: Finish
+        private List<string> GetAnchorRelationships(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            List<string> relationships = new List<string>();
+
+            if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
+            {
+                foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
+                {
+                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
+
+                    if (item is not null && parent is not null)
+                    {
+                        relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
+
+                        //this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
+                    }
+                }
+            }
+
+            return relationships;
+        }
+
         private List<string> GetBaseListTypes(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -1504,30 +1528,6 @@
                     this.Diagram.Relationships.Add($"{itemName} {PlantUML_extension} {className}");
                 }
             }
-        }
-
-        // TODO: Finish
-        private List<string> GetAnchorRelationships(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> relationships = new List<string>();
-
-            if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
-            {
-                foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
-                {
-                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
-
-                    if (item is not null && parent is not null)
-                    {
-                        relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
-                        
-                        //this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
-                    }
-                }
-            }
-
-            return relationships;
         }
 
         private void Visit(
