@@ -1508,9 +1508,11 @@
 
         // TODO: Finish
         // TODO: Rename
-        private void AddNestedRelationship(
+        private List<string> AddNestedRelationship(
             TypeDeclarationSyntax typeDeclaration)
         {
+            List<string> relationships = new List<string>();
+
             if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
             {
                 foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
@@ -1519,10 +1521,14 @@
 
                     if (item is not null && parent is not null)
                     {
-                        this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
+                        relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
+                        
+                        //this.Diagram.Relationships.Add($"{this.DetermineTitle(parent)} {PlantUML_anchor} {this.DetermineTitle(item)}");
                     }
                 }
             }
+
+            return relationships;
         }
 
         private void Visit(
