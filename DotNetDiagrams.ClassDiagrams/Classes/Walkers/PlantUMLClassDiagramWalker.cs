@@ -1500,7 +1500,7 @@
                     string className = this.DetermineTitle(
                         typeDeclaration);
 
-                    this.Diagram.Relationships.Add(itemName + " " + PlantUML_extension + " " + className);
+                    this.Diagram.Relationships.Add($"{itemName} {PlantUML_extension} {className}");
                 }
             }
         }
