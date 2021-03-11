@@ -368,7 +368,12 @@
         {
             SemanticModel semanticModel = this.solution.GetDocument(this.syntaxTree).GetSemanticModelAsync().Result;
 
-            string callerTypeName = invocation.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
+            string callerTypeName = String.Empty;
+
+            if (invocation.GetParent<TypeDeclarationSyntax>() is not null)
+            {
+                callerTypeName = invocation.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
+            }
 
             string targetTypeName;
             string targetName;
