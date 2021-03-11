@@ -1513,6 +1513,11 @@
                     classDeclaration);
             }
 
+            // TODO: Check for nesting
+            var typeDecs = classDeclaration.Ancestors().OfType<TypeDeclarationSyntax>();
+
+            var b = 2;
+
             string command = this.BuildClassDeclarationCommand(
                 className: this.DetermineTitle(
                     classDeclaration),
