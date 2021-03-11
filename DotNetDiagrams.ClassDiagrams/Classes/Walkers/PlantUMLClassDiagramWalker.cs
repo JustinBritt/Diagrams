@@ -1513,8 +1513,14 @@
                     classDeclaration);
             }
 
-            // TODO: Check for nesting
-            var typeDecs = classDeclaration.Ancestors().OfType<TypeDeclarationSyntax>();
+            // TODO: Check
+            if (classDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
+            {
+                foreach (var item in classDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
+                {
+                    this.Diagram.Relationships.Add($"{item.Parent} += {item}");
+                }
+            }
 
             var b = 2;
 
