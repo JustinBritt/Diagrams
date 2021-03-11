@@ -1511,7 +1511,6 @@
         private void AddNestedRelationship(
             TypeDeclarationSyntax typeDeclaration)
         {
-            // TODO: Check
             if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
             {
                 foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
