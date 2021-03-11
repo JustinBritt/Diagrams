@@ -1519,10 +1519,10 @@
                         item.Type,
                         typeDeclaration.SyntaxTree);
 
-                    string className = this.DetermineTitle(
+                    string typeName = this.DetermineTitle(
                         typeDeclaration);
 
-                    this.Diagram.Relationships.Add($"{itemName} {PlantUML_extension} {className}");
+                    this.Diagram.Relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
                 }
             }
         }
