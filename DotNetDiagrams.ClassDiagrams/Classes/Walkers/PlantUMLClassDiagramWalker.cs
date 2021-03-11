@@ -965,7 +965,8 @@
                 namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
             }
 
-            string typeName = this.GetTypeDeclarationTypeName(typeDeclaration);
+            string typeName = this.GetTypeDeclarationTypeName(
+                typeDeclaration);
 
             return $"{namespaceName}.{typeName}";
         }
