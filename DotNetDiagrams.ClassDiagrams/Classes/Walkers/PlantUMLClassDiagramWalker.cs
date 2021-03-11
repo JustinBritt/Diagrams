@@ -119,7 +119,12 @@
         private string DetermineTypeDeclarationTypeName(
             TypeDeclarationSyntax typeDeclaration)
         {
-            return String.Join(".", String.Join(".", typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText)), typeDeclaration.Identifier.ValueText);
+            return String.Join(
+                ".",
+                String.Join(
+                    ".",
+                    typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText)),
+                    typeDeclaration.Identifier.ValueText);
         }
 
         private void StartDiagram(
