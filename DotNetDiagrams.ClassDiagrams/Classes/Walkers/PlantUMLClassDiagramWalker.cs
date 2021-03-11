@@ -92,27 +92,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        // TODO: If multiple types are defined in the same file, then it uses the name of the first one
-        private string GetJoinedNamespaceTypeName(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            string namespaceName = String.Empty;
-
-            if (
-                typeDeclaration.Ancestors().Count() > 0
-                &&
-                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null 
-                &&
-                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
-            {
-                namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
-            }
-
-            string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
-
-            return $"{namespaceName}.{typeName}";
-        }
-
         private string DetermineTypeDeclarationTypeName(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -968,6 +947,27 @@
             return String.Join(
                 " ",
                 PlantUMLModifiers);
+        }
+
+        // TODO: If multiple types are defined in the same file, then it uses the name of the first one
+        private string GetJoinedNamespaceTypeName(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            string namespaceName = String.Empty;
+
+            if (
+                typeDeclaration.Ancestors().Count() > 0
+                &&
+                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null
+                &&
+                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
+            {
+                namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+            }
+
+            string typeName = this.DetermineTypeDeclarationTypeName(typeDeclaration);
+
+            return $"{namespaceName}.{typeName}";
         }
 
         private string GetJoinedParameters(
