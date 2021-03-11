@@ -1525,7 +1525,8 @@
                 }
             }
 
-            base.Visit(baseList);
+            base.Visit(
+                baseList);
         }
         
         private void Visit(
