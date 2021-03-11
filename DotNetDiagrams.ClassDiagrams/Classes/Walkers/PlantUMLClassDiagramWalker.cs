@@ -1509,7 +1509,8 @@
             }
 
             string command = this.BuildClassDeclarationCommand(
-                className: classDeclaration.Identifier.ValueText,
+                className: this.DetermineTitle(
+                    classDeclaration),
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     classDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
@@ -1643,7 +1644,8 @@
             }
 
             string command = this.BuildInterfaceDeclarationCommand(
-                interfaceName: interfaceDeclaration.Identifier.ValueText,
+                interfaceName: this.DetermineTitle(
+                    interfaceDeclaration),
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     interfaceDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
@@ -1757,7 +1759,8 @@
                     structDeclaration),
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     structDeclaration),
-                structName: structDeclaration.Identifier.ValueText);
+                structName: this.DetermineTitle(
+                    structDeclaration));
 
             this.AddCommand(
                 command: command,
