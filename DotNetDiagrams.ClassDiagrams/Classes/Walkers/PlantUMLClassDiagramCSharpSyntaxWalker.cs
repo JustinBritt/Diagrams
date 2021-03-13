@@ -557,13 +557,6 @@
             return $"{constraintClauseName} : {joinedConstraints}";
         }
 
-        private List<string> GetConstraints<T>(
-            TypeParameterConstraintClauseSyntax constraintClause)
-            where T : SyntaxNode
-        {
-            return constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)).ToList();
-        }
-
         private string GetExplicitInterfaceSpecifierTypeName(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
@@ -677,8 +670,7 @@
         {
             return String.Join(
                 stringJoinSeparator_constraints,
-                this.GetConstraints<T>(
-                    constraintClause));
+                constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)));
         }
 
         private string GetJoinedModifiers(
