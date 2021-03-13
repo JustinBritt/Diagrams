@@ -755,7 +755,7 @@
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             return basePropertyDeclaration.AccessorList is not null
-                ? String.Join(" ", basePropertyDeclaration.AccessorList?.Accessors.ToList().Select(w => this.GetAccessor(w)).ToList())
+                ? String.Join(" ", basePropertyDeclaration.AccessorList?.Accessors.ToList().Select(w => this.GetAccessor(w)))
                 : String.Empty;
         }
 
