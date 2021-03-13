@@ -965,15 +965,13 @@
                 : String.Empty;
         }
 
+        // TODO: Account for ArgumentList
         private string GetJoinedVariables(
             BaseFieldDeclarationSyntax baseFieldDeclaration)
         {
-            List<string> variables = this.GetVariables(
-                baseFieldDeclaration);
-
             return String.Join(
-                ", ",
-                variables);
+                stringJoinSeparator_variableDeclarators,
+                baseFieldDeclaration.Declaration.Variables.ToList().Select(w => this.GetVariable(w)));
         }
 
         private List<string> GetModifiers(
@@ -1387,20 +1385,6 @@
                 variableDeclarator);
 
             return $"{variableName} {initializer}";
-        }
-
-        // TODO: Account for ArgumentList
-        private List<string> GetVariables(
-            BaseFieldDeclarationSyntax baseFieldDeclaration)
-        {
-            List<string> variables = new List<string>();
-
-            foreach (VariableDeclaratorSyntax variable in baseFieldDeclaration.Declaration.Variables.ToList())
-            {
-                variables.Add(this.GetVariable(variable));
-            }
-
-            return variables;
         }
 
         private void StartDiagram(
