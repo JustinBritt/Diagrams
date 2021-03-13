@@ -1257,6 +1257,20 @@
             return PlantUMLModifiers;
         }
 
+        private string GetParameter(
+            BaseMethodDeclarationSyntax baseMethodDeclaration,
+            ParameterSyntax parameter)
+        {
+            string parameterName = parameter.Identifier.ValueText;
+
+            string parameterTypeName = this.GetTypeNameOrFallback(
+                parameter.Type.ToString(),
+                parameter.Type,
+                baseMethodDeclaration.SyntaxTree);
+
+            return $"{parameterTypeName} {parameterName}";
+        }
+
         private List<string> GetParameters(
             BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
@@ -1266,14 +1280,7 @@
             {
                 foreach (ParameterSyntax parameter in baseMethodDeclaration.ParameterList.Parameters)
                 {
-                    string parameterName = parameter.Identifier.ValueText;
-
-                    string parameterTypeName = this.GetTypeNameOrFallback(
-                        parameter.Type.ToString(),
-                        parameter.Type,
-                        baseMethodDeclaration.SyntaxTree);
-
-                    parameters.Add($"{parameterTypeName} {parameterName}");
+                    parameters.Add(this.GetParameter(baseMethodDeclaration, parameter));
                 }
             }
 
