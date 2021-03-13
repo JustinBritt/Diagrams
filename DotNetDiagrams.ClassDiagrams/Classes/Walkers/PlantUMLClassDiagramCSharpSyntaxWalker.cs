@@ -535,7 +535,7 @@
                 ? this.GetTypeNameOrFallback(
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
-                    methodDeclaration.SyntaxTree)
+                    typeConstraint.FirstAncestorOrSelf<MethodDeclarationSyntax>().SyntaxTree)
                 : typeParameterConstraint.ToString();
         }
 
