@@ -771,7 +771,7 @@
                 &&
                 typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
             {
-                namespaceName = typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+                namespaceName = typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
             }
 
             string typeName = this.GetTypeDeclarationTypeName(
