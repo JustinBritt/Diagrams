@@ -679,100 +679,82 @@
         private string GetJoinedModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                classDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    classDeclaration));
         }
 
         private string GetJoinedModifiers(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                constructorDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    constructorDeclaration));
         }
 
         private string GetJoinedModifiers(
             EventDeclarationSyntax eventDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                eventDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    eventDeclaration));
         }
 
         private string GetJoinedModifiers(
             EventFieldDeclarationSyntax eventFieldDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                eventFieldDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    eventFieldDeclaration));
         }
 
         private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                fieldDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    fieldDeclaration));
         }
 
         private string GetJoinedModifiers(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                interfaceDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    interfaceDeclaration));
         }
 
         private string GetJoinedModifiers(
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                methodDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    methodDeclaration));
         }
 
         private string GetJoinedModifiers(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                propertyDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    propertyDeclaration));
         }
 
         private string GetJoinedModifiers(
             StructDeclarationSyntax structDeclaration)
         {
-            List<string> PlantUMLModifiers = this.GetModifiers(
-                structDeclaration);
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                PlantUMLModifiers);
+                this.GetModifiers(
+                    structDeclaration));
         }
 
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
