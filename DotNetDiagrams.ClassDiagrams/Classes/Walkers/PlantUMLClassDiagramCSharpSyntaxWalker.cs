@@ -553,27 +553,6 @@
             return $"{constraintClauseName} : {joinedConstraints}";
         }
 
-        private List<string> GetConstraintClauses(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> constraintClauses = new List<string>();
-
-            if (typeDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in typeDeclaration.ConstraintClauses.ToList())
-                {
-                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
-
-                    string joinedConstraints = this.GetJoinedConstraints<TypeDeclarationSyntax>(
-                        constraintClause);
-
-                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
-                }
-            }
-
-            return constraintClauses;
-        }
-
         private List<string> GetConstraints<T>(
             TypeParameterConstraintClauseSyntax constraintClause)
             where T : SyntaxNode
@@ -684,12 +663,11 @@
         private string GetJoinedConstraintClauses(
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<string> constraintClauses = this.GetConstraintClauses(
-                typeDeclaration);
-
-            return String.Join(
-                ", ",
-                constraintClauses);
+            return typeDeclaration.ConstraintClauses.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    typeDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<TypeDeclarationSyntax>(w)).ToList())
+                : String.Empty;
         }
 
         private string GetJoinedConstraints<T>(
