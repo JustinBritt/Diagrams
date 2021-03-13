@@ -48,6 +48,7 @@
         private const string stereotype_volatile = "<<volatile>>";
 
         private const string stringJoinSeparator_accessors = " ";
+        private const string stringJoinSeparator_baseListTypes = ",";
 
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_anchor = "+--";
