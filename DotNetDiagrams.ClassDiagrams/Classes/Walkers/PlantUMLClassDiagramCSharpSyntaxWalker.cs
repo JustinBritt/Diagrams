@@ -478,6 +478,19 @@
             return sb.ToString();
         }
 
+        private string GetAccessor(
+            AccessorDeclarationSyntax accessorDeclaration)
+        {
+            return accessorDeclaration.Keyword.ValueText switch
+            {
+                "get" => stereotype_get,
+
+                "set" => stereotype_set,
+
+                _ => throw new Exception("")
+            };
+        }
+
         private List<string> GetAccessors(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
@@ -487,17 +500,9 @@
             {
                 foreach (AccessorDeclarationSyntax accessorDeclaration in basePropertyDeclaration.AccessorList.Accessors)
                 {
-                    string accessor = accessorDeclaration.Keyword.ValueText switch
-                    {
-                        "get" => stereotype_get,
-
-                        "set" => stereotype_set,
-
-                        _ => throw new Exception("")
-                    };
-
                     accessors.Add(
-                        accessor);
+                        this.GetAccessor(
+                            accessorDeclaration));
                 }
             }
 
