@@ -665,41 +665,39 @@
         private string GetJoinedModifiers(
             SyntaxNode syntaxNode)
         {
-            List<string> modifiers = syntaxNode switch
-            {
-                ClassDeclarationSyntax classDeclaration => this.GetModifiers(
-                    classDeclaration),
-
-                ConstructorDeclarationSyntax constructorDeclaration => this.GetModifiers(
-                    constructorDeclaration),
-                
-                EventDeclarationSyntax eventDeclaration => this.GetModifiers(
-                    eventDeclaration),
-
-                EventFieldDeclarationSyntax eventFieldDeclaration => this.GetModifiers(
-                    eventFieldDeclaration),
-
-                FieldDeclarationSyntax fieldDeclaration => this.GetModifiers(
-                    fieldDeclaration),
-                
-                InterfaceDeclarationSyntax interfaceDeclaration => this.GetModifiers(
-                    interfaceDeclaration),
-                
-                MethodDeclarationSyntax methodDeclaration => this.GetModifiers(
-                    methodDeclaration),
-                
-                PropertyDeclarationSyntax propertyDeclaration => this.GetModifiers(
-                    propertyDeclaration),
-                
-                StructDeclarationSyntax structDeclaration => this.GetModifiers(
-                    structDeclaration),
-
-                _ => throw new Exception("")
-            };
-
             return String.Join(
                 stringJoinSeparator_modifiers,
-                modifiers);
+                syntaxNode switch
+                {
+                    ClassDeclarationSyntax classDeclaration => this.GetModifiers(
+                        classDeclaration),
+                    
+                    ConstructorDeclarationSyntax constructorDeclaration => this.GetModifiers(
+                        constructorDeclaration),
+                
+                    EventDeclarationSyntax eventDeclaration => this.GetModifiers(
+                        eventDeclaration),
+                    
+                    EventFieldDeclarationSyntax eventFieldDeclaration => this.GetModifiers(
+                        eventFieldDeclaration),
+                    
+                    FieldDeclarationSyntax fieldDeclaration => this.GetModifiers(
+                        fieldDeclaration),
+                    
+                    InterfaceDeclarationSyntax interfaceDeclaration => this.GetModifiers(
+                        interfaceDeclaration),
+                    
+                    MethodDeclarationSyntax methodDeclaration => this.GetModifiers(
+                        methodDeclaration),
+                
+                    PropertyDeclarationSyntax propertyDeclaration => this.GetModifiers(
+                        propertyDeclaration),
+                
+                    StructDeclarationSyntax structDeclaration => this.GetModifiers(
+                        structDeclaration),
+                    
+                    _ => throw new Exception("")
+                });
         }
 
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
