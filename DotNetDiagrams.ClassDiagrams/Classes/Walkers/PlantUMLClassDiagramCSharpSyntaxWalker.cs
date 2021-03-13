@@ -1557,7 +1557,8 @@
 
             if (anchorRelationships.Count() > 0)
             {
-                this.Diagram.Relationships.AddRange(anchorRelationships);
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
             }
 
             string command = this.BuildClassDeclarationCommand(
