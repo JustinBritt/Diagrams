@@ -526,14 +526,6 @@
             return relationships;
         }
 
-        private string GetBaseListType(
-            BaseTypeSyntax baseType)
-        {
-            return this.GetTypeName(
-                baseType.Type,
-                baseType.SyntaxTree);
-        }
-
         private string GetConstraint<T>(
             TypeParameterConstraintSyntax typeParameterConstraint)
             where T : SyntaxNode
@@ -641,7 +633,7 @@
             return typeDeclaration.BaseList is not null
                 ? String.Join(
                     stringJoinSeparator_baseListTypes,
-                    typeDeclaration.BaseList?.Types.ToList().Select(w => this.GetBaseListType(w)))
+                    typeDeclaration.BaseList?.Types.ToList().Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
 
