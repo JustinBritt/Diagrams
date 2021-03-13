@@ -674,12 +674,10 @@
             TypeParameterConstraintClauseSyntax constraintClause)
             where T : SyntaxNode
         {
-            List<string> constraints = this.GetConstraints<T>(
-                constraintClause);
-
             return String.Join(
-                ", ",
-                constraints.Select(w => w.ToString()));
+                stringJoinSeparator_constraints,
+                this.GetConstraints<T>(
+                    constraintClause));
         }
 
         private string GetJoinedModifiers(
