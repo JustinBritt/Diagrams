@@ -528,7 +528,6 @@
         }
 
         private string GetConstraint(
-            MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
             return typeParameterConstraint is TypeConstraintSyntax typeConstraint
@@ -604,7 +603,6 @@
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
                 string typeParameterConstraintName = this.GetConstraint(
-                    methodDeclaration,
                     typeParameterConstraint);
 
                 constraints.Add(
