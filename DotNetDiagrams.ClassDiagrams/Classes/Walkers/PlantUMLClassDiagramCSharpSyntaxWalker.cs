@@ -764,12 +764,7 @@
         {
             string namespaceName = String.Empty;
 
-            if (
-                typeDeclaration.Ancestors().Count() > 0
-                &&
-                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null
-                &&
-                typeDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
+            if (typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
             {
                 namespaceName = typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
             }
