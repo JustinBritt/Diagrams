@@ -1377,6 +1377,17 @@
             return name;
         }
 
+        private string GetVariable(
+            VariableDeclaratorSyntax variableDeclarator)
+        {
+            string variableName = variableDeclarator.Identifier.ValueText;
+
+            string initializer = this.GetInitializer(
+                variableDeclarator);
+
+            return $"{variableName} {initializer}";
+        }
+
         // TODO: Account for ArgumentList
         private List<string> GetVariables(
             BaseFieldDeclarationSyntax baseFieldDeclaration)
@@ -1385,12 +1396,7 @@
 
             foreach (VariableDeclaratorSyntax variable in baseFieldDeclaration.Declaration.Variables.ToList())
             {
-                string variableName = variable.Identifier.ValueText;
-
-                string initializer = this.GetInitializer(
-                    variable);
-
-                variables.Add($"{variableName} {initializer}");
+                variables.Add(this.GetVariable(variable));
             }
 
             return variables;
