@@ -47,6 +47,8 @@
         private const string stereotype_virtual = "<<virtual>>";
         private const string stereotype_volatile = "<<volatile>>";
 
+        private const string stringConcatSeparator_constraintClause = " : ";
+
         private const string stringJoinSeparator_accessors = " ";
         private const string stringJoinSeparator_baseListTypes = ",";
         private const string stringJoinSeparator_constraintClauses = ", ";
