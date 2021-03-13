@@ -587,16 +587,7 @@
             TypeParameterConstraintClauseSyntax constraintClause,
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> constraints = new List<string>();
-
-            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
-            {
-                constraints.Add(
-                    this.GetConstraint<MethodDeclarationSyntax>(
-                        typeParameterConstraint));
-            }
-
-            return constraints;
+            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<MethodDeclarationSyntax>(w)).ToList();
         }
 
         private List<string> GetConstraints(
