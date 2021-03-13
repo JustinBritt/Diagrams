@@ -594,16 +594,7 @@
             TypeParameterConstraintClauseSyntax constraintClause,
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<string> constraints = new List<string>();
-
-            foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
-            {
-                constraints.Add(
-                    this.GetConstraint<TypeDeclarationSyntax>(
-                        typeParameterConstraint));
-            }
-
-            return constraints;
+            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<TypeDeclarationSyntax>(w)).ToList();
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
