@@ -549,7 +549,10 @@
                 stringJoinSeparator_constraints,
                 constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)));
 
-            return $"{constraintClauseName} : {joinedConstraints}";
+            return String.Concat(
+                constraintClauseName,
+                stringConcatSeparator_constraintClause,
+                joinedConstraints);
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
