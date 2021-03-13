@@ -1176,7 +1176,7 @@
             TypeDeclarationSyntax typeDeclaration)
         {
             return String.Join(
-                ".",
+                stringJoinSeparator_typeDeclarationTypeNames,
                 typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
                 +
                 typeDeclaration.Identifier.ValueText;
