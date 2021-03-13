@@ -1206,31 +1206,6 @@
             return this.GetSemanticModelOrDefault(syntaxTree) is not null && ModelExtensions.GetTypeInfo(this.GetSemanticModelOrDefault(syntaxTree), syntaxNode).Type is INamedTypeSymbol targetType
                 ? targetType.ToString()
                 : syntaxNode.ToString();
-            //
-            //string name = String.Empty;
-
-            //string fallback = syntaxNode.ToString();
-
-            //SemanticModel semanticModel = this.GetSemanticModelOrDefault(
-            //    syntaxTree);
-
-            //if (semanticModel is not null)
-            //{
-            //    if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
-            //    {
-            //        name = targetType.ToString();
-            //    }
-            //    else
-            //    {
-            //        name = fallback;
-            //    }
-            //}
-            //else
-            //{
-            //    name = fallback;
-            //}
-
-            //return name;
         }
 
         private string GetVariable(
