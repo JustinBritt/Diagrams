@@ -561,12 +561,9 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
                 {
-                    string constraintClauseName = constraintClause.Name.Identifier.ValueText;
-
-                    string joinedConstraints = this.GetJoinedConstraints<MethodDeclarationSyntax>(
-                        constraintClause);
-
-                    constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
+                    constraintClauses.Add(
+                        this.GetConstraintClause<MethodDeclarationSyntax>(
+                            constraintClause));
                 }
             }
 
