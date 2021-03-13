@@ -523,24 +523,6 @@
                 baseType.SyntaxTree);
         }
 
-        private List<string> GetBaseListTypes(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> baseTypeNames = new List<string>();
-
-            if (typeDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax baseType in typeDeclaration.BaseList.Types)
-                {
-                    baseTypeNames.Add(
-                        this.GetBaseListType(
-                            baseType));
-                }
-            }
-
-            return baseTypeNames;
-        }
-
         private string GetConstraint(
             MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
