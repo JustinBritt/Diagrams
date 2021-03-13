@@ -540,6 +540,18 @@
                 : typeParameterConstraint.ToString();
         }
 
+        private string GetConstraintClause<T>(
+            TypeParameterConstraintClauseSyntax constraintClause)
+            where T : SyntaxNode
+        {
+            string constraintClauseName = constraintClause.Name.Identifier.ValueText;
+
+            string joinedConstraints = this.GetJoinedConstraints<T>(
+                constraintClause);
+
+            return $"{constraintClauseName} : {joinedConstraints}";
+        }
+
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
