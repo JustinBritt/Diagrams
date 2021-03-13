@@ -525,7 +525,6 @@
             BaseTypeSyntax baseType)
         {
             return this.GetTypeNameOrFallback(
-                baseType.Type.ToString(),
                 baseType.Type,
                 baseType.SyntaxTree);
         }
@@ -536,7 +535,6 @@
         {
             return typeParameterConstraint is TypeConstraintSyntax typeConstraint
                 ? this.GetTypeNameOrFallback(
-                    typeConstraint.Type.ToString(),
                     typeConstraint.Type,
                     typeConstraint.FirstAncestorOrSelf<T>().SyntaxTree)
                 : typeParameterConstraint.ToString();
@@ -566,7 +564,6 @@
         {
             return basePropertyDeclaration.ExplicitInterfaceSpecifier is not null
                 ? this.GetTypeNameOrFallback(
-                    basePropertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name,
                     basePropertyDeclaration.SyntaxTree)
                 : String.Empty;
@@ -577,7 +574,6 @@
         {
             return methodDeclaration.ExplicitInterfaceSpecifier is not null
                 ? this.GetTypeNameOrFallback(
-                    methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                     methodDeclaration.ExplicitInterfaceSpecifier.Name,
                     methodDeclaration.SyntaxTree)
                 : String.Empty;
@@ -593,7 +589,6 @@
                 foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
                 {
                     string itemName = this.GetTypeNameOrFallback(
-                        item.Type.ToString(),
                         item.Type,
                         typeDeclaration.SyntaxTree);
 
@@ -1156,7 +1151,6 @@
             string parameterName = parameter.Identifier.ValueText;
 
             string parameterTypeName = this.GetTypeNameOrFallback(
-                parameter.Type.ToString(),
                 parameter.Type,
                 baseMethodDeclaration.SyntaxTree);
 
@@ -1206,11 +1200,12 @@
         }
 
         private string GetTypeNameOrFallback(
-            string fallback,
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
         {
             string name = String.Empty;
+
+            string fallback = syntaxNode.ToString();
 
             SemanticModel semanticModel = this.GetSemanticModelOrDefault(
                 syntaxTree);
@@ -1396,7 +1391,6 @@
             string command = this.BuildEventDeclarationCommand(
                 eventName: eventDeclaration.Identifier.ValueText,
                 eventTypeName: this.GetTypeNameOrFallback(
-                    eventDeclaration.Type.ToString(),
                     eventDeclaration.Type,
                     eventDeclaration.SyntaxTree),
                 explicitInterfaceSpecifierTypeName: this.GetExplicitInterfaceSpecifierTypeName(
@@ -1419,7 +1413,6 @@
         {
             string command = this.BuildEventFieldDeclarationCommand(
                 eventFieldTypeName: this.GetTypeNameOrFallback(
-                    eventFieldDeclaration.Declaration.Type.ToString(),
                     eventFieldDeclaration.Declaration.Type,
                     eventFieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
@@ -1440,8 +1433,7 @@
         {
             string command = this.BuildFieldDeclarationCommand(
                 fieldTypeName: this.GetTypeNameOrFallback(
-                    fieldDeclaration.Declaration.Type.ToString(),
-                    fieldDeclaration.Declaration,
+                    fieldDeclaration.Declaration.Type,
                     fieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
                     fieldDeclaration),
@@ -1543,7 +1535,6 @@
                     propertyDeclaration),
                 propertyName: propertyDeclaration.Identifier.ValueText,
                 propertyTypeName: this.GetTypeNameOrFallback(
-                    propertyDeclaration.Type.ToString(),
                     propertyDeclaration.Type,
                     propertyDeclaration.SyntaxTree));
 
