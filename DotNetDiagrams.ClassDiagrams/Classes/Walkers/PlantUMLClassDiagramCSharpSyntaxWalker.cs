@@ -653,33 +653,23 @@
         private string GetExplicitInterfaceSpecifierTypeName(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
-            string explicitInterfaceSpecifierTypeName = String.Empty;
-
-            if (basePropertyDeclaration.ExplicitInterfaceSpecifier is not null)
-            {
-                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+            return basePropertyDeclaration.ExplicitInterfaceSpecifier is not null
+                ? this.GetTypeNameOrFallback(
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name,
-                    basePropertyDeclaration.SyntaxTree);
-            }
-
-            return explicitInterfaceSpecifierTypeName;
+                    basePropertyDeclaration.SyntaxTree)
+                : String.Empty;
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
             MethodDeclarationSyntax methodDeclaration)
         {
-            string explicitInterfaceSpecifierTypeName = String.Empty;
-
-            if (methodDeclaration.ExplicitInterfaceSpecifier is not null)
-            {
-                explicitInterfaceSpecifierTypeName = this.GetTypeNameOrFallback(
+            return methodDeclaration.ExplicitInterfaceSpecifier is not null
+                ? this.GetTypeNameOrFallback(
                     methodDeclaration.ExplicitInterfaceSpecifier.Name.ToString(),
                     methodDeclaration.ExplicitInterfaceSpecifier.Name,
-                    methodDeclaration.SyntaxTree);
-            }
-
-            return explicitInterfaceSpecifierTypeName;
+                    methodDeclaration.SyntaxTree)
+                : String.Empty;
         }
 
         private List<string> GetInheritanceRelationships(
