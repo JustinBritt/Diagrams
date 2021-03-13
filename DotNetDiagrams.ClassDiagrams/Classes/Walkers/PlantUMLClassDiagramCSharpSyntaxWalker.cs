@@ -531,42 +531,24 @@
             MethodDeclarationSyntax methodDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
-            string typeParameterConstraintName = String.Empty;
-
-            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-            {
-                typeParameterConstraintName = this.GetTypeNameOrFallback(
+            return typeParameterConstraint is TypeConstraintSyntax typeConstraint
+                ? this.GetTypeNameOrFallback(
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
-                    methodDeclaration.SyntaxTree);
-            }
-            else
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-
-            return typeParameterConstraintName;
+                    methodDeclaration.SyntaxTree)
+                : typeParameterConstraint.ToString();
         }
 
         private string GetConstraint(
             TypeDeclarationSyntax typeDeclaration,
             TypeParameterConstraintSyntax typeParameterConstraint)
         {
-            string typeParameterConstraintName = String.Empty;
-
-            if (typeParameterConstraint is TypeConstraintSyntax typeConstraint)
-            {
-                typeParameterConstraintName = this.GetTypeNameOrFallback(
+            return typeParameterConstraint is TypeConstraintSyntax typeConstraint
+                ? this.GetTypeNameOrFallback(
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
-                    typeDeclaration.SyntaxTree);
-            }
-            else
-            {
-                typeParameterConstraintName = typeParameterConstraint.ToString();
-            }
-
-            return typeParameterConstraintName;
+                    typeDeclaration.SyntaxTree)
+                : typeParameterConstraint.ToString();
         }
 
         private List<string> GetConstraintClauses(
