@@ -1420,7 +1420,7 @@
             string command = this.BuildEventFieldDeclarationCommand(
                 eventFieldTypeName: this.GetTypeNameOrFallback(
                     eventFieldDeclaration.Declaration.Type.ToString(),
-                    eventFieldDeclaration.Declaration,
+                    eventFieldDeclaration.Declaration.Type,
                     eventFieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
                     eventFieldDeclaration),
