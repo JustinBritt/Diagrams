@@ -758,7 +758,7 @@
         {
             return typeDeclaration.BaseList is not null
                 ? String.Join(
-                    ",",
+                    stringJoinSeparator_baseListTypes,
                     typeDeclaration.BaseList?.Types.ToList().Select(w => this.GetBaseListType(w)))
                 : String.Empty;
         }
