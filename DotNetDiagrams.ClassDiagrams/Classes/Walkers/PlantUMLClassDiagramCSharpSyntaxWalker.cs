@@ -514,6 +514,15 @@
             return relationships;
         }
 
+        private string GetBaseListType(
+            BaseTypeSyntax baseType)
+        {
+            return this.GetTypeNameOrFallback(
+                baseType.Type.ToString(),
+                baseType.Type,
+                baseType.SyntaxTree);
+        }
+
         private List<string> GetBaseListTypes(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -524,10 +533,8 @@
                 foreach (BaseTypeSyntax baseType in typeDeclaration.BaseList.Types)
                 {
                     baseTypeNames.Add(
-                        this.GetTypeNameOrFallback(
-                            baseType.Type.ToString(),
-                            baseType.Type,
-                            baseType.SyntaxTree));
+                        this.GetBaseListType(
+                            baseType));
                 }
             }
 
