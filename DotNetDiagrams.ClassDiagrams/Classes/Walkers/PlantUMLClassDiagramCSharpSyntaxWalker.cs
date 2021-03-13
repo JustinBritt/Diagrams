@@ -491,24 +491,6 @@
             };
         }
 
-        private List<string> GetAccessors(
-            BasePropertyDeclarationSyntax basePropertyDeclaration)
-        {
-            List<string> accessors = new List<string>();
-
-            if (basePropertyDeclaration.AccessorList is not null)
-            {
-                foreach (AccessorDeclarationSyntax accessorDeclaration in basePropertyDeclaration.AccessorList.Accessors)
-                {
-                    accessors.Add(
-                        this.GetAccessor(
-                            accessorDeclaration));
-                }
-            }
-
-            return accessors;
-        }
-
         private List<string> GetAnchorRelationships(
             TypeDeclarationSyntax typeDeclaration)
         {
@@ -772,12 +754,9 @@
         private string GetJoinedAccessors(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
-            List<string> accessors = this.GetAccessors(
-                basePropertyDeclaration);
-
-            return String.Join(
-                " ",
-                accessors);
+            return basePropertyDeclaration.AccessorList is not null
+                ? String.Join(" ", basePropertyDeclaration.AccessorList?.Accessors.ToList().Select(w => this.GetAccessor(w)).ToList())
+                : String.Empty;
         }
 
         private string GetJoinedBaseListTypes(
