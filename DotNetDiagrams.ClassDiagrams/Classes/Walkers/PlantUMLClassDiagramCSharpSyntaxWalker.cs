@@ -551,8 +551,9 @@
         {
             string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
-            string joinedConstraints = this.GetJoinedConstraints<T>(
-                constraintClause);
+            string joinedConstraints = String.Join(
+                stringJoinSeparator_constraints,
+                constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)));
 
             return $"{constraintClauseName} : {joinedConstraints}";
         }
@@ -662,15 +663,6 @@
                     stringJoinSeparator_constraintClauses,
                     typeDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<TypeDeclarationSyntax>(w)).ToList())
                 : String.Empty;
-        }
-
-        private string GetJoinedConstraints<T>(
-            TypeParameterConstraintClauseSyntax constraintClause)
-            where T : SyntaxNode
-        {
-            return String.Join(
-                stringJoinSeparator_constraints,
-                constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)));
         }
 
         private string GetJoinedModifiers(
