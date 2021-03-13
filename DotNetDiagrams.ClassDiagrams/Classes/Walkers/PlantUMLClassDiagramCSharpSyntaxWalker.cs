@@ -1203,30 +1203,34 @@
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
         {
-            string name = String.Empty;
+            return this.GetSemanticModelOrDefault(syntaxTree) is not null && ModelExtensions.GetTypeInfo(this.GetSemanticModelOrDefault(syntaxTree), syntaxNode).Type is INamedTypeSymbol targetType
+                ? targetType.ToString()
+                : syntaxNode.ToString();
+            //
+            //string name = String.Empty;
 
-            string fallback = syntaxNode.ToString();
+            //string fallback = syntaxNode.ToString();
 
-            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
-                syntaxTree);
+            //SemanticModel semanticModel = this.GetSemanticModelOrDefault(
+            //    syntaxTree);
 
-            if (semanticModel is not null)
-            {
-                if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
-                {
-                    name = targetType.ToString();
-                }
-                else
-                {
-                    name = fallback;
-                }
-            }
-            else
-            {
-                name = fallback;
-            }
+            //if (semanticModel is not null)
+            //{
+            //    if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+            //    {
+            //        name = targetType.ToString();
+            //    }
+            //    else
+            //    {
+            //        name = fallback;
+            //    }
+            //}
+            //else
+            //{
+            //    name = fallback;
+            //}
 
-            return name;
+            //return name;
         }
 
         private string GetVariable(
@@ -1507,7 +1511,6 @@
                     methodDeclaration),
                 methodName: methodDeclaration.Identifier.ValueText,
                 returnTypeName: this.GetTypeNameOrFallback(
-                    fallback: methodDeclaration.ReturnType.ToString(),
                     syntaxNode: methodDeclaration.ReturnType,
                     syntaxTree: methodDeclaration.SyntaxTree));
 
