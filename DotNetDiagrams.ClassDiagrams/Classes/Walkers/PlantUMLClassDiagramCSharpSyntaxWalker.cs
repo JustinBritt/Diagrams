@@ -551,9 +551,8 @@
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
-                    string joinedConstraints = this.GetJoinedConstraints(
-                        constraintClause,
-                        methodDeclaration);
+                    string joinedConstraints = this.GetJoinedConstraints<MethodDeclarationSyntax>(
+                        constraintClause);
 
                     constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
                 }
@@ -573,9 +572,8 @@
                 {
                     string constraintClauseName = constraintClause.Name.Identifier.ValueText;
 
-                    string joinedConstraints = this.GetJoinedConstraints(
-                        constraintClause,
-                        typeDeclaration);
+                    string joinedConstraints = this.GetJoinedConstraints<TypeDeclarationSyntax>(
+                        constraintClause);
 
                     constraintClauses.Add($"{constraintClauseName} : {joinedConstraints}");
                 }
@@ -703,23 +701,11 @@
                 constraintClauses);
         }
 
-        private string GetJoinedConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            MethodDeclarationSyntax methodDeclaration)
+        private string GetJoinedConstraints<T>(
+            TypeParameterConstraintClauseSyntax constraintClause)
+            where T : SyntaxNode
         {
-            List<string> constraints = this.GetConstraints<MethodDeclarationSyntax>(
-                constraintClause);
-
-            return String.Join(
-                ", ",
-                constraints.Select(w => w.ToString()));
-        }
-
-        private string GetJoinedConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> constraints = this.GetConstraints<TypeDeclarationSyntax>(
+            List<string> constraints = this.GetConstraints<T>(
                 constraintClause);
 
             return String.Join(
