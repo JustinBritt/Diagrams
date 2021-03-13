@@ -688,7 +688,7 @@
                 classDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -699,7 +699,7 @@
                 constructorDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -710,7 +710,7 @@
                 eventDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -721,7 +721,7 @@
                 eventFieldDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -732,7 +732,7 @@
                 fieldDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -743,7 +743,7 @@
                 interfaceDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -754,7 +754,7 @@
                 methodDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -765,7 +765,7 @@
                 propertyDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
@@ -776,7 +776,7 @@
                 structDeclaration);
 
             return String.Join(
-                " ",
+                stringJoinSeparator_modifiers,
                 PlantUMLModifiers);
         }
 
