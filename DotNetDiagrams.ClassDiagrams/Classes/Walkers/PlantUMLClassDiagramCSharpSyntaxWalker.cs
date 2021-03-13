@@ -947,12 +947,11 @@
         private string GetJoinedTypeParameters(
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> typeParameters = this.GetTypeParameters(
-                methodDeclaration);
-
-            return String.Join(
-                ", ",
-                typeParameters);
+            return methodDeclaration.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    methodDeclaration.TypeParameterList.Parameters.ToList().Select(w => w.Identifier.ValueText))
+                : String.Empty;
         }
 
         private string GetJoinedTypeParameters(
@@ -1376,25 +1375,6 @@
             }
 
             return name;
-        }
-
-        private List<string> GetTypeParameters(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            List<string> typeParameters = new List<string>();
-
-            if (methodDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-
-                    typeParameters.Add(
-                        typeParameterName);
-                }
-            }
-
-            return typeParameters;
         }
 
         // TODO: Account for ArgumentList
