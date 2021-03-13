@@ -493,7 +493,11 @@
         {
             return accessorDeclaration.Keyword.ValueText switch
             {
+                "add" => stereotype_add,
+
                 "get" => stereotype_get,
+
+                "remove" => stereotype_remove,
 
                 "set" => stereotype_set,
 
