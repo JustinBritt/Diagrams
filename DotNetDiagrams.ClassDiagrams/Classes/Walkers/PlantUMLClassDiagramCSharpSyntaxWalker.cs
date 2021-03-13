@@ -709,14 +709,9 @@
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            string expression = String.Empty;
-
-            if (propertyDeclaration.ExpressionBody is not null)
-            {
-                expression = stereotype_arrowExpression;
-            }
-
-            return expression;
+            return propertyDeclaration.ExpressionBody is not null
+                ? stereotype_arrowExpression
+                : String.Empty;
         }
 
         private string GetInitializer(
