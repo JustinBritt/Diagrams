@@ -527,14 +527,15 @@
                 baseType.SyntaxTree);
         }
 
-        private string GetConstraint(
+        private string GetConstraint<T>(
             TypeParameterConstraintSyntax typeParameterConstraint)
+            where T : SyntaxNode
         {
             return typeParameterConstraint is TypeConstraintSyntax typeConstraint
                 ? this.GetTypeNameOrFallback(
                     typeConstraint.Type.ToString(),
                     typeConstraint.Type,
-                    typeConstraint.FirstAncestorOrSelf<MethodDeclarationSyntax>().SyntaxTree)
+                    typeConstraint.FirstAncestorOrSelf<T>().SyntaxTree)
                 : typeParameterConstraint.ToString();
         }
 
@@ -602,7 +603,7 @@
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
-                string typeParameterConstraintName = this.GetConstraint(
+                string typeParameterConstraintName = this.GetConstraint<MethodDeclarationSyntax>(
                     typeParameterConstraint);
 
                 constraints.Add(
