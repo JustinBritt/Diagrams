@@ -583,18 +583,11 @@
             return constraintClauses;
         }
 
-        private List<string> GetConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            MethodDeclarationSyntax methodDeclaration)
+        private List<string> GetConstraints<T>(
+            TypeParameterConstraintClauseSyntax constraintClause)
+            where T : SyntaxNode
         {
-            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<MethodDeclarationSyntax>(w)).ToList();
-        }
-
-        private List<string> GetConstraints(
-            TypeParameterConstraintClauseSyntax constraintClause,
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<TypeDeclarationSyntax>(w)).ToList();
+            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<T>(w)).ToList();
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
@@ -713,9 +706,8 @@
             TypeParameterConstraintClauseSyntax constraintClause,
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> constraints = this.GetConstraints(
-                constraintClause,
-                methodDeclaration);
+            List<string> constraints = this.GetConstraints<MethodDeclarationSyntax>(
+                constraintClause);
 
             return String.Join(
                 ", ",
@@ -726,9 +718,8 @@
             TypeParameterConstraintClauseSyntax constraintClause,
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<string> constraints = this.GetConstraints(
-                constraintClause,
-                typeDeclaration);
+            List<string> constraints = this.GetConstraints<TypeDeclarationSyntax>(
+                constraintClause);
 
             return String.Join(
                 ", ",
