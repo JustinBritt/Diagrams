@@ -707,27 +707,17 @@
         private string GetInitializer(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            string initializer = String.Empty;
-
-            if (propertyDeclaration.Initializer is not null)
-            {
-                initializer = stereotype_equals;
-            }
-
-            return initializer;
+            return propertyDeclaration.Initializer is not null
+                ? stereotype_equals
+                : String.Empty;
         }
 
         private string GetInitializer(
             VariableDeclaratorSyntax variableDeclarator)
         {
-            string initializer = String.Empty;
-
-            if (variableDeclarator.Initializer is not null)
-            {
-                initializer = stereotype_equals;
-            }
-
-            return initializer;
+            return variableDeclarator.Initializer is not null
+                ? stereotype_equals
+                : String.Empty;
         }
 
         private string GetJoinedAccessors(
