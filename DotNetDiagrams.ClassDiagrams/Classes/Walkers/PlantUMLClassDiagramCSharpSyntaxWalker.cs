@@ -663,84 +663,43 @@
         }
 
         private string GetJoinedModifiers(
-            ClassDeclarationSyntax classDeclaration)
+            SyntaxNode syntaxNode)
         {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    classDeclaration));
-        }
+            List<string> modifiers = syntaxNode switch
+            {
+                ClassDeclarationSyntax classDeclaration => this.GetModifiers(
+                    classDeclaration),
 
-        private string GetJoinedModifiers(
-            ConstructorDeclarationSyntax constructorDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    constructorDeclaration));
-        }
+                ConstructorDeclarationSyntax constructorDeclaration => this.GetModifiers(
+                    constructorDeclaration),
+                
+                EventDeclarationSyntax eventDeclaration => this.GetModifiers(
+                    eventDeclaration),
 
-        private string GetJoinedModifiers(
-            EventDeclarationSyntax eventDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    eventDeclaration));
-        }
+                EventFieldDeclarationSyntax eventFieldDeclaration => this.GetModifiers(
+                    eventFieldDeclaration),
 
-        private string GetJoinedModifiers(
-            EventFieldDeclarationSyntax eventFieldDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    eventFieldDeclaration));
-        }
+                FieldDeclarationSyntax fieldDeclaration => this.GetModifiers(
+                    fieldDeclaration),
+                
+                InterfaceDeclarationSyntax interfaceDeclaration => this.GetModifiers(
+                    interfaceDeclaration),
+                
+                MethodDeclarationSyntax methodDeclaration => this.GetModifiers(
+                    methodDeclaration),
+                
+                PropertyDeclarationSyntax propertyDeclaration => this.GetModifiers(
+                    propertyDeclaration),
+                
+                StructDeclarationSyntax structDeclaration => this.GetModifiers(
+                    structDeclaration),
 
-        private string GetJoinedModifiers(
-            FieldDeclarationSyntax fieldDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    fieldDeclaration));
-        }
+                _ => throw new Exception("")
+            };
 
-        private string GetJoinedModifiers(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
             return String.Join(
                 stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    interfaceDeclaration));
-        }
-
-        private string GetJoinedModifiers(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    methodDeclaration));
-        }
-
-        private string GetJoinedModifiers(
-            PropertyDeclarationSyntax propertyDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    propertyDeclaration));
-        }
-
-        private string GetJoinedModifiers(
-            StructDeclarationSyntax structDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                this.GetModifiers(
-                    structDeclaration));
+                modifiers);
         }
 
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
