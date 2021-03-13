@@ -53,6 +53,7 @@
         private const string stringJoinSeparator_constraints = ", ";
         private const string stringJoinSeparator_modifiers = " ";
         private const string stringJoinSeparator_parameters = ", ";
+        private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
         private const string stringJoinSeparator_typeParameters = ", ";
         private const string stringJoinSeparator_variableDeclarators = ", ";
 
