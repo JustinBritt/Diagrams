@@ -555,19 +555,9 @@
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> constraintClauses = new List<string>();
-
-            if (methodDeclaration.ConstraintClauses.Count() > 0)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in methodDeclaration.ConstraintClauses.ToList())
-                {
-                    constraintClauses.Add(
-                        this.GetConstraintClause<MethodDeclarationSyntax>(
-                            constraintClause));
-                }
-            }
-
-            return constraintClauses;
+            return methodDeclaration.ConstraintClauses.Count() > 0
+                ? methodDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<MethodDeclarationSyntax>(w)).ToList()
+                : new List<string>();
         }
 
         private List<string> GetConstraintClauses(
