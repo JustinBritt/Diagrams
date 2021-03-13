@@ -958,12 +958,11 @@
         private string GetJoinedTypeParameters(
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<string> typeParameters = this.GetTypeParameters(
-                typeDeclaration);
-
-            return String.Join(
-                ", ",
-                typeParameters);
+            return typeDeclaration.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    typeDeclaration.TypeParameterList.Parameters.ToList().Select(w => w.Identifier.ValueText))
+                : String.Empty;
         }
 
         private string GetJoinedVariables(
@@ -1387,25 +1386,6 @@
             if (methodDeclaration.TypeParameterList is not null)
             {
                 foreach (TypeParameterSyntax typeParameter in methodDeclaration.TypeParameterList.Parameters.ToList())
-                {
-                    string typeParameterName = typeParameter.Identifier.ValueText;
-
-                    typeParameters.Add(
-                        typeParameterName);
-                }
-            }
-
-            return typeParameters;
-        }
-
-        private List<string> GetTypeParameters(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> typeParameters = new List<string>();
-
-            if (typeDeclaration.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax typeParameter in typeDeclaration.TypeParameterList.Parameters.ToList())
                 {
                     string typeParameterName = typeParameter.Identifier.ValueText;
 
