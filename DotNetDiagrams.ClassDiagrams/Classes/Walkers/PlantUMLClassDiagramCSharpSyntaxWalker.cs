@@ -29,6 +29,7 @@
         private const string stereotype_event = "<<event>>";
         private const string stereotype_extern = "<<extern>>";
         private const string stereotype_fixed = "<<fixed>>";
+        private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
@@ -39,6 +40,7 @@
         private const string stereotype_readonly = "<<readonly>>";
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
+        private const string stereotype_set = "<<set>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
         private const string stereotype_unsafe = "<<unsafe>>";
@@ -485,7 +487,17 @@
             {
                 foreach (AccessorDeclarationSyntax accessorDeclaration in basePropertyDeclaration.AccessorList.Accessors)
                 {
-                    accessors.Add($"<<{accessorDeclaration.Keyword.ValueText}>>");
+                    string accessor = accessorDeclaration.Keyword.ValueText switch
+                    {
+                        "get" => stereotype_get,
+
+                        "set" => stereotype_set,
+
+                        _ => throw new Exception("")
+                    };
+
+                    accessors.Add(
+                        accessor);
                 }
             }
 
