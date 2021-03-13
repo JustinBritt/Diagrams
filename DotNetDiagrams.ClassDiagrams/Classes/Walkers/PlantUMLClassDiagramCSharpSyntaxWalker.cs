@@ -524,7 +524,7 @@
         private string GetBaseListType(
             BaseTypeSyntax baseType)
         {
-            return this.GetTypeNameOrFallback(
+            return this.GetTypeName(
                 baseType.Type,
                 baseType.SyntaxTree);
         }
@@ -534,7 +534,7 @@
             where T : SyntaxNode
         {
             return typeParameterConstraint is TypeConstraintSyntax typeConstraint
-                ? this.GetTypeNameOrFallback(
+                ? this.GetTypeName(
                     typeConstraint.Type,
                     typeConstraint.FirstAncestorOrSelf<T>().SyntaxTree)
                 : typeParameterConstraint.ToString();
@@ -563,7 +563,7 @@
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
             return basePropertyDeclaration.ExplicitInterfaceSpecifier is not null
-                ? this.GetTypeNameOrFallback(
+                ? this.GetTypeName(
                     basePropertyDeclaration.ExplicitInterfaceSpecifier.Name,
                     basePropertyDeclaration.SyntaxTree)
                 : String.Empty;
@@ -573,7 +573,7 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             return methodDeclaration.ExplicitInterfaceSpecifier is not null
-                ? this.GetTypeNameOrFallback(
+                ? this.GetTypeName(
                     methodDeclaration.ExplicitInterfaceSpecifier.Name,
                     methodDeclaration.SyntaxTree)
                 : String.Empty;
@@ -588,7 +588,7 @@
             {
                 foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
                 {
-                    string itemName = this.GetTypeNameOrFallback(
+                    string itemName = this.GetTypeName(
                         item.Type,
                         typeDeclaration.SyntaxTree);
 
@@ -1150,7 +1150,7 @@
         {
             string parameterName = parameter.Identifier.ValueText;
 
-            string parameterTypeName = this.GetTypeNameOrFallback(
+            string parameterTypeName = this.GetTypeName(
                 parameter.Type,
                 baseMethodDeclaration.SyntaxTree);
 
@@ -1199,7 +1199,7 @@
                 typeDeclaration.Identifier.ValueText;
         }
 
-        private string GetTypeNameOrFallback(
+        private string GetTypeName(
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
         {
@@ -1369,7 +1369,7 @@
         {
             string command = this.BuildEventDeclarationCommand(
                 eventName: eventDeclaration.Identifier.ValueText,
-                eventTypeName: this.GetTypeNameOrFallback(
+                eventTypeName: this.GetTypeName(
                     eventDeclaration.Type,
                     eventDeclaration.SyntaxTree),
                 explicitInterfaceSpecifierTypeName: this.GetExplicitInterfaceSpecifierTypeName(
@@ -1391,7 +1391,7 @@
             EventFieldDeclarationSyntax eventFieldDeclaration)
         {
             string command = this.BuildEventFieldDeclarationCommand(
-                eventFieldTypeName: this.GetTypeNameOrFallback(
+                eventFieldTypeName: this.GetTypeName(
                     eventFieldDeclaration.Declaration.Type,
                     eventFieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
@@ -1411,7 +1411,7 @@
             FieldDeclarationSyntax fieldDeclaration)
         {
             string command = this.BuildFieldDeclarationCommand(
-                fieldTypeName: this.GetTypeNameOrFallback(
+                fieldTypeName: this.GetTypeName(
                     fieldDeclaration.Declaration.Type,
                     fieldDeclaration.SyntaxTree),
                 joinedModifiers: this.GetJoinedModifiers(
@@ -1485,7 +1485,7 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     methodDeclaration),
                 methodName: methodDeclaration.Identifier.ValueText,
-                returnTypeName: this.GetTypeNameOrFallback(
+                returnTypeName: this.GetTypeName(
                     syntaxNode: methodDeclaration.ReturnType,
                     syntaxTree: methodDeclaration.SyntaxTree));
 
@@ -1512,7 +1512,7 @@
                 joinedModifiers: this.GetJoinedModifiers(
                     propertyDeclaration),
                 propertyName: propertyDeclaration.Identifier.ValueText,
-                propertyTypeName: this.GetTypeNameOrFallback(
+                propertyTypeName: this.GetTypeName(
                     propertyDeclaration.Type,
                     propertyDeclaration.SyntaxTree));
 
