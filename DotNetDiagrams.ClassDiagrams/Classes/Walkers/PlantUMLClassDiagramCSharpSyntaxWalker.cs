@@ -539,18 +539,6 @@
                 : typeParameterConstraint.ToString();
         }
 
-        private string GetConstraint(
-            TypeDeclarationSyntax typeDeclaration,
-            TypeParameterConstraintSyntax typeParameterConstraint)
-        {
-            return typeParameterConstraint is TypeConstraintSyntax typeConstraint
-                ? this.GetTypeNameOrFallback(
-                    typeConstraint.Type.ToString(),
-                    typeConstraint.Type,
-                    typeDeclaration.SyntaxTree)
-                : typeParameterConstraint.ToString();
-        }
-
         private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -621,8 +609,7 @@
 
             foreach (TypeParameterConstraintSyntax typeParameterConstraint in constraintClause.Constraints.ToList())
             {
-                string typeParameterConstraintName = this.GetConstraint(
-                    typeDeclaration,
+                string typeParameterConstraintName = this.GetConstraint<TypeDeclarationSyntax>(
                     typeParameterConstraint);
 
                 constraints.Add(
