@@ -552,12 +552,11 @@
             return $"{constraintClauseName} : {joinedConstraints}";
         }
 
-        private List<string> GetConstraintClauses<T>(
+        private List<string> GetConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
-            where T : SyntaxNode
         {
             return methodDeclaration.ConstraintClauses.Count() > 0
-                ? methodDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<T>(w)).ToList()
+                ? methodDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<MethodDeclarationSyntax>(w)).ToList()
                 : new List<string>();
         }
 
@@ -682,7 +681,7 @@
         private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> constraintClauses = this.GetConstraintClauses<MethodDeclarationSyntax>(
+            List<string> constraintClauses = this.GetConstraintClauses(
                 methodDeclaration);
 
             return String.Join(
