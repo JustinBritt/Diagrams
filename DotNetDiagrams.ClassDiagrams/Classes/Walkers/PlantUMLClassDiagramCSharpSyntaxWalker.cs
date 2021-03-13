@@ -493,7 +493,7 @@
 
                 "set" => stereotype_set,
 
-                _ => throw new Exception("")
+                _ => throw new Exception(nameof(accessorDeclaration.Keyword))
             };
         }
 
