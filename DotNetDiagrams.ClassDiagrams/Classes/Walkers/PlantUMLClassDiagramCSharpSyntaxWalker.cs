@@ -913,12 +913,11 @@
         private string GetJoinedParameters(
             BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
-            List<string> parameters = this.GetParameters(
-                baseMethodDeclaration);
-
-            return String.Join(
-                ", ",
-                parameters);
+            return baseMethodDeclaration.ParameterList.Parameters.Count > 0
+                ? String.Join(
+                    stringJoinSeparator_parameters,
+                    baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)).ToList())
+                : String.Empty;
         }
 
         private string GetJoinedTypeParameters(
@@ -1270,14 +1269,6 @@
                 baseMethodDeclaration.SyntaxTree);
 
             return $"{parameterTypeName} {parameterName}";
-        }
-
-        private List<string> GetParameters(
-            BaseMethodDeclarationSyntax baseMethodDeclaration)
-        {
-            return baseMethodDeclaration.ParameterList.Parameters.Count > 0
-                ? baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)).ToList()
-                : new List<string>();
         }
 
         private SemanticModel GetSemanticModelOrDefault(
