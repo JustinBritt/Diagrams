@@ -47,6 +47,8 @@
         private const string stereotype_virtual = "<<virtual>>";
         private const string stereotype_volatile = "<<volatile>>";
 
+        private const string stringJoinSeparator_accessors = " ";
+
         private const string PlantUML_abstract = "abstract";
         private const string PlantUML_anchor = "+--";
         private const string PlantUML_annotation = "annotation";
