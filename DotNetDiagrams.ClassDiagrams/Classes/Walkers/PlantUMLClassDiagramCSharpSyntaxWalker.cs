@@ -1274,17 +1274,9 @@
         private List<string> GetParameters(
             BaseMethodDeclarationSyntax baseMethodDeclaration)
         {
-            List<string> parameters = new List<string>();
-
-            if (baseMethodDeclaration.ParameterList.Parameters.Count > 0)
-            {
-                foreach (ParameterSyntax parameter in baseMethodDeclaration.ParameterList.Parameters)
-                {
-                    parameters.Add(this.GetParameter(baseMethodDeclaration, parameter));
-                }
-            }
-
-            return parameters;
+            return baseMethodDeclaration.ParameterList.Parameters.Count > 0
+                ? baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)).ToList()
+                : new List<string>();
         }
 
         private SemanticModel GetSemanticModelOrDefault(
