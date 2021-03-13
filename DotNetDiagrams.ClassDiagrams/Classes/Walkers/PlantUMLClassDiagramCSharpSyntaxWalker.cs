@@ -561,7 +561,7 @@
             TypeParameterConstraintClauseSyntax constraintClause)
             where T : SyntaxNode
         {
-            return constraintClause.Constraints.ToList().Select(w => this.GetConstraint<T>(w)).ToList();
+            return constraintClause.Constraints.Select(w => this.GetConstraint<T>(w)).ToList();
         }
 
         private string GetExplicitInterfaceSpecifierTypeName(
