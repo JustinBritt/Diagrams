@@ -773,12 +773,11 @@
         private string GetJoinedBaseListTypes(
             TypeDeclarationSyntax typeDeclaration)
         {
-            List<string> baseListTypes = this.GetBaseListTypes(
-                typeDeclaration);
-
-            return String.Join(
-                ",",
-                baseListTypes);
+            return typeDeclaration.BaseList is not null
+                ? String.Join(
+                    ",",
+                    typeDeclaration.BaseList?.Types.ToList().Select(w => this.GetBaseListType(w)))
+                : String.Empty;
         }
 
         private string GetJoinedConstraintClauses(
