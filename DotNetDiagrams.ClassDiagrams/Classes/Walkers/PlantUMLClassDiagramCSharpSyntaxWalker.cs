@@ -1241,13 +1241,6 @@
                 constructorDeclaration);
         }
 
-        public enum FOOOOOOOOOOOOOOOOOOOOOOOOOO
-        {
-            Foo,
-            Bar,
-            Baz
-        }
-
         // TODO: Check
         private void Visit(
             EnumDeclarationSyntax enumDeclaration)
