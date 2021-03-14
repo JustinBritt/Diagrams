@@ -1342,7 +1342,7 @@
 
             this.AddCommand(
                 command: command,
-                typeName: enumMemberDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
+                typeName: enumMemberDeclaration.FirstAncestorOrSelf<EnumDeclarationSyntax>().Identifier.ValueText);
 
             base.Visit(
                 enumMemberDeclaration);
