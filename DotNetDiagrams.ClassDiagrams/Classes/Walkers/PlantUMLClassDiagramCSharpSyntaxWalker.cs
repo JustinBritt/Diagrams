@@ -235,6 +235,16 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private string BuildEnumMemberDeclarationCommand(
+            string enumMemberName,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
+
         private string BuildEventDeclarationCommand(
             string eventName,
             string eventTypeName,
