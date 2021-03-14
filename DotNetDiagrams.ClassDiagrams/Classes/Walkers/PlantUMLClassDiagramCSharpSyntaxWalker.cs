@@ -670,9 +670,6 @@
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
                 {                    
-                    EventFieldDeclarationSyntax eventFieldDeclaration => this.GetModifiers(
-                        eventFieldDeclaration),
-                    
                     FieldDeclarationSyntax fieldDeclaration => this.GetModifiers(
                         fieldDeclaration),
                     
@@ -770,6 +767,28 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            EventFieldDeclarationSyntax eventFieldDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                eventFieldDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "static" => modifier_static,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
@@ -827,34 +846,6 @@
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
-        private List<string> GetModifiers(
-            EventFieldDeclarationSyntax eventFieldDeclaration)
-        {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in eventFieldDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "internal" => stereotype_internal,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "static" => modifier_static,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
         }
 
         private List<string> GetModifiers(
