@@ -1125,7 +1125,7 @@
         private void Visit(
             ClassDeclarationSyntax classDeclaration)
         {
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+            List<BaseTypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<BaseTypeDeclarationSyntax>().ToList();
 
             if (classDeclaration == declaredTypes.First())
             {
@@ -1263,7 +1263,7 @@
         private void Visit(
             InterfaceDeclarationSyntax interfaceDeclaration)
         {
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+            List<BaseTypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<BaseTypeDeclarationSyntax>().ToList();
 
             if (interfaceDeclaration == declaredTypes.First())
             {
@@ -1360,7 +1360,7 @@
         private void Visit(
             StructDeclarationSyntax structDeclaration)
         {
-            List<TypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<TypeDeclarationSyntax>().ToList();
+            List<BaseTypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<BaseTypeDeclarationSyntax>().ToList();
 
             if (structDeclaration == declaredTypes.First())
             {
