@@ -1068,11 +1068,9 @@
         private string GetBaseTypeDeclarationTypeName(
             BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
-            return String.Concat(
-                String.Join(
-                    stringJoinSeparator_typeDeclarationTypeNames,
-                    baseTypeDeclaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Select(w => w.Identifier.ValueText)),
-                baseTypeDeclaration.Identifier.ValueText);
+            return String.Join(
+                stringJoinSeparator_typeDeclarationTypeNames,
+                baseTypeDeclaration.AncestorsAndSelf().OfType<BaseTypeDeclarationSyntax>().Reverse().Select(w => w.Identifier.ValueText)));
         }
 
         private string GetTypeName(
