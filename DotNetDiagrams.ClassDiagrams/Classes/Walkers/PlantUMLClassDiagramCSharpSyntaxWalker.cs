@@ -829,11 +829,9 @@
         private List<string> GetModifiers(
             EventDeclarationSyntax eventDeclaration)
         {
-            List<string> CSharpModifiers = eventDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in eventDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -861,11 +859,9 @@
         private List<string> GetModifiers(
             EventFieldDeclarationSyntax eventFieldDeclaration)
         {
-            List<string> CSharpModifiers = eventFieldDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in eventFieldDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -891,11 +887,9 @@
         private List<string> GetModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            List<string> CSharpModifiers = fieldDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in fieldDeclaration.Modifiers.Select(w => w.ValueText).ToList())
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -931,7 +925,7 @@
         {
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in interfaceDeclaration.Modifiers.Select(w => w.ValueText).ToList())
+            foreach (string CSharpModifier in interfaceDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -955,11 +949,9 @@
         private List<string> GetModifiers(
             MethodDeclarationSyntax methodDeclaration)
         {
-            List<string> CSharpModifiers = methodDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in methodDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -1001,11 +993,9 @@
         private List<string> GetModifiers(
             PropertyDeclarationSyntax propertyDeclaration)
         {
-            List<string> CSharpModifiers = propertyDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in propertyDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
@@ -1039,11 +1029,9 @@
         private List<string> GetModifiers(
             StructDeclarationSyntax structDeclaration)
         {
-            List<string> CSharpModifiers = structDeclaration.Modifiers.Select(w => w.ValueText).ToList();
-
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in CSharpModifiers)
+            foreach (string CSharpModifier in structDeclaration.Modifiers.Select(w => w.ValueText).ToList())
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
