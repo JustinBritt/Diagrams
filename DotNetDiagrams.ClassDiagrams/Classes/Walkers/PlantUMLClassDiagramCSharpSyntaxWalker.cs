@@ -725,6 +725,14 @@
                 enumDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "internal" => stereotype_internal,
+
+                    "new" => stereotype_new,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
                     "public" => stereotype_public,
 
                     _ => throw new Exception("")
