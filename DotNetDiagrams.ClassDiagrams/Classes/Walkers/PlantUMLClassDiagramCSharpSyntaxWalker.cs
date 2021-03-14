@@ -1285,6 +1285,15 @@
                     enumDeclaration);
             }
 
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                enumDeclaration);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
             string command = this.BuildEnumDeclarationCommand(
                 enumName: this.GetJoinedNamespaceTypeName(
                     enumDeclaration),
