@@ -664,20 +664,6 @@
         }
 
         private string GetJoinedModifiers(
-            SyntaxNode syntaxNode)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                syntaxNode switch
-                {                    
-                    StructDeclarationSyntax structDeclaration => this.GetModifiers(
-                        structDeclaration),
-                    
-                    _ => throw new Exception("")
-                });
-        }
-
-        private string GetJoinedModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
             return String.Join(
@@ -895,6 +881,30 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            StructDeclarationSyntax structDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                structDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
@@ -952,36 +962,6 @@
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
-        private List<string> GetModifiers(
-            StructDeclarationSyntax structDeclaration)
-        {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in structDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "internal" => stereotype_internal,
-
-                    "partial" => stereotype_partial,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
         }
 
         private string GetParameter(
