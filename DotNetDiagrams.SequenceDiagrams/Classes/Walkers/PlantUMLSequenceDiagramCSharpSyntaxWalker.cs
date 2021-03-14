@@ -11,9 +11,9 @@
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.FindSymbols;
 
-    using DotNetDiagrams.Common.Classes.Diagrams;
     using DotNetDiagrams.Common.Extensions;
-    using DotNetDiagrams.Common.Interfaces.Diagrams;
+    using DotNetDiagrams.SequenceDiagrams.Classes.Diagrams;
+    using DotNetDiagrams.SequenceDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Walkers;
 
     internal sealed class PlantUMLSequenceDiagramCSharpSyntaxWalker : CSharpSyntaxWalker, IPlantUMLSequenceDiagramCSharpSyntaxWalker
@@ -54,7 +54,7 @@
             Solution solution,
             Project project)
         {
-            this.Diagrams = new PlantUMLDiagrams();
+            this.Diagrams = new PlantUMLSequenceDiagrams();
 
             this.compilation = compilation;
 
@@ -67,7 +67,7 @@
 
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
-        public IPlantUMLDiagrams Diagrams { get; }
+        public IPlantUMLSequenceDiagrams Diagrams { get; }
 
         private void AddCommand(
             string command)
