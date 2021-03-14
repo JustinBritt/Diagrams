@@ -1068,11 +1068,11 @@
         private string GetBaseTypeDeclarationTypeName(
             BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
-            return String.Join(
-                stringJoinSeparator_typeDeclarationTypeNames,
-                baseTypeDeclaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
-                +
-                baseTypeDeclaration.Identifier.ValueText;
+            return String.Concat(
+                String.Join(
+                    stringJoinSeparator_typeDeclarationTypeNames,
+                    baseTypeDeclaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Select(w => w.Identifier.ValueText)),
+                baseTypeDeclaration.Identifier.ValueText);
         }
 
         private string GetTypeName(
@@ -1241,6 +1241,13 @@
 
             base.Visit(
                 constructorDeclaration);
+        }
+
+        public enum FOOOOOOOOOOOOOOOOOOOOOOOOOO
+        {
+            Foo,
+            Bar,
+            Baz
         }
 
         // TODO: Check
