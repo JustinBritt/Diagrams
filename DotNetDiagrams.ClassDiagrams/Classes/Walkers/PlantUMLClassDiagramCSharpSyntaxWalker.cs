@@ -235,13 +235,28 @@
             return sb.ToString();
         }
 
-        // TODO: Finish
         private string BuildEnumMemberDeclarationCommand(
             string enumMemberName,
             string equalsValue,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(enumMemberName);
+
+            sb.Append(" ");
+
+            if (equalsValue.Length > 0)
+            {
+                sb.Append(equalsValue);
+            }
 
             return sb.ToString();
         }
