@@ -670,9 +670,6 @@
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
                 {                    
-                    MethodDeclarationSyntax methodDeclaration => this.GetModifiers(
-                        methodDeclaration),
-                
                     PropertyDeclarationSyntax propertyDeclaration => this.GetModifiers(
                         propertyDeclaration),
                 
@@ -833,6 +830,44 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                methodDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "abstract" => modifier_abstract,
+
+                    "async" => stereotype_async,
+
+                    "extern" => stereotype_extern,
+
+                    "internal" => stereotype_internal,
+
+                    "new" => stereotype_new,
+
+                    "override" => stereotype_override,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "static" => modifier_static,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    "virtual" => stereotype_virtual,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
@@ -890,50 +925,6 @@
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
-        private List<string> GetModifiers(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in methodDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "abstract" => modifier_abstract,
-
-                    "async" => stereotype_async,
-
-                    "extern" => stereotype_extern,
-
-                    "internal" => stereotype_internal,
-
-                    "new" => stereotype_new,
-
-                    "override" => stereotype_override,
-
-                    "partial" => stereotype_partial,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "static" => modifier_static,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    "virtual" => stereotype_virtual,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
         }
 
         private List<string> GetModifiers(
