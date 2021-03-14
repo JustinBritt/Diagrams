@@ -1305,7 +1305,6 @@
             Foo4
         }
 
-        // TODO: Check
         private void Visit(
             EnumDeclarationSyntax enumDeclaration)
         {
@@ -1338,7 +1337,6 @@
                 typeName: enumDeclaration.Identifier.ValueText);
         }
 
-        // TODO: Check
         private void Visit(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
