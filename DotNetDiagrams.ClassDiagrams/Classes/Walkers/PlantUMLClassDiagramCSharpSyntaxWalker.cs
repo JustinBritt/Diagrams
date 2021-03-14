@@ -668,12 +668,12 @@
         }
 
         private string GetJoinedBaseListTypes(
-            TypeDeclarationSyntax typeDeclaration)
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
-            return typeDeclaration.BaseList is not null
+            return baseTypeDeclaration.BaseList is not null
                 ? String.Join(
                     stringJoinSeparator_baseListTypes,
-                    typeDeclaration.BaseList?.Types.Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                    baseTypeDeclaration.BaseList?.Types.Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
 
