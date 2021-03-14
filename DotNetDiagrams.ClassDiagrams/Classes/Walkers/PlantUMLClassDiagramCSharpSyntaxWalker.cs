@@ -1184,6 +1184,19 @@
                 constructorDeclaration);
         }
 
+        // TODO: Finish
+        private void Visit(
+            EnumDeclarationSyntax enumDeclaration)
+        {
+            List<BaseTypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<BaseTypeDeclarationSyntax>().ToList();
+
+            if (enumDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    enumDeclaration);
+            }
+        }
+
         private void Visit(
             EventDeclarationSyntax eventDeclaration)
         {
