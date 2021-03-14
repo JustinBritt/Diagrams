@@ -117,8 +117,6 @@
         {
             List<string> currentHeader = new List<string>();
 
-            currentHeader.Add(PlantUML_startuml);
-
             currentHeader.Add($"{PlantUML_title} {title}");
 
             if (autoactivate)
