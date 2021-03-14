@@ -629,7 +629,7 @@
             return basePropertyDeclaration.AccessorList is not null
                 ? String.Join(
                     stringJoinSeparator_accessors,
-                    basePropertyDeclaration.AccessorList?.Accessors.ToList().Select(w => this.GetAccessor(w)))
+                    basePropertyDeclaration.AccessorList?.Accessors.Select(w => this.GetAccessor(w)))
                 : String.Empty;
         }
 
@@ -639,7 +639,7 @@
             return typeDeclaration.BaseList is not null
                 ? String.Join(
                     stringJoinSeparator_baseListTypes,
-                    typeDeclaration.BaseList?.Types.ToList().Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                    typeDeclaration.BaseList?.Types.Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
 
@@ -737,7 +737,7 @@
             return methodDeclaration.TypeParameterList is not null
                 ? String.Join(
                     stringJoinSeparator_typeParameters,
-                    methodDeclaration.TypeParameterList.Parameters.ToList().Select(w => w.Identifier.ValueText))
+                    methodDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
                 : String.Empty;
         }
 
@@ -747,7 +747,7 @@
             return typeDeclaration.TypeParameterList is not null
                 ? String.Join(
                     stringJoinSeparator_typeParameters,
-                    typeDeclaration.TypeParameterList.Parameters.ToList().Select(w => w.Identifier.ValueText))
+                    typeDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
                 : String.Empty;
         }
 
@@ -757,7 +757,7 @@
         {
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
-                baseFieldDeclaration.Declaration.Variables.ToList().Select(w => this.GetVariable(w)));
+                baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
         }
 
         private List<string> GetModifiers(
@@ -889,7 +889,7 @@
         {
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in fieldDeclaration.Modifiers.Select(w => w.ValueText).ToList())
+            foreach (string CSharpModifier in fieldDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
