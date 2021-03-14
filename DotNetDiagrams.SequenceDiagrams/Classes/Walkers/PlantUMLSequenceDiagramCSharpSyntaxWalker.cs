@@ -138,7 +138,7 @@
                 currentHeader.Add($"{PlantUML_hide} {PlantUML_footbox}");
             }
 
-            currentHeader.ForEach(w => AddCommand(w));
+            this.Diagram?.Body.AddRange(currentHeader);
         }
 
         private string EscapeGreaterThanLessThan(
