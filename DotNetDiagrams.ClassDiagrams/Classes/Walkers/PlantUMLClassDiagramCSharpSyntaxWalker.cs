@@ -649,7 +649,7 @@
             return methodDeclaration.ConstraintClauses.Count() > 0
                 ? String.Join(
                     stringJoinSeparator_constraintClauses,
-                    methodDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<MethodDeclarationSyntax>(w)).ToList())
+                    methodDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<MethodDeclarationSyntax>(w)))
                 : String.Empty;
         }
 
@@ -659,7 +659,7 @@
             return typeDeclaration.ConstraintClauses.Count() > 0
                 ? String.Join(
                     stringJoinSeparator_constraintClauses,
-                    typeDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<TypeDeclarationSyntax>(w)).ToList())
+                    typeDeclaration.ConstraintClauses.Select(w => this.GetConstraintClause<TypeDeclarationSyntax>(w)))
                 : String.Empty;
         }
 
@@ -727,7 +727,7 @@
             return baseMethodDeclaration.ParameterList.Parameters.Count > 0
                 ? String.Join(
                     stringJoinSeparator_parameters,
-                    baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)).ToList())
+                    baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)))
                 : String.Empty;
         }
 
@@ -1031,7 +1031,7 @@
         {
             List<string> PlantUMLModifiers = new List<string>();
 
-            foreach (string CSharpModifier in structDeclaration.Modifiers.Select(w => w.ValueText).ToList())
+            foreach (string CSharpModifier in structDeclaration.Modifiers.Select(w => w.ValueText))
             {
                 string PlantUMLModifier = CSharpModifier switch
                 {
