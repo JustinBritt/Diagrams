@@ -234,17 +234,11 @@
                 case CatchClauseSyntax catchClause:
                     this.Visit(catchClause);
                     break;
-                case ConstructorDeclarationSyntax constructorDeclaration:
-                    this.Visit(constructorDeclaration);
-                    break;
                 case DoStatementSyntax doStatement:
                     this.Visit(doStatement);
                     break;
                 case ElseClauseSyntax elseClause:
                     this.Visit(elseClause);
-                    break;
-                case FinallyClauseSyntax finallyClause:
-                    this.Visit(finallyClause);
                     break;
                 case ForStatementSyntax forStatement:
                     this.Visit(forStatement);
@@ -302,12 +296,6 @@
         }
 
         private void Visit(
-            ConstructorDeclarationSyntax constructorDeclaration)
-        {
-            base.Visit(constructorDeclaration);
-        }
-
-        private void Visit(
             DoStatementSyntax doStatement)
         {
             this.AddCommand(group_doWhile);
@@ -333,12 +321,6 @@
             {
                 this.AddCommand(PlantUML_end);
             }
-        }
-
-        private void Visit(
-            FinallyClauseSyntax finallyClause)
-        {
-            base.Visit(finallyClause);
         }
 
         private void Visit(
