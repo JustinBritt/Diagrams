@@ -191,11 +191,11 @@
         private bool HasCallers(
             MethodDeclarationSyntax methodDeclaration)
         {
-            SemanticModel model = compilation.GetSemanticModel(syntaxTree);
+            SemanticModel model = this.compilation.GetSemanticModel(this.syntaxTree);
 
             IMethodSymbol methodSymbol = ModelExtensions.GetDeclaredSymbol(model, methodDeclaration) as IMethodSymbol;
 
-            IEnumerable<SymbolCallerInfo> callers = SymbolFinder.FindCallersAsync(methodSymbol, solution).GetAwaiter().GetResult();
+            IEnumerable<SymbolCallerInfo> callers = SymbolFinder.FindCallersAsync(methodSymbol, this.solution).GetAwaiter().GetResult();
 
             return callers.Any();
         }
@@ -208,9 +208,9 @@
 
             if (!String.IsNullOrEmpty(currentTitle))
             {
-                if (!Diagrams.ContainsTitle(currentTitle))
+                if (!this.Diagrams.ContainsTitle(this.currentTitle))
                 {
-                    Diagrams.AddTitle(currentTitle);
+                    this.Diagrams.AddTitle(this.currentTitle);
                 }
 
                 this.AddHeader(
@@ -223,7 +223,7 @@
         public override void Visit(
             SyntaxNode node)
         {
-            if (ignore)
+            if (this.ignore)
             {
                 base.Visit(node);
                 return;
@@ -286,7 +286,7 @@
         {
             if (catchClause.Block.Statements.Count > 0)
             {
-                AddCommand(PlantUML_else);
+                this.AddCommand(PlantUML_else);
             }
 
             base.Visit(catchClause);
@@ -295,7 +295,7 @@
             {
                 if (((TryStatementSyntax)catchClause.Parent).Catches.Last() == catchClause)
                 {
-                    AddCommand(
+                    this.AddCommand(
                         PlantUML_end);
                 }
             }
@@ -310,11 +310,11 @@
         private void Visit(
             DoStatementSyntax doStatement)
         {
-            AddCommand(group_doWhile);
+            this.AddCommand(group_doWhile);
 
             base.Visit(doStatement);
 
-            AddCommand(PlantUML_end);
+            this.AddCommand(PlantUML_end);
         }
 
         /// <summary>
@@ -325,13 +325,13 @@
         private void Visit(
             ElseClauseSyntax elseClause)
         {
-            AddCommand(PlantUML_else);
+            this.AddCommand(PlantUML_else);
 
             base.Visit(elseClause);
 
             if (elseClause.Statement is BlockSyntax)
             {
-                AddCommand(PlantUML_end);
+                this.AddCommand(PlantUML_end);
             }
         }
 
@@ -344,21 +344,21 @@
         private void Visit(
             ForStatementSyntax forStatement)
         {
-            AddCommand(group_for);
+            this.AddCommand(group_for);
 
             base.Visit(forStatement);
 
-            AddCommand(PlantUML_end);
+            this.AddCommand(PlantUML_end);
         }
 
         private void Visit(
             ForEachStatementSyntax forEachStatement)
         {
-            AddCommand(group_foreach);
+            this.AddCommand(group_foreach);
 
             base.Visit(forEachStatement);
 
-            AddCommand(PlantUML_end);
+            this.AddCommand(PlantUML_end);
         }
 
         private void Visit(
@@ -443,13 +443,13 @@
 
             string command = $"{callerTypeName} -> {targetTypeName}: {targetName}";
 
-            AddCommand(command);
+            this.AddCommand(command);
 
             base.Visit(invocation);
 
             command = $"{targetTypeName} --> {callerTypeName}: {returnTypeName}";
 
-            AddCommand(command);
+            this.AddCommand(command);
         }
 
         /// <summary>
@@ -473,14 +473,14 @@
 
             if (ifStatement.Parent is BlockSyntax)
             {
-                AddCommand(command1);
+                this.AddCommand(command1);
             }
 
             base.Visit(ifStatement);
 
             if (ifStatement.Else is null)
             {
-                AddCommand(PlantUML_end);
+                this.AddCommand(PlantUML_end);
             }
         }
 
@@ -488,11 +488,11 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             // we only care about method declarations that don't have callers
-            ignore = HasCallers(
+            this.ignore = this.HasCallers(
                 methodDeclaration);
 
-            if (!ignore)
-                StartDiagram(
+            if (!this.ignore)
+                this.StartDiagram(
                     methodDeclaration);
 
             try
@@ -502,7 +502,7 @@
             }
             finally
             {
-                ignore = false;
+                this.ignore = false;
             }
         }
 
@@ -516,14 +516,14 @@
         {
             if (tryStatement.Parent is BlockSyntax)
             {
-                AddCommand(PlantUML_alt);
+                this.AddCommand(PlantUML_alt);
             }
 
             base.Visit(tryStatement);
 
             if (tryStatement.Catches.Count == 0)
             {
-                AddCommand(PlantUML_end);
+                this.AddCommand(PlantUML_end);
             }
         }
 
@@ -535,11 +535,11 @@
         private void Visit(
             WhileStatementSyntax whileStatement)
         {
-            AddCommand(group_while);
+            this.AddCommand(group_while);
 
             base.Visit(whileStatement);
 
-            AddCommand(PlantUML_end);
+            this.AddCommand(PlantUML_end);
         }
     }
 }
