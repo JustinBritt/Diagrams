@@ -670,9 +670,6 @@
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
                 {                    
-                    FieldDeclarationSyntax fieldDeclaration => this.GetModifiers(
-                        fieldDeclaration),
-                    
                     InterfaceDeclarationSyntax interfaceDeclaration => this.GetModifiers(
                         interfaceDeclaration),
                     
@@ -789,6 +786,36 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                fieldDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "const" => stereotype_const,
+
+                    "fixed" => stereotype_fixed,
+
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
+                    "public" => stereotype_public,
+
+                    "readonly" => stereotype_readonly,
+
+                    "static" => modifier_static,
+
+                    "volatile" => stereotype_volatile,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
@@ -846,42 +873,6 @@
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
-        private List<string> GetModifiers(
-            FieldDeclarationSyntax fieldDeclaration)
-        {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in fieldDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "const" => stereotype_const,
-
-                    "fixed" => stereotype_fixed,
-
-                    "internal" => stereotype_internal,
-
-                    "private" => stereotype_private,
-
-                    "protected" => stereotype_protected,
-
-                    "public" => stereotype_public,
-
-                    "readonly" => stereotype_readonly,
-
-                    "static" => modifier_static,
-                    
-                    "volatile" => stereotype_volatile,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
         }
 
         private List<string> GetModifiers(
