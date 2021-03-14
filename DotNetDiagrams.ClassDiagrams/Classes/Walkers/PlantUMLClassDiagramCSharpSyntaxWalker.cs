@@ -565,15 +565,15 @@
 
         // TODO: Check for duplicate relationships
         private List<string> GetAnchorRelationships(
-            TypeDeclarationSyntax typeDeclaration)
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
             List<string> relationships = new List<string>();
 
-            if (typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Count() > 0)
+            if (baseTypeDeclaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Count() > 0)
             {
-                foreach (TypeDeclarationSyntax item in typeDeclaration.AncestorsAndSelf().OfType<TypeDeclarationSyntax>())
+                foreach (BaseTypeDeclarationSyntax item in baseTypeDeclaration.AncestorsAndSelf().OfType<BaseTypeDeclarationSyntax>())
                 {
-                    TypeDeclarationSyntax parent = item.Ancestors().OfType<TypeDeclarationSyntax>().FirstOrDefault();
+                    BaseTypeDeclarationSyntax parent = item.Ancestors().OfType<BaseTypeDeclarationSyntax>().FirstOrDefault();
 
                     if (item is not null && parent is not null)
                     {
