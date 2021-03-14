@@ -1274,6 +1274,12 @@
                 typeName: enumDeclaration.Identifier.ValueText);
         }
 
+        // TODO: Finish
+        private void Visit(
+            EnumMemberDeclarationSyntax enumMemberDeclaration)
+        {
+        }
+
         private void Visit(
             EventDeclarationSyntax eventDeclaration)
         {
