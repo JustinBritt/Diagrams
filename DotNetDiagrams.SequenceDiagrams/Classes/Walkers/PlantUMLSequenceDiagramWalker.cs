@@ -499,14 +499,17 @@
             MethodDeclarationSyntax methodDeclaration)
         {
             // we only care about method declarations that don't have callers
-            ignore = HasCallers(methodDeclaration);
+            ignore = HasCallers(
+                methodDeclaration);
 
             if (!ignore)
-                StartDiagram(methodDeclaration);
+                StartDiagram(
+                    methodDeclaration);
 
             try
             {
-                base.Visit(methodDeclaration);
+                base.Visit(
+                    methodDeclaration);
             }
             finally
             {
