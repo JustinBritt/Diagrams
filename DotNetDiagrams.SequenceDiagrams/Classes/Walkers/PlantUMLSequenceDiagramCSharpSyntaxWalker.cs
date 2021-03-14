@@ -16,7 +16,7 @@
     using DotNetDiagrams.Common.Interfaces.Diagrams;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLSequenceDiagramWalker : CSharpSyntaxWalker, IPlantUMLSequenceDiagramWalker
+    internal sealed class PlantUMLSequenceDiagramCSharpSyntaxWalker : CSharpSyntaxWalker, IPlantUMLSequenceDiagramCSharpSyntaxWalker
     {
         private const string group_do = "group do";
         private const string group_doWhile = "group do/while";
@@ -48,7 +48,7 @@
 
         private bool ignore;
 
-        public PlantUMLSequenceDiagramWalker(
+        public PlantUMLSequenceDiagramCSharpSyntaxWalker(
             Compilation compilation,
             SyntaxTree syntaxTree,
             Solution solution,
