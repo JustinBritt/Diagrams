@@ -670,9 +670,6 @@
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
                 {                    
-                    InterfaceDeclarationSyntax interfaceDeclaration => this.GetModifiers(
-                        interfaceDeclaration),
-                    
                     MethodDeclarationSyntax methodDeclaration => this.GetModifiers(
                         methodDeclaration),
                 
