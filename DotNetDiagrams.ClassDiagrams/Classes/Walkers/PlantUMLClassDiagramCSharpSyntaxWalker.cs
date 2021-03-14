@@ -1251,6 +1251,14 @@
                 this.StartDiagram(
                     enumDeclaration);
             }
+
+            string command = this.BuildEnumDeclarationCommand(
+                enumName: this.GetJoinedNamespaceTypeName(
+                    enumDeclaration),
+                joinedBaseListTypes: this.GetJoinedBaseListTypes(
+                    enumDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    enumDeclaration));
         }
 
         private void Visit(
