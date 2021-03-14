@@ -238,6 +238,7 @@
         // TODO: Finish
         private string BuildEnumMemberDeclarationCommand(
             string enumMemberName,
+            string equalsValue,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
