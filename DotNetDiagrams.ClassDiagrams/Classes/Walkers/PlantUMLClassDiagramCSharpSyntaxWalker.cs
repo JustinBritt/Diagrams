@@ -1131,6 +1131,9 @@
                 case ConstructorDeclarationSyntax constructorDeclaration:
                     this.Visit(constructorDeclaration);
                     break;
+                case EnumDeclarationSyntax enumDeclaration:
+                    this.Visit(enumDeclaration);
+                    break;
                 case EventDeclarationSyntax eventDeclaration:
                     this.Visit(eventDeclaration);
                     break;
