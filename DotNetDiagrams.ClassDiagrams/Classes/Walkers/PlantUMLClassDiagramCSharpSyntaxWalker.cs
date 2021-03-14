@@ -692,65 +692,6 @@
                 });
         }
 
-        // TODO: If multiple types are defined in the same file, then it uses the name of the first one
-        private string GetJoinedNamespaceTypeName(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            string namespaceName = String.Empty;
-
-            if (typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
-            {
-                namespaceName = typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
-            }
-
-            string typeName = this.GetTypeDeclarationTypeName(
-                typeDeclaration);
-
-            return String.Concat(
-                namespaceName,
-                stringConcatSeparator_namespaceTypeName,
-                typeName);
-        }
-
-        private string GetJoinedParameters(
-            BaseMethodDeclarationSyntax baseMethodDeclaration)
-        {
-            return baseMethodDeclaration.ParameterList.Parameters.Count > 0
-                ? String.Join(
-                    stringJoinSeparator_parameters,
-                    baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)))
-                : String.Empty;
-        }
-
-        private string GetJoinedTypeParameters(
-            MethodDeclarationSyntax methodDeclaration)
-        {
-            return methodDeclaration.TypeParameterList is not null
-                ? String.Join(
-                    stringJoinSeparator_typeParameters,
-                    methodDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
-                : String.Empty;
-        }
-
-        private string GetJoinedTypeParameters(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            return typeDeclaration.TypeParameterList is not null
-                ? String.Join(
-                    stringJoinSeparator_typeParameters,
-                    typeDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
-                : String.Empty;
-        }
-
-        // TODO: Account for ArgumentList
-        private string GetJoinedVariables(
-            BaseFieldDeclarationSyntax baseFieldDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_variableDeclarators,
-                baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
         private string GetJoinedModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
@@ -827,6 +768,65 @@
 
                     _ => throw new Exception("")
                 }));
+        }
+
+        // TODO: If multiple types are defined in the same file, then it uses the name of the first one
+        private string GetJoinedNamespaceTypeName(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            string namespaceName = String.Empty;
+
+            if (typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
+            {
+                namespaceName = typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
+            }
+
+            string typeName = this.GetTypeDeclarationTypeName(
+                typeDeclaration);
+
+            return String.Concat(
+                namespaceName,
+                stringConcatSeparator_namespaceTypeName,
+                typeName);
+        }
+
+        private string GetJoinedParameters(
+            BaseMethodDeclarationSyntax baseMethodDeclaration)
+        {
+            return baseMethodDeclaration.ParameterList.Parameters.Count > 0
+                ? String.Join(
+                    stringJoinSeparator_parameters,
+                    baseMethodDeclaration.ParameterList.Parameters.Select(w => this.GetParameter(baseMethodDeclaration, w)))
+                : String.Empty;
+        }
+
+        private string GetJoinedTypeParameters(
+            MethodDeclarationSyntax methodDeclaration)
+        {
+            return methodDeclaration.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    methodDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
+                : String.Empty;
+        }
+
+        private string GetJoinedTypeParameters(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            return typeDeclaration.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    typeDeclaration.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
+                : String.Empty;
+        }
+
+        // TODO: Account for ArgumentList
+        private string GetJoinedVariables(
+            BaseFieldDeclarationSyntax baseFieldDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_variableDeclarators,
+                baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
         }
 
         private List<string> GetModifiers(
