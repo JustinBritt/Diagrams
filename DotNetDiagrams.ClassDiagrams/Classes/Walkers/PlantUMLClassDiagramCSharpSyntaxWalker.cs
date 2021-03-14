@@ -1297,6 +1297,14 @@
                 constructorDeclaration);
         }
 
+        public enum Foo
+        {
+            Foo1 = 2,
+            Foo2 = 3,
+            Foo3 = 4,
+            Foo4
+        }
+
         // TODO: Check
         private void Visit(
             EnumDeclarationSyntax enumDeclaration)
@@ -1342,7 +1350,7 @@
 
             this.AddCommand(
                 command: command,
-                typeName: enumMemberDeclaration.FirstAncestorOrSelf<EnumDeclarationSyntax>().Identifier.ValueText);
+                typeName: enumMemberDeclaration.FirstAncestorOrSelf<BaseTypeDeclarationSyntax>().Identifier.ValueText);
 
             base.Visit(
                 enumMemberDeclaration);
