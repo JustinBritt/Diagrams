@@ -202,7 +202,7 @@
         private void StartDiagram(
             MethodDeclarationSyntax methodDeclaration)
         {
-            currentTitle = this.GetJoinedNamespaceTypeMethodName(
+            this.currentTitle = this.GetJoinedNamespaceTypeMethodName(
                 methodDeclaration);
 
             if (!String.IsNullOrEmpty(currentTitle))
@@ -215,7 +215,7 @@
                 this.AddHeader(
                     autoactivate: true,
                     footbox: true,
-                    title: currentTitle);
+                    title: this.currentTitle);
             }
         }
 
