@@ -715,7 +715,10 @@
             string typeName = this.GetTypeDeclarationTypeName(
                 typeDeclaration);
 
-            return $"{namespaceName}.{typeName}";
+            return String.Concat(
+                namespaceName,
+                stringConcatSeparator_namespaceTypeName,
+                typeName);
         }
 
         private string GetJoinedParameters(
