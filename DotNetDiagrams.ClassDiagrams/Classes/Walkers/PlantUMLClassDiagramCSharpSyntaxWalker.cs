@@ -1259,6 +1259,17 @@
                     enumDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     enumDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: enumDeclaration.Identifier.ValueText);
+
+            base.Visit(
+                enumDeclaration);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: enumDeclaration.Identifier.ValueText);
         }
 
         private void Visit(
