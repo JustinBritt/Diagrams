@@ -9,6 +9,7 @@
     using DotNetDiagrams.SequenceDiagrams.Classes.Configurations;
     using DotNetDiagrams.SequenceDiagrams.Classes.Walkers;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Configurations;
+    using DotNetDiagrams.SequenceDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Generators;
 
     internal sealed class PlantUMLSequenceDiagramGenerator : IPlantUMLSequenceDiagramGenerator
@@ -38,6 +39,11 @@
 
                     diagrams.Value.AddRange(walker.Diagrams.Value);
                 }
+            }
+
+            foreach(IPlantUMLSequenceDiagram diagram in diagrams.Value)
+            {
+                diagram.EndDiagram();
             }
 
             return diagrams;
