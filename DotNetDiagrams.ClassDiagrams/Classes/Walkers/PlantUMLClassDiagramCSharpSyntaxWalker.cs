@@ -201,6 +201,40 @@
             return sb.ToString();
         }
 
+        private string BuildEnumDeclarationCommand(
+            string enumName,
+            string joinedBaseListTypes,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PlantUML_enum);
+
+            sb.Append(" ");
+
+            sb.Append(enumName);
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedBaseListTypes.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
         private string BuildEventDeclarationCommand(
             string eventName,
             string eventTypeName,
