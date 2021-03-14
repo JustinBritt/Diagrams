@@ -763,37 +763,30 @@
         private List<string> GetModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in classDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
+            return classDeclaration.Modifiers
+                .Select(w => w.ValueText switch 
                 {
                     "abstract" => stereotype_abstract,
-
+                    
                     "internal" => stereotype_internal,
-
+                    
                     "partial" => stereotype_partial,
-
+                    
                     "private" => stereotype_private,
-
+                    
                     "protected" => stereotype_protected,
-
+                    
                     "public" => stereotype_public,
 
                     "sealed" => stereotype_sealed,
 
                     "static" => stereotype_static,
-
+                    
                     "unsafe" => stereotype_unsafe,
-
+                    
                     _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
+                })
+                .ToList();
         }
 
         private List<string> GetModifiers(
