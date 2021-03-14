@@ -774,6 +774,21 @@
                 }));
         }
 
+        // TODO: Check
+        private string GetJoinedModifiers(
+            EnumMemberDeclarationSyntax enumMemberDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                enumMemberDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "" => String.Empty,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             EventDeclarationSyntax eventDeclaration)
         {
