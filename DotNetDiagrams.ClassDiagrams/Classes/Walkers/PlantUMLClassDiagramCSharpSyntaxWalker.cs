@@ -1326,10 +1326,20 @@
                 typeName: enumDeclaration.Identifier.ValueText);
         }
 
-        // TODO: Finish
+        // TODO: Check
         private void Visit(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
+            string command = this.BuildEnumMemberDeclarationCommand(
+                enumMemberName: enumMemberDeclaration.Identifier.ValueText,
+                equalsValue: this.GetEqualsValue(enumMemberDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    enumMemberDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: enumMemberDeclaration.FirstAncestorOrSelf<TypeDeclarationSyntax>().Identifier.ValueText);
+
             base.Visit(
                 enumMemberDeclaration);
         }
