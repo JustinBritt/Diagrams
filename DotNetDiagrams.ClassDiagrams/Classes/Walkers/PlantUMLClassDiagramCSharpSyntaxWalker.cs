@@ -907,17 +907,17 @@
 
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
-            TypeDeclarationSyntax typeDeclaration)
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
             string namespaceName = String.Empty;
 
-            if (typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
+            if (baseTypeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
             {
-                namespaceName = typeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
+                namespaceName = baseTypeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
             }
 
-            string typeName = this.GetTypeDeclarationTypeName(
-                typeDeclaration);
+            string typeName = this.GetBaseTypeDeclarationTypeName(
+                baseTypeDeclaration);
 
             return String.Concat(
                 namespaceName,
@@ -1009,14 +1009,14 @@
             return typeDeclaration;
         }
 
-        private string GetTypeDeclarationTypeName(
-            TypeDeclarationSyntax typeDeclaration)
+        private string GetBaseTypeDeclarationTypeName(
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
             return String.Join(
                 stringJoinSeparator_typeDeclarationTypeNames,
-                typeDeclaration.Ancestors().OfType<TypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
+                baseTypeDeclaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Select(w => w.Identifier.ValueText))
                 +
-                typeDeclaration.Identifier.ValueText;
+                baseTypeDeclaration.Identifier.ValueText;
         }
 
         private string GetTypeName(
@@ -1040,10 +1040,10 @@
         }
 
         private void StartDiagram(
-            TypeDeclarationSyntax typeDeclaration)
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
             this.currentTitle = this.GetJoinedNamespaceTypeName(
-                typeDeclaration);
+                baseTypeDeclaration);
 
             if (!String.IsNullOrEmpty(this.currentTitle))
             {
