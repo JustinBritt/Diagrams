@@ -43,7 +43,6 @@
         private readonly Solution solution;
         private readonly SyntaxTree syntaxTree;
 
-        private List<string> currentHeader;
         private string currentTitle;
 
         private bool ignore;
@@ -116,7 +115,7 @@
             bool footbox,
             string title)
         {
-            currentHeader = new List<string>();
+            List<string> currentHeader = new List<string>();
 
             currentHeader.Add(PlantUML_startuml);
 
