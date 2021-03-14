@@ -542,6 +542,7 @@
             };
         }
 
+        // TODO: Check for duplicate relationships
         private List<string> GetAnchorRelationships(
             TypeDeclarationSyntax typeDeclaration)
         {
