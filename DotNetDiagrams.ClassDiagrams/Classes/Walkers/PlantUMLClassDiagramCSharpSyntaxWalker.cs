@@ -1240,7 +1240,7 @@
                 constructorDeclaration);
         }
 
-        // TODO: Finish
+        // TODO: Check
         private void Visit(
             EnumDeclarationSyntax enumDeclaration)
         {
