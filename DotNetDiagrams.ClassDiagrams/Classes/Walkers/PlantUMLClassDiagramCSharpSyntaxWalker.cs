@@ -670,9 +670,6 @@
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
                 {                    
-                    ConstructorDeclarationSyntax constructorDeclaration => this.GetModifiers(
-                        constructorDeclaration),
-                
                     EventDeclarationSyntax eventDeclaration => this.GetModifiers(
                         eventDeclaration),
                     
@@ -787,14 +784,13 @@
                 }));
         }
 
-        private List<string> GetModifiers(
+        private string GetJoinedModifiers(
             ConstructorDeclarationSyntax constructorDeclaration)
         {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in constructorDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                constructorDeclaration.Modifiers
+                .Select(w => w.ValueText switch
                 {
                     "internal" => stereotype_internal,
 
@@ -809,12 +805,7 @@
                     "unsafe" => stereotype_unsafe,
 
                     _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
+                }));
         }
 
         private List<string> GetModifiers(
