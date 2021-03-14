@@ -816,6 +816,26 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                interfaceDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "internal" => stereotype_internal,
+
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    "unsafe" => stereotype_unsafe,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: If multiple types are defined in the same file, then it uses the name of the first one
         private string GetJoinedNamespaceTypeName(
             TypeDeclarationSyntax typeDeclaration)
@@ -873,32 +893,6 @@
             return String.Join(
                 stringJoinSeparator_variableDeclarators,
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
-        }
-
-        private List<string> GetModifiers(
-            InterfaceDeclarationSyntax interfaceDeclaration)
-        {
-            List<string> PlantUMLModifiers = new List<string>();
-
-            foreach (string CSharpModifier in interfaceDeclaration.Modifiers.Select(w => w.ValueText))
-            {
-                string PlantUMLModifier = CSharpModifier switch
-                {
-                    "internal" => stereotype_internal,
-
-                    "private" => stereotype_private,
-
-                    "public" => stereotype_public,
-
-                    "unsafe" => stereotype_unsafe,
-
-                    _ => throw new Exception("")
-                };
-
-                PlantUMLModifiers.Add(PlantUMLModifier);
-            }
-
-            return PlantUMLModifiers;
         }
 
         private List<string> GetModifiers(
