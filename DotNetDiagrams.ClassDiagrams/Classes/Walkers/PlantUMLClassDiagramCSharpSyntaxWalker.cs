@@ -601,6 +601,14 @@
                 joinedConstraints);
         }
 
+        private string GetEqualsValue(
+            EnumMemberDeclarationSyntax enumMemberDeclaration)
+        {
+            return enumMemberDeclaration.EqualsValue is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetExplicitInterfaceSpecifierTypeName(
             BasePropertyDeclarationSyntax basePropertyDeclaration)
         {
