@@ -64,8 +64,6 @@
             this.project = project;
         }
 
-        private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
-
         public IPlantUMLSequenceDiagram Diagram => Diagrams.GetSequenceDiagramAtTitleOrDefault(currentTitle);
 
         public IPlantUMLSequenceDiagrams Diagrams { get; }
@@ -73,41 +71,44 @@
         private void AddCommand(
             string command)
         {
-            string currentLast = PlantUMLCode.LastOrDefault();
-
-            List<string> cannotImmediatelyPrecedePlantUML_end = new List<string>() 
+            if (this.Diagram is not null)
             {
-                group_do,
-                group_doWhile,
-                group_for,
-                group_foreach,
-                group_while,
-                PlantUML_alt,
-                PlantUML_else,
-                PlantUML_opt,
-            };
+                string currentLast = this.Diagram.Body.LastOrDefault();
 
-            if (command == PlantUML_end && currentLast == PlantUML_else)
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-
-                currentLast = PlantUMLCode.LastOrDefault();
-
-                if (currentLast == PlantUML_alt || currentLast == PlantUML_opt)
+                List<string> cannotImmediatelyPrecedePlantUML_end = new List<string>()
                 {
-                    this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
+                    group_do,
+                    group_doWhile,
+                    group_for,
+                    group_foreach,
+                    group_while,
+                    PlantUML_alt,
+                    PlantUML_else,
+                    PlantUML_opt,
+                };
+
+                if (command == PlantUML_end && currentLast == PlantUML_else)
+                {
+                    this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
+
+                    currentLast = this.Diagram.Body.LastOrDefault();
+
+                    if (currentLast == PlantUML_alt || currentLast == PlantUML_opt)
+                    {
+                        this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
+
+                        return;
+                    }
+                }
+                else if (command == PlantUML_end && cannotImmediatelyPrecedePlantUML_end.Contains(currentLast))
+                {
+                    this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
 
                     return;
-                }  
-            }
-            else if (command == PlantUML_end && cannotImmediatelyPrecedePlantUML_end.Contains(currentLast))
-            {
-                this.PlantUMLCode.RemoveAt(this.PlantUMLCode.Count - 1);
-                
-                return;
-            }
+                }
 
-            this.PlantUMLCode.Add(command);
+                this.Diagram.Body.Add(command);
+            }
         }
 
         private void AddHeader(
