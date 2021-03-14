@@ -204,6 +204,7 @@
         private string BuildEnumDeclarationCommand(
             string enumName,
             string joinedBaseListTypes,
+            string joinedMembers,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
@@ -231,6 +232,8 @@
             }
 
             sb.Append(PlantUML_leftBrace);
+
+            sb.Append(joinedMembers);
 
             return sb.ToString();
         }
@@ -1311,6 +1314,7 @@
                     enumDeclaration),
                 joinedBaseListTypes: this.GetJoinedBaseListTypes(
                     enumDeclaration),
+                joinedMembers: "",
                 joinedModifiers: this.GetJoinedModifiers(
                     enumDeclaration));
 
