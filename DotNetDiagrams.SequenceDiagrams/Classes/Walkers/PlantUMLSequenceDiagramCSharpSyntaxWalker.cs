@@ -67,6 +67,8 @@
 
         private List<string> PlantUMLCode => Diagrams.GetCodeAtTitleOrDefault(currentTitle);
 
+        public IPlantUMLSequenceDiagram Diagram => Diagrams.GetSequenceDiagramAtTitleOrDefault(currentTitle);
+
         public IPlantUMLSequenceDiagrams Diagrams { get; }
 
         private void AddCommand(
