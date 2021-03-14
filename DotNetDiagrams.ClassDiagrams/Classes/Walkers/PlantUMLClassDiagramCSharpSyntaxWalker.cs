@@ -583,7 +583,7 @@
 
             if (typeDeclaration.BaseList is not null)
             {
-                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types.ToList())
+                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types)
                 {
                     string itemName = this.GetTypeName(
                         item.Type,
