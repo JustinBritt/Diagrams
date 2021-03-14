@@ -669,10 +669,7 @@
             return String.Join(
                 stringJoinSeparator_modifiers,
                 syntaxNode switch
-                {
-                    ClassDeclarationSyntax classDeclaration => this.GetModifiers(
-                        classDeclaration),
-                    
+                {                    
                     ConstructorDeclarationSyntax constructorDeclaration => this.GetModifiers(
                         constructorDeclaration),
                 
@@ -760,33 +757,34 @@
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
         }
 
-        private List<string> GetModifiers(
+        private string GetJoinedModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
-            return classDeclaration.Modifiers
-                .Select(w => w.ValueText switch 
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                classDeclaration.Modifiers
+                .Select(w => w.ValueText switch
                 {
                     "abstract" => stereotype_abstract,
-                    
+
                     "internal" => stereotype_internal,
-                    
+
                     "partial" => stereotype_partial,
-                    
+
                     "private" => stereotype_private,
-                    
+
                     "protected" => stereotype_protected,
-                    
+
                     "public" => stereotype_public,
 
                     "sealed" => stereotype_sealed,
 
                     "static" => stereotype_static,
-                    
+
                     "unsafe" => stereotype_unsafe,
-                    
+
                     _ => throw new Exception("")
-                })
-                .ToList();
+                }));
         }
 
         private List<string> GetModifiers(
