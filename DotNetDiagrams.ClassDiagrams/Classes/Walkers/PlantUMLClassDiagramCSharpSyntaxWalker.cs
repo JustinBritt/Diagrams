@@ -718,6 +718,20 @@
         }
 
         private string GetJoinedModifiers(
+            EnumDeclarationSyntax enumDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                enumDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             EventDeclarationSyntax eventDeclaration)
         {
             return String.Join(
