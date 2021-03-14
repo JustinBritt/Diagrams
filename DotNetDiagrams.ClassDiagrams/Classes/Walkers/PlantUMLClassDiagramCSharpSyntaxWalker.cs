@@ -1297,14 +1297,6 @@
                 constructorDeclaration);
         }
 
-        public enum Foo
-        {
-            Foo1 = 2,
-            Foo2 = 3,
-            Foo3 = 4,
-            Foo4
-        }
-
         private void Visit(
             EnumDeclarationSyntax enumDeclaration)
         {
