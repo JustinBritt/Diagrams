@@ -1278,6 +1278,8 @@
         private void Visit(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
+            base.Visit(
+                enumMemberDeclaration);
         }
 
         private void Visit(
