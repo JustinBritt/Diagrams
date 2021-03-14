@@ -240,17 +240,9 @@
 
         private string BuildEnumMemberDeclarationCommand(
             string enumMemberName,
-            string equalsValue,
-            string joinedModifiers)
+            string equalsValue)
         {
             StringBuilder sb = new StringBuilder();
-
-            if (joinedModifiers.Length > 0)
-            {
-                sb.Append(joinedModifiers);
-
-                sb.Append(" ");
-            }
 
             sb.Append(enumMemberName);
 
@@ -811,21 +803,6 @@
                 }));
         }
 
-        // TODO: Check
-        private string GetJoinedModifiers(
-            EnumMemberDeclarationSyntax enumMemberDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_modifiers,
-                enumMemberDeclaration.Modifiers
-                .Select(w => w.ValueText switch
-                {
-                    "" => String.Empty,
-
-                    _ => throw new Exception("")
-                }));
-        }
-
         private string GetJoinedModifiers(
             EventDeclarationSyntax eventDeclaration)
         {
@@ -1334,9 +1311,7 @@
         {
             string command = this.BuildEnumMemberDeclarationCommand(
                 enumMemberName: enumMemberDeclaration.Identifier.ValueText,
-                equalsValue: this.GetEqualsValue(enumMemberDeclaration),
-                joinedModifiers: this.GetJoinedModifiers(
-                    enumMemberDeclaration));
+                equalsValue: this.GetEqualsValue(enumMemberDeclaration));
 
             this.AddCommand(
                 command: command,
