@@ -143,17 +143,6 @@
             currentHeader.ForEach(w => AddCommand(w));
         }
 
-        private void EndDiagram()
-        {
-            if (!string.IsNullOrEmpty(currentTitle))
-            {
-                if (PlantUMLCode.Count > currentHeader.Count) // minimum # of lines in header
-                    AddCommand(PlantUML_enduml);
-                else
-                    Diagrams.RemoveAtTitle(currentTitle);
-            }
-        }
-
         private string EscapeGreaterThanLessThan(
             string value)
         {
@@ -515,9 +504,6 @@
             }
             finally
             {
-                if (!ignore)
-                    EndDiagram();
-
                 ignore = false;
             }
         }
