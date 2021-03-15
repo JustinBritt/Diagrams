@@ -138,7 +138,8 @@
                 currentHeader.Add($"{PlantUML_hide} {PlantUML_footbox}");
             }
 
-            this.Diagram?.Body.AddRange(currentHeader);
+            this.Diagram?.Body.AddRange(
+                currentHeader);
         }
 
         private string EscapeGreaterThanLessThan(
