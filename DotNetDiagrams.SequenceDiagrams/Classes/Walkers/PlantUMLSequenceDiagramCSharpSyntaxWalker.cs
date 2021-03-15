@@ -212,6 +212,21 @@
                 typeName);
         }
 
+        private SemanticModel GetSemanticModelOrDefault(
+            SyntaxTree syntaxTree)
+        {
+            return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
+        }
+
+        private string GetTypeName(
+            SyntaxNode syntaxNode,
+            SyntaxTree syntaxTree)
+        {
+            return this.GetSemanticModelOrDefault(syntaxTree) is not null && ModelExtensions.GetTypeInfo(this.GetSemanticModelOrDefault(syntaxTree), syntaxNode).Type is INamedTypeSymbol targetType
+                ? targetType.ToString()
+                : syntaxNode.ToString();
+        }
+
         private bool HasCallers(
             MethodDeclarationSyntax methodDeclaration)
         {
@@ -419,15 +434,16 @@
                     { } => throw new Exception(expression.ToFullString())
                 };
 
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString() ?? "void";
+                returnTypeName = this.GetTypeName(invocation, invocation.Parent.SyntaxTree);
+
             }
             else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
             {
-                targetTypeName = targetType.ToString();
-
                 targetName = invocation.TryGetInferredMemberName();
-                
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString() ?? "void";
+
+                targetTypeName = this.GetTypeName(expression, expression.Parent.SyntaxTree);
+
+                returnTypeName = this.GetTypeName(invocation, invocation.Parent.SyntaxTree);
             }
             else
             {
