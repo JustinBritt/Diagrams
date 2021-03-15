@@ -27,18 +27,18 @@
                 workspace,
                 LanguageNames.CSharp);
 
-            var usingDirectives = generator.NamespaceImportDeclaration("System");
+            UsingDirectiveSyntax usingDirectives = (UsingDirectiveSyntax)generator.NamespaceImportDeclaration("System");
             
-            var lastNameField = generator.FieldDeclaration("_lastName",
+            FieldDeclarationSyntax lastNameField = (FieldDeclarationSyntax)generator.FieldDeclaration("_lastName",
                 generator.TypeExpression(SpecialType.System_String),
                 Accessibility.Private);
-            
-            var firstNameField = generator.FieldDeclaration("_firstName",
+
+            FieldDeclarationSyntax firstNameField = (FieldDeclarationSyntax)generator.FieldDeclaration("_firstName",
                 generator.TypeExpression(SpecialType.System_String),
                 Accessibility.Private);
 
             // Generate two properties with explicit get/set
-            var lastNameProperty = generator.PropertyDeclaration(
+            PropertyDeclarationSyntax lastNameProperty = (PropertyDeclarationSyntax)generator.PropertyDeclaration(
                 "LastName",
                 generator.TypeExpression(
                     SpecialType.System_String),
@@ -58,7 +58,7 @@
                           "value"))
                 });
 
-            var firstNameProperty = generator.PropertyDeclaration(
+            PropertyDeclarationSyntax firstNameProperty = (PropertyDeclarationSyntax)generator.PropertyDeclaration(
                 "FirstName",
                 generator.TypeExpression(
                     SpecialType.System_String),
@@ -77,17 +77,17 @@
                 });
 
             // Generate the method body for the Clone method
-            var cloneMethodBody = generator.ReturnStatement(
+            ReturnStatementSyntax cloneMethodBody = (ReturnStatementSyntax)generator.ReturnStatement(
                 generator.InvocationExpression(
                     generator.IdentifierName(
                         "MemberwiseClone")));
 
             // Generate a SyntaxNode for the interface's name you want to implement
-            var ICloneableInterfaceType = generator.IdentifierName(
+            IdentifierNameSyntax ICloneableInterfaceType = (IdentifierNameSyntax)generator.IdentifierName(
                 "ICloneable");
 
             // Generate the Clone method declaration
-            var cloneMethoDeclaration = generator.MethodDeclaration(
+            MethodDeclarationSyntax cloneMethoDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
                 "Clone",
                 null,
                 null,
@@ -100,12 +100,12 @@
                 });
 
             // Explicit ICloneable.Clone implemenation
-            var cloneMethodWithInterfaceType = generator.AsPublicInterfaceImplementation(
+            MethodDeclarationSyntax cloneMethodWithInterfaceType = (MethodDeclarationSyntax)generator.AsPublicInterfaceImplementation(
                 cloneMethoDeclaration,
                 ICloneableInterfaceType);
 
             // Generate parameters for the class' constructor
-            var constructorParameters = new SyntaxNode[] 
+            SyntaxNode[] constructorParameters = new SyntaxNode[] 
             {
                 generator.ParameterDeclaration(
                     "LastName",
@@ -117,7 +117,7 @@
             };
 
             // Generate the constructor's method body
-            var constructorBody = new SyntaxNode[]
+            SyntaxNode[] constructorBody = new SyntaxNode[]
             {
                 generator.AssignmentStatement(
                     generator.IdentifierName(
@@ -131,14 +131,14 @@
                         "FirstName"))};
 
             // Generate the class' constructor
-            var constructor = generator.ConstructorDeclaration(
+            ConstructorDeclarationSyntax constructor = (ConstructorDeclarationSyntax)generator.ConstructorDeclaration(
                 "Person",
                 constructorParameters, 
                 Accessibility.Public,
                 statements: constructorBody);
 
             // An array of SyntaxNode as the class members
-            var members = new SyntaxNode[] 
+            SyntaxNode[] members = new SyntaxNode[] 
             { 
                 lastNameField,
                 firstNameField,
