@@ -17,7 +17,7 @@
     public class PlantUMLClassDiagramCSharpSyntaxWalker
     {
         // TODO: Remove
-        public void CreateCompilationUnit()
+        public CompilationUnitSyntax CreateCompilationUnit()
         {
             AdhocWorkspace workspace = new AdhocWorkspace();
 
@@ -163,7 +163,7 @@
                 classDefinition);
 
             // Get a CompilationUnit (code file) for the generated code
-            SyntaxNode newNode = generator.CompilationUnit(
+            return (CompilationUnitSyntax)generator.CompilationUnit(
                 usingDirectives,
                 namespaceDeclaration).
                 NormalizeWhitespace();
