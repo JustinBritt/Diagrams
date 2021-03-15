@@ -20,6 +20,25 @@
         private const string modifier_protectedInternal = "# <<internal>>";
         private const string modifier_static = "{static}";
 
+        private const string PlantUML_abstract = "abstract";
+        private const string PlantUML_anchor = "+--";
+        private const string PlantUML_annotation = "annotation";
+        private const string PlantUML_class = "class";
+        private const string PlantUML_entity = "entity";
+        private const string PlantUML_enum = "enum";
+        private const string PlantUML_extension = "<|--";
+        private const string PlantUML_implements = "implements";
+        private const string PlantUML_interface = "interface";
+        private const string PlantUML_leftBrace = "{";
+        private const string PlantUML_leftParenthesis = "(";
+        private const string PlantUML_packageProtected = "~";
+        private const string PlantUML_private = "-";
+        private const string PlantUML_protected = "#";
+        private const string PlantUML_public = "+";
+        private const string PlantUML_rightBrace = "}";
+        private const string PlantUML_rightParenthesis = ")";
+        private const string PlantUML_title = "title";
+
         private const string stereotype_abstract = "<<abstract>>";
         private const string stereotype_add = "<<add>>";
         private const string stereotype_arrowExpression = @"<<""=>"">>";
@@ -59,25 +78,6 @@
         private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
         private const string stringJoinSeparator_typeParameters = ", ";
         private const string stringJoinSeparator_variableDeclarators = ", ";
-
-        private const string PlantUML_abstract = "abstract";
-        private const string PlantUML_anchor = "+--";
-        private const string PlantUML_annotation = "annotation";
-        private const string PlantUML_class = "class";
-        private const string PlantUML_entity = "entity";
-        private const string PlantUML_enum = "enum";
-        private const string PlantUML_extension = "<|--";
-        private const string PlantUML_implements = "implements";
-        private const string PlantUML_interface = "interface";
-        private const string PlantUML_leftBrace = "{";
-        private const string PlantUML_leftParenthesis = "(";
-        private const string PlantUML_packageProtected = "~";
-        private const string PlantUML_private = "-";
-        private const string PlantUML_protected = "#";
-        private const string PlantUML_public = "+";
-        private const string PlantUML_rightBrace = "}";
-        private const string PlantUML_rightParenthesis = ")";
-        private const string PlantUML_title = "title";
 
         private readonly Compilation compilation;
         private readonly Project project;
