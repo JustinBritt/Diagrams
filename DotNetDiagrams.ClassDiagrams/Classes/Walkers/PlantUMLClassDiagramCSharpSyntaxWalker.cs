@@ -1115,7 +1115,9 @@
             string initializer = this.GetInitializer(
                 variableDeclarator);
 
-            return $"{variableName} {initializer}";
+            return initializer.Length > 0
+                ? $"{variableName} {initializer}"
+                : $"{variableName}";
         }
 
         private void StartDiagram(
