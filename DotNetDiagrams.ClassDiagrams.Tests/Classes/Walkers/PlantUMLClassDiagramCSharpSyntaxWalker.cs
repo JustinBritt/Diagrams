@@ -192,20 +192,20 @@
 
             //Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
 
-            //Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
+            Project project = solution2.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
 
-            //Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+            Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
 
-            //SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
+            SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
 
-            //DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
-            //    compilation: compilation,
-            //    syntaxTree: syntaxTree,
-            //    solution: solution2,
-            //    project: project);
+            DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
+                compilation: compilation,
+                syntaxTree: syntaxTree,
+                solution: solution2,
+                project: project);
 
             // Act
-            //walker.Visit(syntaxTree.GetRoot());
+            walker.Visit(syntaxTree.GetRoot());
 
             // Assert
             Assert.AreEqual(2, solution2.Projects.Count());
