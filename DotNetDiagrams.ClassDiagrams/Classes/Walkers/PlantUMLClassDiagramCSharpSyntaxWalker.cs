@@ -582,7 +582,7 @@
                 }
             }
 
-            return relationships.Distinct().ToList();
+            return relationships;
         }
 
         private string GetConstraint<T>(
