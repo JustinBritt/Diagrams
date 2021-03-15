@@ -10,6 +10,9 @@
 
     internal sealed class PlantUMLUseCaseDiagram : IPlantUMLUseCaseDiagram
     {
+        private const string PlantUML_enduml = "@enduml";
+        private const string PlantUML_startuml = "@startuml";
+
         public PlantUMLUseCaseDiagram()
         {
         }
