@@ -5,6 +5,7 @@
     using Microsoft.Build.Locator;
 
     using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.Editing;
     using Microsoft.CodeAnalysis.MSBuild;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
