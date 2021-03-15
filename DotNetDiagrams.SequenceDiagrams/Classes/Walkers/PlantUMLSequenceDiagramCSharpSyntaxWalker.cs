@@ -388,13 +388,10 @@
             SemanticModel semanticModel = this.GetSemanticModelOrDefault(
                 syntaxTree);
 
-            string callerTypeName = String.Empty;
-
-            if (invocation.GetParent<TypeDeclarationSyntax>() is not null)
-            {
-                callerTypeName = this.GetJoinedNamespaceTypeName(
-                    invocation.GetParent<TypeDeclarationSyntax>());
-            }
+            string callerTypeName = invocation.GetParent<TypeDeclarationSyntax>() is not null
+                ? this.GetJoinedNamespaceTypeName(
+                    invocation.GetParent<TypeDeclarationSyntax>())
+                : String.Empty;
 
             string targetTypeName;
             string targetName;
