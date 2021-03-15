@@ -479,11 +479,7 @@
 
             sb.Append(propertyName);
 
-            sb.Append(" ");
-
-            sb.Append(":");
-
-            sb.Append(" ");
+            sb.Append(" : ");
 
             if (joinedAccessors.Length > 0)
             {
