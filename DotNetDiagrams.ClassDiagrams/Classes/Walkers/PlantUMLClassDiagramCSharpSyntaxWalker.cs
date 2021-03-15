@@ -190,8 +190,6 @@
 
             sb.Append(constructorName);
 
-            sb.Append(" ");
-
             sb.Append(PlantUML_leftParenthesis);
 
             sb.Append(joinedParameters);
