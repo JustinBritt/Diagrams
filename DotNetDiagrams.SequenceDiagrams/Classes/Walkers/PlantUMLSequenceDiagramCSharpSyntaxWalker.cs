@@ -376,7 +376,8 @@
 
             if (invocation.GetParent<TypeDeclarationSyntax>() is not null)
             {
-                callerTypeName = invocation.GetParent<TypeDeclarationSyntax>().Identifier.ValueText;
+                callerTypeName = this.GetJoinedNamespaceTypeName(
+                    invocation.GetParent<TypeDeclarationSyntax>());
             }
 
             string targetTypeName;
