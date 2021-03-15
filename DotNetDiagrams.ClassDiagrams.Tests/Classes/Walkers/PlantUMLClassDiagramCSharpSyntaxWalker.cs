@@ -12,12 +12,20 @@
         [TestMethod]
         public void TestMethod1()
         {
+            Solution solution = null;
+
+            Project project = null;
+
+            Compilation compilation = null;
+
+            SyntaxTree syntaxTree = null;
+
             // Arrange
             DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
-                compilation: null,
-                syntaxTree: null,
-                solution: null,
-                project: null);
+                compilation: compilation,
+                syntaxTree: syntaxTree,
+                solution: solution,
+                project: project);
 
             // Act
 
