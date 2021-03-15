@@ -11,6 +11,11 @@
         public void TestMethod1()
         {
             // Arrange
+            DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
+                compilation: null,
+                syntaxTree: null,
+                solution: null,
+                project: null);
 
             // Act
 
