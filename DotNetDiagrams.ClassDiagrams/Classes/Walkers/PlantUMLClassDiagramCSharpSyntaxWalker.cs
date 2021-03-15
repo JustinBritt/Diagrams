@@ -349,10 +349,10 @@
 
             sb.Append(fieldTypeName);
 
-            sb.Append(" ");
-
             if (joinedVariables.Length > 0)
             {
+                sb.Append(" ");
+
                 sb.Append(joinedVariables);
             }
 
