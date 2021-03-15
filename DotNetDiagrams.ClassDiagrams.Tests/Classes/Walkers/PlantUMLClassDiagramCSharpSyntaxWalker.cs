@@ -170,8 +170,7 @@
                 NormalizeWhitespace();
         }
 
-        [TestMethod]
-        public void TestMethod1()
+        public void TestMethod0()
         {
             // Arrange
             MSBuildLocator.RegisterDefaults();
@@ -180,6 +179,27 @@
 
             string solutionPath = "";
 
+            //Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+
+            //Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
+
+            //Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+            //SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
+
+            //DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
+            //    compilation: compilation,
+            //    syntaxTree: syntaxTree,
+            //    solution: solution2,
+            //    project: project);
+
+            // Act
+        }
+
+        [TestMethod]
+        public void TestMethod1()
+        {
+            // Arrange
             var projectId = ProjectId.CreateNewId();
 
             var documentId = DocumentId.CreateNewId(
@@ -187,13 +207,11 @@
 
             Microsoft.CodeAnalysis.AdhocWorkspace ws = new Microsoft.CodeAnalysis.AdhocWorkspace();
 
-            Solution solution2 = ws.CurrentSolution
+            Solution solution = ws.CurrentSolution
                 .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
                 .AddDocument(documentId, "MyFile.cs", this.CreateCompilationUnit().ToFullString());
 
-            //Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
-
-            Project project = solution2.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
+            Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
 
             Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
 
@@ -202,7 +220,7 @@
             DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
                 compilation: compilation,
                 syntaxTree: syntaxTree,
-                solution: solution2,
+                solution: solution,
                 project: project);
 
             // Act
