@@ -149,7 +149,7 @@
             };
 
             // Generate the class
-            var classDefinition = generator.ClassDeclaration(
+            ClassDeclarationSyntax classDefinition = (ClassDeclarationSyntax)generator.ClassDeclaration(
               "Person", 
               typeParameters:
               null,
