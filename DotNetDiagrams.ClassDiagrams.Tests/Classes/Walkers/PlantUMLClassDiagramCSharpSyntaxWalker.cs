@@ -300,6 +300,14 @@
             Assert.AreEqual(
                 expected: "<<public>> string FirstName : <<get>> <<set>>",
                 actual: diagram.Body[4]);
+
+            Assert.AreEqual(
+                expected: "<<public>> <<virtual>> void Clone()",
+                actual: diagram.Body[5]);
+
+            Assert.AreEqual(
+                expected: "<<public>> Person(string LastName, string FirstName)",
+                actual: diagram.Body[6]);
         }
     }
 }
