@@ -18,9 +18,11 @@
             // Arrange
             MSBuildLocator.RegisterDefaults();
 
-            MSBuildWorkspace workspace = MSBuildWorkspace.Create();
+            MSBuildWorkspace MSBuildWorkspace = MSBuildWorkspace.Create();
 
-            Solution solution = null;
+            string solutionPath = "";
+
+            Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
 
             Project project = null;
 
