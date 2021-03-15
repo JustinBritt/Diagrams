@@ -563,7 +563,6 @@
             };
         }
 
-        // TODO: Check for duplicate relationships
         private List<string> GetAnchorRelationships(
             BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
