@@ -38,6 +38,8 @@
         private const string PlantUML_startuml = "@startuml";
         private const string PlantUML_title = "title";
 
+        private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
