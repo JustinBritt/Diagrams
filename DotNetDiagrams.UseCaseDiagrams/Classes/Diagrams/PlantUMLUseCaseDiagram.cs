@@ -13,8 +13,20 @@
         private const string PlantUML_enduml = "@enduml";
         private const string PlantUML_startuml = "@startuml";
 
-        public PlantUMLUseCaseDiagram()
+        public PlantUMLUseCaseDiagram(
+            string title)
         {
+            this.Body = new List<string>();
+
+            this.Code = new List<string>();
+
+            this.End = PlantUML_enduml;
+
+            this.Header = new List<string>();
+
+            this.Start = PlantUML_startuml;
+
+            this.Title = title;
         }
 
         public List<string> Body { get; set; }
