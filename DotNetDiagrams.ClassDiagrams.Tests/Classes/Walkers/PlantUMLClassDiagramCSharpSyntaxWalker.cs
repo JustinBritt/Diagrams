@@ -1,5 +1,7 @@
 ﻿namespace DotNetDiagrams.ClassDiagrams.Tests.Classes.Walkers
 {
+    using Microsoft.CodeAnalysis;
+
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;

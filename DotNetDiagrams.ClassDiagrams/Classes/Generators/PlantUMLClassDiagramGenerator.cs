@@ -9,7 +9,6 @@
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Generators;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
-    using System.Collections.Generic;
 
     internal sealed class PlantUMLClassDiagramGenerator : IPlantUMLClassDiagramGenerator
     {
