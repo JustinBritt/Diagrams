@@ -448,20 +448,13 @@
         private void Visit(
             IfStatementSyntax ifStatement)
         {
-            string command1;
-
-            if (ifStatement.Else is null)
-            {
-                command1 = PlantUML_opt;
-            }
-            else
-            {
-                command1 = PlantUML_alt;
-            }
+            string command = ifStatement.Else is null
+                ? PlantUML_opt
+                : PlantUML_alt;
 
             if (ifStatement.Parent is BlockSyntax)
             {
-                this.AddCommand(command1);
+                this.AddCommand(command);
             }
 
             base.Visit(ifStatement);
