@@ -308,6 +308,10 @@
             Assert.AreEqual(
                 expected: "<<public>> Person(string LastName, string FirstName)",
                 actual: diagram.Body[6]);
+
+            Assert.AreEqual(
+                expected: "}",
+                actual: diagram.Body[7]);
         }
     }
 }
