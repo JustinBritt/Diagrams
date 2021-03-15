@@ -231,7 +231,7 @@
             walker.Visit(
                 classDeclaration);
 
-            var diagram = walker.Diagrams.GetClassDiagramAtTitleOrDefault(
+            DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams.IPlantUMLClassDiagram diagram = walker.Diagrams.GetClassDiagramAtTitleOrDefault(
                 "MyTypes.Person");
 
             Assert.IsNotNull(diagram);
