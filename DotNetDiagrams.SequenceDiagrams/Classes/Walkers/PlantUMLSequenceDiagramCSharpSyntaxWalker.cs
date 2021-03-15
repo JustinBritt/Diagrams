@@ -171,14 +171,9 @@
         {
             string namespaceName = String.Empty;
 
-            if (
-                methodDeclaration.Ancestors().Count() > 0
-                &&
-                methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>() is not null
-                &&
-                methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().Count() > 0)
+            if (methodDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
             {
-                namespaceName = methodDeclaration.AncestorsAndSelf().OfType<NamespaceDeclarationSyntax>().SingleOrDefault().Name.ToString();
+                namespaceName = methodDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
             }
 
             string typeName = this.GetBaseTypeDeclarationTypeName(
@@ -186,7 +181,12 @@
 
             string methodName = methodDeclaration.Identifier.ValueText;
 
-            return $"{namespaceName}.{typeName}.{methodName}";
+            return String.Concat(
+                namespaceName,
+                stringConcatSeparator_namespaceTypeMethodNames,
+                typeName,
+                stringConcatSeparator_namespaceTypeMethodNames,
+                methodName);
         }
 
         private bool HasCallers(
