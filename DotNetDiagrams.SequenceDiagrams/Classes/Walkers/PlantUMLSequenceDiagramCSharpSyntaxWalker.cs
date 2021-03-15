@@ -40,6 +40,7 @@
         private const string PlantUML_title = "title";
 
         private const string stringConcatSeparator_namespaceTypeMethodNames = ".";
+        private const string stringConcatSeparator_namespaceTypeNames = ".";
 
         private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
 
@@ -190,6 +191,25 @@
                 typeName,
                 stringConcatSeparator_namespaceTypeMethodNames,
                 methodName);
+        }
+
+        private string GetJoinedNamespaceTypeName(
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
+        {
+            string namespaceName = String.Empty;
+
+            if (baseTypeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>() is not null)
+            {
+                namespaceName = baseTypeDeclaration.FirstAncestorOrSelf<NamespaceDeclarationSyntax>().Name.ToString();
+            }
+
+            string typeName = this.GetBaseTypeDeclarationTypeName(
+                baseTypeDeclaration);
+
+            return String.Concat(
+                namespaceName,
+                stringConcatSeparator_namespaceTypeNames,
+                typeName);
         }
 
         private bool HasCallers(
