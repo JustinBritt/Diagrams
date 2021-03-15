@@ -234,7 +234,9 @@
             DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams.IPlantUMLClassDiagram diagram = walker.Diagrams.GetClassDiagramAtTitleOrDefault(
                 "MyTypes.Person");
 
-            Assert.IsNotNull(diagram);
+            Assert.AreEqual(
+                expected: "MyTypes.Person",
+                actual: diagram.Title);
         }
     }
 }
