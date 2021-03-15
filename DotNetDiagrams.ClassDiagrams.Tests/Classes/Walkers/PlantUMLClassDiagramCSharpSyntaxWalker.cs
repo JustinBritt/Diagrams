@@ -1,5 +1,7 @@
 ﻿namespace DotNetDiagrams.ClassDiagrams.Tests.Classes.Walkers
 {
+    using System.Linq;
+
     using Microsoft.Build.Locator;
 
     using Microsoft.CodeAnalysis;
