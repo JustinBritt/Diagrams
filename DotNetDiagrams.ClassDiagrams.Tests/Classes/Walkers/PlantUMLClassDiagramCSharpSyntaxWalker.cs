@@ -5,6 +5,7 @@
     using Microsoft.Build.Locator;
 
     using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.CSharp;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
     using Microsoft.CodeAnalysis.Editing;
     using Microsoft.CodeAnalysis.MSBuild;
@@ -205,10 +206,24 @@
                 project: project);
 
             // Act
-            walker.Visit(syntaxTree.GetRoot());
+            ClassDeclarationSyntax classDeclaration = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().First();
+
+            walker.Visit(classDeclaration);
+
+            int count = 0;
+
+            foreach (var item in walker.Diagrams.Value)
+            {
+                var code = item.Code;
+
+                foreach (string item2 in code)
+                {
+                    count = count + 1;
+                }
+            }
 
             // Assert
-            Assert.AreEqual(2, solution2.Projects.Count());
+            Assert.AreEqual(count, 2);
         }
     }
 }
