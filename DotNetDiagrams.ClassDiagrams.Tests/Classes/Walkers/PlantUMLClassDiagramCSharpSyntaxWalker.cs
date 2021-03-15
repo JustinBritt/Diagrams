@@ -282,16 +282,16 @@
 
             // Assert
             Assert.AreEqual(
-                diagram.Body[0],
-                "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {");
+                expected: "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {",
+                actual: diagram.Body[0]);
 
             Assert.AreEqual(
-                diagram.Body[1],
-                "<<private>> string _lastName ");
+                expected: "<<private>> string _lastName",
+                actual: diagram.Body[1]);
 
             Assert.AreEqual(
-                diagram.Body[2],
-                "<<private>> string _firstName ");
+                expected: "<<private>> string _firstName",
+                actual: diagram.Body[2]);
         }
     }
 }
