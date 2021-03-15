@@ -294,8 +294,12 @@
                 actual: diagram.Body[2]);
 
             Assert.AreEqual(
-                expected: "<<public>> string LastName : <<get>> <<set>> ",
+                expected: "<<public>> string LastName : <<get>> <<set>>",
                 actual: diagram.Body[3]);
+
+            Assert.AreEqual(
+                expected: "<<public>> string FirstName : <<get>> <<set>>",
+                actual: diagram.Body[4]);
         }
     }
 }
