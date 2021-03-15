@@ -484,8 +484,6 @@
             if (joinedAccessors.Length > 0)
             {
                 sb.Append(joinedAccessors);
-
-                sb.Append(" ");
             }
 
             if (expression.Length > 0)
