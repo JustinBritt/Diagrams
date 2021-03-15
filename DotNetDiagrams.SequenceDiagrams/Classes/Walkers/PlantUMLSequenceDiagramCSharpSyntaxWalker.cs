@@ -426,7 +426,7 @@
             targetTypeName = this.EscapeGreaterThanLessThan(
                 targetTypeName);
 
-            string command = $"{callerTypeName} {PlantUML_arrow} {targetTypeName}: {targetName}";
+            string command = $"{callerTypeName} {PlantUML_arrow} {targetTypeName} : {targetName}";
 
             this.AddCommand(
                 command);
@@ -434,7 +434,7 @@
             base.Visit(
                 invocation);
 
-            command = $"{targetTypeName} {PlantUML_dottedArrow} {callerTypeName}: {returnTypeName}";
+            command = $"{targetTypeName} {PlantUML_dottedArrow} {callerTypeName} : {returnTypeName}";
 
             this.AddCommand(
                 command);
