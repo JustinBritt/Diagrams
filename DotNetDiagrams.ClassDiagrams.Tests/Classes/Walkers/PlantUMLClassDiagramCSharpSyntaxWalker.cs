@@ -28,9 +28,9 @@
 
             Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
 
-            Compilation compilation = null;
+            Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
 
-            SyntaxTree syntaxTree = null;
+            SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
 
             DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
                 compilation: compilation,
