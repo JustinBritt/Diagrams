@@ -284,6 +284,14 @@
             Assert.AreEqual(
                 diagram.Body[0],
                 "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {");
+
+            Assert.AreEqual(
+                diagram.Body[1],
+                "<<private>> string _lastName ");
+
+            Assert.AreEqual(
+                diagram.Body[2],
+                "<<private>> string _firstName ");
         }
     }
 }
