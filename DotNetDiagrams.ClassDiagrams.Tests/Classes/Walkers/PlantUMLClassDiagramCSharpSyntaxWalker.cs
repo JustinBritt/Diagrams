@@ -281,7 +281,6 @@
 
             diagram.EndDiagram();
 
-
             // Assert
             Assert.AreEqual(
                 expected:
@@ -294,38 +293,6 @@
                 "<<public>> Person(string LastName, string FirstName)",
                 "}"),
                 actual: System.String.Concat(diagram.Body));
-
-            Assert.AreEqual(
-                expected: "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {",
-                actual: diagram.Body[0]);
-
-            Assert.AreEqual(
-                expected: "<<private>> string _lastName",
-                actual: diagram.Body[1]);
-
-            Assert.AreEqual(
-                expected: "<<private>> string _firstName",
-                actual: diagram.Body[2]);
-
-            Assert.AreEqual(
-                expected: "<<public>> string LastName : <<get>> <<set>>",
-                actual: diagram.Body[3]);
-
-            Assert.AreEqual(
-                expected: "<<public>> string FirstName : <<get>> <<set>>",
-                actual: diagram.Body[4]);
-
-            Assert.AreEqual(
-                expected: "<<public>> <<virtual>> void Clone()",
-                actual: diagram.Body[5]);
-
-            Assert.AreEqual(
-                expected: "<<public>> Person(string LastName, string FirstName)",
-                actual: diagram.Body[6]);
-
-            Assert.AreEqual(
-                expected: "}",
-                actual: diagram.Body[7]);
         }
     }
 }
