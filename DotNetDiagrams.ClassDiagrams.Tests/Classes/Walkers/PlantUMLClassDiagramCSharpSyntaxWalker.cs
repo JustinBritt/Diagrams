@@ -13,7 +13,8 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
-    
+    using System.Text;
+
     [TestClass]
     public class PlantUMLClassDiagramCSharpSyntaxWalker
     {
@@ -280,7 +281,20 @@
 
             diagram.EndDiagram();
 
+
             // Assert
+            Assert.AreEqual(
+                expected:
+                System.String.Concat("class MyTypes.Person <<public>> <<abstract>> implements ICloneable {",
+                "<<private>> string _lastName",
+                "<<private>> string _firstName",
+                "<<public>> string LastName : <<get>> <<set>>",
+                "<<public>> string FirstName : <<get>> <<set>>",
+                "<<public>> <<virtual>> void Clone()",
+                "<<public>> Person(string LastName, string FirstName)",
+                "}"),
+                actual: System.String.Concat(diagram.Body));
+
             Assert.AreEqual(
                 expected: "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {",
                 actual: diagram.Body[0]);
