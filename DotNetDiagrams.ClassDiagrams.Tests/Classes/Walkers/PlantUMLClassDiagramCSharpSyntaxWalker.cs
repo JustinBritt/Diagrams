@@ -179,25 +179,36 @@
 
             string solutionPath = "";
 
-            Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+            var projectId = ProjectId.CreateNewId();
 
-            Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
+            var documentId = DocumentId.CreateNewId(
+                projectId);
 
-            Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+            Microsoft.CodeAnalysis.AdhocWorkspace ws = new Microsoft.CodeAnalysis.AdhocWorkspace();
 
-            SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
+            Solution solution2 = ws.CurrentSolution
+                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
+                .AddDocument(documentId, "MyFile.cs", this.CreateCompilationUnit().ToFullString());
 
-            DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
-                compilation: compilation,
-                syntaxTree: syntaxTree,
-                solution: solution,
-                project: project);
+            //Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
+
+            //Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
+
+            //Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+            //SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
+
+            //DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
+            //    compilation: compilation,
+            //    syntaxTree: syntaxTree,
+            //    solution: solution2,
+            //    project: project);
 
             // Act
-            walker.Visit(syntaxTree.GetRoot());
+            //walker.Visit(syntaxTree.GetRoot());
 
             // Assert
-            Assert.AreEqual(1, solution.Projects.Count());
+            Assert.AreEqual(2, solution2.Projects.Count());
         }
     }
 }
