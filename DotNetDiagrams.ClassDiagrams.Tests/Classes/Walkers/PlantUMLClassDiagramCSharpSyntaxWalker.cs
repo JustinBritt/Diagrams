@@ -39,8 +39,10 @@
                 project: project);
 
             // Act
+            walker.Visit(syntaxTree.GetRoot());
 
             // Assert
+            Assert.AreEqual(1, solution.Projects.Count());
         }
     }
 }
