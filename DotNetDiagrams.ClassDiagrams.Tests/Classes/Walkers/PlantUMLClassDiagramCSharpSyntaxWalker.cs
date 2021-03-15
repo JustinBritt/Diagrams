@@ -226,7 +226,8 @@
             // Act
             ClassDeclarationSyntax classDeclaration = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().First();
 
-            walker.Visit(classDeclaration);
+            walker.Visit(
+                classDeclaration);
 
             int count = 0;
 
