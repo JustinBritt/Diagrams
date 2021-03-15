@@ -2,7 +2,6 @@
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-    using DotNetDiagrams.ClassDiagrams.Classes.Generators;
     using DotNetDiagrams.ClassDiagrams.Classes.Walkers;
 
     [TestClass]
