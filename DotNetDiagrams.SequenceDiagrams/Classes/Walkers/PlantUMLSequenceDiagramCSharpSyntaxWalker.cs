@@ -454,14 +454,17 @@
 
             if (ifStatement.Parent is BlockSyntax)
             {
-                this.AddCommand(command);
+                this.AddCommand(
+                    command);
             }
 
-            base.Visit(ifStatement);
+            base.Visit(
+                ifStatement);
 
             if (ifStatement.Else is null)
             {
-                this.AddCommand(PlantUML_end);
+                this.AddCommand(
+                    PlantUML_end);
             }
         }
 
