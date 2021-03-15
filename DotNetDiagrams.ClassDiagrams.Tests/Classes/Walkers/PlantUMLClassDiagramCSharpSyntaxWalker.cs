@@ -152,8 +152,7 @@
             // Generate the class
             ClassDeclarationSyntax classDefinition = (ClassDeclarationSyntax)generator.ClassDeclaration(
               "Person", 
-              typeParameters:
-              null,
+              typeParameters: null,
               accessibility: Accessibility.Public,
               modifiers: DeclarationModifiers.Abstract,
               baseType: null,
