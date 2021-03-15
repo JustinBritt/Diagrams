@@ -67,7 +67,7 @@
         private const string stereotype_volatile = "<<volatile>>";
 
         private const string stringConcatSeparator_constraintClause = " : ";
-        private const string stringConcatSeparator_namespaceTypeName = ".";
+        private const string stringConcatSeparator_namespaceTypeNames = ".";
 
         private const string stringJoinSeparator_accessors = " ";
         private const string stringJoinSeparator_baseListTypes = ",";
@@ -998,7 +998,7 @@
 
             return String.Concat(
                 namespaceName,
-                stringConcatSeparator_namespaceTypeName,
+                stringConcatSeparator_namespaceTypeNames,
                 typeName);
         }
 
