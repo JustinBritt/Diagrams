@@ -1,6 +1,9 @@
 ﻿namespace DotNetDiagrams.ClassDiagrams.Tests.Classes.Walkers
 {
+    using Microsoft.Build.Locator;
+
     using Microsoft.CodeAnalysis;
+    using Microsoft.CodeAnalysis.MSBuild;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,6 +15,11 @@
         [TestMethod]
         public void TestMethod1()
         {
+            // Arrange
+            MSBuildLocator.RegisterDefaults();
+
+            MSBuildWorkspace workspace = MSBuildWorkspace.Create();
+
             Solution solution = null;
 
             Project project = null;
@@ -20,7 +28,6 @@
 
             SyntaxTree syntaxTree = null;
 
-            // Arrange
             DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
                 compilation: compilation,
                 syntaxTree: syntaxTree,
