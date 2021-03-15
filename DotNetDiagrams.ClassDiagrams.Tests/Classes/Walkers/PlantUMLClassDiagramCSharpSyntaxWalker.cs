@@ -111,9 +111,10 @@
                     "LastName",
                     generator.TypeExpression(
                         SpecialType.System_String)),
-                generator.ParameterDeclaration("FirstName",
-                generator.TypeExpression(
-                    SpecialType.System_String))
+                generator.ParameterDeclaration(
+                    "FirstName",
+                    generator.TypeExpression(
+                        SpecialType.System_String))
             };
 
             // Generate the constructor's method body
