@@ -36,6 +36,8 @@
         private const string PlantUML_show = "show";
         private const string PlantUML_title = "title";
 
+        private const string stringConcatSeparator_namespaceTypeMethodNames = ".";
+
         private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
 
         private readonly Compilation compilation;
