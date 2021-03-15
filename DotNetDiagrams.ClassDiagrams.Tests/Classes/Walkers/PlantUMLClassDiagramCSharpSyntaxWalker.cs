@@ -231,20 +231,10 @@
             walker.Visit(
                 classDeclaration);
 
-            int count = 0;
+            var diagram = walker.Diagrams.GetClassDiagramAtTitleOrDefault(
+                "MyTypes.Person");
 
-            foreach (var item in walker.Diagrams.Value)
-            {
-                var code = item.Code;
-
-                foreach (string item2 in code)
-                {
-                    count = count + 1;
-                }
-            }
-
-            // Assert
-            Assert.AreEqual(count, 2);
+            Assert.IsNotNull(diagram);
         }
     }
 }
