@@ -24,7 +24,7 @@
 
             Solution solution = MSBuildWorkspace.OpenSolutionAsync(solutionPath).GetAwaiter().GetResult();
 
-            Project project = null;
+            Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
 
             Compilation compilation = null;
 
