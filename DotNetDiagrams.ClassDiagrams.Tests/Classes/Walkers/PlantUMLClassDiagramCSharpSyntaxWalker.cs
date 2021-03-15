@@ -200,14 +200,14 @@
         public void TestMethod1()
         {
             // Arrange
-            var projectId = ProjectId.CreateNewId();
+            ProjectId projectId = ProjectId.CreateNewId();
 
-            var documentId = DocumentId.CreateNewId(
+            DocumentId documentId = DocumentId.CreateNewId(
                 projectId);
 
-            Microsoft.CodeAnalysis.AdhocWorkspace ws = new Microsoft.CodeAnalysis.AdhocWorkspace();
+            AdhocWorkspace adhocWorkspace = new AdhocWorkspace();
 
-            Solution solution = ws.CurrentSolution
+            Solution solution = adhocWorkspace.CurrentSolution
                 .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
                 .AddDocument(documentId, "MyFile.cs", this.CreateCompilationUnit().ToFullString());
 
