@@ -426,13 +426,16 @@
 
             string command = $"{callerTypeName} -> {targetTypeName}: {targetName}";
 
-            this.AddCommand(command);
+            this.AddCommand(
+                command);
 
-            base.Visit(invocation);
+            base.Visit(
+                invocation);
 
             command = $"{targetTypeName} --> {callerTypeName}: {returnTypeName}";
 
-            this.AddCommand(command);
+            this.AddCommand(
+                command);
         }
 
         /// <summary>
