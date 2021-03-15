@@ -385,7 +385,8 @@
         private void Visit(
             ExpressionSyntax invocation)
         {
-            SemanticModel semanticModel = this.solution.GetDocument(this.syntaxTree).GetSemanticModelAsync().Result;
+            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
+                syntaxTree);
 
             string callerTypeName = String.Empty;
 
