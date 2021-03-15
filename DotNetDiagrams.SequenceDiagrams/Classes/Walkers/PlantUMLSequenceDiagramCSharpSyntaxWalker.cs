@@ -398,7 +398,7 @@
                     { } => throw new Exception(expression.ToFullString())
                 };
 
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString() ?? "void";
             }
             else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
             {
@@ -406,7 +406,7 @@
 
                 targetName = invocation.TryGetInferredMemberName();
                 
-                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString().Split('.').Last() ?? "void";
+                returnTypeName = ModelExtensions.GetTypeInfo(semanticModel, invocation).Type?.ToString() ?? "void";
             }
             else
             {
