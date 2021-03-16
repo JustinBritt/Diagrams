@@ -42,9 +42,11 @@ MethodDeclarationSyntax
 
 #### Type Parameter List
 
+### Property Declarations
+PropertyDeclarationSyntax
+
 ## Based on
 
 * https://github.com/SoundLogic/Diagrams/wiki 
 * https://github.com/msawczyn/Diagrams
-
 * https://github.com/pierre3/PlantUmlClassDiagramGenerator
