@@ -56,6 +56,8 @@
                 classStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Protected" => stereotype_protected,
+
                     "Public" => stereotype_public,
 
                     _ => throw new Exception("")
