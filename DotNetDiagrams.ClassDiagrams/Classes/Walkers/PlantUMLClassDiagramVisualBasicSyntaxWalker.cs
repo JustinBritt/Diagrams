@@ -57,6 +57,8 @@
                 classStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Friend" => stereotype_internal,
+
                     "Protected" => stereotype_protected,
 
                     "Public" => stereotype_public,
