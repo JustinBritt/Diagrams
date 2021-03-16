@@ -10,6 +10,6 @@
 
     public interface IPlantUMLUseCaseDiagram : IPlantUMLDiagram
     {
-        List<string> EntryPoints { get; set; }
+        Dictionary<string, string> EntryPoints { get; set; }
     }
 }

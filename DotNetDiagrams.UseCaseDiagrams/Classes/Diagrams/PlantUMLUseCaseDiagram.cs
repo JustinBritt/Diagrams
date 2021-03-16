@@ -22,7 +22,7 @@
 
             this.End = PlantUML_enduml;
 
-            this.EntryPoints = new List<string>();
+            this.EntryPoints = new Dictionary<string, string>();
 
             this.Header = new List<string>();
 
@@ -35,7 +35,7 @@
         
         public string End { get; set; }
 
-        public List<string> EntryPoints { get; set; }
+        public Dictionary<string, string> EntryPoints { get; set; }
 
         public List<string> Header { get; set; }
         
