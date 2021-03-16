@@ -223,18 +223,18 @@
 
         // TODO: Finish
         private void Visit(
-            PropertyBlockSyntax propertyBlock)
-        {
-            string joinedAccessors = this.GetJoinedAccessors(
-                propertyBlock);
-        }
-
-        // TODO: Finish
-        private void Visit(
             InterfaceBlockSyntax interfaceBlock)
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 interfaceBlock.InterfaceStatement);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            PropertyBlockSyntax propertyBlock)
+        {
+            string joinedAccessors = this.GetJoinedAccessors(
+                propertyBlock);
         }
 
         // TODO: Finish
