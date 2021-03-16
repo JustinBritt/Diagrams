@@ -8,6 +8,10 @@ This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate U
 
 ## Class Diagrams
 
+|C# Syntax Node Type                    | Method                                 |
+|:--------------------------------------|---------------------------------------:|
+| `BaseListSyntax`                      | `Visit(BaseListSyntax baseList)`       |
+
 ### Base Lists
 BaseListSyntax
 
