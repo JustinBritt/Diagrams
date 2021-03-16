@@ -538,21 +538,26 @@
             return sb.ToString();
         }
 
+        // TODO: Update spacing
         private string GetAccessor(
             AccessorDeclarationSyntax accessorDeclaration)
         {
-            return accessorDeclaration.Keyword.ValueText switch
+            return String.Concat(
+                this.GetJoinedModifiers(
+                    accessorDeclaration),
+                " ",
+                accessorDeclaration.Keyword.ValueText switch
             {
                 "add" => stereotype_add,
-
+                
                 "get" => stereotype_get,
-
+                
                 "remove" => stereotype_remove,
-
+                
                 "set" => stereotype_set,
 
                 _ => throw new Exception(nameof(accessorDeclaration.Keyword))
-            };
+            });
         }
 
         private List<string> GetAnchorRelationships(
