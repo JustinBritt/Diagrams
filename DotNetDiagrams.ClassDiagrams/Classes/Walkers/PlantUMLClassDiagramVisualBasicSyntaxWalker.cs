@@ -89,6 +89,9 @@
                 case ClassBlockSyntax classBlock:
                     this.Visit(classBlock);
                     break;
+                case InterfaceBlockSyntax interfaceBlock:
+                    this.Visit(interfaceBlock);
+                    break;
                 default:
                     base.Visit(node);
                     break;
@@ -105,6 +108,13 @@
             var implements = classBlock.Implements;
 
             var inherits = classBlock.Inherits;
+        }
+        
+        // TODO: Finish
+        private void Visit(
+            InterfaceBlockSyntax interfaceBlock)
+        {
+
         }
     }
 }
