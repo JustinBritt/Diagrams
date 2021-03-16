@@ -240,6 +240,9 @@
             var implements = classBlock.Implements;
 
             var inherits = classBlock.Inherits;
+
+            base.Visit(
+                classBlock);
         }
 
         // TODO: Finish
@@ -248,6 +251,9 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 constructorBlock.SubNewStatement);
+
+            base.Visit(
+                constructorBlock);
         }
 
         // TODO: Finish
@@ -264,6 +270,9 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 fieldDeclaration);
+
+            base.Visit(
+                fieldDeclaration);
         }
 
         // TODO: Finish
@@ -272,6 +281,9 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 interfaceBlock.InterfaceStatement);
+
+            base.Visit(
+                interfaceBlock);
         }
 
         // TODO: Finish
@@ -280,12 +292,17 @@
         {
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyBlock);
+
+            base.Visit(
+                propertyBlock);
         }
 
         // TODO: Finish
         private void Visit(
             SubNewStatementSyntax subNewStatement)
         {
+            base.Visit(
+                subNewStatement);
         }
     }
 }
