@@ -133,9 +133,9 @@
 
             // Generate the class' constructor
             ConstructorDeclarationSyntax constructor = (ConstructorDeclarationSyntax)generator.ConstructorDeclaration(
-                "Person",
-                constructorParameters, 
-                Accessibility.Public,
+                containingTypeName: "Person",
+                parameters: constructorParameters,
+                accessibility: Accessibility.Public,
                 statements: constructorBody);
 
             // An array of SyntaxNode as the class members
