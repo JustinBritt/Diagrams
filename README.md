@@ -12,6 +12,10 @@ This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate U
 
 MethodDeclarationSyntax
 
+#### Constraint Clauses
+
+#### Explicit Interface Specifier,
+
 #### Modifiers
 
 |C#                    | PlantUML           |
@@ -29,6 +33,12 @@ MethodDeclarationSyntax
 | `static`             | `{static}`         |
 | `unsafe`             | `<<unsafe>>`       |
 | `virtual`            | `<<virtual>>`      |
+
+#### Parameters
+
+#### Return Type
+
+#### Type Parameters
 
 ## Based on
 
