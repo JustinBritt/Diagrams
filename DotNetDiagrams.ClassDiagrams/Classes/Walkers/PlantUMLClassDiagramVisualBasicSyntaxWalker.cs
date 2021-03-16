@@ -66,6 +66,7 @@
         private void Visit(
             ClassBlockSyntax classBlock)
         {
+            List<string> modifiers = classBlock.ClassStatement.Modifiers.Select(w => w.ValueText).ToList();
         }
     }
 }
