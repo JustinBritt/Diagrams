@@ -77,6 +77,26 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            InterfaceStatementSyntax interfaceStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                interfaceStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
@@ -114,7 +134,8 @@
         private void Visit(
             InterfaceBlockSyntax interfaceBlock)
         {
-
+            string joinedModifiers = this.GetJoinedModifiers(
+                interfaceBlock.InterfaceStatement);
         }
     }
 }
