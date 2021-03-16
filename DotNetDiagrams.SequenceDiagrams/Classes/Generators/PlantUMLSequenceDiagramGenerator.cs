@@ -11,6 +11,7 @@
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Configurations;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.SequenceDiagrams.Interfaces.Generators;
+    using DotNetDiagrams.UseCaseDiagrams.Interfaces.Diagrams;
 
     internal sealed class PlantUMLSequenceDiagramGenerator : IPlantUMLSequenceDiagramGenerator
     {
