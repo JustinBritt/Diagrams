@@ -53,6 +53,22 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
+        // TODO: Finish
+        private string GetAccessor(
+            AccessorStatementSyntax accessorStatement)
+        {
+            return String.Concat(
+                this.GetJoinedModifiers(accessorStatement),
+                accessorStatement.AccessorKeyword.ValueText switch
+                {
+                    "get" => stereotype_get,
+
+                    "set" => stereotype_set,
+
+                    _ => throw new Exception(nameof(accessorStatement.AccessorKeyword))
+                });
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
