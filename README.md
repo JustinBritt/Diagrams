@@ -1,13 +1,15 @@
 # DotNet.Diagrams
 
-This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate UML class and sequence diagrams for C# projects.
+This is a .NET 6.0 solution that uses the Roslyn code analysis APIs to generate UML class and sequence diagrams for C# projects.
 
 ## Use Case Diagrams
 
 ## Sequence Diagrams
+The `DotNetDiagrams.SequenceDiagrams` project uses a visitor pattern to generate UML sequence diagrams.
 
 ## Class Diagrams
-The `DotNetDiagrams.ClassDiagrams` project uses a visitor pattern to generate class diagrams.
+The `DotNetDiagrams.ClassDiagrams` project uses a visitor pattern to generate UML class diagrams.
+
 ### Base Lists
 BaseListSyntax
 
