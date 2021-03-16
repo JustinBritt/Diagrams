@@ -19,6 +19,8 @@ ClassDeclarationSyntax
 #### Constraint Clauses
 
 #### Modifiers
+In `PlantUMLClassDiagramCSharpSyntaxWalker`, `private string GetJoinedModifiers(ClassDeclarationSyntax classDeclaration)` 
+uses pattern matching to map the entries in the `Modifiers` property of the `classDeclaration` instance to PlantUML stereotypes.
 |C#                    | PlantUML           |
 |:---------------------|-------------------:|
 | `abstract`           | `<<abstract>>`     |
