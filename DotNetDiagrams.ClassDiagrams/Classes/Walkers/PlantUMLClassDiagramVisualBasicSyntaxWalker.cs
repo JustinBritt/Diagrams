@@ -44,6 +44,20 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
+        private string GetJoinedModifiers(
+            ClassStatementSyntax classStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                classStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
