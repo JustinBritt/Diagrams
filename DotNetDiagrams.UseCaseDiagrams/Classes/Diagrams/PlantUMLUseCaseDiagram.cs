@@ -44,5 +44,9 @@
         public List<string> Code { get; set; }
 
         public string Title { get; set; }
+
+        public void EndDiagram()
+        {
+        }
     }
 }
