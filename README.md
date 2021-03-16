@@ -45,6 +45,9 @@ MethodDeclarationSyntax
 ### Property Declarations
 PropertyDeclarationSyntax
 
+### Struct Declarations
+StructDeclarationSyntax
+
 ## Based on
 
 * https://github.com/SoundLogic/Diagrams/wiki 
