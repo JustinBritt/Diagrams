@@ -19,7 +19,17 @@ ClassDeclarationSyntax
 #### Constraint Clauses
 
 #### Modifiers
-
+|C#                    | PlantUML           |
+|:---------------------|-------------------:|
+| `abstract`           | `<<abstract>>`     |
+| `internal`           | `<<internal>>`     |
+| `partial`            | `<<partial>>`      |	
+| `private`            | `<<private>>`      |
+| `protected`          | `<<protected>>`    |
+| `public`             | `<<public>>`       |
+| `sealed`             | `<<sealed>>`       |
+| `static`             | `<<static>>`       |
+| `unsafe`             | `<<unsafe>>`       |
 #### TypeParameterList
 
 ### Constructor Declarations
