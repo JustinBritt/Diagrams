@@ -66,7 +66,6 @@
         private const string stereotype_virtual = "<<virtual>>";
         private const string stereotype_volatile = "<<volatile>>";
 
-        private const string stringConcatSeparator_accessorModifiers = " ";
         private const string stringConcatSeparator_constraintClause = " : ";
         private const string stringConcatSeparator_namespaceTypeNames = ".";
 
@@ -544,7 +543,7 @@
         {
             return String.Concat(
                 this.GetJoinedModifiers(accessorDeclaration).Length > 0
-                ? $"{this.GetJoinedModifiers(accessorDeclaration)} {stringConcatSeparator_accessorModifiers}"
+                ? $"{this.GetJoinedModifiers(accessorDeclaration)}"
                 : String.Empty,
                 accessorDeclaration.Keyword.ValueText switch
             {
