@@ -61,6 +61,8 @@
                 {
                     "Friend" => stereotype_internal,
 
+                    "Partial" => stereotype_partial,
+
                     "Protected" => stereotype_protected,
 
                     "Public" => stereotype_public,
