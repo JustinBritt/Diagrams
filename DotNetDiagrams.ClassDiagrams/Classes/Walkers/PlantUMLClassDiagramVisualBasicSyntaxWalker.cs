@@ -77,6 +77,21 @@
                 }));
         }
 
+        // TODO: Finish
+        private string GetJoinedModifiers(
+            SubNewStatementSyntax subNewStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                subNewStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             InterfaceStatementSyntax interfaceStatement)
         {
@@ -142,6 +157,8 @@
         private void Visit(
             ConstructorBlockSyntax constructorBlock)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                constructorBlock.SubNewStatement);
         }
         
         // TODO: Finish
