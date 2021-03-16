@@ -151,7 +151,7 @@
 
             // Generate the class
             ClassDeclarationSyntax classDefinition = (ClassDeclarationSyntax)generator.ClassDeclaration(
-              "Person", 
+              name: "Person", 
               typeParameters: null,
               accessibility: Accessibility.Public,
               modifiers: DeclarationModifiers.Abstract,
@@ -161,8 +161,8 @@
 
             // Declare a namespace
             NamespaceDeclarationSyntax namespaceDeclaration = (NamespaceDeclarationSyntax)generator.NamespaceDeclaration(
-                "MyTypes", 
-                classDefinition);
+                name: "MyTypes", 
+                declarations: classDefinition);
 
             // Get a CompilationUnit (code file) for the generated code
             return (CompilationUnitSyntax)generator.CompilationUnit(
