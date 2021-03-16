@@ -101,6 +101,10 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 classBlock.ClassStatement);
+
+            var implements = classBlock.Implements;
+
+            var inherits = classBlock.Inherits;
         }
     }
 }
