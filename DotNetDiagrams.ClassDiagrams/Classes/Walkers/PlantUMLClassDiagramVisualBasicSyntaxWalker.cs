@@ -57,5 +57,6 @@
                     base.Visit(node);
                     break;
             }
+        }
     }
 }
