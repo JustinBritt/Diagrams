@@ -99,7 +99,8 @@
         private void Visit(
             ClassBlockSyntax classBlock)
         {
-            string joinedModifiers = this.GetJoinedModifiers(classBlock.ClassStatement);
+            string joinedModifiers = this.GetJoinedModifiers(
+                classBlock.ClassStatement);
         }
     }
 }
