@@ -217,6 +217,8 @@
         private void Visit(
             PropertyBlockSyntax propertyBlock)
         {
+            string joinedAccessors = this.GetJoinedAccessors(
+                propertyBlock);
         }
 
         // TODO: Finish
