@@ -30,7 +30,7 @@ ClassDeclarationSyntax
 | `sealed`             | `<<sealed>>`       |
 | `static`             | `<<static>>`       |
 | `unsafe`             | `<<unsafe>>`       |
-#### TypeParameterList
+#### Type Parameter List
 
 ### Constructor Declarations
 ConstructorDeclarationSyntax
