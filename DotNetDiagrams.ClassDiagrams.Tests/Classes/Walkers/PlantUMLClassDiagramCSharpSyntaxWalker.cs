@@ -24,8 +24,8 @@
             AdhocWorkspace workspace = new AdhocWorkspace();
 
             SyntaxGenerator generator = SyntaxGenerator.GetGenerator(
-                workspace,
-                LanguageNames.CSharp);
+                workspace: workspace,
+                language: LanguageNames.CSharp);
 
             UsingDirectiveSyntax usingDirectives = (UsingDirectiveSyntax)generator.NamespaceImportDeclaration("System");
             
@@ -88,13 +88,13 @@
 
             // Generate the Clone method declaration
             MethodDeclarationSyntax cloneMethoDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
-                "Clone",
-                null,
-                null,
-                null,
-                Accessibility.Public,
-                DeclarationModifiers.Virtual,
-                new SyntaxNode[] 
+                name: "Clone",
+                parameters: null,
+                typeParameters: null,
+                returnType: null,
+                accessibility: Accessibility.Public,
+                modifiers: DeclarationModifiers.Virtual,
+                statements: new SyntaxNode[] 
                 { 
                     cloneMethodBody 
                 });
