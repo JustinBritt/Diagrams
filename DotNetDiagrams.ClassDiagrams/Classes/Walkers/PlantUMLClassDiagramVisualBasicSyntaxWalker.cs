@@ -111,6 +111,9 @@
                 case ClassBlockSyntax classBlock:
                     this.Visit(classBlock);
                     break;
+                case ConstructorBlockSyntax constructorBlock:
+                    this.Visit(constructorBlock);
+                    break;
                 case InterfaceBlockSyntax interfaceBlock:
                     this.Visit(interfaceBlock);
                     break;
@@ -130,6 +133,12 @@
             var implements = classBlock.Implements;
 
             var inherits = classBlock.Inherits;
+        }
+
+        // TODO: Finish
+        private void Visit(
+            ConstructorBlockSyntax constructorBlock)
+        {
         }
         
         // TODO: Finish
