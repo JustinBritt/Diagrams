@@ -59,7 +59,6 @@
 
         public IPlantUMLClassDiagrams Diagrams { get; }
 
-        // TODO: Finish
         private string GetAccessor(
             AccessorStatementSyntax accessorStatement)
         {
@@ -67,9 +66,15 @@
                 this.GetJoinedModifiers(accessorStatement),
                 accessorStatement.AccessorKeyword.ValueText switch
                 {
-                    "get" => stereotype_get,
+                    "AddHandler" => stereotype_add,
 
-                    "set" => stereotype_set,
+                    "Get" => stereotype_get,
+
+                    "RaiseEvent" => stereotype_raise,
+
+                    "RemoveHandler" => stereotype_remove,
+
+                    "Set" => stereotype_set,
 
                     _ => throw new Exception(nameof(accessorStatement.AccessorKeyword))
                 });
