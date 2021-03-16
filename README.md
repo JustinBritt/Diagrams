@@ -7,7 +7,7 @@ This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate U
 ## Sequence Diagrams
 
 ## Class Diagrams
-
+The `DotNetDiagrams.ClassDiagrams` project uses a visitor pattern to generate class diagrams.
 ### Base Lists
 BaseListSyntax
 
