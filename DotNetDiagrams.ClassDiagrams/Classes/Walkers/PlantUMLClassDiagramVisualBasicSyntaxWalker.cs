@@ -183,7 +183,13 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 constructorBlock.SubNewStatement);
         }
-        
+
+        // TODO: Finish
+        private void Visit(
+            PropertyBlockSyntax propertyBlock)
+        {
+        }
+
         // TODO: Finish
         private void Visit(
             InterfaceBlockSyntax interfaceBlock)
