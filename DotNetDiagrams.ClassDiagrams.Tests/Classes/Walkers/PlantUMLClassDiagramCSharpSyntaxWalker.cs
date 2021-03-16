@@ -29,20 +29,22 @@
 
             UsingDirectiveSyntax usingDirectives = (UsingDirectiveSyntax)generator.NamespaceImportDeclaration("System");
             
-            FieldDeclarationSyntax lastNameField = (FieldDeclarationSyntax)generator.FieldDeclaration("_lastName",
-                generator.TypeExpression(SpecialType.System_String),
-                Accessibility.Private);
+            FieldDeclarationSyntax lastNameField = (FieldDeclarationSyntax)generator.FieldDeclaration(
+                name: "_lastName",
+                type: generator.TypeExpression(SpecialType.System_String),
+                accessibility: Accessibility.Private);
 
-            FieldDeclarationSyntax firstNameField = (FieldDeclarationSyntax)generator.FieldDeclaration("_firstName",
-                generator.TypeExpression(SpecialType.System_String),
-                Accessibility.Private);
+            FieldDeclarationSyntax firstNameField = (FieldDeclarationSyntax)generator.FieldDeclaration(
+                name: "_firstName",
+                type: generator.TypeExpression(SpecialType.System_String),
+                accessibility: Accessibility.Private);
 
             // Generate two properties with explicit get/set
             PropertyDeclarationSyntax lastNameProperty = (PropertyDeclarationSyntax)generator.PropertyDeclaration(
-                "LastName",
-                generator.TypeExpression(
+                name: "LastName",
+                type: generator.TypeExpression(
                     SpecialType.System_String),
-                Accessibility.Public,
+                accessibility: Accessibility.Public,
                 getAccessorStatements: new SyntaxNode[]
                 { 
                   generator.ReturnStatement(
@@ -59,10 +61,10 @@
                 });
 
             PropertyDeclarationSyntax firstNameProperty = (PropertyDeclarationSyntax)generator.PropertyDeclaration(
-                "FirstName",
-                generator.TypeExpression(
+                name: "FirstName",
+                type: generator.TypeExpression(
                     SpecialType.System_String),
-                Accessibility.Public,
+                accessibility: Accessibility.Public,
                 getAccessorStatements: new SyntaxNode[]
                 { 
                     generator.ReturnStatement(
@@ -78,13 +80,13 @@
 
             // Generate the method body for the Clone method
             ReturnStatementSyntax cloneMethodBody = (ReturnStatementSyntax)generator.ReturnStatement(
-                generator.InvocationExpression(
+                expression: generator.InvocationExpression(
                     generator.IdentifierName(
                         "MemberwiseClone")));
 
             // Generate a SyntaxNode for the interface's name you want to implement
             IdentifierNameSyntax ICloneableInterfaceType = (IdentifierNameSyntax)generator.IdentifierName(
-                "ICloneable");
+                identifier: "ICloneable");
 
             // Generate the Clone method declaration
             MethodDeclarationSyntax cloneMethoDeclaration = (MethodDeclarationSyntax)generator.MethodDeclaration(
@@ -101,8 +103,8 @@
 
             // Explicit ICloneable.Clone implemenation
             MethodDeclarationSyntax cloneMethodWithInterfaceType = (MethodDeclarationSyntax)generator.AsPublicInterfaceImplementation(
-                cloneMethoDeclaration,
-                ICloneableInterfaceType);
+                declaration: cloneMethoDeclaration,
+                interfaceType: ICloneableInterfaceType);
 
             // Generate parameters for the class' constructor
             SyntaxNode[] constructorParameters = new SyntaxNode[] 
