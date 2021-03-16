@@ -189,6 +189,9 @@
                 case ConstructorBlockSyntax constructorBlock:
                     this.Visit(constructorBlock);
                     break;
+                case FieldDeclarationSyntax fieldDeclaration:
+                    this.Visit(fieldDeclaration);
+                    break;
                 case InterfaceBlockSyntax interfaceBlock:
                     this.Visit(interfaceBlock);
                     break;
@@ -222,6 +225,12 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 constructorBlock.SubNewStatement);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
         }
 
         // TODO: Finish
