@@ -731,6 +731,8 @@
                 accessorDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "internal" => stereotype_internal,
+
                     "private" => stereotype_private,
 
                     "public" => stereotype_public,
