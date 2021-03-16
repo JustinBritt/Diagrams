@@ -14,7 +14,7 @@
     using DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams;
     using DotNetDiagrams.ClassDiagrams.Interfaces.Walkers;
 
-    internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : IPlantUMLClassDiagramVisualBasicSyntaxWalker
+    internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLClassDiagramVisualBasicSyntaxWalker
     {
         private readonly Compilation compilation;
         private readonly Project project;
