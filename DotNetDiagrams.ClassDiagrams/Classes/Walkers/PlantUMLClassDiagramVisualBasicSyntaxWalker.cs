@@ -16,6 +16,10 @@
 
     internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLClassDiagramVisualBasicSyntaxWalker
     {
+        private const string stereotype_public = "<<public>>";
+
+        private const string stringJoinSeparator_modifiers = " ";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
