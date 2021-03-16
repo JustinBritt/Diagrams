@@ -880,13 +880,13 @@
                 eventFieldDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "internal" => stereotype_internal,
+                    "internal" => PlantUML_packagePrivate,
 
-                    "private" => stereotype_private,
+                    "private" => PlantUML_private,
 
-                    "protected" => stereotype_protected,
+                    "protected" => PlantUML_protected,
 
-                    "public" => stereotype_public,
+                    "public" => PlantUML_public,
 
                     "static" => modifier_static,
 
@@ -906,13 +906,13 @@
 
                     "fixed" => stereotype_fixed,
 
-                    "internal" => stereotype_internal,
+                    "internal" => PlantUML_packagePrivate,
 
-                    "private" => stereotype_private,
+                    "private" => PlantUML_private,
 
-                    "protected" => stereotype_protected,
+                    "protected" => PlantUML_protected,
 
-                    "public" => stereotype_public,
+                    "public" => PlantUML_public,
 
                     "readonly" => stereotype_readonly,
 
@@ -958,7 +958,7 @@
 
                     "extern" => stereotype_extern,
 
-                    "internal" => stereotype_internal,
+                    "internal" => PlantUML_packagePrivate,
 
                     "new" => stereotype_new,
 
@@ -966,11 +966,11 @@
 
                     "partial" => stereotype_partial,
 
-                    "private" => stereotype_private,
+                    "private" => PlantUML_private,
 
-                    "protected" => stereotype_protected,
+                    "protected" => PlantUML_protected,
 
-                    "public" => stereotype_public,
+                    "public" => PlantUML_public,
 
                     "static" => modifier_static,
 
