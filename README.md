@@ -8,6 +8,33 @@ This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate U
 
 ## Class Diagrams
 
+### Base Lists
+BaseListSyntax
+
+### Class Declarations
+ClassDeclarationSyntax
+
+### Constructor Declarations
+ConstructorDeclarationSyntax
+
+### Enum Declarations
+EnumDeclarationSyntax
+
+### Enum Member Declarations
+EnumMemberDeclarationSyntax
+
+### Event Declarations
+EventDeclarationSyntax
+
+### Event Field Declarations
+EventFieldDeclarationSyntax
+
+### Field Declarations
+FieldDeclarationSyntax
+
+### Interface Declarations
+InterfaceDeclarationSyntax
+
 ### Method Declarations
 
 MethodDeclarationSyntax
