@@ -208,50 +208,6 @@
         }
 
         [TestMethod]
-        public void TestMethod1()
-        {
-            // Arrange
-            ProjectId projectId = ProjectId.CreateNewId();
-
-            DocumentId documentId = DocumentId.CreateNewId(
-                projectId);
-
-            AdhocWorkspace adhocWorkspace = new AdhocWorkspace();
-
-            Solution solution = adhocWorkspace.CurrentSolution
-                .AddProject(projectId, "MyProject", "MyProject", LanguageNames.CSharp)
-                .AddDocument(documentId, "MyFile.cs", this.CreateCompilationUnit().ToFullString());
-
-            Project project = solution.Projects.Where(w => w.Language is LanguageNames.CSharp).First();
-
-            Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
-
-            SyntaxTree syntaxTree = compilation.SyntaxTrees.First();
-
-            DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker walker = new(
-                compilation: compilation,
-                syntaxTree: syntaxTree,
-                solution: solution,
-                project: project);
-
-            // Act
-            ClassDeclarationSyntax classDeclaration = syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassDeclarationSyntax>().First();
-
-            walker.Visit(
-                classDeclaration);
-
-            DotNetDiagrams.ClassDiagrams.Interfaces.Diagrams.IPlantUMLClassDiagram diagram = walker.Diagrams.GetClassDiagramAtTitleOrDefault(
-                "MyTypes.Person");
-
-            diagram.EndDiagram();
-
-            // Assert
-            Assert.AreEqual(
-                expected: "MyTypes.Person",
-                actual: diagram.Title);
-        }
-
-        [TestMethod]
         public void TestMethod2()
         {
             // Arrange
