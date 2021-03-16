@@ -542,9 +542,7 @@
             AccessorDeclarationSyntax accessorDeclaration)
         {
             return String.Concat(
-                this.GetJoinedModifiers(accessorDeclaration).Length > 0
-                ? $"{this.GetJoinedModifiers(accessorDeclaration)}"
-                : String.Empty,
+                this.GetJoinedModifiers(accessorDeclaration),
                 accessorDeclaration.Keyword.ValueText switch
             {
                 "add" => stereotype_add,
