@@ -22,6 +22,8 @@
 
             this.End = PlantUML_enduml;
 
+            this.EntryPoints = new List<string>();
+
             this.Header = new List<string>();
 
             this.Start = PlantUML_startuml;
@@ -32,6 +34,8 @@
         public List<string> Body { get; set; }
         
         public string End { get; set; }
+
+        public List<string> EntryPoints { get; set; }
 
         public List<string> Header { get; set; }
         
