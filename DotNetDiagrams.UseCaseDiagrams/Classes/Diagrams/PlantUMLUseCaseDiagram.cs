@@ -47,6 +47,17 @@
 
         public void EndDiagram()
         {
+            this.Code.Add(
+                this.Start);
+
+            this.Code.AddRange(
+                this.Header);
+
+            this.Code.AddRange(
+                this.Body);
+
+            this.Code.Add(
+                this.End);
         }
     }
 }
