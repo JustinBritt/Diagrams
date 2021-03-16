@@ -16,12 +16,15 @@
 
     internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLClassDiagramVisualBasicSyntaxWalker
     {
+        private const string stereotype_add = "<<add>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_partial = "<<partial>>";
         private const string stereotype_private = "<<private>>";
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_public = "<<public>>";
+        private const string stereotype_raise = "<<raise>>";
+        private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_set = "<<set>>";
 
