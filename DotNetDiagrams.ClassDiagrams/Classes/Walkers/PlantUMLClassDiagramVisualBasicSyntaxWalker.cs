@@ -71,6 +71,16 @@
                 });
         }
 
+        private string GetJoinedAccessors(
+            PropertyBlockSyntax propertyBlock)
+        {
+            return propertyBlock.Accessors.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_accessors,
+                    propertyBlock.Accessors.Select(w => this.GetAccessor(w.AccessorStatement)))
+                : String.Empty;
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
