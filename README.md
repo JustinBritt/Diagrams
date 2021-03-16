@@ -9,9 +9,11 @@ This is a .NET 6.0 project that uses the Roslyn code analysis APIs to generate U
 ## Class Diagrams
 
 ### Visitor Pattern
-|C# Syntax Node Type                    | Method in 'DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker'   |
-|:--------------------------------------|--------------------------------------------------------------------------------------------------:|
-| `BaseListSyntax`                      | `Visit(BaseListSyntax baseList)`                                                                  |
+'DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker'
+
+|C# Syntax Node Type                    | Visit Method                                     |
+|:--------------------------------------|-------------------------------------------------:|
+| `BaseListSyntax`                      | `Visit(BaseListSyntax baseList)`                 |
 
 ### Base Lists
 BaseListSyntax
