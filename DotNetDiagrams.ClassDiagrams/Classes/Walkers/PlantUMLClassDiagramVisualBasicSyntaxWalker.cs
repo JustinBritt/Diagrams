@@ -192,6 +192,9 @@
                 case InterfaceBlockSyntax interfaceBlock:
                     this.Visit(interfaceBlock);
                     break;
+                case PropertyBlockSyntax propertyBlock:
+                    this.Visit(propertyBlock);
+                    break;
                 case SubNewStatementSyntax subNewStatement:
                     this.Visit(subNewStatement);
                     break;
