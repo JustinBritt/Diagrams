@@ -18,6 +18,7 @@
     {
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_partial = "<<partial>>";
+        private const string stereotype_private = "<<private>>";
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_public = "<<public>>";
         private const string stereotype_sealed = "<<sealed>>";
