@@ -54,6 +54,24 @@
         public IPlantUMLClassDiagrams Diagrams { get; }
 
         private string GetJoinedModifiers(
+            AccessorStatementSyntax accessorStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                accessorStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             ClassStatementSyntax classStatement)
         {
             return String.Join(
