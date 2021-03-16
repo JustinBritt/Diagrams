@@ -14,7 +14,9 @@ MethodDeclarationSyntax
 
 #### Constraint Clauses
 
-#### Explicit Interface Specifier,
+#### Explicit Interface Specifier
+
+#### Identifier
 
 #### Modifiers
 
@@ -34,11 +36,11 @@ MethodDeclarationSyntax
 | `unsafe`             | `<<unsafe>>`       |
 | `virtual`            | `<<virtual>>`      |
 
-#### Parameters
+#### Parameter List
 
 #### Return Type
 
-#### Type Parameters
+#### Type Parameter List
 
 ## Based on
 
