@@ -53,10 +53,18 @@
         {
             switch (node)
             {
+                case ClassBlockSyntax classBlock:
+                    this.Visit(classBlock);
+                    break;
                 default:
                     base.Visit(node);
                     break;
             }
+        }
+
+        private void Visit(
+            ClassBlockSyntax classBlock)
+        {
         }
     }
 }
