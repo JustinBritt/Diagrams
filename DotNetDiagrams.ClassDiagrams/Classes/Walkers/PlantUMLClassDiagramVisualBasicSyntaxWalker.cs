@@ -117,6 +117,9 @@
                 case InterfaceBlockSyntax interfaceBlock:
                     this.Visit(interfaceBlock);
                     break;
+                case SubNewStatementSyntax subNewStatement:
+                    this.Visit(subNewStatement);
+                    break;
                 default:
                     base.Visit(node);
                     break;
@@ -147,6 +150,12 @@
         {
             string joinedModifiers = this.GetJoinedModifiers(
                 interfaceBlock.InterfaceStatement);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            SubNewStatementSyntax subNewStatement)
+        {
         }
     }
 }
