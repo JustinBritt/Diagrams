@@ -28,6 +28,11 @@
                 language: LanguageNames.CSharp);
 
             UsingDirectiveSyntax usingDirectives = (UsingDirectiveSyntax)generator.NamespaceImportDeclaration("System");
+
+            // TODO: Update
+            //EventFieldDeclarationSyntax eventDeclaration = (EventFieldDeclarationSyntax)generator.EventDeclaration(
+            //    name: "ev",
+            //    type: generator.IdentifierName("EventHandler"));
             
             FieldDeclarationSyntax lastNameField = (FieldDeclarationSyntax)generator.FieldDeclaration(
                 name: "_lastName",
@@ -143,6 +148,7 @@
             // An array of SyntaxNode as the class members
             SyntaxNode[] members = new SyntaxNode[] 
             { 
+                eventDeclaration,
                 lastNameField,
                 firstNameField,
                 lastNameProperty,
