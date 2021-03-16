@@ -578,6 +578,14 @@
             return relationships;
         }
 
+        private string GetBaseTypeDeclarationTypeName(
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_typeDeclarationTypeNames,
+                baseTypeDeclaration.AncestorsAndSelf().OfType<BaseTypeDeclarationSyntax>().Reverse().Select(w => w.Identifier.ValueText));
+        }
+
         private string GetConstraint<T>(
             TypeParameterConstraintSyntax typeParameterConstraint)
             where T : SyntaxNode
@@ -662,6 +670,32 @@
             return propertyDeclaration.ExpressionBody is not null
                 ? stereotype_arrowExpression
                 : String.Empty;
+        }
+
+        private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
+            SyntaxNode syntaxNode,
+            SyntaxTree syntaxTree)
+        {
+            TypeDeclarationSyntax typeDeclaration = null;
+
+            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
+                syntaxTree);
+
+            if (semanticModel is not null)
+            {
+                if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
+                {
+                    if (targetType.DeclaringSyntaxReferences.Length > 0)
+                    {
+                        if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
+                        {
+                            typeDeclaration = typeDeclarationSyntax;
+                        }
+                    }
+                }
+            }
+
+            return typeDeclaration;
         }
 
         private string GetInitializer(
@@ -1078,40 +1112,6 @@
             SyntaxTree syntaxTree)
         {
             return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
-        }
-
-        private TypeDeclarationSyntax GetFirstTypeDeclarationOrDefault(
-            SyntaxNode syntaxNode,
-            SyntaxTree syntaxTree)
-        {
-            TypeDeclarationSyntax typeDeclaration = null;
-
-            SemanticModel semanticModel = this.GetSemanticModelOrDefault(
-                syntaxTree);
-
-            if (semanticModel is not null)
-            {
-                if (ModelExtensions.GetTypeInfo(semanticModel, syntaxNode).Type is INamedTypeSymbol targetType)
-                {
-                    if (targetType.DeclaringSyntaxReferences.Length > 0)
-                    {
-                        if (targetType.DeclaringSyntaxReferences.First().GetSyntax() is TypeDeclarationSyntax typeDeclarationSyntax)
-                        {
-                            typeDeclaration = typeDeclarationSyntax;
-                        }
-                    }
-                }
-            }
-
-            return typeDeclaration;
-        }
-
-        private string GetBaseTypeDeclarationTypeName(
-            BaseTypeDeclarationSyntax baseTypeDeclaration)
-        {
-            return String.Join(
-                stringJoinSeparator_typeDeclarationTypeNames,
-                baseTypeDeclaration.AncestorsAndSelf().OfType<BaseTypeDeclarationSyntax>().Reverse().Select(w => w.Identifier.ValueText));
         }
 
         private string GetTypeName(
