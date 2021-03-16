@@ -28,5 +28,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DotNetDiagrams.Common\DotNetDiagrams.Common.csproj" />
+	  <ProjectReference Include="..\DotNetDiagrams.UseCaseDiagrams\DotNetDiagrams.UseCaseDiagrams.csproj" />
 	</ItemGroup>
 </Project>
