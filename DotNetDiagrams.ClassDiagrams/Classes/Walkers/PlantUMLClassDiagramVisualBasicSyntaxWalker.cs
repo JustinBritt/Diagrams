@@ -133,6 +133,22 @@
         }
 
         private string GetJoinedModifiers(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                fieldDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Private" => stereotype_private,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             SubNewStatementSyntax subNewStatement)
         {
             return String.Join(
@@ -231,6 +247,8 @@
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                fieldDeclaration);
         }
 
         // TODO: Finish
