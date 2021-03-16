@@ -148,7 +148,6 @@
             // An array of SyntaxNode as the class members
             SyntaxNode[] members = new SyntaxNode[] 
             { 
-                eventDeclaration,
                 lastNameField,
                 firstNameField,
                 lastNameProperty,
