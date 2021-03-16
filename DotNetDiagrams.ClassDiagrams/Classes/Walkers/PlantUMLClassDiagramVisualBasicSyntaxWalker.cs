@@ -77,7 +77,6 @@
                 }));
         }
 
-        // TODO: Finish
         private string GetJoinedModifiers(
             SubNewStatementSyntax subNewStatement)
         {
@@ -86,6 +85,12 @@
                 subNewStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
                     "Public" => stereotype_public,
 
                     _ => throw new Exception("")
