@@ -53,9 +53,9 @@
         private const string stereotype_new = "<<new>>";
         private const string stereotype_override = "<<override>>";
         private const string stereotype_partial = "<<partial>>";
-        private const string stereotype_public = "<<public>>";
         private const string stereotype_private = "<<private>>";
         private const string stereotype_protected = "<<protected>>";
+        private const string stereotype_public = "<<public>>";
         private const string stereotype_readonly = "<<readonly>>";
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
