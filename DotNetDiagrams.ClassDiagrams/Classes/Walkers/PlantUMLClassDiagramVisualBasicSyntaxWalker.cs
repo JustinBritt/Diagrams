@@ -20,6 +20,7 @@
         private const string stereotype_partial = "<<partial>>";
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_public = "<<public>>";
+        private const string stereotype_sealed = "<<sealed>>";
 
         private const string stringJoinSeparator_modifiers = " ";
 
@@ -60,6 +61,8 @@
                 .Select(w => w.ValueText switch
                 {
                     "Friend" => stereotype_internal,
+
+                    "NotInheritable" => stereotype_sealed,
 
                     "Partial" => stereotype_partial,
 
