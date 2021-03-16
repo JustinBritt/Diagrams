@@ -15,9 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.ClassDiagram
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.UseCaseDiagrams", "DotNetDiagrams.UseCaseDiagrams\DotNetDiagrams.UseCaseDiagrams.csproj", "{68A392DF-6C91-4A44-846F-672F41429678}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.ClassDiagrams.Tests", "DotNetDiagrams.ClassDiagrams.Tests\DotNetDiagrams.ClassDiagrams.Tests.csproj", "{2A97329C-24ED-47C8-ABFC-2B34F19B652E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetDiagrams.DocFX", "DotNetDiagrams.DocFX\DotNetDiagrams.DocFX.csproj", "{763005A5-AC88-4294-95CA-0CDECF3D9777}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetDiagrams.ClassDiagrams.Tests", "DotNetDiagrams.ClassDiagrams.Tests\DotNetDiagrams.ClassDiagrams.Tests.csproj", "{2A97329C-24ED-47C8-ABFC-2B34F19B652E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,14 +81,6 @@ Global
 		{2A97329C-24ED-47C8-ABFC-2B34F19B652E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2A97329C-24ED-47C8-ABFC-2B34F19B652E}.Release|x86.ActiveCfg = Release|Any CPU
 		{2A97329C-24ED-47C8-ABFC-2B34F19B652E}.Release|x86.Build.0 = Release|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Debug|x86.Build.0 = Debug|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Release|Any CPU.Build.0 = Release|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Release|x86.ActiveCfg = Release|Any CPU
-		{763005A5-AC88-4294-95CA-0CDECF3D9777}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
