@@ -719,6 +719,22 @@
         }
 
         private string GetJoinedModifiers(
+            AccessorDeclarationSyntax accessorDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                accessorDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "private" => stereotype_private,
+
+                    "public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             ClassDeclarationSyntax classDeclaration)
         {
             return String.Join(
