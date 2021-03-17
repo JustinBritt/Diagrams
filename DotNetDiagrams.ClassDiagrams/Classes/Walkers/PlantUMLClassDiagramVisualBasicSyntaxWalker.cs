@@ -551,6 +551,9 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 interfaceBlock.InterfaceStatement);
 
+            string joinedTypeParameters = this.GetJoinedTypeParameters(
+                interfaceBlock.InterfaceStatement);
+
             base.Visit(
                 interfaceBlock);
         }
