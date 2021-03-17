@@ -39,6 +39,8 @@
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_set = "<<set>>";
 
+        private const string stringConcatSeparator_namespaceTypeNames = ".";
+
         private const string stringJoinSeparator_accessors = " ";
         private const string stringJoinSeparator_modifiers = " ";
 
