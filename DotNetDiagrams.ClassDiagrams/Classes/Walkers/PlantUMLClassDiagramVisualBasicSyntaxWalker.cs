@@ -121,6 +121,25 @@
                 });
         }
 
+        private string GetConstraint(
+            ConstraintSyntax constraint)
+        {
+            return constraint.Kind() switch
+            {
+                SyntaxKind.ClassConstraint => "Class",
+
+                SyntaxKind.NewConstraint => "New",
+
+                SyntaxKind.StructureConstraint => "Structure",
+
+                SyntaxKind.TypeConstraint => this.GetTypeName(
+                    ((TypeConstraintSyntax)constraint).Type,
+                    constraint.SyntaxTree),
+
+                _ => throw new Exception("")
+            };
+        }
+
         // TODO: Finish
         private string GetDeclarationStatementIdentifier(
             DeclarationStatementSyntax declarationStatement)
