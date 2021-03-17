@@ -131,6 +131,26 @@
                     _ => throw new Exception("")
                 }));
         }
+        
+        private string GetJoinedModifiers(
+            EnumStatementSyntax enumStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                enumStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
 
         private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
