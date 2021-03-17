@@ -436,6 +436,14 @@
         private void Visit(
             ClassBlockSyntax classBlock)
         {
+            List<DeclarationStatementSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<DeclarationStatementSyntax>().ToList();
+
+            if (classBlock == declaredTypes.First())
+            {
+                this.StartDiagram(
+                    classBlock);
+            }
+
             string joinedModifiers = this.GetJoinedModifiers(
                 classBlock.ClassStatement);
 
