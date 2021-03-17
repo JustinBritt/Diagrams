@@ -548,7 +548,9 @@
                         }
                         else if (constraint is TypeConstraintSyntax typeConstraint)
                         {
-                            var text = this.GetTypeName(typeConstraint.Type, classBlock.SyntaxTree);
+                            var text = this.GetTypeName(
+                                typeConstraint.Type,
+                                classBlock.SyntaxTree);
                         }
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
@@ -570,7 +572,9 @@
                             }
                             else if (constraint is TypeConstraintSyntax typeConstraint)
                             {
-                                var text = this.GetTypeName(typeConstraint.Type, classBlock.SyntaxTree);
+                                var text = this.GetTypeName(
+                                    typeConstraint.Type,
+                                    classBlock.SyntaxTree);
                             }
                         }
                     }
