@@ -215,6 +215,16 @@
                 : String.Empty;
         }
 
+        private string GetJoinedConstraintClauses(
+            MethodBlockSyntax methodBlock)
+        {
+            return methodBlock.SubOrFunctionStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    methodBlock.SubOrFunctionStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
