@@ -39,6 +39,24 @@
                 }
             }
 
+            foreach (Project project in solution.Projects.Where(w => w.Language is LanguageNames.VisualBasic))
+            {
+                Compilation compilation = project.GetCompilationAsync().GetAwaiter().GetResult();
+
+                foreach (SyntaxTree syntaxTree in compilation.SyntaxTrees)
+                {
+                    PlantUMLClassDiagramVisualBasicSyntaxWalker walker = new PlantUMLClassDiagramVisualBasicSyntaxWalker(
+                        compilation,
+                        syntaxTree,
+                        solution,
+                        project);
+
+                    walker.Visit(syntaxTree.GetRoot());
+
+                    diagrams.Value.AddRange(walker.Diagrams.Value);
+                }
+            }
+
             foreach (IPlantUMLClassDiagram diagram in diagrams.Value)
             {
                 diagram.EndDiagram();
