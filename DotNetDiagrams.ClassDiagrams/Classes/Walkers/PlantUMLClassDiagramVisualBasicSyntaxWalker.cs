@@ -531,7 +531,16 @@
                 {
                     if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
                     {
-                        var constraint = single;
+                        ConstraintSyntax constraint = single.Constraint;
+
+                        if (constraint is SpecialConstraintSyntax specialConstraint)
+                        {
+                            var text = constraint.ToString();
+                        }
+                        else if (constraint is TypeConstraintSyntax typeConstraint)
+                        {
+                            var text = constraint.ToString();
+                        }
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
@@ -545,15 +554,7 @@
                             {
                                 var text = constraint.ToString();
                             }
-                            else
-                            {
-                                var text = constraint.ToString();
-                            }
                         }
-                    }
-                    else
-                    {
-                        throw new Exception("");
                     }
                 }
             }    
