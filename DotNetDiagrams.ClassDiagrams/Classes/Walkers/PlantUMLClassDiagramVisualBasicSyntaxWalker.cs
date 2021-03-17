@@ -152,6 +152,7 @@
                 }));
         }
 
+        // TODO: Should Dim be mapped to an empty string?
         private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
@@ -160,6 +161,8 @@
                 fieldDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Dim" => String.Empty,
+
                     "Friend" => stereotype_internal,
 
                     "Private" => stereotype_private,
