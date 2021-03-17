@@ -179,7 +179,7 @@
         private string GetJoinedConstraintClauses(
             ClassBlockSyntax classBlock)
         {
-            string joinedConstraintClauses = String.Empty;
+            List<string> constraintClauses = new List<string>();
 
             if (classBlock.ClassStatement.TypeParameterList is not null)
             {
@@ -187,19 +187,21 @@
                 {
                     if (constraintClause is TypeParameterSingleConstraintClauseSyntax single)
                     {
-                        joinedConstraintClauses = this.GetConstraint(
-                            single.Constraint);
+                        constraintClauses.Add(
+                            this.GetConstraint(
+                                single.Constraint));
                     }
                     else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
-                        joinedConstraintClauses = String.Join(
-                            stringJoinSeparator_constraintClauses,
+                        constraintClauses.AddRange(
                             multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
                     }
                 }
             }
 
-            return joinedConstraintClauses;
+            return String.Join(
+                stringJoinSeparator_constraintClauses,
+                constraintClauses);
         }
 
         private string GetJoinedModifiers(
