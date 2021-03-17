@@ -33,7 +33,7 @@
             string title)
         {
             return this.Value.Select(w => w.Title).Contains(title)
-                ? this.Value.Where(w => w.Title == title).SingleOrDefault().Code
+                ? this.Value.Where(w => w.Title == title).FirstOrDefault().Code
                 : new List<string>();
         }
 
