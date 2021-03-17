@@ -124,7 +124,12 @@
         private string GetDeclarationStatementIdentifier(
             DeclarationStatementSyntax declarationStatement)
         {
-            return String.Empty;
+            return declarationStatement switch
+            {
+                ClassBlockSyntax classBlock => classBlock.ClassStatement.Identifier.ValueText,
+
+                _ => throw new Exception("")
+            };
         }
 
         private string GetDeclarationStatementTypeName(
