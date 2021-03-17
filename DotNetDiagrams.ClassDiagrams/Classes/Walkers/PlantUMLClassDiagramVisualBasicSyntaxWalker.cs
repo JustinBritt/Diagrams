@@ -16,6 +16,8 @@
 
     internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLClassDiagramVisualBasicSyntaxWalker
     {
+        private const string modifier_static = "{static}";
+
         private const string stereotype_add = "<<add>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_get = "<<get>>";
@@ -174,6 +176,8 @@
                     "Protected" => stereotype_protected,
 
                     "Public" => stereotype_public,
+
+                    "Shared" => modifier_static,
 
                     "WithEvents" => String.Empty,
 
