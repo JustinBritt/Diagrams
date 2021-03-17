@@ -717,6 +717,9 @@
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 structureBlock.StructureStatement);
 
+            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
+                structureBlock);
+
             base.Visit(
                 structureBlock);
         }
