@@ -17,6 +17,7 @@
     internal sealed class PlantUMLClassDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLClassDiagramVisualBasicSyntaxWalker
     {
         private const string stereotype_add = "<<add>>";
+        private const string stereotype_const = "<<const>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_partial = "<<partial>>";
