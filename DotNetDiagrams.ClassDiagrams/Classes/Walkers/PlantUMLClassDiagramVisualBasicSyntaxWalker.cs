@@ -205,33 +205,14 @@
                 : String.Empty;
         }
 
-        // TODO: Finish
         private string GetJoinedConstraintClauses(
             InterfaceBlockSyntax interfaceBlock)
         {
-            List<string> constraintClauses = new List<string>();
-
-            if (interfaceBlock.InterfaceStatement.TypeParameterList is not null)
-            {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in interfaceBlock.InterfaceStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause))
-                {
-                    if (constraintClause is TypeParameterSingleConstraintClauseSyntax single)
-                    {
-                        constraintClauses.Add(
-                            this.GetConstraint(
-                                single.Constraint));
-                    }
-                    else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
-                    {
-                        constraintClauses.AddRange(
-                            multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
-                    }
-                }
-            }
-
-            return String.Join(
-                stringJoinSeparator_constraintClauses,
-                constraintClauses);
+            return interfaceBlock.InterfaceStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    interfaceBlock.InterfaceStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
         }
 
         private string GetJoinedModifiers(
