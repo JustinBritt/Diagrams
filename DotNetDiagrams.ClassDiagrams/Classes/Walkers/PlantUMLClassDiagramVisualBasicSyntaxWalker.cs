@@ -175,6 +175,31 @@
                 : String.Empty;
         }
 
+        // TODO: Finish
+        private string GetJoinedConstraintClauses(
+            ClassBlockSyntax classBlock)
+        {
+            string joinedConstraintClauses = String.Empty;
+
+            if (classBlock.ClassStatement.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax parameter in classBlock.ClassStatement.TypeParameterList.Parameters)
+                {
+                    if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
+                    {
+                        joinedConstraintClauses = this.GetConstraint(
+                            single.Constraint);
+                    }
+                    else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
+                    {
+                        joinedConstraintClauses = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
+                    }
+                }
+            }
+
+            return joinedConstraintClauses;
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
@@ -545,22 +570,6 @@
 
             string joinedConstraintClauses = String.Empty;
 
-            if (classBlock.ClassStatement.TypeParameterList is not null)
-            {
-                foreach (TypeParameterSyntax parameter in classBlock.ClassStatement.TypeParameterList.Parameters)
-                {
-                    if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
-                    {
-                        joinedConstraintClauses = this.GetConstraint(
-                            single.Constraint);
-                    }
-                    else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
-                    {
-                        joinedConstraintClauses = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
-                    }
-                }
-            }    
-            
             base.Visit(
                 classBlock);
         }
