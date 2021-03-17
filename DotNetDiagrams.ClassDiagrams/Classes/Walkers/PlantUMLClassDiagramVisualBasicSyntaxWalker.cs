@@ -425,6 +425,21 @@
             return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
         }
 
+        private string GetSpecialConstraint(
+            SpecialConstraintSyntax specialConstraint)
+        {
+            return specialConstraint.Kind() switch
+            {
+                SyntaxKind.ClassConstraint => "Class",
+
+                SyntaxKind.NewConstraint => "New",
+
+                SyntaxKind.StructureConstraint => "Structure",
+
+                _ => throw new Exception("")
+            };
+        }
+
         private string GetTypeName(
             SyntaxNode syntaxNode,
             SyntaxTree syntaxTree)
@@ -535,16 +550,8 @@
 
                         if (constraint is SpecialConstraintSyntax specialConstraint)
                         {
-                            var text = constraint.Kind() switch
-                            {
-                                SyntaxKind.ClassConstraint => "Class",
-
-                                SyntaxKind.NewConstraint => "New",
-
-                                SyntaxKind.StructureConstraint => "Structure",
-
-                                _ => throw new Exception("")
-                            };
+                            var text = this.GetSpecialConstraint(
+                                specialConstraint);
                         }
                         else if (constraint is TypeConstraintSyntax typeConstraint)
                         {
@@ -559,16 +566,8 @@
                         {
                             if (constraint is SpecialConstraintSyntax specialConstraint)
                             {
-                                var text = constraint.Kind() switch
-                                {
-                                    SyntaxKind.ClassConstraint => "Class",
-
-                                    SyntaxKind.NewConstraint => "New",
-
-                                    SyntaxKind.StructureConstraint => "Structure",
-
-                                    _ => throw new Exception("")
-                                };
+                                var text = this.GetSpecialConstraint(
+                                    specialConstraint);
                             }
                             else if (constraint is TypeConstraintSyntax typeConstraint)
                             {
