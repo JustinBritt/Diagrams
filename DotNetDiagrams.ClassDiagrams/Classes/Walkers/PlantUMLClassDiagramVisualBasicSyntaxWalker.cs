@@ -207,6 +207,21 @@
                 }));
         }
 
+        // TODO: Finish
+        private string GetJoinedModifiers(
+            MethodStatementSyntax methodStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                methodStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "" => "",
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             SubNewStatementSyntax subNewStatement)
         {
