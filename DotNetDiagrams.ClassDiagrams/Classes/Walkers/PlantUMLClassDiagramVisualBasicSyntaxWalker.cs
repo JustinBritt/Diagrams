@@ -221,7 +221,13 @@
                 methodStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "" => "",
+                    "Friend" => PlantUML_packagePrivate,
+
+                    "Private" => PlantUML_private,
+
+                    "Protected" => PlantUML_protected,
+
+                    "Public" => PlantUML_public,
 
                     _ => throw new Exception("")
                 }));
