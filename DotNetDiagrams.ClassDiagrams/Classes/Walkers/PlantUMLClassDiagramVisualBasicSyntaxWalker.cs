@@ -289,6 +289,9 @@
         private void Visit(
             EnumBlockSyntax enumBlock)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                enumBlock.EnumStatement);
+
             base.Visit(
                 enumBlock);
         }
@@ -297,9 +300,6 @@
         private void Visit(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
-            string joinedModifiers = this.GetJoinedModifiers(
-                enumMemberDeclaration);
-
             base.Visit(
                 enumMemberDeclaration);
         }
