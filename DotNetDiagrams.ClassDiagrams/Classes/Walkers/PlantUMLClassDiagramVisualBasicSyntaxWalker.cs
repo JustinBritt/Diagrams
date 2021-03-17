@@ -154,6 +154,7 @@
         }
 
         // TODO: Should Dim be mapped to an empty string?
+        // TODO: Should WithEvents be mapped to an empty string?
         private string GetJoinedModifiers(
             FieldDeclarationSyntax fieldDeclaration)
         {
@@ -173,6 +174,8 @@
                     "Protected" => stereotype_protected,
 
                     "Public" => stereotype_public,
+
+                    "WithEvents" => String.Empty,
 
                     _ => throw new Exception("")
                 }));
