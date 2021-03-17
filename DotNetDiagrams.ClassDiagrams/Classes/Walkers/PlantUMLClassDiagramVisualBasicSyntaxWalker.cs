@@ -236,6 +236,8 @@
 
                     "Public" => PlantUML_public,
 
+                    "Shared" => modifier_static,
+
                     _ => throw new Exception("")
                 }));
         }
