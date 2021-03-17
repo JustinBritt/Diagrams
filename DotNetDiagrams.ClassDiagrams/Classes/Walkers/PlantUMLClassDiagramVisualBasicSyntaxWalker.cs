@@ -585,6 +585,9 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 methodBlock.SubOrFunctionStatement);
 
+            string joinedTypeParameters = this.GetJoinedTypeParameters(
+                methodBlock.SubOrFunctionStatement);
+
             base.Visit(
                 methodBlock);
         }
