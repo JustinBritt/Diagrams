@@ -464,6 +464,9 @@
 
             var inherits = classBlock.Inherits;
 
+            // TypeParameterList
+            var typeParameterList = classBlock.ClassStatement.TypeParameterList;
+
             base.Visit(
                 classBlock);
         }
