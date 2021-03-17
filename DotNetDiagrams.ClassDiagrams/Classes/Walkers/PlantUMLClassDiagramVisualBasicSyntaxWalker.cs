@@ -328,6 +328,25 @@
                 }));
         }
 
+        private void StartDiagram(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            this.currentTitle = this.GetJoinedNamespaceTypeName(
+                declarationStatement);
+
+            if (!String.IsNullOrEmpty(this.currentTitle))
+            {
+                if (!this.Diagrams.ContainsTitle(this.currentTitle))
+                {
+                    this.Diagrams.AddTitle(
+                        this.currentTitle);
+                }
+
+                this.AddHeader(
+                    this.currentTitle);
+            }
+        }
+
         /// <summary>
         /// This visits a node in the syntax tree.
         /// </summary>
