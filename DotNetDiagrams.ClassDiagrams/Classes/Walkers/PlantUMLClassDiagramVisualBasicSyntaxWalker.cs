@@ -224,6 +224,9 @@
                 case PropertyBlockSyntax propertyBlock:
                     this.Visit(propertyBlock);
                     break;
+                case StructureBlockSyntax structureBlock:
+                    this.Visit(structureBlock);
+                    break;
                 case SubNewStatementSyntax subNewStatement:
                     this.Visit(subNewStatement);
                     break;
@@ -306,6 +309,14 @@
 
             base.Visit(
                 propertyBlock);
+        }
+
+        // TODO: Finish 
+        private void Visit(
+            StructureBlockSyntax structureBlock)
+        {
+            base.Visit(
+                structureBlock);
         }
 
         // TODO: Finish
