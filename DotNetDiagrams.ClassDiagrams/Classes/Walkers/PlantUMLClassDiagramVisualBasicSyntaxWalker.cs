@@ -551,12 +551,12 @@
                 {
                     if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
                     {
-                        string text = this.GetConstraint(
+                        joinedConstraintClauses = this.GetConstraint(
                             single.Constraint);
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
-                        string cons = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
+                        joinedConstraintClauses = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
                     }
                 }
             }    
