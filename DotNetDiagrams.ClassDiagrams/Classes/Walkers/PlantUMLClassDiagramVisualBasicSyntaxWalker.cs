@@ -44,6 +44,7 @@
         private const string stringJoinSeparator_accessors = " ";
         private const string stringJoinSeparator_declarationStatementTypeNames = ".";
         private const string stringJoinSeparator_modifiers = " ";
+        private const string stringJoinSeparator_typeParameters = ", ";
 
         private readonly Compilation compilation;
         private readonly Project project;
@@ -376,6 +377,16 @@
                 namespaceName,
                 stringConcatSeparator_namespaceTypeNames,
                 typeName);
+        }
+
+        private string GetJoinedTypeParameters(
+            ClassStatementSyntax classStatement)
+        {
+            return classStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    classStatement.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
+                : String.Empty;
         }
 
         private void StartDiagram(
