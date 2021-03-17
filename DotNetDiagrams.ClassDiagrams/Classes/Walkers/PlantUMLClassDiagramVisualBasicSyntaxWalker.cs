@@ -679,6 +679,9 @@
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 methodBlock.SubOrFunctionStatement);
 
+            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
+                methodBlock);
+
             base.Visit(
                 methodBlock);
         }
