@@ -328,6 +328,25 @@
                 }));
         }
 
+        private string GetJoinedNamespaceTypeName(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            string namespaceName = String.Empty;
+
+            if (declarationStatement.FirstAncestorOrSelf<NamespaceBlockSyntax>() is not null)
+            {
+                namespaceName = declarationStatement.FirstAncestorOrSelf<NamespaceBlockSyntax>().NamespaceStatement.Name.ToString();
+            }
+
+            string typeName = this.GetDeclarationStatementTypeName(
+                declarationStatement);
+
+            return String.Concat(
+                namespaceName,
+                stringConcatSeparator_namespaceTypeNames,
+                typeName);
+        }
+
         private void StartDiagram(
             DeclarationStatementSyntax declarationStatement)
         {
