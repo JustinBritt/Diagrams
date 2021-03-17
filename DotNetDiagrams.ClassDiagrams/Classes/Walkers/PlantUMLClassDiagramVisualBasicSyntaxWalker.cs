@@ -196,21 +196,14 @@
                 : String.Empty;
         }
 
-        // TODO: Finish
         private string GetJoinedConstraintClauses(
             ClassBlockSyntax classBlock)
         {
-            List<string> constraintClauses = new List<string>();
-
-            if (classBlock.ClassStatement.TypeParameterList is not null)
-            {
-                constraintClauses.AddRange(
-                    classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)));
-            }
-
-            return String.Join(
-                stringJoinSeparator_constraintClauses,
-                constraintClauses);
+            return classBlock.ClassStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
         }
 
         // TODO: Finish
