@@ -28,6 +28,7 @@
         private const string stereotype_const = "<<const>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
+        private const string stereotype_override = "<<override>>";
         private const string stereotype_partial = "<<partial>>";
         private const string stereotype_private = "<<private>>";
         private const string stereotype_protected = "<<protected>>";
@@ -213,6 +214,8 @@
                 }));
         }
 
+        // TODO: Finish
+        // TODO: Should Overrides map to stereotype_override?
         private string GetJoinedModifiers(
             MethodStatementSyntax methodStatement)
         {
@@ -222,6 +225,8 @@
                 .Select(w => w.ValueText switch
                 {
                     "Async" => stereotype_async,
+
+                    "Overrides" => stereotype_override,
 
                     "Friend" => PlantUML_packagePrivate,
 
