@@ -24,6 +24,7 @@
         private const string PlantUML_public = "+";
 
         private const string stereotype_add = "<<add>>";
+        private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
@@ -220,6 +221,8 @@
                 methodStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Async" => stereotype_async,
+
                     "Friend" => PlantUML_packagePrivate,
 
                     "Private" => PlantUML_private,
