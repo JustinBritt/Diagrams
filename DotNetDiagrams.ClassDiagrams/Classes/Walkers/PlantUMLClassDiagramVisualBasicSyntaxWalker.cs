@@ -215,6 +215,9 @@
                 case EnumMemberDeclarationSyntax enumMemberDeclaration:
                     this.Visit(enumMemberDeclaration);
                     break;
+                case EventBlockSyntax eventBlock:
+                    this.Visit(eventBlock);
+                    break;
                 case FieldDeclarationSyntax fieldDeclaration:
                     this.Visit(fieldDeclaration);
                     break;
@@ -276,6 +279,14 @@
         {
             base.Visit(
                 enumMemberDeclaration);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            EventBlockSyntax eventBlock)
+        {
+            base.Visit(
+                eventBlock);
         }
 
         // TODO: Finish
