@@ -132,7 +132,7 @@
         {
             return String.Join(
                 stringJoinSeparator_declarationStatementTypeNames,
-                declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => w.Identifier.ValueText));
+                declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => this.GetDeclarationStatementIdentifier(w)));
         }
 
         private string GetJoinedAccessors(
