@@ -508,6 +508,9 @@
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 classBlock.ClassStatement);
 
+            string joinedConstraintClauses = String.Empty;
+            //classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause);
+
             base.Visit(
                 classBlock);
         }
