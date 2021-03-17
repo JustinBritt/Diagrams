@@ -22,6 +22,7 @@
         private const string PlantUML_private = "-";
         private const string PlantUML_protected = "#";
         private const string PlantUML_public = "+";
+        private const string PlantUML_title = "title";
 
         private const string stereotype_add = "<<add>>";
         private const string stereotype_async = "<<async>>";
