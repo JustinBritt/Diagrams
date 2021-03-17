@@ -607,6 +607,9 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 structureBlock.StructureStatement);
 
+            string joinedTypeParameters = this.GetJoinedTypeParameters(
+                structureBlock.StructureStatement);
+
             base.Visit(
                 structureBlock);
         }
