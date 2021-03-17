@@ -419,6 +419,21 @@
                 : String.Empty;
         }
 
+        private SemanticModel GetSemanticModelOrDefault(
+            SyntaxTree syntaxTree)
+        {
+            return this.solution.GetDocument(syntaxTree).GetSemanticModelAsync().Result;
+        }
+
+        private string GetTypeName(
+            SyntaxNode syntaxNode,
+            SyntaxTree syntaxTree)
+        {
+            return this.GetSemanticModelOrDefault(syntaxTree) is not null && ModelExtensions.GetTypeInfo(this.GetSemanticModelOrDefault(syntaxTree), syntaxNode).Type is INamedTypeSymbol targetType
+                ? targetType.ToString()
+                : syntaxNode.ToString();
+        }
+
         private void StartDiagram(
             DeclarationStatementSyntax declarationStatement)
         {
