@@ -174,13 +174,13 @@
 
                     "Dim" => String.Empty,
 
-                    "Friend" => stereotype_internal,
+                    "Friend" => PlantUML_packagePrivate,
 
-                    "Private" => stereotype_private,
+                    "Private" => PlantUML_private,
 
-                    "Protected" => stereotype_protected,
+                    "Protected" => PlantUML_protected,
 
-                    "Public" => stereotype_public,
+                    "Public" => PlantUML_public,
 
                     "Shared" => modifier_static,
 
