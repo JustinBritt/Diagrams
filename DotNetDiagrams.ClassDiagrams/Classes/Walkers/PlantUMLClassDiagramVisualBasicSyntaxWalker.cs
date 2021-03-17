@@ -565,35 +565,15 @@
                 {
                     if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
                     {
-                        ConstraintSyntax constraint = single.Constraint;
-
-                        if (constraint is SpecialConstraintSyntax specialConstraint)
-                        {
-                            var text = this.GetSpecialConstraint(
-                                specialConstraint);
-                        }
-                        else if (constraint is TypeConstraintSyntax typeConstraint)
-                        {
-                            var text = this.GetTypeName(
-                                typeConstraint.Type,
-                                classBlock.SyntaxTree);
-                        }
+                        string text = this.GetConstraint(
+                            single.Constraint);
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
                         foreach (ConstraintSyntax constraint in multiple.Constraints)
                         {
-                            if (constraint is SpecialConstraintSyntax specialConstraint)
-                            {
-                                var text = this.GetSpecialConstraint(
-                                    specialConstraint);
-                            }
-                            else if (constraint is TypeConstraintSyntax typeConstraint)
-                            {
-                                var text = this.GetTypeName(
-                                    typeConstraint.Type,
-                                    classBlock.SyntaxTree);
-                            }
+                            string text = this.GetConstraint(
+                                constraint);
                         }
                     }
                 }
