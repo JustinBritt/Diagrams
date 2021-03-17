@@ -120,6 +120,13 @@
                 });
         }
 
+        // TODO: Finish
+        private string GetDeclarationStatementIdentifier(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            return String.Empty;
+        }
+
         private string GetDeclarationStatementTypeName(
             DeclarationStatementSyntax declarationStatement)
         {
