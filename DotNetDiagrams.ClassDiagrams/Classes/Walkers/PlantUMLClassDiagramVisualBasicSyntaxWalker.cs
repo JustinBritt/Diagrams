@@ -389,6 +389,16 @@
                 : String.Empty;
         }
 
+        private string GetJoinedTypeParameters(
+            InterfaceStatementSyntax interfaceStatement)
+        {
+            return interfaceStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    interfaceStatement.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
+                : String.Empty;
+        }
+
         private void StartDiagram(
             DeclarationStatementSyntax declarationStatement)
         {
