@@ -42,6 +42,7 @@
         private const string stringConcatSeparator_namespaceTypeNames = ".";
 
         private const string stringJoinSeparator_accessors = " ";
+        private const string stringJoinSeparator_declarationStatementTypeNames = ".";
         private const string stringJoinSeparator_modifiers = " ";
 
         private readonly Compilation compilation;
@@ -117,6 +118,14 @@
 
                     _ => throw new Exception(nameof(accessorStatement.AccessorKeyword))
                 });
+        }
+
+        private string GetDeclarationStatementTypeName(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_declarationStatementTypeNames,
+                declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => w.Identifier.ValueText));
         }
 
         private string GetJoinedAccessors(
