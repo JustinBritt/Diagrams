@@ -128,6 +128,10 @@
             {
                 ClassBlockSyntax classBlock => classBlock.ClassStatement.Identifier.ValueText,
 
+                InterfaceBlockSyntax interfaceBlock => interfaceBlock.InterfaceStatement.Identifier.ValueText,
+
+                StructureBlockSyntax structureBlock => structureBlock.StructureStatement.Identifier.ValueText,
+
                 _ => throw new Exception("")
             };
         }
