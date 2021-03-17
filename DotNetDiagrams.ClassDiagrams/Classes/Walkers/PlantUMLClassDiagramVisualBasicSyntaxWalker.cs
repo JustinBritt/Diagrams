@@ -162,6 +162,8 @@
                 fieldDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "Const" => stereotype_const,
+
                     "Dim" => String.Empty,
 
                     "Friend" => stereotype_internal,
