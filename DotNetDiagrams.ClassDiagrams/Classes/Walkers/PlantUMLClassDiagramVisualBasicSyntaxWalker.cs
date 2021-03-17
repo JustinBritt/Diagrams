@@ -568,7 +568,8 @@
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 classBlock.ClassStatement);
 
-            string joinedConstraintClauses = String.Empty;
+            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
+                classBlock);
 
             base.Visit(
                 classBlock);
