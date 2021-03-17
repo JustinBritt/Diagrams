@@ -553,8 +553,6 @@
                             else if (constraint is TypeConstraintSyntax typeConstraint)
                             {
                                 var text = this.GetTypeName(typeConstraint.Type, classBlock.SyntaxTree);
-
-                                var stop = true;
                             }
                         }
                     }
