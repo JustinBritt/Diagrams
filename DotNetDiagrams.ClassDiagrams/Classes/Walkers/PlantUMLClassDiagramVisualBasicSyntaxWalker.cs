@@ -192,7 +192,9 @@
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
-                        joinedConstraintClauses = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
+                        joinedConstraintClauses = String.Join(
+                            ",",
+                            multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
                     }
                 }
             }
