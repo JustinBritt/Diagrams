@@ -364,6 +364,10 @@
             {
                 namespaceName = declarationStatement.FirstAncestorOrSelf<NamespaceBlockSyntax>().NamespaceStatement.Name.ToString();
             }
+            else
+            {
+                namespaceName = project.Name;
+            }
 
             string typeName = this.GetDeclarationStatementTypeName(
                 declarationStatement);
