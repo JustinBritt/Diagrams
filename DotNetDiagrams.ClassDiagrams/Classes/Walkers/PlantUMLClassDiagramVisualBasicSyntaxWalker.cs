@@ -214,7 +214,6 @@
                 }));
         }
 
-        // TODO: Finish
         // TODO: Should Overrides map to stereotype_override?
         private string GetJoinedModifiers(
             MethodStatementSyntax methodStatement)
