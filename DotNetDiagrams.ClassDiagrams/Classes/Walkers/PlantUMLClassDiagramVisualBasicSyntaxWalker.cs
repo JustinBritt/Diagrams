@@ -282,6 +282,9 @@
                 case InterfaceBlockSyntax interfaceBlock:
                     this.Visit(interfaceBlock);
                     break;
+                case MethodBlockSyntax methodBlock:
+                    this.Visit(methodBlock);
+                    break;
                 case PropertyBlockSyntax propertyBlock:
                     this.Visit(propertyBlock);
                     break;
@@ -370,6 +373,17 @@
 
             base.Visit(
                 interfaceBlock);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            MethodBlockSyntax methodBlock)
+        {
+            string joinedModifiers = this.GetJoinedModifiers(
+                methodBlock.SubOrFunctionStatement);
+
+            base.Visit(
+                methodBlock);
         }
 
         // TODO: Finish
