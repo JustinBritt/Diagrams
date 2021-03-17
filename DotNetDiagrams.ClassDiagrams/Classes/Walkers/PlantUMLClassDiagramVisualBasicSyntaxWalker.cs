@@ -475,8 +475,8 @@
 
             var inherits = classBlock.Inherits;
 
-            // TypeParameterList
-            var typeParameterList = classBlock.ClassStatement.TypeParameterList;
+            string joinedTypeParameters = this.GetJoinedTypeParameters(
+                classBlock.ClassStatement);
 
             base.Visit(
                 classBlock);
