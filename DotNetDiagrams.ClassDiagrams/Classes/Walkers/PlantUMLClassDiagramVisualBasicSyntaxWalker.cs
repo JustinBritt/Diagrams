@@ -242,6 +242,26 @@
         }
 
         private string GetJoinedModifiers(
+            StructureStatementSyntax structureStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                structureStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             SubNewStatementSyntax subNewStatement)
         {
             return String.Join(
@@ -410,6 +430,9 @@
         private void Visit(
             StructureBlockSyntax structureBlock)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                structureBlock.StructureStatement);
+
             base.Visit(
                 structureBlock);
         }
