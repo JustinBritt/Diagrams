@@ -142,6 +142,27 @@
         }
 
         // TODO: Finish
+        private List<string> GetConstraintClauses(
+            TypeParameterConstraintClauseSyntax constraintClause)
+        {
+            List<string> constraintClauses = new List<string>();
+
+            if (constraintClause is TypeParameterSingleConstraintClauseSyntax single)
+            {
+                constraintClauses.Add(
+                    this.GetConstraint(
+                        single.Constraint));
+            }
+            else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
+            {
+                constraintClauses.AddRange(
+                    multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
+            }
+
+            return constraintClauses;
+        }
+
+        // TODO: Finish
         private string GetDeclarationStatementIdentifier(
             DeclarationStatementSyntax declarationStatement)
         {
@@ -184,17 +205,9 @@
             {
                 foreach (TypeParameterConstraintClauseSyntax constraintClause in classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause))
                 {
-                    if (constraintClause is TypeParameterSingleConstraintClauseSyntax single)
-                    {
-                        constraintClauses.Add(
-                            this.GetConstraint(
-                                single.Constraint));
-                    }
-                    else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
-                    {
-                        constraintClauses.AddRange(
-                            multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
-                    }
+                    constraintClauses.AddRange(
+                        this.GetConstraintClauses(
+                            constraintClause));
                 }
             }
 
