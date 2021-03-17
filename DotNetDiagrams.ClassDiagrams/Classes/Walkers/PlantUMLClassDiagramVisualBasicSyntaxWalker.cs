@@ -526,6 +526,39 @@
             string joinedConstraintClauses = String.Empty;
             //classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause);
 
+            if (classBlock.ClassStatement.TypeParameterList is not null)
+            {
+                foreach (TypeParameterSyntax parameter in classBlock.ClassStatement.TypeParameterList.Parameters)
+                {
+                    if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
+                    {
+                        var constraint = single;
+                    }
+                    else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
+                    {
+                        foreach (ConstraintSyntax constraint in multiple.Constraints)
+                        {
+                            if (constraint is SpecialConstraintSyntax specialConstraint)
+                            {
+                                var text = constraint.ToString();
+                            }
+                            else if (constraint is TypeConstraintSyntax typeConstraint)
+                            {
+                                var text = constraint.ToString();
+                            }
+                            else
+                            {
+                                var text = constraint.ToString();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("");
+                    }
+                }
+            }    
+            
             base.Visit(
                 classBlock);
         }
