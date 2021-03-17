@@ -162,6 +162,26 @@
                 }));
         }
 
+        private string GetJoinedModifiers(
+            EventStatementSyntax eventStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                eventStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         // TODO: Should Dim be mapped to an empty string?
         // TODO: Should WithEvents be mapped to an empty string?
         private string GetJoinedModifiers(
@@ -378,6 +398,9 @@
         private void Visit(
             EventBlockSyntax eventBlock)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                   eventBlock.EventStatement);
+
             base.Visit(
                 eventBlock);
         }
