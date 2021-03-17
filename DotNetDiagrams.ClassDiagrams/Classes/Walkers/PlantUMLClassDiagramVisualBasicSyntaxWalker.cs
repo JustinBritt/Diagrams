@@ -535,7 +535,16 @@
 
                         if (constraint is SpecialConstraintSyntax specialConstraint)
                         {
-                            var text = specialConstraint.ToString();
+                            var text = constraint.Kind() switch
+                            {
+                                SyntaxKind.ClassConstraint => "Class",
+
+                                SyntaxKind.NewConstraint => "New",
+
+                                SyntaxKind.StructureConstraint => "Structure",
+
+                                _ => throw new Exception("")
+                            };
                         }
                         else if (constraint is TypeConstraintSyntax typeConstraint)
                         {
@@ -548,7 +557,16 @@
                         {
                             if (constraint is SpecialConstraintSyntax specialConstraint)
                             {
-                                var text = constraint.ToString();
+                                var text = constraint.Kind() switch
+                                {
+                                    SyntaxKind.ClassConstraint => "Class",
+
+                                    SyntaxKind.NewConstraint => "New",
+
+                                    SyntaxKind.StructureConstraint => "Structure",
+
+                                    _ => throw new Exception("")
+                                };
                             }
                             else if (constraint is TypeConstraintSyntax typeConstraint)
                             {
