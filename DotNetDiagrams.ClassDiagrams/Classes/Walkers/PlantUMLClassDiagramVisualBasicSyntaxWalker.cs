@@ -212,7 +212,6 @@
                 }));
         }
 
-        // TODO: Finish
         private string GetJoinedModifiers(
             MethodStatementSyntax methodStatement)
         {
