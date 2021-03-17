@@ -225,6 +225,16 @@
                 : String.Empty;
         }
 
+        private string GetJoinedConstraintClauses(
+            StructureBlockSyntax structureBlock)
+        {
+            return structureBlock.StructureStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    structureBlock.StructureStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
