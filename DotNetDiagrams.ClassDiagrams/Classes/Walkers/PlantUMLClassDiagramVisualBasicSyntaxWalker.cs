@@ -196,6 +196,7 @@
                 : String.Empty;
         }
 
+        // TODO: Finish
         private string GetJoinedConstraintClauses(
             ClassBlockSyntax classBlock)
         {
@@ -203,12 +204,8 @@
 
             if (classBlock.ClassStatement.TypeParameterList is not null)
             {
-                foreach (TypeParameterConstraintClauseSyntax constraintClause in classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause))
-                {
-                    constraintClauses.AddRange(
-                        this.GetConstraintClauses(
-                            constraintClause));
-                }
+                constraintClauses.AddRange(
+                    classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)));
             }
 
             return String.Join(
