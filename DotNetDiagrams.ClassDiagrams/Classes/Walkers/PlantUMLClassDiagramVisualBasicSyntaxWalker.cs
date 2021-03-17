@@ -524,7 +524,6 @@
                 classBlock.ClassStatement);
 
             string joinedConstraintClauses = String.Empty;
-            //classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause);
 
             if (classBlock.ClassStatement.TypeParameterList is not null)
             {
