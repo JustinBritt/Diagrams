@@ -535,11 +535,11 @@
 
                         if (constraint is SpecialConstraintSyntax specialConstraint)
                         {
-                            var text = constraint.ToString();
+                            var text = specialConstraint.ToString();
                         }
                         else if (constraint is TypeConstraintSyntax typeConstraint)
                         {
-                            var text = constraint.ToString();
+                            var text = this.GetTypeName(typeConstraint, classBlock.SyntaxTree);
                         }
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
@@ -552,7 +552,9 @@
                             }
                             else if (constraint is TypeConstraintSyntax typeConstraint)
                             {
-                                var text = constraint.ToString();
+                                var text = this.GetTypeName(typeConstraint, classBlock.SyntaxTree);
+
+                                var stop = true;
                             }
                         }
                     }
