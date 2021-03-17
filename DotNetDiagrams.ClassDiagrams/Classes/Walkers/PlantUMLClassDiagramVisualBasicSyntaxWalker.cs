@@ -141,7 +141,6 @@
             };
         }
 
-        // TODO: Finish
         private List<string> GetConstraintClauses(
             TypeParameterConstraintClauseSyntax constraintClause)
         {
@@ -156,7 +155,7 @@
             else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
             {
                 constraintClauses.AddRange(
-                    multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
+                    multiple.Constraints.Select(w => this.GetConstraint(w)));
             }
 
             return constraintClauses;
