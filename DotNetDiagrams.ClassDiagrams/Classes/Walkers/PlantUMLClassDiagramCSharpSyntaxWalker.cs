@@ -1147,10 +1147,10 @@
                 if (!this.Diagrams.ContainsTitle(this.currentTitle))
                 {
                     this.Diagrams.AddTitle(this.currentTitle);
-                }
 
-                this.AddHeader(
-                    this.currentTitle);
+                    this.AddHeader(
+                        this.currentTitle);
+                }
             }
         }
 
