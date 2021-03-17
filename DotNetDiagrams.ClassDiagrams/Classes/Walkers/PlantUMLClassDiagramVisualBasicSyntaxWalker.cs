@@ -18,6 +18,11 @@
     {
         private const string modifier_static = "{static}";
 
+        private const string PlantUML_packagePrivate = "~";
+        private const string PlantUML_private = "-";
+        private const string PlantUML_protected = "#";
+        private const string PlantUML_public = "+";
+
         private const string stereotype_add = "<<add>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_get = "<<get>>";
