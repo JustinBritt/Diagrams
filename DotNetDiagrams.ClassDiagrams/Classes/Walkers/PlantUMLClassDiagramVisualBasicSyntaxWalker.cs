@@ -175,7 +175,6 @@
                 : String.Empty;
         }
 
-        // TODO: Finish
         private string GetJoinedConstraintClauses(
             ClassBlockSyntax classBlock)
         {
