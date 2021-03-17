@@ -186,14 +186,16 @@
         }
 
         private string GetJoinedModifiers(
-            SubNewStatementSyntax subNewStatement)
+            InterfaceStatementSyntax interfaceStatement)
         {
             return String.Join(
                 stringJoinSeparator_modifiers,
-                subNewStatement.Modifiers
+                interfaceStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
                     "Friend" => stereotype_internal,
+
+                    "Partial" => stereotype_partial,
 
                     "Private" => stereotype_private,
 
@@ -206,16 +208,14 @@
         }
 
         private string GetJoinedModifiers(
-            InterfaceStatementSyntax interfaceStatement)
+            SubNewStatementSyntax subNewStatement)
         {
             return String.Join(
                 stringJoinSeparator_modifiers,
-                interfaceStatement.Modifiers
+                subNewStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
                     "Friend" => stereotype_internal,
-
-                    "Partial" => stereotype_partial,
 
                     "Private" => stereotype_private,
 
