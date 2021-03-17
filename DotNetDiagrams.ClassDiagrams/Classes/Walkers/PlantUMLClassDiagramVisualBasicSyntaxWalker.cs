@@ -555,11 +555,7 @@
                     }
                     else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
-                        foreach (ConstraintSyntax constraint in multiple.Constraints)
-                        {
-                            string text = this.GetConstraint(
-                                constraint);
-                        }
+                        string cons = String.Join(",", multiple.Constraints.Select(w => this.GetConstraint(w)).ToList());
                     }
                 }
             }    
