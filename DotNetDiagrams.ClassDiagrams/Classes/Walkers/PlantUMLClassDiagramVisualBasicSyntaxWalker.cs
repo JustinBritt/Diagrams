@@ -183,14 +183,14 @@
 
             if (classBlock.ClassStatement.TypeParameterList is not null)
             {
-                foreach (TypeParameterSyntax parameter in classBlock.ClassStatement.TypeParameterList.Parameters)
+                foreach (TypeParameterConstraintClauseSyntax constraintClause in classBlock.ClassStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause))
                 {
-                    if (parameter.TypeParameterConstraintClause is TypeParameterSingleConstraintClauseSyntax single)
+                    if (constraintClause is TypeParameterSingleConstraintClauseSyntax single)
                     {
                         joinedConstraintClauses = this.GetConstraint(
                             single.Constraint);
                     }
-                    else if (parameter.TypeParameterConstraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
+                    else if (constraintClause is TypeParameterMultipleConstraintClauseSyntax multiple)
                     {
                         joinedConstraintClauses = String.Join(
                             stringJoinSeparator_constraintClauses,
