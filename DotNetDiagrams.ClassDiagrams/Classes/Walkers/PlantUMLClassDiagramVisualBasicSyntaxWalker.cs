@@ -652,6 +652,9 @@
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 interfaceBlock.InterfaceStatement);
 
+            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
+                interfaceBlock);
+
             base.Visit(
                 interfaceBlock);
         }
