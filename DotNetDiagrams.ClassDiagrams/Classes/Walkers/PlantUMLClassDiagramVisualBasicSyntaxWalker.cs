@@ -1149,6 +1149,18 @@
                 : $"{variableType} {variableNames}";
         }
 
+        // TODO: Check
+        private string GetVariableTypeName(
+            VariableDeclaratorSyntax variableDeclarator)
+        {
+            return variableDeclarator.AsClause is not null
+                ? this.GetAsClauseTypeName(
+                    variableDeclarator.AsClause)
+                : this.GetTypeName(
+                    syntaxNode: variableDeclarator,
+                    syntaxTree: variableDeclarator.SyntaxTree);
+        }
+
         // TODO: Update types
         private bool ShouldDiagramBeStarted(
             DeclarationStatementSyntax declarationStatement)
