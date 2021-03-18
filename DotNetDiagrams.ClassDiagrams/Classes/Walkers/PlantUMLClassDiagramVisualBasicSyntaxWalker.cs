@@ -669,23 +669,30 @@
                     classBlock);
             }
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                classBlock.ClassStatement);
+            string command = this.BuildClassDeclarationCommand(
+                className: this.GetJoinedNamespaceTypeName(
+                    classBlock),
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    classBlock),
+                joinedExtends: this.GetJoinedExtends(
+                    classBlock),
+                joinedImplements: this.GetJoinedImplements(
+                    classBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    classBlock.ClassStatement),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    classBlock.ClassStatement));
 
-            string joinedExtends = this.GetJoinedExtends(
-                classBlock);
-
-            string joinedImplements = this.GetJoinedImplements(
-                classBlock);
-
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                classBlock.ClassStatement);
-
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                classBlock);
+            this.AddCommand(
+                command: command,
+                typeName: classBlock.ClassStatement.Identifier.ValueText);
 
             base.Visit(
                 classBlock);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: classBlock.ClassStatement.Identifier.ValueText);
         }
 
         // TODO: Finish
