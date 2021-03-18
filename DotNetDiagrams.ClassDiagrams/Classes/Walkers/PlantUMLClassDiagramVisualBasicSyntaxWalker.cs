@@ -660,6 +660,7 @@
         }
 
         // TODO: Finish
+        // TODO: Account for anchor relationships
         private void Visit(
             ClassBlockSyntax classBlock)
         {
