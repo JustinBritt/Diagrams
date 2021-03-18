@@ -666,6 +666,27 @@
                 ? targetType.ToString()
                 : syntaxNode.ToString();
         }
+        
+        // TODO: Update types
+        private bool ShouldDiagramBeStarted(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            bool result = false;
+
+            List<DeclarationStatementSyntax> declaredTypes = new List<DeclarationStatementSyntax>();
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<EnumBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<InterfaceBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ModuleBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<StructureBlockSyntax>());
+
+            if (declarationStatement == declaredTypes.First())
+            {
+                result = true;
+            }
+
+            return result;
+        }
 
         private void StartDiagram(
             DeclarationStatementSyntax declarationStatement)
