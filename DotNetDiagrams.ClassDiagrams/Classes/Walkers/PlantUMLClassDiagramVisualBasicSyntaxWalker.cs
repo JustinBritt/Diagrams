@@ -158,6 +158,31 @@
             return sb.ToString();
         }
 
+        private string BuildConstructorBlockCommand(
+            string constructorName,
+            string joinedModifiers,
+            string joinedParameters)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(constructorName);
+
+            sb.Append(PlantUML_leftParenthesis);
+
+            sb.Append(joinedParameters);
+
+            sb.Append(PlantUML_rightParenthesis);
+
+            return sb.ToString();
+        }
+
         private string GetAccessor(
             AccessorStatementSyntax accessorStatement)
         {
