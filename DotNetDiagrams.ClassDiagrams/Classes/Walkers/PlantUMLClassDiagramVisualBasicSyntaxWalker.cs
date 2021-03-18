@@ -837,6 +837,16 @@
                 : String.Empty;
         }
 
+        private string GetJoinedParameters(
+            MethodBlockSyntax methodBlock)
+        {
+            return methodBlock.SubOrFunctionStatement.ParameterList.Parameters.Count > 0
+                ? String.Join(
+                    stringJoinSeparator_parameters,
+                    methodBlock.SubOrFunctionStatement.ParameterList.Parameters.Select(w => this.GetParameter(methodBlock, w)))
+                : String.Empty;
+        }
+
         private string GetJoinedTypeParameters(
             ClassStatementSyntax classStatement)
         {
