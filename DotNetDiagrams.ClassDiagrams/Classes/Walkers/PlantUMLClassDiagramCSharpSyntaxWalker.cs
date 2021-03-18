@@ -662,6 +662,14 @@
                 joinedConstraints);
         }
 
+        private string GetDefault(
+            ParameterSyntax parameter)
+        {
+            return parameter.Default is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetEqualsValue(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
@@ -1178,12 +1186,9 @@
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
         {
-            string defaultEquals = parameter.Default is not null
-                ? stereotype_equals
-                : String.Empty;
-
             return this.BuildParameter(
-                defaultEquals: defaultEquals,
+                defaultEquals: this.GetDefault(
+                    parameter),
                 joinedModifiers: this.GetJoinedModifiers(
                     parameter),
                 parameterName: parameter.Identifier.ValueText,
