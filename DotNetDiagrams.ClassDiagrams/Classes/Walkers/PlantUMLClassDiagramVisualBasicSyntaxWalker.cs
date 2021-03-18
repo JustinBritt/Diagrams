@@ -1326,17 +1326,17 @@
             // TODO: Update name
             string typeName = String.Empty;
 
-            if (constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
+            if (methodBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
             {
-                typeName = constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
+                typeName = methodBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
             }
-            else if (constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
+            else if (methodBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
             {
-                typeName = constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
+                typeName = methodBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
             }
-            else if (constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
+            else if (methodBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
             {
-                typeName = constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
+                typeName = methodBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
             }
             else
             {
