@@ -708,6 +708,10 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 constructorBlock.SubNewStatement);
 
+            var parameterList = constructorBlock.SubNewStatement.ParameterList.Parameters.ToList();
+
+            string joinedParameters = "";
+
             base.Visit(
                 constructorBlock);
         }
