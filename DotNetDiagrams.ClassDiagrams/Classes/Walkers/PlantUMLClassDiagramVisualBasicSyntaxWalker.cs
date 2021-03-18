@@ -37,6 +37,7 @@
         private const string stereotype_add = "<<add>>";
         private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
+        private const string stereotype_equals = "<<=>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_override = "<<override>>";
