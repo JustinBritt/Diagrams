@@ -1127,7 +1127,6 @@
                 propertyBlock);
         }
 
-        // TODO: Finish 
         private void Visit(
             StructureBlockSyntax structureBlock)
         {
