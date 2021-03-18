@@ -621,13 +621,8 @@
 
             var joinedInherits = classBlock.Inherits;
 
-            foreach (InheritsStatementSyntax inheritsStatement in classBlock.Inherits)
-            {
-                foreach (TypeSyntax type in inheritsStatement.Types)
-                {
-                    string name = this.GetTypeName(type, inheritsStatement.SyntaxTree);
-                }
-            }
+            string joinedExtends = this.GetJoinedExtends(
+                classBlock);
 
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 classBlock.ClassStatement);
