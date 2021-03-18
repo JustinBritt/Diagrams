@@ -1212,6 +1212,12 @@
             string joinedConstraintClauses = this.GetJoinedConstraintClauses(
                 methodBlock);
 
+            // TODO: Update
+            string joinedParameters = "";
+
+            // TODO: Update
+            string returnTypeName = "";
+
             base.Visit(
                 methodBlock);
         }
