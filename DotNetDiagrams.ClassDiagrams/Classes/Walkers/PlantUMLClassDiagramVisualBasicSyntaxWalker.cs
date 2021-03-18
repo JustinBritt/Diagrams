@@ -1072,10 +1072,18 @@
                 typeName: enumBlock.EnumStatement.Identifier.ValueText);
         }
 
-        // TODO: Finish
         private void Visit(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
+            string command = this.BuildEnumMemberDeclarationCommand(
+                enumMemberName: enumMemberDeclaration.Identifier.ValueText,
+                initializer: this.GetInitializer(
+                    enumMemberDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: enumMemberDeclaration.FirstAncestorOrSelf<EnumBlockSyntax>().EnumStatement.Identifier.ValueText);
+
             base.Visit(
                 enumMemberDeclaration);
         }
