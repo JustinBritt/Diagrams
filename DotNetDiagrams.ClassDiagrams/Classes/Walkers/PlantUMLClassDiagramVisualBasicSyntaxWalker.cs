@@ -332,10 +332,7 @@
             return sb.ToString();
         }
 
-        // TODO: Update
         private string BuildPropertyBlockCommand(
-            string explicitInterfaceSpecifierTypeName,
-            string expression,
             string initializer,
             string joinedAccessors,
             string joinedModifiers,
@@ -355,11 +352,6 @@
 
             sb.Append(" ");
 
-            if (explicitInterfaceSpecifierTypeName.Length > 0)
-            {
-                sb.Append($"{explicitInterfaceSpecifierTypeName}.");
-            }
-
             sb.Append(propertyName);
 
             sb.Append(" : ");
@@ -367,11 +359,6 @@
             if (joinedAccessors.Length > 0)
             {
                 sb.Append(joinedAccessors);
-            }
-
-            if (expression.Length > 0)
-            {
-                sb.Append(expression);
             }
 
             if (initializer.Length > 0)
@@ -1391,11 +1378,8 @@
                 throw new Exception("");
             }
 
-            // TODO: Account for explicitInterfaceSpecifierTypeName, expression?
             // TODO: Check names
             string command = this.BuildPropertyBlockCommand(
-                explicitInterfaceSpecifierTypeName: "",
-                expression: "",
                 initializer: this.GetInitializer(
                     propertyBlock),
                 joinedAccessors: this.GetJoinedAccessors(
