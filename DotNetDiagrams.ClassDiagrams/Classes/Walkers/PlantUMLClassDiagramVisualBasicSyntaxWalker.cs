@@ -1388,30 +1388,9 @@
                 typeName: interfaceBlock.InterfaceStatement.Identifier.ValueText);
         }
 
-        // TODO: Finish
         private void Visit(
             MethodBlockSyntax methodBlock)
         {
-            // TODO: Update name
-            string typeName = String.Empty;
-
-            if (methodBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
-            {
-                typeName = methodBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
-            }
-            else if (methodBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
-            {
-                typeName = methodBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
-            }
-            else if (methodBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
-            {
-                typeName = methodBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
-            }
-            else
-            {
-                throw new Exception("");
-            }
-
             string command = this.BuildMethodBlockCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodBlock),
@@ -1427,7 +1406,8 @@
 
             this.AddCommand(
                 command: command,
-                typeName: typeName);
+                typeName: this.GetFirstTypeAncestorTypeName(
+                    methodBlock));
 
             base.Visit(
                 methodBlock);
