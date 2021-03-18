@@ -773,7 +773,7 @@
                 propertyStatement.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "" => "",
+                    "Friend" => stereotype_internal,
 
                     _ => throw new Exception("")
                 }));
