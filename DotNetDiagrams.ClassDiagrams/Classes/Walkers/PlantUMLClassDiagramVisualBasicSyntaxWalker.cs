@@ -23,6 +23,7 @@
         private const string PlantUML_enum = "enum";
         private const string PlantUML_extends = "extends";
         private const string PlantUML_implements = "implements";
+        private const string PlantUML_interface = "interface";
         private const string PlantUML_leftBrace = "{";
         private const string PlantUML_leftParenthesis = "(";
         private const string PlantUML_packagePrivate = "~";
