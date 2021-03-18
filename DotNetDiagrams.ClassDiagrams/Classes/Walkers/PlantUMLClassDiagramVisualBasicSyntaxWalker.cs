@@ -660,6 +660,14 @@
                 declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => this.GetDeclarationStatementIdentifier(w)));
         }
 
+        private string GetDefault(
+            ParameterSyntax parameter)
+        {
+            return parameter.Default is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetEventTypeName(
             EventBlockSyntax eventBlock)
         {
