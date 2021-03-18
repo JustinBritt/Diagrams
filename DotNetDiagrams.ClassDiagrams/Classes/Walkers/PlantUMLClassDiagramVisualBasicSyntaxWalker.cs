@@ -577,6 +577,20 @@
                 : String.Empty;
         }
 
+        // TODO: Update
+        private string GetParameter(
+            ConstructorBlockSyntax constructorBlock,
+            ParameterSyntax parameter)
+        {
+            string parameterName = parameter.Identifier.Identifier.ValueText;
+
+            string parameterTypeName = this.GetTypeName(
+                parameter,
+                constructorBlock.SyntaxTree);
+
+            return $"{parameterTypeName} {parameterName}";
+        }
+
         private SemanticModel GetSemanticModelOrDefault(
             SyntaxTree syntaxTree)
         {
