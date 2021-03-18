@@ -1349,6 +1349,26 @@
         private void Visit(
             PropertyBlockSyntax propertyBlock)
         {
+            // TODO: Update name
+            string typeName = String.Empty;
+
+            if (propertyBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
+            {
+                typeName = propertyBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
+            }
+            else if (propertyBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
+            {
+                typeName = propertyBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
+            }
+            else if (propertyBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
+            {
+                typeName = propertyBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
             // TODO: Account for explicitInterfaceSpecifierTypeName, expression?
             // TODO: Check names
             string command = this.BuildPropertyBlockCommand(
@@ -1365,10 +1385,9 @@
                     propertyBlock.PropertyStatement.AsClause,
                     propertyBlock.SyntaxTree));
 
-            // TODO: Update typeName
             this.AddCommand(
                 command: command,
-                typeName: Guid.NewGuid().ToString());
+                typeName: typeName);
 
             base.Visit(
                 propertyBlock);
