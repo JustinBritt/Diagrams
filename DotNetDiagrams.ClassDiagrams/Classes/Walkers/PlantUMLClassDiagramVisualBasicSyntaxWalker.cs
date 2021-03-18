@@ -468,7 +468,13 @@
         {
             string typeName = String.Empty;
 
-            if(asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() is not null)
+            if (asClause.ChildNodes().OfType<AsNewClauseSyntax>().FirstOrDefault() is not null)
+            {
+                typeName = this.GetTypeName(
+                    syntaxNode: asClause.ChildNodes().OfType<AsNewClauseSyntax>().FirstOrDefault(),
+                    syntaxTree: asClause.SyntaxTree);
+            }
+            else if(asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() is not null)
             {
                 typeName = this.GetTypeName(
                     syntaxNode: asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault(),
