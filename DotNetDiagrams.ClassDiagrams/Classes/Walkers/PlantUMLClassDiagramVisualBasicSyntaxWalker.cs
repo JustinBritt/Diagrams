@@ -1430,15 +1430,22 @@
                 enumMemberDeclaration);
         }
 
-        // TODO: Finish
         private void Visit(
             EventBlockSyntax eventBlock)
         {
-            string joinedAccessors = this.GetJoinedAccessors(
-                eventBlock);
+            string command = this.BuildEventBlockCommand(
+                eventName: eventBlock.EventStatement.Identifier.ValueText,
+                eventTypeName: this.GetEventTypeName(
+                    eventBlock),
+                joinedAccessors: this.GetJoinedAccessors(
+                    eventBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    eventBlock.EventStatement));
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                   eventBlock.EventStatement);
+            this.AddCommand(
+                command: command,
+                typeName: this.GetFirstTypeAncestorTypeName(
+                    eventBlock));
 
             base.Visit(
                 eventBlock);
