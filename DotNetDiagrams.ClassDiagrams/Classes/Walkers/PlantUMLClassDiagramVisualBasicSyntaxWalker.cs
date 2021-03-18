@@ -1298,6 +1298,13 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 propertyBlock.PropertyStatement);
 
+            string propertyName = propertyBlock.PropertyStatement.Identifier.ValueText;
+
+            // TODO: Check
+            string propertyTypeName = this.GetTypeName(
+                    propertyBlock.PropertyStatement.AsClause,
+                    propertyBlock.SyntaxTree);
+
             base.Visit(
                 propertyBlock);
         }
