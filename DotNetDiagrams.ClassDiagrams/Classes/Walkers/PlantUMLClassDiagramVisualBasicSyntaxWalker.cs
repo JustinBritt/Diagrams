@@ -1227,20 +1227,25 @@
         private void Visit(
             MethodBlockSyntax methodBlock)
         {
-            string joinedModifiers = this.GetJoinedModifiers(
-                methodBlock.SubOrFunctionStatement);
+            // TODO: Check return type
+            string command = this.BuildMethodBlockCommand(
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    methodBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    methodBlock.SubOrFunctionStatement),
+                joinedParameters: this.GetJoinedParameters(
+                    methodBlock),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    methodBlock.SubOrFunctionStatement),
+                methodName: methodBlock.SubOrFunctionStatement.Identifier.ValueText,
+                returnTypeName: this.GetTypeName(
+                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
+                    syntaxTree: methodBlock.SyntaxTree));
 
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                methodBlock.SubOrFunctionStatement);
-
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                methodBlock);
-
-            // TODO: Update
-            string joinedParameters = "";
-
-            // TODO: Update
-            string returnTypeName = "";
+            // TODO: Check type
+            this.AddCommand(
+                command: command,
+                typeName: methodBlock.FirstAncestorOrSelf<ClassStatementSyntax>().Identifier.ValueText);
 
             base.Visit(
                 methodBlock);
