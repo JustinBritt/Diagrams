@@ -103,6 +103,56 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
+        // TODO: Finish
+        private string BuildClassDeclarationCommand(
+            string className,
+            string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers,
+            string joinedTypeParameters)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PlantUML_class);
+
+            sb.Append(" ");
+
+            sb.Append(className);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedExtends.Length > 0)
+            {
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
         private string GetAccessor(
             AccessorStatementSyntax accessorStatement)
         {
