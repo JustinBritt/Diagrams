@@ -1349,21 +1349,26 @@
         private void Visit(
             PropertyBlockSyntax propertyBlock)
         {
-            string joinedAccessors = this.GetJoinedAccessors(
-                propertyBlock);
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                propertyBlock.PropertyStatement);
-
-            string propertyName = propertyBlock.PropertyStatement.Identifier.ValueText;
-
-            // TODO: Check
-            string propertyTypeName = this.GetTypeName(
+            // TODO: Account for explicitInterfaceSpecifierTypeName, expression?
+            // TODO: Check names
+            string command = this.BuildPropertyBlockCommand(
+                explicitInterfaceSpecifierTypeName: "",
+                expression: "",
+                initializer: this.GetInitializer(
+                    propertyBlock),
+                joinedAccessors: this.GetJoinedAccessors(
+                    propertyBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    propertyBlock.PropertyStatement),
+                propertyName: propertyBlock.PropertyStatement.Identifier.ValueText,
+                propertyTypeName: this.GetTypeName(
                     propertyBlock.PropertyStatement.AsClause,
-                    propertyBlock.SyntaxTree);
+                    propertyBlock.SyntaxTree));
 
-            string initializer = this.GetInitializer(
-                propertyBlock);
+            // TODO: Update typeName
+            this.AddCommand(
+                command: command,
+                typeName: Guid.NewGuid().ToString());
 
             base.Visit(
                 propertyBlock);
