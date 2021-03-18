@@ -981,11 +981,22 @@
         {
             string parameterName = parameter.Identifier.Identifier.ValueText;
 
-            string parameterTypeName = this.GetTypeName(
-                parameter,
-                methodBlock.SyntaxTree);
+            string parameterTypeName = this.GetParameterTypeName(
+                parameter);
 
             return $"{parameterTypeName} {parameterName}";
+        }
+
+        private string GetParameterTypeName(
+            ParameterSyntax parameter)
+        {
+            return parameter.AsClause is not null
+                ? this.GetTypeName(
+                    syntaxNode: parameter.AsClause.Type,
+                    syntaxTree: parameter.SyntaxTree)
+                : this.GetTypeName(
+                    syntaxNode: parameter,
+                    syntaxTree: parameter.SyntaxTree);
         }
 
         // TODO: Add const for void
