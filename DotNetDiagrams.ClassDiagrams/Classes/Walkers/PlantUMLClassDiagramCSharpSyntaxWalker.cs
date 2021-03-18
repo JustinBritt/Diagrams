@@ -1358,7 +1358,8 @@
         {
             string command = this.BuildEnumMemberDeclarationCommand(
                 enumMemberName: enumMemberDeclaration.Identifier.ValueText,
-                equalsValue: this.GetEqualsValue(enumMemberDeclaration));
+                equalsValue: this.GetEqualsValue(
+                    enumMemberDeclaration));
 
             this.AddCommand(
                 command: command,
