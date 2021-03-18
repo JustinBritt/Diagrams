@@ -1183,6 +1183,7 @@
             ParameterSyntax parameter)
         {
             return this.BuildParameter(
+                defaultEquals: "",
                 joinedModifiers: this.GetJoinedModifiers(
                     parameter),
                 parameterName: parameter.Identifier.Identifier.ValueText,
