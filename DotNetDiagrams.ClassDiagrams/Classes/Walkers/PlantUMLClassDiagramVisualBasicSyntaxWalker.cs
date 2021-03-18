@@ -757,13 +757,32 @@
         private void Visit(
             ConstructorBlockSyntax constructorBlock)
         {
-            string joinedModifiers = this.GetJoinedModifiers(
-                constructorBlock.SubNewStatement);
+            // TODO: Update name
+            string typeName = String.Empty;
 
-            var parameterList = constructorBlock.SubNewStatement.ParameterList.Parameters.ToList();
+            if (constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
+            {
+                typeName = constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
+            }
+            else
+            {
+                typeName = "?";
+            }
 
-            string joinedParameters = this.GetJoinedParameters(
-                constructorBlock);
+            // TODO: Update constructor name
+            string constructorName = "";// constructorBlock.SubNewStatement.SubKeyword.ToString() + " " + constructorBlock.SubNewStatement.NewKeyword.ToString();
+            constructorName = typeName;
+
+            string command = this.BuildConstructorBlockCommand(
+                constructorName: constructorName,
+                joinedModifiers: this.GetJoinedModifiers(
+                    constructorBlock.SubNewStatement),
+                joinedParameters: this.GetJoinedParameters(
+                    constructorBlock));
+
+            this.AddCommand(
+                command: command,
+                typeName: typeName);
 
             base.Visit(
                 constructorBlock);
