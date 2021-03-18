@@ -1324,6 +1324,8 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 fieldDeclaration);
 
+            var declarators = fieldDeclaration.Declarators.ToList();
+
             base.Visit(
                 fieldDeclaration);
         }
