@@ -904,11 +904,26 @@
                     anchorRelationships);
             }
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                enumBlock.EnumStatement);
+            string command = this.BuildEnumBlockCommand(
+                enumName: this.GetJoinedNamespaceTypeName(
+                    enumBlock),
+                joinedExtends: this.GetJoinedExtends(
+                    enumBlock),
+                joinedImplements: this.GetJoinedImplements(
+                    enumBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    enumBlock.EnumStatement));
+
+            this.AddCommand(
+                command: command,
+                typeName: enumBlock.EnumStatement.Identifier.ValueText);
 
             base.Visit(
                 enumBlock);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: enumBlock.EnumStatement.Identifier.ValueText);
         }
 
         // TODO: Finish
