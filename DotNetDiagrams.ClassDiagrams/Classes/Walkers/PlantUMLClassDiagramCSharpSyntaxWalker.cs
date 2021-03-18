@@ -66,6 +66,7 @@
         private const string stereotype_set = "<<set>>";
         private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
+        private const string stereotype_this = "<<this>>";
         private const string stereotype_unsafe = "<<unsafe>>";
         private const string stereotype_virtual = "<<virtual>>";
         private const string stereotype_volatile = "<<volatile>>";
@@ -1010,7 +1011,6 @@
                 }));
         }
 
-        // TODO: Finish
         private string GetJoinedModifiers(
             ParameterSyntax parameter)
         {
@@ -1025,7 +1025,7 @@
 
                     "ref" => stereotype_ref,
 
-                    "this" => String.Empty,
+                    "this" => stereotype_this,
 
                     _ => throw new Exception("")
                 }));
