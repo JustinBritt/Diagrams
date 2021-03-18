@@ -1144,7 +1144,6 @@
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
         }
 
-        // TODO: Account for Default
         private string GetParameter(
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
@@ -1157,6 +1156,10 @@
             string parameterTypeName = this.GetTypeName(
                 parameter.Type,
                 baseMethodDeclaration.SyntaxTree);
+
+            string defaultEquals = parameter.Default is not null
+                ? stereotype_equals
+                : String.Empty;
 
             StringBuilder sb = new StringBuilder();
 
@@ -1172,6 +1175,12 @@
             sb.Append(" ");
 
             sb.Append(parameterName);
+
+            if (defaultEquals.Length > 0)
+            {
+                sb.Append(
+                    defaultEquals);
+            }
 
             return sb.ToString();
         }
