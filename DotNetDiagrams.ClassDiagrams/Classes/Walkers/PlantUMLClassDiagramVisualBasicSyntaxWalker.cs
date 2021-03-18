@@ -96,15 +96,18 @@
             string command,
             string typeName)
         {
-            if (this.Diagram.Types.ContainsKey(typeName))
+            if (this.Diagram is not null && this.Diagram.Types is not null)
             {
-                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
-            }
-            else
-            {
-                this.Diagram.Types.Add(typeName, new List<string>());
+                if (this.Diagram.Types.ContainsKey(typeName))
+                {
+                    this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+                }
+                else
+                {
+                    this.Diagram.Types.Add(typeName, new List<string>());
 
-                this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+                    this.Diagram.Types.Where(w => w.Key == typeName).Select(w => w.Value).SingleOrDefault().Add(command);
+                }
             }
         }
 
