@@ -735,7 +735,8 @@
 
             var parameterList = constructorBlock.SubNewStatement.ParameterList.Parameters.ToList();
 
-            string joinedParameters = "";
+            string joinedParameters = this.GetJoinedParameters(
+                constructorBlock);
 
             base.Visit(
                 constructorBlock);
