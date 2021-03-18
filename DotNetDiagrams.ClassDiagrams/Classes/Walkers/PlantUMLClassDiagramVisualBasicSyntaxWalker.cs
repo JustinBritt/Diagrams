@@ -189,8 +189,6 @@
 
         private string BuildEnumBlockCommand(
             string enumName,
-            string joinedExtends,
-            string joinedImplements,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
@@ -206,20 +204,6 @@
             if (joinedModifiers.Length > 0)
             {
                 sb.Append(joinedModifiers);
-
-                sb.Append(" ");
-            }
-
-            if (joinedExtends.Length > 0)
-            {
-                sb.Append($"{PlantUML_extends} {joinedExtends}");
-
-                sb.Append(" ");
-            }
-
-            if (joinedImplements.Length > 0)
-            {
-                sb.Append($"{PlantUML_implements} {joinedImplements}");
 
                 sb.Append(" ");
             }
@@ -906,10 +890,6 @@
 
             string command = this.BuildEnumBlockCommand(
                 enumName: this.GetJoinedNamespaceTypeName(
-                    enumBlock),
-                joinedExtends: this.GetJoinedExtends(
-                    enumBlock),
-                joinedImplements: this.GetJoinedImplements(
                     enumBlock),
                 joinedModifiers: this.GetJoinedModifiers(
                     enumBlock.EnumStatement));
