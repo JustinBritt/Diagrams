@@ -1433,31 +1433,9 @@
                 methodBlock);
         }
 
-        // TODO: Finish
         private void Visit(
             PropertyBlockSyntax propertyBlock)
         {
-            // TODO: Update name
-            string typeName = String.Empty;
-
-            if (propertyBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
-            {
-                typeName = propertyBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
-            }
-            else if (propertyBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
-            {
-                typeName = propertyBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
-            }
-            else if (propertyBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
-            {
-                typeName = propertyBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
-            }
-            else
-            {
-                throw new Exception("");
-            }
-
-            // TODO: Check names
             string command = this.BuildPropertyBlockCommand(
                 initializer: this.GetInitializer(
                     propertyBlock),
@@ -1471,7 +1449,8 @@
 
             this.AddCommand(
                 command: command,
-                typeName: typeName);
+                typeName: this.GetFirstTypeAncestorTypeName(
+                    propertyBlock));
 
             base.Visit(
                 propertyBlock);
