@@ -784,6 +784,8 @@
 
                     "ReadOnly" => stereotype_readonly,
 
+                    "Shared" => stereotype_static,
+
                     _ => throw new Exception("")
                 }));
         }
