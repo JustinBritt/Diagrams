@@ -1178,41 +1178,18 @@
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
         {
-            string joinedModifiers = this.GetJoinedModifiers(
-                parameter);
-            
-            string parameterName = parameter.Identifier.ValueText;
-
-            string parameterTypeName = this.GetTypeName(
-                parameter.Type,
-                baseMethodDeclaration.SyntaxTree);
-
             string defaultEquals = parameter.Default is not null
                 ? stereotype_equals
                 : String.Empty;
 
-            StringBuilder sb = new StringBuilder();
-
-            if (joinedModifiers.Length > 0)
-            {
-                sb.Append(joinedModifiers);
-
-                sb.Append(" ");
-            }
-
-            sb.Append(parameterTypeName);
-
-            sb.Append(" ");
-
-            sb.Append(parameterName);
-
-            if (defaultEquals.Length > 0)
-            {
-                sb.Append(
-                    defaultEquals);
-            }
-
-            return sb.ToString();
+            return this.BuildParameter(
+                defaultEquals: defaultEquals,
+                joinedModifiers: this.GetJoinedModifiers(
+                    parameter),
+                parameterName: parameter.Identifier.ValueText,
+                parameterTypeName: this.GetTypeName(
+                    parameter.Type,
+                    baseMethodDeclaration.SyntaxTree));
         }
 
         private SemanticModel GetSemanticModelOrDefault(
