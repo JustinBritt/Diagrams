@@ -22,11 +22,13 @@
         private const string PlantUML_extends = "extends";
         private const string PlantUML_implements = "implements";
         private const string PlantUML_leftBrace = "{";
+        private const string PlantUML_leftParenthesis = "(";
         private const string PlantUML_packagePrivate = "~";
         private const string PlantUML_private = "-";
         private const string PlantUML_protected = "#";
         private const string PlantUML_public = "+";
         private const string PlantUML_rightBrace = "}";
+        private const string PlantUML_rightParenthesis = ")";
         private const string PlantUML_title = "title";
 
         private const string stereotype_add = "<<add>>";
