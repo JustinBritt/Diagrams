@@ -45,6 +45,7 @@
         private const string stringJoinSeparator_constraintClauses = ", ";
         private const string stringJoinSeparator_declarationStatementTypeNames = ".";
         private const string stringJoinSeparator_extends = ",";
+        private const string stringJoinSeparator_implements = ",";
         private const string stringJoinSeparator_modifiers = " ";
         private const string stringJoinSeparator_typeParameters = ", ";
 
