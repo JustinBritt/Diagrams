@@ -960,16 +960,15 @@
                 : String.Empty;
         }
 
-        // TODO: Account for Modifiers, Default, AsClause
+        // TODO: Account for Modifiers, Default
         private string GetParameter(
             ConstructorBlockSyntax constructorBlock,
             ParameterSyntax parameter)
         {
             string parameterName = parameter.Identifier.Identifier.ValueText;
 
-            string parameterTypeName = this.GetTypeName(
-                parameter,
-                constructorBlock.SyntaxTree);
+            string parameterTypeName = this.GetParameterTypeName(
+                parameter);
 
             return $"{parameterTypeName} {parameterName}";
         }
