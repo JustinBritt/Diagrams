@@ -558,6 +558,32 @@
                 declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => this.GetDeclarationStatementIdentifier(w)));
         }
 
+        // TODO: Finish
+        private string GetFirstTypeAncestorTypeName(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            string typeName = String.Empty;
+
+            if (declarationStatement.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
+            {
+                typeName = declarationStatement.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
+            }
+            else if (declarationStatement.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
+            {
+                typeName = declarationStatement.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
+            }
+            else if (declarationStatement.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
+            {
+                typeName = declarationStatement.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
+            return typeName;
+        }
+
         private string GetInitializer(
             EnumMemberDeclarationSyntax enumMemberDeclaration)
         {
