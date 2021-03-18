@@ -1007,6 +1007,21 @@
                 }));
         }
 
+        // TODO: Finish
+        private string GetJoinedModifiers(
+            ParameterSyntax parameter)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                parameter.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "this" => String.Empty,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -1120,18 +1135,21 @@
                 baseFieldDeclaration.Declaration.Variables.Select(w => this.GetVariable(w)));
         }
 
-        // TODO: Account for Modifiers, Default
+        // TODO: Account for Default
         private string GetParameter(
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                parameter);
+            
             string parameterName = parameter.Identifier.ValueText;
 
             string parameterTypeName = this.GetTypeName(
                 parameter.Type,
                 baseMethodDeclaration.SyntaxTree);
 
-            return $"{parameterTypeName} {parameterName}";
+            return $"{joinedModifiers} {parameterTypeName} {parameterName}";
         }
 
         private SemanticModel GetSemanticModelOrDefault(
