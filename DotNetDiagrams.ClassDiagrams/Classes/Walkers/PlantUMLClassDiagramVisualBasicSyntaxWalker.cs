@@ -663,7 +663,10 @@
         private void Visit(
             ClassBlockSyntax classBlock)
         {
-            List<DeclarationStatementSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<DeclarationStatementSyntax>().ToList();
+            List<DeclarationStatementSyntax> declaredTypes = new List<DeclarationStatementSyntax>();
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<InterfaceBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<StructureBlockSyntax>());
 
             if (classBlock == declaredTypes.First())
             {
