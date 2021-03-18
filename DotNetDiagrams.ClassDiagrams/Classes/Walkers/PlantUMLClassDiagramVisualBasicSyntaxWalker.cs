@@ -734,11 +734,10 @@
             }
         }
 
-        // TODO: Account for anchor relationships
+        // TODO: Update types
         private void Visit(
             ClassBlockSyntax classBlock)
         {
-            // TODO: Update types
             List<DeclarationStatementSyntax> declaredTypes = new List<DeclarationStatementSyntax>();
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassBlockSyntax>());
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<EnumBlockSyntax>());
