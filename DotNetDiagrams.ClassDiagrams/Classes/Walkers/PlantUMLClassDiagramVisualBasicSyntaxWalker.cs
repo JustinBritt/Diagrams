@@ -1082,6 +1082,21 @@
         private void Visit(
             StructureBlockSyntax structureBlock)
         {
+            if (this.ShouldDiagramBeStarted(structureBlock))
+            {
+                this.StartDiagram(
+                    structureBlock);
+            }
+
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                structureBlock);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
             string joinedModifiers = this.GetJoinedModifiers(
                 structureBlock.StructureStatement);
 
