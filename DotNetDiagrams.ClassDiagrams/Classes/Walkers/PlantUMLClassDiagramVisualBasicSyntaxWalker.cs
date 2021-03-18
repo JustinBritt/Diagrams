@@ -915,6 +915,17 @@
             return $"{parameterTypeName} {parameterName}";
         }
 
+        // TODO: Add const for void
+        private string GetReturnTypeName(
+            MethodBlockSyntax methodBlock)
+        {
+            return methodBlock.SubOrFunctionStatement.AsClause is not null
+                ? this.GetTypeName(
+                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
+                    syntaxTree: methodBlock.SyntaxTree)
+                : "void";
+        }
+
         private SemanticModel GetSemanticModelOrDefault(
             SyntaxTree syntaxTree)
         {
@@ -1227,13 +1238,6 @@
         private void Visit(
             MethodBlockSyntax methodBlock)
         {
-            string returnTypeName = methodBlock.SubOrFunctionStatement.AsClause is not null
-                ? this.GetTypeName(
-                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
-                    syntaxTree: methodBlock.SyntaxTree)
-                : "void";
-
-            // TODO: Check return type
             string command = this.BuildMethodBlockCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodBlock),
@@ -1244,7 +1248,8 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     methodBlock.SubOrFunctionStatement),
                 methodName: methodBlock.SubOrFunctionStatement.Identifier.ValueText,
-                returnTypeName: returnTypeName);
+                returnTypeName: this.GetReturnTypeName(
+                    methodBlock));
 
             // TODO: Change typeName
             this.AddCommand(
