@@ -755,7 +755,6 @@
             }
         }
 
-        // TODO: Update types
         private void Visit(
             ClassBlockSyntax classBlock)
         {
