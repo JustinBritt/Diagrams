@@ -237,14 +237,13 @@
                 : String.Empty;
         }
 
-        // TODO: Finish
         private string GetJoinedExtends(
             ClassBlockSyntax classBlock)
         {
             return classBlock.Inherits.Count() > 0
                 ? String.Join(
                     stringJoinSeparator_extends,
-                    classBlock.Inherits.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, w.SyntaxTree)))
+                    classBlock.Inherits.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, classBlock.SyntaxTree)))
                 : String.Empty;
         }
 
