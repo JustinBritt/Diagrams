@@ -71,9 +71,10 @@
         private const string stringConcatSeparator_namespaceTypeNames = ".";
 
         private const string stringJoinSeparator_accessors = " ";
-        private const string stringJoinSeparator_baseListTypes = ",";
         private const string stringJoinSeparator_constraintClauses = ", ";
         private const string stringJoinSeparator_constraints = ", ";
+        private const string stringJoinSeparator_extends = ",";
+        private const string stringJoinSeparator_implements = ",";
         private const string stringJoinSeparator_modifiers = " ";
         private const string stringJoinSeparator_parameters = ", ";
         private const string stringJoinSeparator_typeDeclarationTypeNames = ".";
@@ -782,7 +783,7 @@
         {
             return baseTypeDeclaration.BaseList is not null
                 ? String.Join(
-                    stringJoinSeparator_baseListTypes,
+                    stringJoinSeparator_extends,
                     baseTypeDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(baseTypeDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
@@ -792,7 +793,7 @@
         {
             return baseTypeDeclaration.BaseList is not null
                 ? String.Join(
-                    stringJoinSeparator_baseListTypes,
+                    stringJoinSeparator_implements,
                     baseTypeDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(baseTypeDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Interface).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
