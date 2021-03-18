@@ -46,6 +46,7 @@
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_public = "<<public>>";
         private const string stereotype_raise = "<<raise>>";
+        private const string stereotype_readonly = "<<readonly>>";
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_set = "<<set>>";
@@ -774,6 +775,8 @@
                 .Select(w => w.ValueText switch
                 {
                     "Friend" => stereotype_internal,
+
+                    "ReadOnly" => stereotype_readonly,
 
                     _ => throw new Exception("")
                 }));
