@@ -1006,7 +1006,6 @@
                 fieldDeclaration);
         }
 
-        // TODO: Finish
         private void Visit(
             InterfaceBlockSyntax interfaceBlock)
         {
