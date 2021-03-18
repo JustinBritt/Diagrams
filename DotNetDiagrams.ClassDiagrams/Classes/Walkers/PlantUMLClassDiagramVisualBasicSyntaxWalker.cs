@@ -108,7 +108,6 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
-        // TODO: Finish
         private string BuildClassDeclarationCommand(
             string className,
             string joinedConstraintClauses,
