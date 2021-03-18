@@ -461,6 +461,7 @@
             return relationships;
         }
 
+        // TODO: Use pattern matching?
         private string GetAsClauseTypeName(
             AsClauseSyntax asClause)
         {
