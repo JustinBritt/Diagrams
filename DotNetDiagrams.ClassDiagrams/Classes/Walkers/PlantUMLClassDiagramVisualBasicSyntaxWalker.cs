@@ -764,6 +764,21 @@
                 }));
         }
 
+        // TODO: Finish
+        private string GetJoinedModifiers(
+            PropertyStatementSyntax propertyStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                propertyStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "" => "",
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             StructureStatementSyntax structureStatement)
         {
@@ -1268,6 +1283,9 @@
         {
             string joinedAccessors = this.GetJoinedAccessors(
                 propertyBlock);
+
+            string joinedModifiers = this.GetJoinedModifiers(
+                propertyBlock.PropertyStatement);
 
             base.Visit(
                 propertyBlock);
