@@ -741,6 +741,7 @@
             // TODO: Update types
             List<DeclarationStatementSyntax> declaredTypes = new List<DeclarationStatementSyntax>();
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ClassBlockSyntax>());
+            declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<EnumBlockSyntax>());
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<InterfaceBlockSyntax>());
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<ModuleBlockSyntax>());
             declaredTypes.AddRange(this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<StructureBlockSyntax>());
