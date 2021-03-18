@@ -461,7 +461,6 @@
             return relationships;
         }
 
-        // TODO: Finish
         private string GetAsClauseTypeName(
             AsClauseSyntax asClause)
         {
@@ -471,6 +470,12 @@
             {
                 typeName = this.GetTypeName(
                     syntaxNode: asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault(),
+                    syntaxTree: asClause.SyntaxTree);
+            }
+            else if (asClause.ChildNodes().OfType<PredefinedTypeSyntax>().FirstOrDefault() is not null)
+            {
+                typeName = this.GetTypeName(
+                    syntaxNode: asClause.ChildNodes().OfType<PredefinedTypeSyntax>().FirstOrDefault(),
                     syntaxTree: asClause.SyntaxTree);
             }
             else if (asClause.ChildNodes().OfType<QualifiedNameSyntax>().FirstOrDefault() is not null)
@@ -1029,9 +1034,8 @@
             PropertyBlockSyntax propertyBlock)
         {
             return propertyBlock.PropertyStatement.AsClause is not null
-                ? this.GetTypeName(
-                    syntaxNode: propertyBlock.PropertyStatement.AsClause.ChildNodes().OfType<QualifiedNameSyntax>().First(),
-                    syntaxTree: propertyBlock.SyntaxTree)
+                ? this.GetAsClauseTypeName(
+                    propertyBlock.PropertyStatement.AsClause)
                 : this.GetTypeName(
                     syntaxNode: propertyBlock.PropertyStatement,
                     syntaxTree: propertyBlock.SyntaxTree);
@@ -1042,9 +1046,8 @@
             MethodBlockSyntax methodBlock)
         {
             return methodBlock.SubOrFunctionStatement.AsClause is not null
-                ? this.GetTypeName(
-                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
-                    syntaxTree: methodBlock.SyntaxTree)
+                ? this.GetAsClauseTypeName(
+                    methodBlock.SubOrFunctionStatement.AsClause)
                 : "void";
         }
 
