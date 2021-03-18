@@ -770,7 +770,7 @@
             }
             else
             {
-                typeName = "?";
+                throw new Exception("");
             }
 
             // TODO: Update constructor name
