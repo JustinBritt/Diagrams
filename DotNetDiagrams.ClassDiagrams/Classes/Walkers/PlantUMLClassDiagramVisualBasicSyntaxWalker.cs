@@ -214,7 +214,6 @@
             return sb.ToString();
         }
 
-        // TODO: Update
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
             string joinedConstraintClauses,
