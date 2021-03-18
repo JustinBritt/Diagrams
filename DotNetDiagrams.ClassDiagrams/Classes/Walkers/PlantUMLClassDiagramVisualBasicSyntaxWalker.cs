@@ -213,6 +213,56 @@
             return sb.ToString();
         }
 
+        // TODO: Update
+        private string BuildInterfaceDeclarationCommand(
+            string interfaceName,
+            string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers,
+            string joinedTypeParameters)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PlantUML_interface);
+
+            sb.Append(" ");
+
+            sb.Append(interfaceName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedExtends.Length > 0)
+            {
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
         private string GetAccessor(
             AccessorStatementSyntax accessorStatement)
         {
