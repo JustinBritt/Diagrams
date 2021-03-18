@@ -1181,9 +1181,6 @@
                 case StructureBlockSyntax structureBlock:
                     this.Visit(structureBlock);
                     break;
-                case SubNewStatementSyntax subNewStatement:
-                    this.Visit(subNewStatement);
-                    break;
                 default:
                     base.Visit(node);
                     break;
@@ -1465,14 +1462,6 @@
             this.AddCommand(
                 command: $"{PlantUML_rightBrace}",
                 typeName: structureBlock.StructureStatement.Identifier.ValueText);
-        }
-
-        // TODO: Finish
-        private void Visit(
-            SubNewStatementSyntax subNewStatement)
-        {
-            base.Visit(
-                subNewStatement);
         }
     }
 }
