@@ -248,11 +248,11 @@
             Assert.AreEqual(
                 expected: System.String.Concat(
                     "class MyTypes.Person <<public>> <<abstract>> implements ICloneable {",
-                    "<<private>> string _lastName",
-                    "<<private>> string _firstName",
+                    "- string _lastName",
+                    "- string _firstName",
                     "<<public>> string LastName : <<get>> <<set>>",
                     "<<public>> string FirstName : <<get>> <<set>>",
-                    "<<public>> <<virtual>> void Clone()",
+                    "+ <<virtual>> void Clone()",
                     "<<public>> Person(string LastName, string FirstName)",
                     "}"),
                 actual: System.String.Concat(
