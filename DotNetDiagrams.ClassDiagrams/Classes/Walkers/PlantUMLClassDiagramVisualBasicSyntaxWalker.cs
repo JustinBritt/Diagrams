@@ -776,6 +776,12 @@
                 {
                     "Friend" => stereotype_internal,
 
+                    "Private" => stereotype_private,
+
+                    "Protected" => stereotype_protected,
+
+                    "Public" => stereotype_public,
+
                     "ReadOnly" => stereotype_readonly,
 
                     _ => throw new Exception("")
