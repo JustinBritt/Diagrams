@@ -1019,11 +1019,11 @@
                 parameter.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "out" => "out",
+                    "out" => stereotype_out,
 
-                    "params" => "params",
+                    "params" => stereotype_params,
 
-                    "ref" => "ref",
+                    "ref" => stereotype_ref,
 
                     "this" => String.Empty,
 
