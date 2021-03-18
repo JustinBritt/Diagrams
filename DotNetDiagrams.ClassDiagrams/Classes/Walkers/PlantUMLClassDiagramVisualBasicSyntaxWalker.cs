@@ -846,6 +846,21 @@
         private void Visit(
             EnumBlockSyntax enumBlock)
         {
+            if (this.ShouldDiagramBeStarted(enumBlock))
+            {
+                this.StartDiagram(
+                    enumBlock);
+            }
+
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                enumBlock);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
             string joinedModifiers = this.GetJoinedModifiers(
                 enumBlock.EnumStatement);
 
