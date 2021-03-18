@@ -1037,7 +1037,6 @@
                 : String.Empty;
         }
 
-        // TODO: Finish
         private string GetJoinedVariables(
             FieldDeclarationSyntax fieldDeclaration)
         {
