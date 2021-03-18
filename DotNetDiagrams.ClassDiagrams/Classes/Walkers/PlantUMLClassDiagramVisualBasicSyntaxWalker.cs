@@ -20,6 +20,7 @@
 
         private const string PlantUML_anchor = "+--";
         private const string PlantUML_class = "class";
+        private const string PlantUML_enum = "enum";
         private const string PlantUML_extends = "extends";
         private const string PlantUML_implements = "implements";
         private const string PlantUML_leftBrace = "{";
