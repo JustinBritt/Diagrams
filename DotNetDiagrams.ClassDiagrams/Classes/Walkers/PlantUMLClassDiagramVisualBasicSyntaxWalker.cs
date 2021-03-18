@@ -50,6 +50,7 @@
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_set = "<<set>>";
+        private const string stereotype_static = "<<static>>";
         private const string stereotype_struct = "<<struct>>";
 
         private const string stringConcatSeparator_namespaceTypeNames = ".";
