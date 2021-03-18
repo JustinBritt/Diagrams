@@ -1145,7 +1145,6 @@
         }
 
         // TODO: Account for Default
-        // TODO: Fix xpacing
         private string GetParameter(
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
@@ -1159,7 +1158,22 @@
                 parameter.Type,
                 baseMethodDeclaration.SyntaxTree);
 
-            return $"{joinedModifiers} {parameterTypeName} {parameterName}";
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(parameterName);
+
+            sb.Append(" ");
+
+            sb.Append(parameterName);
+
+            return sb.ToString();
         }
 
         private SemanticModel GetSemanticModelOrDefault(
