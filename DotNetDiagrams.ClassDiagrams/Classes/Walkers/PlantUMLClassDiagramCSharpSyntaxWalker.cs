@@ -1170,7 +1170,7 @@
                 sb.Append(" ");
             }
 
-            sb.Append(parameterName);
+            sb.Append(parameterTypeName);
 
             sb.Append(" ");
 
