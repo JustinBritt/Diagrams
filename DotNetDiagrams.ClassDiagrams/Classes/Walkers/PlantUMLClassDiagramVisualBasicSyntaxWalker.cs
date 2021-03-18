@@ -618,19 +618,10 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 classBlock.ClassStatement);
 
-            var joinedImplements = classBlock.Implements.ToList();
-
-            foreach (ImplementsStatementSyntax implementsStatement in classBlock.Implements)
-            {
-                foreach (TypeSyntax type in implementsStatement.Types)
-                {
-
-                }
-            }    
-
-            var joinedInherits = classBlock.Inherits;
-
             string joinedExtends = this.GetJoinedExtends(
+                classBlock);
+
+            string joinedImplements = this.GetJoinedImplements(
                 classBlock);
 
             string joinedTypeParameters = this.GetJoinedTypeParameters(
