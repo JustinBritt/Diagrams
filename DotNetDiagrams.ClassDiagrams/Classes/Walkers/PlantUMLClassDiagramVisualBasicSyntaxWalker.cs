@@ -577,7 +577,7 @@
                 : String.Empty;
         }
 
-        // TODO: Update
+        // TODO: Account for Modifiers, Default, AsClause
         private string GetParameter(
             ConstructorBlockSyntax constructorBlock,
             ParameterSyntax parameter)
