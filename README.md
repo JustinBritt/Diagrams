@@ -42,6 +42,15 @@ These stereotypes are then joined using `String.Join` with separator `private co
 
 ##### Visual Basic .NET
 
+|VB.NET                    | PlantUML           |
+|:-------------------------|-------------------:|
+| `Friend`                 | `<<internal>>`     |
+| `NotInheritable`         | `<<sealed>>`       |
+| `Partial`                | `<<partial>>`      |
+| `Private`                | `<<private>>`      |
+| `Protected`              | `<<protected>>`    |
+| `Public`                 | `<<public>>`       |
+
 #### Relationships
 
 #### Type Parameter List
