@@ -1143,8 +1143,8 @@
                 variableDeclarator);
 
             return initializer.Length > 0
-                ? $"{variableNames} {initializer}"
-                : $"{variableNames}";
+                ? $"{variableType} {variableNames} {initializer}"
+                : $"{variableType} {variableNames}";
         }
 
         // TODO: Update types
