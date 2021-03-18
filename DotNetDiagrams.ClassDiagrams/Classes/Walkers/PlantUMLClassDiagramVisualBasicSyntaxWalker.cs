@@ -1066,7 +1066,6 @@
                     syntaxTree: parameter.SyntaxTree);
         }
 
-        // TODO: Finish
         private string GetPropertyTypeName(
             PropertyBlockSyntax propertyBlock)
         {
