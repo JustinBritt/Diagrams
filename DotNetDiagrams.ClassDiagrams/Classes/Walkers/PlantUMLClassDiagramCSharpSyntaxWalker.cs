@@ -757,16 +757,6 @@
                 : String.Empty;
         }
 
-        private string GetJoinedBaseListTypes(
-            BaseTypeDeclarationSyntax baseTypeDeclaration)
-        {
-            return baseTypeDeclaration.BaseList is not null
-                ? String.Join(
-                    stringJoinSeparator_baseListTypes,
-                    baseTypeDeclaration.BaseList?.Types.Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
-                : String.Empty;
-        }
-
         private string GetJoinedConstraintClauses(
             MethodDeclarationSyntax methodDeclaration)
         {
