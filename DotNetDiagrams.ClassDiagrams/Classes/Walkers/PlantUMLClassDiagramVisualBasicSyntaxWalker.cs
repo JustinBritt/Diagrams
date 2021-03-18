@@ -109,7 +109,7 @@
             this.Diagram.Header.AddRange(currentHeader);
         }
 
-        private string BuildClassDeclarationCommand(
+        private string BuildClassBlockCommand(
             string className,
             string joinedConstraintClauses,
             string joinedExtends,
@@ -725,7 +725,7 @@
                     classBlock);
             }
 
-            string command = this.BuildClassDeclarationCommand(
+            string command = this.BuildClassBlockCommand(
                 className: this.GetJoinedNamespaceTypeName(
                     classBlock),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
