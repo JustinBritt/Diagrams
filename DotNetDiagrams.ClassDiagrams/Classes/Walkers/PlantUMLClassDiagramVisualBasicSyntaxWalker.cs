@@ -1138,7 +1138,7 @@
             }    
 
             string variableNames = String.Join(
-                " ",
+                stringJoinSeparator_variableDeclarators,
                 variableDeclarator.Names.Select(w => w.Identifier.ValueText));
 
             string initializer = this.GetInitializer(
