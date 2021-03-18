@@ -21,6 +21,8 @@ ClassDeclarationSyntax
 #### Constraint Clauses
 
 #### Modifiers
+
+##### C#
 In `DotNetDiagrams.ClassDiagrams.Classes.Walkers.PlantUMLClassDiagramCSharpSyntaxWalker`, `private string GetJoinedModifiers(ClassDeclarationSyntax classDeclaration)` 
 uses pattern matching to map entries in the `Modifiers` property of the `classDeclaration` instance to PlantUML stereotypes as follows:
 
@@ -37,6 +39,8 @@ uses pattern matching to map entries in the `Modifiers` property of the `classDe
 | `unsafe`             | `<<unsafe>>`       |
 
 These stereotypes are then joined using `String.Join` with separator `private const string stringJoinSeparator_modifiers = " "`.
+
+##### Visual Basic .NET
 
 #### Relationships
 
