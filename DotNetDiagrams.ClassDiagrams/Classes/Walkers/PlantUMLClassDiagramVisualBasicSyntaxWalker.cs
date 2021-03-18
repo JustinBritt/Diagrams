@@ -1311,8 +1311,8 @@
         private void Visit(
             EventBlockSyntax eventBlock)
         {
-            // TODO: Finish
-            string joinedAccessors = String.Empty;
+            string joinedAccessors = this.GetJoinedAccessors(
+                eventBlock);
 
             string joinedModifiers = this.GetJoinedModifiers(
                    eventBlock.EventStatement);
