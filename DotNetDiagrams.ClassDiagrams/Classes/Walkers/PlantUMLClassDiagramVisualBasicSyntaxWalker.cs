@@ -1005,17 +1005,30 @@
                     anchorRelationships);
             }
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                interfaceBlock.InterfaceStatement);
+            string command = this.BuildInterfaceDeclarationCommand(
+                interfaceName: this.GetJoinedNamespaceTypeName(
+                    interfaceBlock),
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    interfaceBlock),
+                joinedExtends: this.GetJoinedExtends(
+                    interfaceBlock),
+                joinedImplements: this.GetJoinedImplements(
+                    interfaceBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    interfaceBlock.InterfaceStatement),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    interfaceBlock.InterfaceStatement));
 
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                interfaceBlock.InterfaceStatement);
-
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                interfaceBlock);
+            this.AddCommand(
+                command: command,
+                typeName: interfaceBlock.InterfaceStatement.Identifier.ValueText);
 
             base.Visit(
                 interfaceBlock);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: interfaceBlock.InterfaceStatement.Identifier.ValueText);
         }
 
         // TODO: Finish
