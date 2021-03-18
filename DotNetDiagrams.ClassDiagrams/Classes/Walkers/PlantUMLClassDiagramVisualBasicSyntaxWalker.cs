@@ -596,9 +596,25 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 classBlock.ClassStatement);
 
-            var implements = classBlock.Implements;
+            var joinedImplements = classBlock.Implements.ToList();
 
-            var inherits = classBlock.Inherits;
+            foreach (ImplementsStatementSyntax implementsStatement in classBlock.Implements)
+            {
+                foreach (TypeSyntax type in implementsStatement.Types)
+                {
+
+                }
+            }    
+
+            var joinedInherits = classBlock.Inherits;
+
+            foreach (InheritsStatementSyntax inheritsStatement in classBlock.Inherits)
+            {
+                foreach (TypeSyntax type in inheritsStatement.Types)
+                {
+                    string name = this.GetTypeName(type, inheritsStatement.SyntaxTree);
+                }
+            }
 
             string joinedTypeParameters = this.GetJoinedTypeParameters(
                 classBlock.ClassStatement);
