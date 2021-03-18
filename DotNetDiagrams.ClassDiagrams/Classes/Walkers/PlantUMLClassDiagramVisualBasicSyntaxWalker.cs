@@ -329,6 +329,56 @@
             return sb.ToString();
         }
 
+        // TODO: Update
+        private string BuildPropertyBlockCommand(
+            string explicitInterfaceSpecifierTypeName,
+            string expression,
+            string initializer,
+            string joinedAccessors,
+            string joinedModifiers,
+            string propertyName,
+            string propertyTypeName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(propertyTypeName);
+
+            sb.Append(" ");
+
+            if (explicitInterfaceSpecifierTypeName.Length > 0)
+            {
+                sb.Append($"{explicitInterfaceSpecifierTypeName}.");
+            }
+
+            sb.Append(propertyName);
+
+            sb.Append(" : ");
+
+            if (joinedAccessors.Length > 0)
+            {
+                sb.Append(joinedAccessors);
+            }
+
+            if (expression.Length > 0)
+            {
+                sb.Append(expression);
+            }
+
+            if (initializer.Length > 0)
+            {
+                sb.Append(initializer);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildStructureBlockCommand(
             string joinedConstraintClauses,
             string joinedExtends,
