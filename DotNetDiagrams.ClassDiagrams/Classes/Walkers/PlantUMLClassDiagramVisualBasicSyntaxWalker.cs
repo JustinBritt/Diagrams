@@ -461,6 +461,32 @@
             return relationships;
         }
 
+        // TODO: Finish
+        private string GetAsClauseTypeName(
+            AsClauseSyntax asClause)
+        {
+            string typeName = String.Empty;
+
+            if(asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault() is not null)
+            {
+                typeName = this.GetTypeName(
+                    syntaxNode: asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault(),
+                    syntaxTree: asClause.SyntaxTree);
+            }
+            else if (asClause.ChildNodes().OfType<QualifiedNameSyntax>().FirstOrDefault() is not null)
+            {
+                typeName = this.GetTypeName(
+                    syntaxNode: asClause.ChildNodes().OfType<QualifiedNameSyntax>().FirstOrDefault(),
+                    syntaxTree: asClause.SyntaxTree);
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
+            return typeName;
+        }
+
         private string GetConstraint(
             ConstraintSyntax constraint)
         {
