@@ -998,6 +998,19 @@
                     syntaxTree: parameter.SyntaxTree);
         }
 
+        // TODO: Finish
+        private string GetPropertyTypeName(
+            PropertyBlockSyntax propertyBlock)
+        {
+            return propertyBlock.PropertyStatement.AsClause is not null
+                ? this.GetTypeName(
+                    syntaxNode: propertyBlock.PropertyStatement.AsClause,
+                    syntaxTree: propertyBlock.SyntaxTree)
+                : this.GetTypeName(
+                    syntaxNode: propertyBlock.PropertyStatement,
+                    syntaxTree: propertyBlock.SyntaxTree);
+        }
+
         // TODO: Add const for void
         private string GetReturnTypeName(
             MethodBlockSyntax methodBlock)
