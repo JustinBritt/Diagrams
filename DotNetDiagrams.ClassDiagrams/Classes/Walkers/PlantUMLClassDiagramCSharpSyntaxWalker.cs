@@ -891,7 +891,7 @@
 
                     "public" => stereotype_public,
 
-                    "static" => modifier_static,
+                    "static" => stereotype_static,
 
                     _ => throw new Exception("")
                 }));
@@ -1015,7 +1015,7 @@
                 propertyDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "abstract" => modifier_abstract,
+                    "abstract" => stereotype_abstract,
 
                     "internal" => stereotype_internal,
 
@@ -1029,7 +1029,7 @@
 
                     "public" => stereotype_public,
 
-                    "static" => modifier_static,
+                    "static" => stereotype_static,
 
                     "virtual" => stereotype_virtual,
 
