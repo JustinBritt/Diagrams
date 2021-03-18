@@ -1125,7 +1125,6 @@
                 : syntaxNode.ToString();
         }
 
-        // TODO: Finish
         private string GetVariable(
             VariableDeclaratorSyntax variableDeclarator)
         {
