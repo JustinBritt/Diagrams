@@ -1129,13 +1129,8 @@
         private string GetVariable(
             VariableDeclaratorSyntax variableDeclarator)
         {
-            string variableType = String.Empty;
-
-            if (variableDeclarator.AsClause is not null)
-            {
-                variableType = this.GetAsClauseTypeName(
-                    variableDeclarator.AsClause);
-            }    
+            string variableTypeName = this.GetVariableTypeName(
+                variableDeclarator);   
 
             string variableNames = String.Join(
                 stringJoinSeparator_variableDeclarators,
@@ -1145,8 +1140,8 @@
                 variableDeclarator);
 
             return initializer.Length > 0
-                ? $"{variableType} {variableNames} {initializer}"
-                : $"{variableType} {variableNames}";
+                ? $"{variableTypeName} {variableNames} {initializer}"
+                : $"{variableTypeName} {variableNames}";
         }
 
         // TODO: Check
