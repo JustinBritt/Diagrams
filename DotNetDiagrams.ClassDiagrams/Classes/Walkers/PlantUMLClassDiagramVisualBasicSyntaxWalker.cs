@@ -751,6 +751,15 @@
                     classBlock);
             }
 
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                classBlock);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
             string command = this.BuildClassBlockCommand(
                 className: this.GetJoinedNamespaceTypeName(
                     classBlock),
