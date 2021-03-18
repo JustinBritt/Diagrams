@@ -586,6 +586,17 @@
                 declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => this.GetDeclarationStatementIdentifier(w)));
         }
 
+        private string GetEventTypeName(
+            EventBlockSyntax eventBlock)
+        {
+            return eventBlock.EventStatement.AsClause is not null
+                ? this.GetAsClauseTypeName(
+                    eventBlock.EventStatement.AsClause)
+                : this.GetTypeName(
+                    syntaxNode: eventBlock.EventStatement,
+                    syntaxTree: eventBlock.SyntaxTree);
+        }
+
         // TODO: Finish
         private string GetFirstTypeAncestorTypeName(
             DeclarationStatementSyntax declarationStatement)
