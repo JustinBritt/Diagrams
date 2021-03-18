@@ -764,6 +764,10 @@
             {
                 typeName = constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
             }
+            else if (constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
+            {
+                typeName = constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
+            }
             else if (constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
             {
                 typeName = constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
