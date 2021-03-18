@@ -1199,7 +1199,6 @@
                     parameter));
         }
 
-        // TODO: Account for Modifiers, Default
         private string GetParameter(
             MethodBlockSyntax methodBlock,
             ParameterSyntax parameter)
