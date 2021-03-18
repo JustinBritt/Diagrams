@@ -1004,7 +1004,7 @@
         {
             return propertyBlock.PropertyStatement.AsClause is not null
                 ? this.GetTypeName(
-                    syntaxNode: propertyBlock.PropertyStatement.AsClause,
+                    syntaxNode: propertyBlock.PropertyStatement.AsClause.ChildNodes().OfType<QualifiedNameSyntax>().First(),
                     syntaxTree: propertyBlock.SyntaxTree)
                 : this.GetTypeName(
                     syntaxNode: propertyBlock.PropertyStatement,
@@ -1410,9 +1410,8 @@
                 joinedModifiers: this.GetJoinedModifiers(
                     propertyBlock.PropertyStatement),
                 propertyName: propertyBlock.PropertyStatement.Identifier.ValueText,
-                propertyTypeName: this.GetTypeName(
-                    propertyBlock.PropertyStatement.AsClause,
-                    propertyBlock.SyntaxTree));
+                propertyTypeName: this.GetPropertyTypeName(
+                    propertyBlock));
 
             this.AddCommand(
                 command: command,
