@@ -18,6 +18,7 @@
     {
         private const string modifier_static = "{static}";
 
+        private const string PlantUML_anchor = "+--";
         private const string PlantUML_class = "class";
         private const string PlantUML_extends = "extends";
         private const string PlantUML_implements = "implements";
