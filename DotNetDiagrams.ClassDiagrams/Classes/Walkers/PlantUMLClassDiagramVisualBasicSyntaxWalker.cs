@@ -1377,12 +1377,8 @@
             string joinedModifiers = this.GetJoinedModifiers(
                 fieldDeclaration);
 
-            var declarators = fieldDeclaration.Declarators.ToList();
-
             string joinedVariables = this.GetJoinedVariables(
                 fieldDeclaration);
-
-            string w = "stop";
 
             base.Visit(
                 fieldDeclaration);
