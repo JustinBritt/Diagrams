@@ -766,7 +766,6 @@
                 }));
         }
 
-        // TODO: Finish
         private string GetJoinedModifiers(
             PropertyStatementSyntax propertyStatement)
         {
