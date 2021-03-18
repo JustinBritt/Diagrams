@@ -227,6 +227,8 @@
 
                 InterfaceBlockSyntax interfaceBlock => interfaceBlock.InterfaceStatement.Identifier.ValueText,
 
+                NamespaceBlockSyntax namespaceBlock => String.Empty,
+
                 StructureBlockSyntax structureBlock => structureBlock.StructureStatement.Identifier.ValueText,
 
                 _ => throw new Exception("")
