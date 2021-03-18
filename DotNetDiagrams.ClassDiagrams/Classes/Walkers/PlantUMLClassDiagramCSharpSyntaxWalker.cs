@@ -26,6 +26,7 @@
         private const string PlantUML_class = "class";
         private const string PlantUML_entity = "entity";
         private const string PlantUML_enum = "enum";
+        private const string PlantUML_extends = "extends";
         private const string PlantUML_extension = "<|--";
         private const string PlantUML_implements = "implements";
         private const string PlantUML_interface = "interface";
@@ -135,8 +136,9 @@
 
         private string BuildClassDeclarationCommand(
             string className,
-            string joinedBaseListTypes,
             string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
             string joinedModifiers,
             string joinedTypeParameters)
         {
@@ -162,9 +164,16 @@
                 sb.Append(" ");
             }
 
-            if (joinedBaseListTypes.Length > 0)
+            if (joinedExtends.Length > 0)
             {
-                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
 
                 sb.Append(" ");
             }
@@ -1268,9 +1277,11 @@
             string command = this.BuildClassDeclarationCommand(
                 className: this.GetJoinedNamespaceTypeName(
                     classDeclaration),
-                joinedBaseListTypes: this.GetJoinedBaseListTypes(
-                    classDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    classDeclaration),
+                joinedExtends: this.GetJoinedExtends(
+                    classDeclaration),
+                joinedImplements: this.GetJoinedImplements(
                     classDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     classDeclaration),
