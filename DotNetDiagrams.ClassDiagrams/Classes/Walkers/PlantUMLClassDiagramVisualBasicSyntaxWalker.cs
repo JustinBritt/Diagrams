@@ -1313,6 +1313,9 @@
                     propertyBlock.PropertyStatement.AsClause,
                     propertyBlock.SyntaxTree);
 
+            string initializer = this.GetInitializer(
+                propertyBlock);
+
             base.Visit(
                 propertyBlock);
         }
