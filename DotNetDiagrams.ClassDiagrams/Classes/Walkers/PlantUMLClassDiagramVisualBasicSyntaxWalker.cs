@@ -1365,6 +1365,9 @@
                 case MethodBlockSyntax methodBlock:
                     this.Visit(methodBlock);
                     break;
+                case ModuleBlockSyntax moduleBlock:
+                    this.Visit(moduleBlock);
+                    break;
                 case PropertyBlockSyntax propertyBlock:
                     this.Visit(propertyBlock);
                     break;
@@ -1599,6 +1602,12 @@
 
             base.Visit(
                 methodBlock);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            ModuleBlockSyntax moduleBlock)
+        {
         }
 
         private void Visit(
