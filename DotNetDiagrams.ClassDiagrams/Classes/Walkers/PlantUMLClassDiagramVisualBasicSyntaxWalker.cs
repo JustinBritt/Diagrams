@@ -891,6 +891,20 @@
             return $"{parameterTypeName} {parameterName}";
         }
 
+        // TODO: Account for Modifiers, Default, AsClause
+        private string GetParameter(
+            MethodBlockSyntax methodBlock,
+            ParameterSyntax parameter)
+        {
+            string parameterName = parameter.Identifier.Identifier.ValueText;
+
+            string parameterTypeName = this.GetTypeName(
+                parameter,
+                methodBlock.SyntaxTree);
+
+            return $"{parameterTypeName} {parameterName}";
+        }
+
         private SemanticModel GetSemanticModelOrDefault(
             SyntaxTree syntaxTree)
         {
