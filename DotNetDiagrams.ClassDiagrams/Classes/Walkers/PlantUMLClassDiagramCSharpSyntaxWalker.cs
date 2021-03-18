@@ -754,6 +754,26 @@
                 : String.Empty;
         }
 
+        private string GetJoinedExtends(
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
+        {
+            return baseTypeDeclaration.BaseList is not null
+                ? String.Join(
+                    stringJoinSeparator_baseListTypes,
+                    baseTypeDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(baseTypeDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedImplements(
+            BaseTypeDeclarationSyntax baseTypeDeclaration)
+        {
+            return baseTypeDeclaration.BaseList is not null
+                ? String.Join(
+                    stringJoinSeparator_baseListTypes,
+                    baseTypeDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(baseTypeDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Interface).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                : String.Empty;
+        }
+
         private string GetJoinedModifiers(
             AccessorDeclarationSyntax accessorDeclaration)
         {
