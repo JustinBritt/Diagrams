@@ -1123,6 +1123,9 @@
         private string GetVariable(
             VariableDeclaratorSyntax variableDeclarator)
         {
+            string variableType = this.GetAsClauseTypeName(
+                variableDeclarator.AsClause);
+
             string variableNames = String.Join(" ", variableDeclarator.Names.Select(w => w.Identifier.ValueText));
 
             string initializer = this.GetInitializer(
