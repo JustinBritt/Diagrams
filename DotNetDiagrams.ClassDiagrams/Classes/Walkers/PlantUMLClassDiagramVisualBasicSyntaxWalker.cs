@@ -422,6 +422,14 @@
                 declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>().Reverse().Select(w => this.GetDeclarationStatementIdentifier(w)));
         }
 
+        private string GetInitializer(
+            EnumMemberDeclarationSyntax enumMemberDeclaration)
+        {
+            return enumMemberDeclaration.Initializer is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetJoinedAccessors(
             PropertyBlockSyntax propertyBlock)
         {
