@@ -240,6 +240,27 @@
             return sb.ToString();
         }
 
+        private string BuildFieldDeclarationCommand(
+            string joinedModifiers,
+            string joinedVariables)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedVariables.Length > 0)
+            {
+                sb.Append(joinedVariables);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
             string joinedConstraintClauses,
@@ -1370,15 +1391,19 @@
                 eventBlock);
         }
 
-        // TODO: Finish
         private void Visit(
             FieldDeclarationSyntax fieldDeclaration)
         {
-            string joinedModifiers = this.GetJoinedModifiers(
-                fieldDeclaration);
+            string command = this.BuildFieldDeclarationCommand(
+                joinedModifiers: this.GetJoinedModifiers(
+                    fieldDeclaration),
+                joinedVariables: this.GetJoinedVariables(
+                    fieldDeclaration));
 
-            string joinedVariables = this.GetJoinedVariables(
-                fieldDeclaration);
+            this.AddCommand(
+                command: command,
+                typeName: this.GetFirstTypeAncestorTypeName(
+                    fieldDeclaration));
 
             base.Visit(
                 fieldDeclaration);
