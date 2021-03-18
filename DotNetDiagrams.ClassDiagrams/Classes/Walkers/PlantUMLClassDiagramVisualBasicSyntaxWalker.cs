@@ -869,7 +869,6 @@
                 constructorBlock);
         }
 
-        // TODO: Finish
         private void Visit(
             EnumBlockSyntax enumBlock)
         {
