@@ -247,6 +247,16 @@
                 : String.Empty;
         }
 
+        private string GetJoinedImplements(
+            ClassBlockSyntax classBlock)
+        {
+            return classBlock.Implements.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_implements,
+                    classBlock.Implements.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, classBlock.SyntaxTree)))
+                : String.Empty;
+        }
+
         private string GetJoinedModifiers(
             AccessorStatementSyntax accessorStatement)
         {
