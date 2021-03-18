@@ -1146,17 +1146,30 @@
                     anchorRelationships);
             }
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                structureBlock.StructureStatement);
+            string command = this.BuildStructureBlockCommand(
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    structureBlock),
+                joinedExtends: this.GetJoinedExtends(
+                    structureBlock),
+                joinedImplements: this.GetJoinedImplements(
+                    structureBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    structureBlock.StructureStatement),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    structureBlock.StructureStatement),
+                structName: this.GetJoinedNamespaceTypeName(
+                    structureBlock));
 
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                structureBlock.StructureStatement);
-
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                structureBlock);
+            this.AddCommand(
+                command: command,
+                typeName: structureBlock.StructureStatement.Identifier.ValueText);
 
             base.Visit(
                 structureBlock);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: structureBlock.StructureStatement.Identifier.ValueText);
         }
 
         // TODO: Finish
