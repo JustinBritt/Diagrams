@@ -38,6 +38,7 @@
         private const string stereotype_async = "<<async>>";
         private const string stereotype_const = "<<const>>";
         private const string stereotype_equals = "<<=>>";
+        private const string stereotype_event = "<<event>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
         private const string stereotype_override = "<<override>>";
@@ -235,6 +236,47 @@
             if (initializer.Length > 0)
             {
                 sb.Append(initializer);
+            }
+
+            return sb.ToString();
+        }
+
+        private string BuildEventBlockCommand(
+            string eventName,
+            string eventTypeName,
+            string joinedAccessors,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(stereotype_event);
+
+            sb.Append(" ");
+
+            sb.Append(eventTypeName);
+
+            sb.Append(" ");
+
+            sb.Append(eventName);
+
+            sb.Append(" ");
+
+            sb.Append(":");
+
+            sb.Append(" ");
+
+            if (joinedAccessors.Length > 0)
+            {
+                sb.Append(joinedAccessors);
+
+                sb.Append(" ");
             }
 
             return sb.ToString();
