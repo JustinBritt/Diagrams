@@ -698,29 +698,6 @@
                 : String.Empty;
         }
 
-        private List<string> GetInheritanceRelationships(
-            TypeDeclarationSyntax typeDeclaration)
-        {
-            List<string> relationships = new List<string>();
-
-            if (typeDeclaration.BaseList is not null)
-            {
-                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types)
-                {
-                    string itemName = this.GetTypeName(
-                        item.Type,
-                        typeDeclaration.SyntaxTree);
-
-                    string typeName = this.GetJoinedNamespaceTypeName(
-                        typeDeclaration);
-
-                    relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
-                }
-            }
-
-            return relationships;
-        }
-
         private string GetExpression(
             PropertyDeclarationSyntax propertyDeclaration)
         {
@@ -753,6 +730,29 @@
             }
 
             return typeDeclaration;
+        }
+
+        private List<string> GetInheritanceRelationships(
+            TypeDeclarationSyntax typeDeclaration)
+        {
+            List<string> relationships = new List<string>();
+
+            if (typeDeclaration.BaseList is not null)
+            {
+                foreach (BaseTypeSyntax item in typeDeclaration.BaseList.Types)
+                {
+                    string itemName = this.GetTypeName(
+                        item.Type,
+                        typeDeclaration.SyntaxTree);
+
+                    string typeName = this.GetJoinedNamespaceTypeName(
+                        typeDeclaration);
+
+                    relationships.Add($"{itemName} {PlantUML_extension} {typeName}");
+                }
+            }
+
+            return relationships;
         }
 
         private string GetInitializer(
