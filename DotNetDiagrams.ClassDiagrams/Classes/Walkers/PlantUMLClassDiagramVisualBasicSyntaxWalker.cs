@@ -206,6 +206,28 @@
                 });
         }
 
+        // TODO: Update
+        private List<string> GetAnchorRelationships(
+            DeclarationStatementSyntax declarationStatement)
+        {
+            List<string> relationships = new List<string>();
+
+            if (declarationStatement.Ancestors().OfType<DeclarationStatementSyntax>().Count() > 0)
+            {
+                foreach (DeclarationStatementSyntax item in declarationStatement.AncestorsAndSelf().OfType<DeclarationStatementSyntax>())
+                {
+                    DeclarationStatementSyntax parent = item.Ancestors().OfType<DeclarationStatementSyntax>().FirstOrDefault();
+
+                    if (item is not null && parent is not null)
+                    {
+                        relationships.Add($"{this.GetJoinedNamespaceTypeName(parent)} {PlantUML_anchor} {this.GetJoinedNamespaceTypeName(item)}");
+                    }
+                }
+            }
+
+            return relationships;
+        }
+
         private string GetConstraint(
             ConstraintSyntax constraint)
         {
