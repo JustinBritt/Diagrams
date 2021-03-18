@@ -1016,6 +1016,12 @@
                 parameter.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "out" => "out",
+
+                    "params" => "params",
+
+                    "ref" => "ref",
+
                     "this" => String.Empty,
 
                     _ => throw new Exception("")
@@ -1136,6 +1142,7 @@
         }
 
         // TODO: Account for Default
+        // TODO: Fix xpacing
         private string GetParameter(
             BaseMethodDeclarationSyntax baseMethodDeclaration,
             ParameterSyntax parameter)
