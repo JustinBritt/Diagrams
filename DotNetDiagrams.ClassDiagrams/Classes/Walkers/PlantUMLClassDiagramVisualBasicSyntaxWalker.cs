@@ -1098,8 +1098,10 @@
             }
 
             // TODO: Update constructor name
-            string constructorName = "";// constructorBlock.SubNewStatement.SubKeyword.ToString() + " " + constructorBlock.SubNewStatement.NewKeyword.ToString();
-            constructorName = typeName;
+            string constructorName = String.Join(
+                " ",
+                constructorBlock.SubNewStatement.SubKeyword.ValueText,
+                constructorBlock.SubNewStatement.NewKeyword.ValueText);
 
             string command = this.BuildConstructorBlockCommand(
                 constructorName: constructorName,
