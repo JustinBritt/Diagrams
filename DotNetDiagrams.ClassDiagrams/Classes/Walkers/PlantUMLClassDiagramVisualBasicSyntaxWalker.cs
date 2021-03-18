@@ -283,6 +283,51 @@
             return sb.ToString();
         }
 
+        // TODO: Update
+        private string BuildMethodBlockCommand(
+            string joinedConstraintClauses,
+            string joinedModifiers,
+            string joinedParameters,
+            string joinedTypeParameters,
+            string methodName,
+            string returnTypeName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(returnTypeName);
+
+            sb.Append(" ");
+
+            sb.Append(methodName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedTypeParameters}>");
+            }
+
+            sb.Append(PlantUML_leftParenthesis);
+
+            sb.Append(joinedParameters);
+
+            sb.Append(PlantUML_rightParenthesis);
+
+            if (joinedConstraintClauses.Length > 0)
+            {
+                sb.Append(" where ");
+
+                sb.Append(joinedConstraintClauses);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildStructureBlockCommand(
             string joinedConstraintClauses,
             string joinedExtends,
