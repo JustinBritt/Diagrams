@@ -1323,6 +1323,26 @@
         private void Visit(
             MethodBlockSyntax methodBlock)
         {
+            // TODO: Update name
+            string typeName = String.Empty;
+
+            if (constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
+            {
+                typeName = constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
+            }
+            else if (constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
+            {
+                typeName = constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
+            }
+            else if (constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
+            {
+                typeName = constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
+            }
+            else
+            {
+                throw new Exception("");
+            }
+
             string command = this.BuildMethodBlockCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
                     methodBlock),
@@ -1336,10 +1356,9 @@
                 returnTypeName: this.GetReturnTypeName(
                     methodBlock));
 
-            // TODO: Change typeName
             this.AddCommand(
                 command: command,
-                typeName: Guid.NewGuid().ToString());
+                typeName: typeName);
 
             base.Visit(
                 methodBlock);
