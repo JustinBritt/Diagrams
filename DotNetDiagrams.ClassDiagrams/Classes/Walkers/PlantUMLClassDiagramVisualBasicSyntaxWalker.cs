@@ -186,6 +186,48 @@
             return sb.ToString();
         }
 
+        private string BuildEnumBlockCommand(
+            string enumName,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(PlantUML_enum);
+
+            sb.Append(" ");
+
+            sb.Append(enumName);
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedExtends.Length > 0)
+            {
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
         private string GetAccessor(
             AccessorStatementSyntax accessorStatement)
         {
