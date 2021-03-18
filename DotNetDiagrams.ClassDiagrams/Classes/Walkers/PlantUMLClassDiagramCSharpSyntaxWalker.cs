@@ -213,7 +213,6 @@
             string enumName,
             string joinedExtends,
             string joinedImplements,
-            string joinedMembers,
             string joinedModifiers)
         {
             StringBuilder sb = new StringBuilder();
@@ -248,8 +247,6 @@
             }
 
             sb.Append(PlantUML_leftBrace);
-
-            sb.Append(joinedMembers);
 
             return sb.ToString();
         }
@@ -1361,7 +1358,6 @@
                     enumDeclaration),
                 joinedImplements: this.GetJoinedImplements(
                     enumDeclaration),
-                joinedMembers: "",
                 joinedModifiers: this.GetJoinedModifiers(
                     enumDeclaration));
 
