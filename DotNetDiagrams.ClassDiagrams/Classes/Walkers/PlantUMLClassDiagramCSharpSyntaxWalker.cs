@@ -459,6 +459,36 @@
             return sb.ToString();
         }
 
+        private string BuildParameter(
+            string defaultEquals,
+            string joinedModifiers,
+            string parameterName,
+            string parameterTypeName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            sb.Append(parameterTypeName);
+
+            sb.Append(" ");
+
+            sb.Append(parameterName);
+
+            if (defaultEquals.Length > 0)
+            {
+                sb.Append(
+                    defaultEquals);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildPropertyDeclarationCommand(
             string explicitInterfaceSpecifierTypeName,
             string expression,
