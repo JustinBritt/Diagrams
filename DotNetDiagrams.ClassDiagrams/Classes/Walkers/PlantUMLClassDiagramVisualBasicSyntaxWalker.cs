@@ -1204,12 +1204,14 @@
             MethodBlockSyntax methodBlock,
             ParameterSyntax parameter)
         {
-            string parameterName = parameter.Identifier.Identifier.ValueText;
-
-            string parameterTypeName = this.GetParameterTypeName(
-                parameter);
-
-            return $"{parameterTypeName} {parameterName}";
+            return this.BuildParameter(
+                defaultEquals: this.GetDefault(
+                    parameter),
+                joinedModifiers: this.GetJoinedModifiers(
+                    parameter),
+                parameterName: parameter.Identifier.Identifier.ValueText,
+                parameterTypeName: this.GetParameterTypeName(
+                    parameter));
         }
 
         private string GetParameterTypeName(
