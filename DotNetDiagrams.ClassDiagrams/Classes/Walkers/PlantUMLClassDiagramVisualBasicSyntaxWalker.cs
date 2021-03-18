@@ -495,6 +495,14 @@
                 : String.Empty;
         }
 
+        private string GetInitializer(
+            PropertyBlockSyntax propertyBlock)
+        {
+            return propertyBlock.PropertyStatement.Initializer is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetJoinedAccessors(
             PropertyBlockSyntax propertyBlock)
         {
