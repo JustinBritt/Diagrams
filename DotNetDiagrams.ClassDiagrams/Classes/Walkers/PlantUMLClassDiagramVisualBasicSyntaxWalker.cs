@@ -538,6 +538,16 @@
                 typeName);
         }
 
+        private string GetJoinedParameters(
+            ConstructorBlockSyntax constructorBlock)
+        {
+            return constructorBlock.SubNewStatement.ParameterList.Parameters.Count > 0
+                ? String.Join(
+                    stringJoinSeparator_parameters,
+                    constructorBlock.SubNewStatement.ParameterList.Parameters.Select(w => this.GetParameter(constructorBlock, w)))
+                : String.Empty;
+        }
+
         private string GetJoinedTypeParameters(
             ClassStatementSyntax classStatement)
         {
