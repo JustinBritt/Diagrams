@@ -285,7 +285,6 @@
             return sb.ToString();
         }
 
-        // TODO: Update
         private string BuildMethodBlockCommand(
             string joinedConstraintClauses,
             string joinedModifiers,
