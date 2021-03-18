@@ -1227,6 +1227,12 @@
         private void Visit(
             MethodBlockSyntax methodBlock)
         {
+            string returnTypeName = methodBlock.SubOrFunctionStatement.AsClause is not null
+                ? this.GetTypeName(
+                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
+                    syntaxTree: methodBlock.SyntaxTree)
+                : "void";
+
             // TODO: Check return type
             string command = this.BuildMethodBlockCommand(
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
@@ -1238,14 +1244,12 @@
                 joinedTypeParameters: this.GetJoinedTypeParameters(
                     methodBlock.SubOrFunctionStatement),
                 methodName: methodBlock.SubOrFunctionStatement.Identifier.ValueText,
-                returnTypeName: this.GetTypeName(
-                    syntaxNode: methodBlock.SubOrFunctionStatement.AsClause,
-                    syntaxTree: methodBlock.SyntaxTree));
+                returnTypeName: returnTypeName);
 
-            // TODO: Check type
+            // TODO: Change typeName
             this.AddCommand(
                 command: command,
-                typeName: methodBlock.FirstAncestorOrSelf<ClassStatementSyntax>().Identifier.ValueText);
+                typeName: Guid.NewGuid().ToString());
 
             base.Visit(
                 methodBlock);
