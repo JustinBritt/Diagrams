@@ -1182,12 +1182,12 @@
             ConstructorBlockSyntax constructorBlock,
             ParameterSyntax parameter)
         {
-            string parameterName = parameter.Identifier.Identifier.ValueText;
-
-            string parameterTypeName = this.GetParameterTypeName(
-                parameter);
-
-            return $"{parameterTypeName} {parameterName}";
+            return this.BuildParameter(
+                joinedModifiers: this.GetJoinedModifiers(
+                    parameter),
+                parameterName: parameter.Identifier.Identifier.ValueText,
+                parameterTypeName: this.GetParameterTypeName(
+                    parameter));
         }
 
         // TODO: Account for Modifiers, Default
