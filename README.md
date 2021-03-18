@@ -40,7 +40,7 @@ uses pattern matching to map entries in the `Modifiers` property of the `classDe
 
 These stereotypes are then joined using `String.Join` with separator `private const string stringJoinSeparator_modifiers = " "`.
 
-##### Visual Basic .NET
+##### VB.NET
 
 |VB.NET                    | PlantUML           |
 |:-------------------------|-------------------:|
