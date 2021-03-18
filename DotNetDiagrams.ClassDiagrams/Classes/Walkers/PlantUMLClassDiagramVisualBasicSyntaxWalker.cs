@@ -1185,13 +1185,13 @@
                 fieldDeclaration.Declarators.Select(w => this.GetVariable(w)));
         }
 
-        // TODO: Account for Modifiers, Default
         private string GetParameter(
             ConstructorBlockSyntax constructorBlock,
             ParameterSyntax parameter)
         {
             return this.BuildParameter(
-                defaultEquals: "",
+                defaultEquals: this.GetDefault(
+                    parameter),
                 joinedModifiers: this.GetJoinedModifiers(
                     parameter),
                 parameterName: parameter.Identifier.Identifier.ValueText,
