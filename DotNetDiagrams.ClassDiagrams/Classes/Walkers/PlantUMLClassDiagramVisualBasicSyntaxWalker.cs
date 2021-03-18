@@ -216,6 +216,24 @@
             return sb.ToString();
         }
 
+        private string BuildEnumMemberDeclarationCommand(
+            string enumMemberName,
+            string initializer)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(enumMemberName);
+
+            sb.Append(" ");
+
+            if (initializer.Length > 0)
+            {
+                sb.Append(initializer);
+            }
+
+            return sb.ToString();
+        }
+
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
             string joinedConstraintClauses,
