@@ -939,6 +939,21 @@
         private void Visit(
             InterfaceBlockSyntax interfaceBlock)
         {
+            if (this.ShouldDiagramBeStarted(interfaceBlock))
+            {
+                this.StartDiagram(
+                    interfaceBlock);
+            }
+
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                interfaceBlock);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
             string joinedModifiers = this.GetJoinedModifiers(
                 interfaceBlock.InterfaceStatement);
 
