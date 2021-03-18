@@ -52,6 +52,7 @@
         private const string stringJoinSeparator_extends = ",";
         private const string stringJoinSeparator_implements = ",";
         private const string stringJoinSeparator_modifiers = " ";
+        private const string stringJoinSeparator_parameters = ", ";
         private const string stringJoinSeparator_typeParameters = ", ";
 
         private readonly Compilation compilation;
