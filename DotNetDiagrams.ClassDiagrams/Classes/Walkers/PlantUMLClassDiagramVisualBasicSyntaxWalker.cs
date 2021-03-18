@@ -63,6 +63,7 @@
         private const string stringJoinSeparator_modifiers = " ";
         private const string stringJoinSeparator_parameters = ", ";
         private const string stringJoinSeparator_typeParameters = ", ";
+        private const string stringJoinSeparator_variableDeclarators = ", ";
 
         private readonly Compilation compilation;
         private readonly Project project;
@@ -600,6 +601,14 @@
                 : String.Empty;
         }
 
+        private string GetInitializer(
+            VariableDeclaratorSyntax variableDeclarator)
+        {
+            return variableDeclarator.Initializer is not null
+                ? stereotype_equals
+                : String.Empty;
+        }
+
         private string GetJoinedAccessors(
             EventBlockSyntax eventBlock)
         {
@@ -1028,6 +1037,15 @@
                 : String.Empty;
         }
 
+        // TODO: Finish
+        private string GetJoinedVariables(
+            FieldDeclarationSyntax fieldDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_variableDeclarators,
+                fieldDeclaration.Declarators.Select(w => this.GetVariable(w)));
+        }
+
         // TODO: Account for Modifiers, Default
         private string GetParameter(
             ConstructorBlockSyntax constructorBlock,
@@ -1101,7 +1119,21 @@
                 ? targetType.ToString()
                 : syntaxNode.ToString();
         }
-        
+
+        // TODO: Finish
+        private string GetVariable(
+            VariableDeclaratorSyntax variableDeclarator)
+        {
+            string variableNames = String.Join(" ", variableDeclarator.Names.Select(w => w.Identifier.ValueText));
+
+            string initializer = this.GetInitializer(
+                variableDeclarator);
+
+            return initializer.Length > 0
+                ? $"{variableNames} {initializer}"
+                : $"{variableNames}";
+        }
+
         // TODO: Update types
         private bool ShouldDiagramBeStarted(
             DeclarationStatementSyntax declarationStatement)
@@ -1325,6 +1357,11 @@
                 fieldDeclaration);
 
             var declarators = fieldDeclaration.Declarators.ToList();
+
+            string joinedVariables = this.GetJoinedVariables(
+                fieldDeclaration);
+
+            string w = "stop";
 
             base.Visit(
                 fieldDeclaration);
