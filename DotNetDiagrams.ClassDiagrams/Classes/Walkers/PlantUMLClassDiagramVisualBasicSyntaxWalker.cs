@@ -973,6 +973,26 @@
         }
 
         private string GetJoinedModifiers(
+            ParameterSyntax parameter)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                parameter.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "ByRef" => stereotype_ref,
+
+                    "ByVal" => String.Empty,
+
+                    "Optional" => stereotype_equals,
+
+                    "ParamArray" => stereotype_params,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             PropertyStatementSyntax propertyStatement)
         {
             return String.Join(
