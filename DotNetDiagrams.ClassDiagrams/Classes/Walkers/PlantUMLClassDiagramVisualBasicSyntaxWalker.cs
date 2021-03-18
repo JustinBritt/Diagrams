@@ -44,6 +44,7 @@
         private const string stringJoinSeparator_accessors = " ";
         private const string stringJoinSeparator_constraintClauses = ", ";
         private const string stringJoinSeparator_declarationStatementTypeNames = ".";
+        private const string stringJoinSeparator_extends = ",";
         private const string stringJoinSeparator_modifiers = " ";
         private const string stringJoinSeparator_typeParameters = ", ";
 
@@ -232,6 +233,17 @@
                 ? String.Join(
                     stringJoinSeparator_constraintClauses,
                     structureBlock.StructureStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
+        }
+
+        // TODO: Finish
+        private string GetJoinedExtends(
+            ClassBlockSyntax classBlock)
+        {
+            return classBlock.Inherits.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_extends,
+                    classBlock.Inherits.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, w.SyntaxTree)))
                 : String.Empty;
         }
 
