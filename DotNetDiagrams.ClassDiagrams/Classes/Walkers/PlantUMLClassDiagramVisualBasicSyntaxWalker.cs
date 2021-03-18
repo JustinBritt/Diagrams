@@ -48,6 +48,7 @@
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
         private const string stereotype_set = "<<set>>";
+        private const string stereotype_struct = "<<struct>>";
 
         private const string stringConcatSeparator_namespaceTypeNames = ".";
 
@@ -229,6 +230,55 @@
             sb.Append(" ");
 
             sb.Append(interfaceName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedExtends.Length > 0)
+            {
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
+        private string BuildStructureBlockCommand(
+            string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers,
+            string joinedTypeParameters,
+            string structName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append(stereotype_struct);
+
+            sb.Append(" ");
+
+            sb.Append(structName);
 
             if (joinedTypeParameters.Length > 0)
             {
