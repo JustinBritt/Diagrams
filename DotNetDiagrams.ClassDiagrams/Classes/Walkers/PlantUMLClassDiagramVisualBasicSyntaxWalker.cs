@@ -1225,38 +1225,12 @@
                 typeName: classBlock.ClassStatement.Identifier.ValueText);
         }
 
-        // TODO: Finish
         private void Visit(
             ConstructorBlockSyntax constructorBlock)
         {
-            // TODO: Update name
-            string typeName = String.Empty;
-
-            if (constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>() is not null)
-            {
-                typeName = constructorBlock.FirstAncestorOrSelf<ClassBlockSyntax>().ClassStatement.Identifier.ValueText;
-            }
-            else if (constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>() is not null)
-            {
-                typeName = constructorBlock.FirstAncestorOrSelf<ModuleBlockSyntax>().ModuleStatement.Identifier.ValueText;
-            }
-            else if (constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>() is not null)
-            {
-                typeName = constructorBlock.FirstAncestorOrSelf<StructureBlockSyntax>().StructureStatement.Identifier.ValueText;
-            }
-            else
-            {
-                throw new Exception("");
-            }
-
-            // TODO: Update constructor name
-            string constructorName = String.Join(
-                " ",
-                constructorBlock.SubNewStatement.SubKeyword.ValueText,
-                constructorBlock.SubNewStatement.NewKeyword.ValueText);
-
             string command = this.BuildConstructorBlockCommand(
-                constructorName: constructorName,
+                constructorName: this.GetFirstTypeAncestorTypeName(
+                    constructorBlock),
                 joinedModifiers: this.GetJoinedModifiers(
                     constructorBlock.SubNewStatement),
                 joinedParameters: this.GetJoinedParameters(
@@ -1264,7 +1238,8 @@
 
             this.AddCommand(
                 command: command,
-                typeName: typeName);
+                typeName: this.GetFirstTypeAncestorTypeName(
+                    constructorBlock));
 
             base.Visit(
                 constructorBlock);
