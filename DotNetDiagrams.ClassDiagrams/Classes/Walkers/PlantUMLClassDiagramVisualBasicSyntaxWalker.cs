@@ -474,6 +474,12 @@
                     syntaxNode: asClause.ChildNodes().OfType<IdentifierNameSyntax>().FirstOrDefault(),
                     syntaxTree: asClause.SyntaxTree);
             }
+            else if (asClause.ChildNodes().OfType<ObjectCreationExpressionSyntax>().FirstOrDefault() is not null)
+            {
+                typeName = this.GetTypeName(
+                    syntaxNode: asClause.ChildNodes().OfType<ObjectCreationExpressionSyntax>().FirstOrDefault(),
+                    syntaxTree: asClause.SyntaxTree);
+            }
             else if (asClause.ChildNodes().OfType<PredefinedTypeSyntax>().FirstOrDefault() is not null)
             {
                 typeName = this.GetTypeName(
