@@ -376,8 +376,9 @@
 
         private string BuildInterfaceDeclarationCommand(
             string interfaceName,
-            string joinedBaseListTypes,
             string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
             string joinedModifiers,
             string joinedTypeParameters)
         {
@@ -403,9 +404,16 @@
                 sb.Append(" ");
             }
 
-            if (joinedBaseListTypes.Length > 0)
+            if (joinedExtends.Length > 0)
             {
-                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
 
                 sb.Append(" ");
             }
@@ -515,8 +523,9 @@
         }
 
         private string BuildStructDeclarationCommand(
-            string joinedBaseListTypes,
             string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
             string joinedModifiers,
             string joinedTypeParameters,
             string structName)
@@ -543,9 +552,16 @@
                 sb.Append(" ");
             }
 
-            if (joinedBaseListTypes.Length > 0)
+            if (joinedExtends.Length > 0)
             {
-                sb.Append($"{PlantUML_implements} {joinedBaseListTypes}");
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
 
                 sb.Append(" ");
             }
@@ -1469,9 +1485,11 @@
             string command = this.BuildInterfaceDeclarationCommand(
                 interfaceName: this.GetJoinedNamespaceTypeName(
                     interfaceDeclaration),
-                joinedBaseListTypes: this.GetJoinedBaseListTypes(
-                    interfaceDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    interfaceDeclaration),
+                joinedExtends: this.GetJoinedExtends(
+                    interfaceDeclaration),
+                joinedImplements: this.GetJoinedImplements(
                     interfaceDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     interfaceDeclaration),
@@ -1564,9 +1582,11 @@
             }
 
             string command = this.BuildStructDeclarationCommand(
-                joinedBaseListTypes: this.GetJoinedBaseListTypes(
-                    structDeclaration),
                 joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    structDeclaration),
+                joinedExtends: this.GetJoinedExtends(
+                    structDeclaration),
+                joinedImplements: this.GetJoinedImplements(
                     structDeclaration),
                 joinedModifiers: this.GetJoinedModifiers(
                     structDeclaration),
