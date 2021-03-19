@@ -420,20 +420,26 @@
                     { } => throw new Exception(expression.ToFullString())
                 };
 
-                returnTypeName = this.GetTypeName(invocation, invocation.Parent.SyntaxTree);
-
+                returnTypeName = this.GetTypeName(
+                    invocation,
+                    invocation.Parent.SyntaxTree);
             }
             else if (ModelExtensions.GetTypeInfo(semanticModel, expression).Type is INamedTypeSymbol targetType)
             {
                 targetName = invocation.TryGetInferredMemberName();
 
-                targetTypeName = this.GetTypeName(expression, expression.Parent.SyntaxTree);
+                targetTypeName = this.GetTypeName(
+                    expression,
+                    expression.Parent.SyntaxTree);
 
-                returnTypeName = this.GetTypeName(invocation, invocation.Parent.SyntaxTree);
+                returnTypeName = this.GetTypeName(
+                    invocation,
+                    invocation.Parent.SyntaxTree);
             }
             else
             {
-                base.Visit(invocation);
+                base.Visit(
+                    invocation);
 
                 return;
             }
