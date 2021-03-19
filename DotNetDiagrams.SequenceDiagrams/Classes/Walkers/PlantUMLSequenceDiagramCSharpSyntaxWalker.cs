@@ -323,7 +323,8 @@
         {
             if (catchClause.Block.Statements.Count > 0)
             {
-                this.AddCommand(PlantUML_else);
+                this.AddCommand(
+                    PlantUML_else);
             }
 
             base.Visit(catchClause);
