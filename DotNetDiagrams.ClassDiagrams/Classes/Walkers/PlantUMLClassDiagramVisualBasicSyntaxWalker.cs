@@ -781,6 +781,16 @@
         }
 
         private string GetJoinedConstraintClauses(
+            ModuleBlockSyntax moduleBlock)
+        {
+            return moduleBlock.ModuleStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_constraintClauses,
+                    moduleBlock.ModuleStatement.TypeParameterList.Parameters.Select(w => w.TypeParameterConstraintClause).SelectMany(w => this.GetConstraintClauses(w)))
+                : String.Empty;
+        }
+
+        private string GetJoinedConstraintClauses(
             StructureBlockSyntax structureBlock)
         {
             return structureBlock.StructureStatement.TypeParameterList is not null
