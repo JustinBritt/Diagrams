@@ -1624,6 +1624,23 @@
         private void Visit(
             ModuleBlockSyntax moduleBlock)
         {
+            if (this.ShouldDiagramBeStarted(moduleBlock))
+            {
+                this.StartDiagram(
+                    moduleBlock);
+            }
+
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                moduleBlock);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
+            string joinedModifiers = this.GetJoinedModifiers(
+                moduleBlock.ModuleStatement);
         }
 
         private void Visit(
