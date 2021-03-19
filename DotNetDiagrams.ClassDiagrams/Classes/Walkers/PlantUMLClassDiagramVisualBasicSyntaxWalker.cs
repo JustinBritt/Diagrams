@@ -699,6 +699,8 @@
 
                 InterfaceBlockSyntax interfaceBlock => interfaceBlock.InterfaceStatement.Identifier.ValueText,
 
+                ModuleBlockSyntax moduleBlock => moduleBlock.ModuleStatement.Identifier.ValueText,
+
                 NamespaceBlockSyntax namespaceBlock => String.Empty,
 
                 StructureBlockSyntax structureBlock => structureBlock.StructureStatement.Identifier.ValueText,
