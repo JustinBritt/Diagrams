@@ -538,11 +538,8 @@
         private void Visit(
             TryStatementSyntax tryStatement)
         {
-            if (tryStatement.Parent is BlockSyntax)
-            {
-                this.AddCommand(
-                    PlantUML_alt);
-            }
+            this.AddCommand(
+                PlantUML_alt);
 
             base.Visit(tryStatement);
 
