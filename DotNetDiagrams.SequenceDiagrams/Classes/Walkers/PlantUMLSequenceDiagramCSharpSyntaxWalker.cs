@@ -541,7 +541,8 @@
             this.AddCommand(
                 PlantUML_alt);
 
-            base.Visit(tryStatement);
+            base.Visit(
+                tryStatement);
 
             if (tryStatement.Catches.Count == 0)
             {
@@ -558,11 +559,14 @@
         private void Visit(
             WhileStatementSyntax whileStatement)
         {
-            this.AddCommand(group_while);
+            this.AddCommand(
+                group_while);
 
-            base.Visit(whileStatement);
+            base.Visit(
+                whileStatement);
 
-            this.AddCommand(PlantUML_end);
+            this.AddCommand(
+                PlantUML_end);
         }
     }
 }
