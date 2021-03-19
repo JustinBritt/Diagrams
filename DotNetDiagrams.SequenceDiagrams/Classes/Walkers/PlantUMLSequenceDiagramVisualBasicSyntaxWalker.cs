@@ -116,6 +116,23 @@
             }
         }
 
+        // TODO: Finish
+        private void Visit(
+            TryBlockSyntax tryBlock)
+        {
+            this.AddCommand(
+                PlantUML_alt);
+
+            base.Visit(
+                tryBlock);
+
+            if (tryBlock.CatchBlocks.Count == 0)
+            {
+                this.AddCommand(
+                    PlantUML_end);
+            }
+        }
+
         private void Visit(
             WhileBlockSyntax whileBlock)
         {
