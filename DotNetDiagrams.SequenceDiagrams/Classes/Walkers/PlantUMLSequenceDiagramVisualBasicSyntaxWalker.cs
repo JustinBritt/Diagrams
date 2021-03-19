@@ -20,6 +20,21 @@
     {
         private const string group_while = "group while";
 
+        private const string PlantUML_alt = "alt";
+        private const string PlantUML_arrow = "->";
+        private const string PlantUML_autoactivate = "autoactivate";
+        private const string PlantUML_colon = ":";
+        private const string PlantUML_dottedArrow = "-->";
+        private const string PlantUML_else = "else";
+        private const string PlantUML_end = "end";
+        private const string PlantUML_footbox = "footbox";
+        private const string PlantUML_hide = "hide";
+        private const string PlantUML_off = "off";
+        private const string PlantUML_on = "on";
+        private const string PlantUML_opt = "opt";
+        private const string PlantUML_show = "show";
+        private const string PlantUML_title = "title";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
