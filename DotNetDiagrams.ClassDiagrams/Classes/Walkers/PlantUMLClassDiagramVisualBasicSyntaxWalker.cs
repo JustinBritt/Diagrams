@@ -399,7 +399,7 @@
             return sb.ToString();
         }
 
-        // TODO: Add stereotype for module
+        // Note: Maps module to <<static>> <<class>>
         private string BuildModuleBlockCommand(
             string joinedConstraintClauses,
             string joinedExtends,
@@ -410,7 +410,11 @@
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.Append("<<module>>");
+            sb.Append(stereotype_static);
+
+            sb.Append(" ");
+
+            sb.Append(PlantUML_class);
 
             sb.Append(" ");
 
