@@ -116,6 +116,13 @@
             }
         }
 
+        // TODO: Finish
+        private void Visit(
+            MethodBlockSyntax method)
+        {
+
+        }
+
         private void Visit(
             TryBlockSyntax tryBlock)
         {
