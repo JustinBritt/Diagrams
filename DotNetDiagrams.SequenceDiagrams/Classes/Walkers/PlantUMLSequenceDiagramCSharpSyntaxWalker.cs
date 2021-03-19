@@ -356,13 +356,16 @@
         private void Visit(
             ElseClauseSyntax elseClause)
         {
-            this.AddCommand(PlantUML_else);
+            this.AddCommand(
+                PlantUML_else);
 
-            base.Visit(elseClause);
+            base.Visit(
+                elseClause);
 
             if (elseClause.Statement is BlockSyntax)
             {
-                this.AddCommand(PlantUML_end);
+                this.AddCommand(
+                    PlantUML_end);
             }
         }
 
