@@ -1012,6 +1012,22 @@
         }
 
         private string GetJoinedModifiers(
+            ModuleStatementSyntax moduleStatement)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                moduleStatement.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "Friend" => stereotype_internal,
+
+                    "Public" => stereotype_public,
+
+                    _ => throw new Exception("")
+                }));
+        }
+
+        private string GetJoinedModifiers(
             ParameterSyntax parameter)
         {
             return String.Join(
