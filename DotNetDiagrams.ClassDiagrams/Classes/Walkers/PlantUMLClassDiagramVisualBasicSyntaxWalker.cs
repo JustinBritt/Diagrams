@@ -399,6 +399,56 @@
             return sb.ToString();
         }
 
+        // TODO: Add stereotype for module
+        private string BuildModuleBlockCommand(
+            string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers,
+            string joinedTypeParameters,
+            string moduleName)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("<<module>>");
+
+            sb.Append(" ");
+
+            sb.Append(moduleName);
+
+            if (joinedTypeParameters.Length > 0)
+            {
+                sb.Append($"<{joinedConstraintClauses}>");
+            }
+
+            sb.Append(" ");
+
+            if (joinedModifiers.Length > 0)
+            {
+                sb.Append(joinedModifiers);
+
+                sb.Append(" ");
+            }
+
+            if (joinedExtends.Length > 0)
+            {
+                sb.Append($"{PlantUML_extends} {joinedExtends}");
+
+                sb.Append(" ");
+            }
+
+            if (joinedImplements.Length > 0)
+            {
+                sb.Append($"{PlantUML_implements} {joinedImplements}");
+
+                sb.Append(" ");
+            }
+
+            sb.Append(PlantUML_leftBrace);
+
+            return sb.ToString();
+        }
+
         private string BuildParameter(
             string defaultEquals,
             string joinedModifiers,
