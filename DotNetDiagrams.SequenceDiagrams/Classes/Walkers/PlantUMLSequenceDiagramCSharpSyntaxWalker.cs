@@ -371,26 +371,6 @@
         }
 
         private void Visit(
-            ForStatementSyntax forStatement)
-        {
-            this.AddCommand(group_for);
-
-            base.Visit(forStatement);
-
-            this.AddCommand(PlantUML_end);
-        }
-
-        private void Visit(
-            ForEachStatementSyntax forEachStatement)
-        {
-            this.AddCommand(group_foreach);
-
-            base.Visit(forEachStatement);
-
-            this.AddCommand(PlantUML_end);
-        }
-
-        private void Visit(
             ExpressionSyntax invocation)
         {
             SemanticModel semanticModel = this.GetSemanticModelOrDefault(
@@ -482,6 +462,26 @@
 
             this.AddCommand(
                 command);
+        }
+
+        private void Visit(
+            ForStatementSyntax forStatement)
+        {
+            this.AddCommand(group_for);
+
+            base.Visit(forStatement);
+
+            this.AddCommand(PlantUML_end);
+        }
+
+        private void Visit(
+            ForEachStatementSyntax forEachStatement)
+        {
+            this.AddCommand(group_foreach);
+
+            base.Visit(forEachStatement);
+
+            this.AddCommand(PlantUML_end);
         }
 
         /// <summary>
