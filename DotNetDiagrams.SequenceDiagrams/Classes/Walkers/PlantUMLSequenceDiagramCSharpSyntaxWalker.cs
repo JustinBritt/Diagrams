@@ -540,14 +540,16 @@
         {
             if (tryStatement.Parent is BlockSyntax)
             {
-                this.AddCommand(PlantUML_alt);
+                this.AddCommand(
+                    PlantUML_alt);
             }
 
             base.Visit(tryStatement);
 
             if (tryStatement.Catches.Count == 0)
             {
-                this.AddCommand(PlantUML_end);
+                this.AddCommand(
+                    PlantUML_end);
             }
         }
 
