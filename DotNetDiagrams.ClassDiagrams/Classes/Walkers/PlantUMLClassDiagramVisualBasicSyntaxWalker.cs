@@ -1710,7 +1710,6 @@
                 methodBlock);
         }
 
-        // TODO: Finish
         private void Visit(
             ModuleBlockSyntax moduleBlock)
         {
@@ -1729,8 +1728,30 @@
                     anchorRelationships);
             }
 
-            string joinedModifiers = this.GetJoinedModifiers(
-                moduleBlock.ModuleStatement);
+            string command = this.BuildModuleBlockCommand(
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    moduleBlock),
+                joinedExtends: this.GetJoinedExtends(
+                    moduleBlock),
+                joinedImplements: this.GetJoinedImplements(
+                    moduleBlock),
+                joinedModifiers: this.GetJoinedModifiers(
+                    moduleBlock.ModuleStatement),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    moduleBlock.ModuleStatement),
+                moduleName: this.GetJoinedNamespaceTypeName(
+                    moduleBlock));
+
+            this.AddCommand(
+                command: command,
+                typeName: moduleBlock.ModuleStatement.Identifier.ValueText);
+
+            base.Visit(
+                moduleBlock);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: moduleBlock.ModuleStatement.Identifier.ValueText);
         }
 
         private void Visit(
