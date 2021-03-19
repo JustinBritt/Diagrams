@@ -95,25 +95,29 @@
 
                 if (command == PlantUML_end && currentLast == PlantUML_else)
                 {
-                    this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
+                    this.Diagram.Body.RemoveAt(
+                        this.Diagram.Body.Count - 1);
 
                     currentLast = this.Diagram.Body.LastOrDefault();
 
                     if (currentLast == PlantUML_alt || currentLast == PlantUML_opt)
                     {
-                        this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
+                        this.Diagram.Body.RemoveAt(
+                            this.Diagram.Body.Count - 1);
 
                         return;
                     }
                 }
                 else if (command == PlantUML_end && cannotImmediatelyPrecedePlantUML_end.Contains(currentLast))
                 {
-                    this.Diagram.Body.RemoveAt(this.Diagram.Body.Count - 1);
+                    this.Diagram.Body.RemoveAt(
+                        this.Diagram.Body.Count - 1);
 
                     return;
                 }
 
-                this.Diagram.Body.Add(command);
+                this.Diagram.Body.Add(
+                    command);
             }
         }
 
