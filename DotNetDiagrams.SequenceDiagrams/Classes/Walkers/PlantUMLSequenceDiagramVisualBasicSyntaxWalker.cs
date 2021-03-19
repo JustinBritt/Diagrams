@@ -115,6 +115,13 @@
                     command);
             }
         }
+        
+        // TODO: Finish
+        private void Visit(
+            IfStatementSyntax ifStatement)
+        {
+
+        }
 
         // TODO: Finish
         private void Visit(
