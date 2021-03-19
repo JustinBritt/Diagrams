@@ -811,6 +811,16 @@
         }
 
         private string GetJoinedExtends(
+            ModuleBlockSyntax moduleBlock)
+        {
+            return moduleBlock.Inherits.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_extends,
+                    moduleBlock.Inherits.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, moduleBlock.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedExtends(
             StructureBlockSyntax structureBlock)
         {
             return structureBlock.Inherits.Count() > 0
@@ -837,6 +847,16 @@
                 ? String.Join(
                     stringJoinSeparator_implements,
                     interfaceBlock.Implements.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, interfaceBlock.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedImplements(
+            ModuleBlockSyntax moduleBlock)
+        {
+            return moduleBlock.Implements.Count() > 0
+                ? String.Join(
+                    stringJoinSeparator_implements,
+                    moduleBlock.Implements.SelectMany(w => w.Types).Select(w => this.GetTypeName(w, moduleBlock.SyntaxTree)))
                 : String.Empty;
         }
 
