@@ -116,10 +116,17 @@
             }
         }
 
-        // TODO: Finish
         private void Visit(
             WhileBlockSyntax whileBlock)
         {
+            this.AddCommand(
+                group_while);
+
+            base.Visit(
+                whileBlock);
+
+            this.AddCommand(
+                PlantUML_end);
         }
     }
 }
