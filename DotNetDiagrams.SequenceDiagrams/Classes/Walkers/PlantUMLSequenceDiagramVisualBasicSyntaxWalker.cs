@@ -69,6 +69,53 @@
 
         public IPlantUMLSequenceDiagrams Diagrams { get; }
 
+        private void AddCommand(
+            string command)
+        {
+            if (this.Diagram is not null)
+            {
+                string currentLast = this.Diagram.Body.LastOrDefault();
+
+                List<string> cannotImmediatelyPrecedePlantUML_end = new List<string>()
+                {
+                    group_do,
+                    group_doWhile,
+                    group_for,
+                    group_foreach,
+                    group_while,
+                    PlantUML_alt,
+                    PlantUML_else,
+                    PlantUML_opt,
+                };
+
+                if (command == PlantUML_end && currentLast == PlantUML_else)
+                {
+                    this.Diagram.Body.RemoveAt(
+                        this.Diagram.Body.Count - 1);
+
+                    currentLast = this.Diagram.Body.LastOrDefault();
+
+                    if (currentLast == PlantUML_alt || currentLast == PlantUML_opt)
+                    {
+                        this.Diagram.Body.RemoveAt(
+                            this.Diagram.Body.Count - 1);
+
+                        return;
+                    }
+                }
+                else if (command == PlantUML_end && cannotImmediatelyPrecedePlantUML_end.Contains(currentLast))
+                {
+                    this.Diagram.Body.RemoveAt(
+                        this.Diagram.Body.Count - 1);
+
+                    return;
+                }
+
+                this.Diagram.Body.Add(
+                    command);
+            }
+        }
+
         // TODO: Finish
         private void Visit(
             WhileBlockSyntax whileBlock)
