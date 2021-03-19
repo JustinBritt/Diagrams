@@ -47,5 +47,11 @@
         public IPlantUMLSequenceDiagram Diagram => Diagrams.GetSequenceDiagramAtTitleOrDefault(currentTitle);
 
         public IPlantUMLSequenceDiagrams Diagrams { get; }
+
+        // TODO: Finish
+        private void Visit(
+            WhileBlockSyntax whileBlock)
+        {
+        }
     }
 }
