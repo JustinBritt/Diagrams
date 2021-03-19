@@ -118,16 +118,26 @@
         
         // TODO: Finish
         private void Visit(
+            ElseBlockSyntax elseBlock)
+        {
+        }
+
+        // TODO: Finish
+        private void Visit(
+            ElseIfBlockSyntax elseIfBlock)
+        {
+        }
+
+        // TODO: Finish
+        private void Visit(
             IfStatementSyntax ifStatement)
         {
-
         }
 
         // TODO: Finish
         private void Visit(
             MethodBlockSyntax method)
         {
-
         }
 
         private void Visit(
