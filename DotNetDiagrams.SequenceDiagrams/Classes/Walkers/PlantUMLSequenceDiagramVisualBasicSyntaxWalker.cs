@@ -115,7 +115,7 @@
                     command);
             }
         }
-        
+
         // TODO: Finish
         private void Visit(
             ElseBlockSyntax elseBlock)
@@ -131,6 +131,12 @@
         // TODO: Finish
         private void Visit(
             IfStatementSyntax ifStatement)
+        {
+        }
+
+        // TODO: Finish
+        private void Visit(
+            LoopStatementSyntax loopStatement)
         {
         }
 
