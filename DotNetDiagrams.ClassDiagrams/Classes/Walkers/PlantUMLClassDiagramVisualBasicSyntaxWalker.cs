@@ -1205,6 +1205,16 @@
         }
 
         private string GetJoinedTypeParameters(
+            ModuleStatementSyntax moduleStatement)
+        {
+            return moduleStatement.TypeParameterList is not null
+                ? String.Join(
+                    stringJoinSeparator_typeParameters,
+                    moduleStatement.TypeParameterList.Parameters.Select(w => w.Identifier.ValueText))
+                : String.Empty;
+        }
+
+        private string GetJoinedTypeParameters(
             StructureStatementSyntax structureStatement)
         {
             return structureStatement.TypeParameterList is not null
