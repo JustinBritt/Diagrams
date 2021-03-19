@@ -41,7 +41,6 @@
         private const string stereotype_event = "<<event>>";
         private const string stereotype_get = "<<get>>";
         private const string stereotype_internal = "<<internal>>";
-        private const string stereotype_optional = "<<optional>>";
         private const string stereotype_override = "<<override>>";
         private const string stereotype_params = "<<params>>";
         private const string stereotype_partial = "<<partial>>";
@@ -1125,7 +1124,7 @@
 
                     "ByVal" => String.Empty,
 
-                    "Optional" => stereotype_optional,
+                    "Optional" => String.Empty,
 
                     "ParamArray" => stereotype_params,
 
