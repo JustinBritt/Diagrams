@@ -18,6 +18,8 @@
 
     internal sealed class PlantUMLSequenceDiagramVisualBasicSyntaxWalker : VisualBasicSyntaxWalker, IPlantUMLSequenceDiagramVisualBasicSyntaxWalker
     {
+        private const string group_while = "group while";
+
         private readonly Compilation compilation;
         private readonly Project project;
         private readonly Solution solution;
