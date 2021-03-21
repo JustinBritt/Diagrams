@@ -810,14 +810,43 @@
                 : String.Empty;
         }
 
-        // TODO: Account for records
         private string GetJoinedExtends(
-            BaseTypeDeclarationSyntax baseTypeDeclaration)
+            ClassDeclarationSyntax classDeclaration)
         {
-            return baseTypeDeclaration.BaseList is not null
+            return classDeclaration.BaseList is not null
                 ? String.Join(
                     stringJoinSeparator_extends,
-                    baseTypeDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(baseTypeDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                    classDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(classDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedExtends(
+            InterfaceDeclarationSyntax interfaceDeclaration)
+        {
+            return interfaceDeclaration.BaseList is not null
+                ? String.Join(
+                    stringJoinSeparator_extends,
+                    interfaceDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(interfaceDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedExtends(
+            RecordDeclarationSyntax recordDeclaration)
+        {
+            return recordDeclaration.BaseList is not null
+                ? String.Join(
+                    stringJoinSeparator_extends,
+                    recordDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(recordDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.IsRecord).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
+                : String.Empty;
+        }
+
+        private string GetJoinedExtends(
+            StructDeclarationSyntax structDeclaration)
+        {
+            return structDeclaration.BaseList is not null
+                ? String.Join(
+                    stringJoinSeparator_extends,
+                    structDeclaration.BaseList?.Types.Where(w => this.GetSemanticModelOrDefault(structDeclaration.SyntaxTree).GetTypeInfo(w.Type).Type.TypeKind is TypeKind.Class).Select(w => this.GetTypeName(w.Type, w.SyntaxTree)))
                 : String.Empty;
         }
 
