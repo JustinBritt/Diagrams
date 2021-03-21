@@ -540,7 +540,13 @@
         }
 
         // TODO: Finish
-        private string BuildRecordDeclarationCommand()
+        private string BuildRecordDeclarationCommand(           
+            string joinedConstraintClauses,
+            string joinedExtends,
+            string joinedImplements,
+            string joinedModifiers,
+            string joinedTypeParameters,
+            string recordName)
         {
             StringBuilder sb = new StringBuilder();
 
