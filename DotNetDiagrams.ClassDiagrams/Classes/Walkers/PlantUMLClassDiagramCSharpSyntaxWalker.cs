@@ -1674,7 +1674,8 @@
             string joinedExtends = this.GetJoinedExtends(
                 recordDeclaration);
 
-            string joinedImplements = "";
+            string joinedImplements = this.GetJoinedImplements(
+                recordDeclaration);
 
             string joinedModifiers = this.GetJoinedModifiers(
                 recordDeclaration);
