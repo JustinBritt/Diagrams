@@ -60,6 +60,7 @@
         private const string stereotype_protected = "<<protected>>";
         private const string stereotype_public = "<<public>>";
         private const string stereotype_readonly = "<<readonly>>";
+        private const string stereotype_record = "<<record>>";
         private const string stereotype_ref = "<<ref>>";
         private const string stereotype_remove = "<<remove>>";
         private const string stereotype_sealed = "<<sealed>>";
