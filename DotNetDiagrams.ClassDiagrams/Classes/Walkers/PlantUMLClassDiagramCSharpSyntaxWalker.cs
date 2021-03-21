@@ -539,6 +539,14 @@
             return sb.ToString();
         }
 
+        // TODO: Finish
+        private string BuildRecordDeclarationCommand()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            return sb.ToString();
+        }
+
         private string BuildStructDeclarationCommand(
             string joinedConstraintClauses,
             string joinedExtends,
@@ -1286,6 +1294,9 @@
                 case PropertyDeclarationSyntax propertyDeclaration:
                     this.Visit(propertyDeclaration);
                     break;
+                case RecordDeclarationSyntax recordDeclaration:
+                    this.Visit(recordDeclaration);
+                    break;
                 case StructDeclarationSyntax structDeclaration:
                     this.Visit(structDeclaration);
                     break;
@@ -1594,6 +1605,12 @@
 
             base.Visit(
                 propertyDeclaration);
+        }
+
+        // TODO: Finish
+        private void Visit(
+            RecordDeclarationSyntax recordDeclaration)
+        {
         }
 
         private void Visit(
