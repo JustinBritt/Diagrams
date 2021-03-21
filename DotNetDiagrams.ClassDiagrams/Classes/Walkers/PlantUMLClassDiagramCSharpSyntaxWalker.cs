@@ -1639,8 +1639,19 @@
         private void Visit(
             RecordDeclarationSyntax recordDeclaration)
         {
+            string joinedConstraintClauses = "";
+
+            string joinedExtends = "";
+
+            string joinedImplements = "";
+
             string joinedModifiers = this.GetJoinedModifiers(
                 recordDeclaration);
+
+            string joinedTypeParameters = "";
+
+            string recordName = this.GetJoinedNamespaceTypeName(
+                    recordDeclaration);
 
             base.Visit(
                 recordDeclaration);
