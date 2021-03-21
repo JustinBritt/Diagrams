@@ -810,6 +810,7 @@
                 : String.Empty;
         }
 
+        // TODO: Account for records
         private string GetJoinedExtends(
             BaseTypeDeclarationSyntax baseTypeDeclaration)
         {
