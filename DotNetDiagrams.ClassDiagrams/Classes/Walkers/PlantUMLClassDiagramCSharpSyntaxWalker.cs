@@ -1108,6 +1108,21 @@
                 }));
         }
 
+        // TODO: Finish
+        private string GetJoinedModifiers(
+            RecordDeclarationSyntax recordDeclaration)
+        {
+            return String.Join(
+                stringJoinSeparator_modifiers,
+                recordDeclaration.Modifiers
+                .Select(w => w.ValueText switch
+                {
+                    "" = "",
+
+                    _ => throw new Exception("")
+                }));
+        }
+
         private string GetJoinedModifiers(
             StructDeclarationSyntax structDeclaration)
         {
@@ -1611,6 +1626,11 @@
         private void Visit(
             RecordDeclarationSyntax recordDeclaration)
         {
+            string joinedModifiers = this.GetJoinedModifiers(
+                recordDeclaration);
+
+            base.Visit(
+                recordDeclaration);
         }
 
         private void Visit(
