@@ -113,6 +113,10 @@ MethodDeclarationSyntax
 ### Property Declarations
 PropertyDeclarationSyntax
 
+### Record Declarations
+
+#### Modifiers
+
 ### Struct Declarations
 StructDeclarationSyntax
 
