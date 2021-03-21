@@ -1108,7 +1108,6 @@
                 }));
         }
 
-        // TODO: Finish
         private string GetJoinedModifiers(
             RecordDeclarationSyntax recordDeclaration)
         {
@@ -1117,7 +1116,21 @@
                 recordDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
+                    "abstract" => stereotype_abstract,
+
+                    "internal" => stereotype_internal,
+
+                    "partial" => stereotype_partial,
+
+                    "private" => stereotype_private,
+
+                    "protected" => stereotype_protected,
+
                     "public" => stereotype_public,
+
+                    "sealed" => stereotype_sealed,
+
+                    "unsafe" => stereotype_unsafe,
 
                     _ => throw new Exception("")
                 }));
