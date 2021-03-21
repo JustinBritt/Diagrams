@@ -1671,7 +1671,8 @@
         {
             string joinedConstraintClauses = "";
 
-            string joinedExtends = "";
+            string joinedExtends = this.GetJoinedExtends(
+                recordDeclaration);
 
             string joinedImplements = "";
 
