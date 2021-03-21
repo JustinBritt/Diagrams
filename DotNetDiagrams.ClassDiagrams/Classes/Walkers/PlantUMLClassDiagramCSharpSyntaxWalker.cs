@@ -1117,7 +1117,7 @@
                 recordDeclaration.Modifiers
                 .Select(w => w.ValueText switch
                 {
-                    "" = "",
+                    "public" => stereotype_public,
 
                     _ => throw new Exception("")
                 }));
