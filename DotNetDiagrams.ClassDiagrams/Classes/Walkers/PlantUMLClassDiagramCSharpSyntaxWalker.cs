@@ -1671,30 +1671,50 @@
                 propertyDeclaration);
         }
 
-        // TODO: Finish
         private void Visit(
             RecordDeclarationSyntax recordDeclaration)
         {
-            string joinedConstraintClauses = this.GetJoinedConstraintClauses(
-                recordDeclaration);
+            List<BaseTypeDeclarationSyntax> declaredTypes = this.syntaxTree.GetRoot().DescendantNodesAndSelf().OfType<BaseTypeDeclarationSyntax>().ToList();
 
-            string joinedExtends = this.GetJoinedExtends(
-                recordDeclaration);
-
-            string joinedImplements = this.GetJoinedImplements(
-                recordDeclaration);
-
-            string joinedModifiers = this.GetJoinedModifiers(
-                recordDeclaration);
-
-            string joinedTypeParameters = this.GetJoinedTypeParameters(
-                recordDeclaration);
-
-            string recordName = this.GetJoinedNamespaceTypeName(
+            if (recordDeclaration == declaredTypes.First())
+            {
+                this.StartDiagram(
                     recordDeclaration);
+            }
+
+            List<string> anchorRelationships = this.GetAnchorRelationships(
+                recordDeclaration);
+
+            if (anchorRelationships.Count() > 0)
+            {
+                this.Diagram.Relationships.AddRange(
+                    anchorRelationships);
+            }
+
+            string command = this.BuildRecordDeclarationCommand(
+                joinedConstraintClauses: this.GetJoinedConstraintClauses(
+                    recordDeclaration),
+                joinedExtends: this.GetJoinedExtends(
+                    recordDeclaration),
+                joinedImplements: this.GetJoinedImplements(
+                    recordDeclaration),
+                joinedModifiers: this.GetJoinedModifiers(
+                    recordDeclaration),
+                joinedTypeParameters: this.GetJoinedTypeParameters(
+                    recordDeclaration),
+                recordName: this.GetJoinedNamespaceTypeName(
+                    recordDeclaration));
+
+            this.AddCommand(
+                command: command,
+                typeName: recordDeclaration.Identifier.ValueText);
 
             base.Visit(
                 recordDeclaration);
+
+            this.AddCommand(
+                command: $"{PlantUML_rightBrace}",
+                typeName: recordDeclaration.Identifier.ValueText);
         }
 
         private void Visit(
