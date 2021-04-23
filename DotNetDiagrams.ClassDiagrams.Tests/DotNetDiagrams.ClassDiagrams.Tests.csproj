@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
 
     <IsPackable>false</IsPackable>
   </PropertyGroup>
@@ -19,5 +18,4 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetDiagrams.ClassDiagrams\DotNetDiagrams.ClassDiagrams.csproj" />
   </ItemGroup>
-
 </Project>
